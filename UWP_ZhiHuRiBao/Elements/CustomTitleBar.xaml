@@ -1,0 +1,25 @@
+﻿<UserControl
+    x:Class="CN.Brook.UI.CustomTitleBar"
+    Name="CustomTitleBarControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Loaded="CustomTitleBarControl_Loaded">
+
+    <Grid VerticalAlignment="Top" Height="{x:Bind TitleBarHeight, Mode=OneWay}" Canvas.ZIndex="10">
+        <Rectangle Name="TitleBarBackground" Fill="{x:Bind TitleBarBackgroundColor, Mode=TwoWay}"/>
+        <Grid Padding="{x:Bind TitleBarPadding, Mode=OneWay}" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Name="TitleBarTitle" Orientation="Horizontal">
+                <Image Source="{x:Bind TitleBarIcon, Mode=TwoWay}" Margin="{x:Bind IconMargin, Mode=TwoWay}" />
+                <TextBlock VerticalAlignment="Center" Margin="{x:Bind TitleMargin, Mode=TwoWay}" Text="{x:Bind Title, Mode=TwoWay}"/>
+            </StackPanel>
+            <ContentPresenter Grid.Column="1" Content="{Binding TitleBarControl, ElementName=CustomTitleBarControl}"/>
+        </Grid>
+    </Grid>
+</UserControl>
