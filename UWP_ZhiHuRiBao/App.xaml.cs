@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Brook.ZhiHuRiBao.Pages;
+using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using XPHttp;
 
 namespace Brook.ZhiHuRiBao
 {
@@ -32,7 +34,7 @@ namespace Brook.ZhiHuRiBao
         /// <param name="e">有关启动请求和过程的详细信息。</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
+            InitHttpClient();
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -69,6 +71,13 @@ namespace Brook.ZhiHuRiBao
             }
             // 确保当前窗口处于活动状态
             Window.Current.Activate();
+        }
+
+        void InitHttpClient()
+        {
+            XPHttpClient.DefaultClient.HttpConfig
+                .SetBaseUrl("http://news-at.zhihu.com/api/4/")
+                .ApplyConfig();
         }
 
         /// <summary>

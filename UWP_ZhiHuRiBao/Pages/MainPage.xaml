@@ -1,24 +1,26 @@
 ﻿<Page
-    x:Class="Brook.ZhiHuRiBao.MainPage"
+    x:Class="Brook.ZhiHuRiBao.Pages.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Brook.ZhiHuRiBao"
+    xmlns:local="using:Brook.ZhiHuRiBao.Pages"
     xmlns:ui="using:CN.Brook.UI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.DataContext>
+        <local:MainViewModel/>
+    </Page.DataContext>
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Elements/MainItem.xaml"/>
+                <ResourceDictionary Source="../Elements/MainItem.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
     <StackPanel Orientation="Vertical">
         <ui:CustomTitleBar x:Name="TitleBar">
-             <Button Content="asdf"/>
         </ui:CustomTitleBar>
-        <SplitView IsPaneOpen="true" DisplayMode="Inline" Background="AliceBlue" PaneBackground="Red" OpenPaneLength="250" CompactPaneLength="50">
+        <SplitView IsPaneOpen="true" DisplayMode="Inline" OpenPaneLength="350" CompactPaneLength="50">
             <SplitView.Pane>
                 <ListView x:Name="MainListView" ItemsSource="{x:Bind MainList}" ItemTemplate="{StaticResource MainItem}">
                 </ListView>
