@@ -7,10 +7,23 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Elements/MainItem.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
     <StackPanel Orientation="Vertical">
         <ui:CustomTitleBar x:Name="TitleBar">
              <Button Content="asdf"/>
         </ui:CustomTitleBar>
-        <Button Content="asfd" Click="Button_Click"/>
+        <SplitView IsPaneOpen="true" DisplayMode="Inline" Background="AliceBlue" PaneBackground="Red" OpenPaneLength="250" CompactPaneLength="50">
+            <SplitView.Pane>
+                <ListView x:Name="MainListView" ItemsSource="{x:Bind MainList}" ItemTemplate="{StaticResource MainItem}">
+                </ListView>
+            </SplitView.Pane>
+            <Image Source="Assets/StoreLogo.png"/>
+        </SplitView>
     </StackPanel>
 </Page>
