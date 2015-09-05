@@ -29,11 +29,11 @@ namespace Brook.ZhiHuRiBao.Common
 
         public PageBase()
         {
-            VM = DataContext as ViewModelBase;
         }
 
         public void Init()
         {
+            VM = DataContext as ViewModelBase;
             if (VM == null)
                 return;
 

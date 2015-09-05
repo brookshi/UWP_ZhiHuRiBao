@@ -23,30 +23,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XPHttp;
+using XPHttp.Serializer;
 
 namespace Brook.ZhiHuRiBao.Pages
 {
     public class MainViewModel : ViewModelBase
     {
-        private readonly ObservableCollection<MainItem> _mainList = new ObservableCollection<MainItem>();
+        private readonly ObservableCollection<Story> _mainList = new ObservableCollection<Story>();
 
-        public ObservableCollection<MainItem> MainList {
+        public ObservableCollection<Story> MainList {
             get { return _mainList; }
         }
 
         public override void Init()
         {
-            
+            RequestData(DateTime.Now, false);
         }
 
-        void GetDataList(DateTime dt)
+        void RequestData(DateTime dt, bool isGetMore)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
                 .AddUrlSegements("dt", dt.AddDays(1).ToString("yyyyMMdd"));
-            XPHttpClient.DefaultClient.GetAsync("stories/before/{dt}", httpParam, new XPResponseHandler<dynamic>()
+            SerializerFactory.ReplaceSerializer(typeof(JsonSerializer), new SimpleJsonSerializer());
+            XPHttpClient.DefaultClient.GetAsync("stories/before/{dt}", httpParam, new XPResponseHandler<MainData>()
             {
-                OnSuccess = (response, data) => { }
+                OnSuccess = (response, list) => 
+                {
+                    if (!isGetMore)
+                        MainList.Clear();
+
+                    AppendData(list);
+                },
+                OnFailed = response => { }
             });
+        }
+
+        void AppendData(MainData data)
+        {
+            data.stories.ForEach(o => MainList.Add(o));
         }
     }
 }

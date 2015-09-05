@@ -1,11 +1,12 @@
-﻿<Page
+﻿<common:PageBase
     x:Class="Brook.ZhiHuRiBao.Pages.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Brook.ZhiHuRiBao.Pages"
     xmlns:ui="using:CN.Brook.UI"
+    xmlns:common="using:Brook.ZhiHuRiBao.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     mc:Ignorable="d">
     <Page.DataContext>
         <local:MainViewModel/>
@@ -13,7 +14,7 @@
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Elements/MainItem.xaml"/>
+                <ResourceDictionary Source="../Elements/Story.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
@@ -22,10 +23,10 @@
         </ui:CustomTitleBar>
         <SplitView IsPaneOpen="true" DisplayMode="Inline" OpenPaneLength="350" CompactPaneLength="50">
             <SplitView.Pane>
-                <ListView x:Name="MainListView" ItemsSource="{x:Bind MainList}" ItemTemplate="{StaticResource MainItem}">
+                <ListView x:Name="MainListView" ItemsSource="{x:Bind MainList}" ItemTemplate="{StaticResource Story}">
                 </ListView>
             </SplitView.Pane>
-            <Image Source="Assets/StoreLogo.png"/>
+            
         </SplitView>
     </StackPanel>
-</Page>
+</common:PageBase>

@@ -3,15 +3,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Brook.ZhiHuRiBao.Elements">
 
-    <DataTemplate x:Key="MainItem">
+    <DataTemplate x:Key="Story">
         <RelativePanel Height="auto">
-            <Image x:Name="MainItem_Image" Stretch="Fill" Width="70" Height="70" Margin="5"
+            <Image CacheMode=" x:Name="MainItem_Image" Stretch="Fill" Width="70" Height="70" Margin="5"
                    RelativePanel.AlignVerticalCenterWithPanel="True">
                 <Image.Source>
-                    <BitmapImage UriSource="{Binding ImageUrl}"/>
+                    <BitmapImage UriSource="{Binding images[0]}"/>
                 </Image.Source>
             </Image>
-            <TextBlock x:Name="MainItem_Content" Margin="5" TextWrapping="Wrap" Text="{Binding Content}"
+            <TextBlock x:Name="MainItem_Content" Margin="5" TextWrapping="Wrap" Text="{Binding title}"
                        RelativePanel.RightOf="MainItem_Image" />
         </RelativePanel>
     </DataTemplate>

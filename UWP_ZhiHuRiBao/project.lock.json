@@ -1575,7 +1575,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "XPHttp/0.2.1": {
+      "XPHttp/0.2.2": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
         },
@@ -3247,7 +3247,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "XPHttp/0.2.1": {
+      "XPHttp/0.2.2": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
         },
@@ -4891,7 +4891,7 @@
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "XPHttp/0.2.1": {
+      "XPHttp/0.2.2": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
         },
@@ -6568,7 +6568,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "XPHttp/0.2.1": {
+      "XPHttp/0.2.2": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
         },
@@ -8212,7 +8212,7 @@
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "XPHttp/0.2.1": {
+      "XPHttp/0.2.2": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
         },
@@ -9889,7 +9889,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "XPHttp/0.2.1": {
+      "XPHttp/0.2.2": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
         },
@@ -11533,7 +11533,7 @@
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "XPHttp/0.2.1": {
+      "XPHttp/0.2.2": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
         },
@@ -14954,15 +14954,15 @@
         "[Content_Types].xml"
       ]
     },
-    "XPHttp/0.2.1": {
-      "sha512": "Y4oezr0JucphKRqL6LRtR2NMv25QtUhSDB08wPGS+nE1BZDxvkZ9j8yokgCItd2MM6LmuIWU30chLfmomXfrHw==",
+    "XPHttp/0.2.2": {
+      "sha512": "YVNG/G43POVo31lqvC+YnXkg/oVQte3JJeTty9g7IbMAGp4Iu+HkmoMrOTCvQBqbHpWRkznBYomA1ENSef/MwQ==",
       "type": "Package",
       "files": [
         "_rels/.rels",
         "XPHttp.nuspec",
         "lib/uap10.0/XPHttp/Properties/XPHttp.rd.xml",
         "lib/uap10.0/XPHttp.dll",
-        "package/services/metadata/core-properties/3969fe26ea2449a49ea0dbcc11883c10.psmdcp",
+        "package/services/metadata/core-properties/311695af2af9472da8aff6a2c28b8d7c.psmdcp",
         "[Content_Types].xml"
       ]
     }
@@ -14974,7 +14974,7 @@
       "Microsoft.ApplicationInsights.PersistenceChannel >= 1.0.0",
       "Microsoft.ApplicationInsights.WindowsApps >= 1.0.0",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
-      "XPHttp >= 0.2.1"
+      "XPHttp >= 0.2.2"
     ],
     "UAP,Version=v10.0": []
   }
