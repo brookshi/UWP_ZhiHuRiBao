@@ -35,12 +35,26 @@ namespace Brook.ZhiHuRiBao.Pages
             get { return _mainList; }
         }
 
-        public override void Init()
+        private string _htmlSource = string.Empty;
+        public string HtmlSource
         {
-            RequestData(DateTime.Now, false);
+            get { return _htmlSource; }
+            set
+            {
+                if(value !=  _htmlSource)
+                {
+                    _htmlSource = value;
+                    Notify("HtmlSource");
+                }
+            }
         }
 
-        void RequestData(DateTime dt, bool isGetMore)
+        public override void Init()
+        {
+            RequestMainList(DateTime.Now, false);
+        }
+
+        void RequestMainList(DateTime dt, bool isGetMore)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
                 .AddUrlSegements("dt", dt.AddDays(1).ToString("yyyyMMdd"));
@@ -62,5 +76,20 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             data.stories.ForEach(o => MainList.Add(o));
         }
+
+        public void RequestMainContent(string id)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .AddUrlSegements("id", id);
+            XPHttpClient.DefaultClient.GetAsync("story/{id}", httpParam, new XPResponseHandler<MainContent>()
+            {
+                OnSuccess = (response, content) =>
+                {
+                    HtmlSource = Html.Constructor(content);
+                },
+                OnFailed = response => { }
+            });
+        }
+
     }
 }

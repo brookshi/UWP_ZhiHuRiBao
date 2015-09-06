@@ -5,6 +5,7 @@ using Windows.UI.Xaml.Controls;
 using System.Collections.ObjectModel;
 using Brook.ZhiHuRiBao.Models;
 using Brook.ZhiHuRiBao.Common;
+using XPHttp;
 
 namespace Brook.ZhiHuRiBao.Pages
 {
@@ -13,11 +14,16 @@ namespace Brook.ZhiHuRiBao.Pages
         public MainPage()
         {
             this.InitializeComponent();
-            Init();
+            Initalize();
         }
 
         public ObservableCollection<Story> MainList {
-            get { return (VM as MainViewModel).MainList; }
+            get { return GetVM<MainViewModel>().MainList; }
+        }
+
+        private void MainListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            GetVM<MainViewModel>().RequestMainContent((e.ClickedItem as Story).id.ToString());
         }
     }
 }

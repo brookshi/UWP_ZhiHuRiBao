@@ -27,7 +27,7 @@ namespace Brook.ZhiHuRiBao.Common
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void Notify(string property)
+        protected void Notify(string property)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
