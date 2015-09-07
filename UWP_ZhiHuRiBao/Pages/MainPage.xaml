@@ -27,8 +27,7 @@
                 <ListView x:Name="MainListView" ItemsSource="{x:Bind MainList}" ItemTemplate="{StaticResource Story}" IsItemClickEnabled="True" ItemClick="MainListView_ItemClick">
                 </ListView>
             </SplitView.Pane>
-            <!--<WebView x:Name="MainContent"/>-->
-            <RichTextBlock x:Name="MainContent" utils:RTBHtml.Html="{Binding HtmlSource}"/>
+            <WebView x:Name="MainContent" utils:WebViewExtend.Content="{Binding HtmlSource}"/>
         </SplitView>
     </StackPanel>
 </common:PageBase>

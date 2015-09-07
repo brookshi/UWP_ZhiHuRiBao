@@ -90,6 +90,5 @@ namespace Brook.ZhiHuRiBao.Pages
                 OnFailed = response => { }
             });
         }
-
     }
 }

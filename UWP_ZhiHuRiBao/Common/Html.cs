@@ -21,7 +21,7 @@ namespace Brook.ZhiHuRiBao.Common
 {
     public static class Html
     {
-        private const string _htmlTemplate = "<html><head><meta charset = \"utf-8\" > < title >{0}</ title > {1} {2} </head> {3} </html> ";
+        private const string _htmlTemplate = "<html><head><meta charset = \"utf-8\" > {1} {2} </head> {3} </html> ";
 
         private const string _cssTemplate = "<link rel=\"Stylesheet\" type=\"text/css\" href=\"{0}\" />";
 
@@ -35,7 +35,10 @@ namespace Brook.ZhiHuRiBao.Common
             content.css.ForEach(o => cssBuilder.Append(string.Format(_cssTemplate, o)));
             content.js.ForEach(o => jsBuilder.Append(string.Format(_jsTemplate, o)));
 
-            return string.Format(_htmlTemplate, content.title, cssBuilder.ToString(), jsBuilder.ToString(), content.body);
+            var source = string.Format(_htmlTemplate, content.title, cssBuilder.ToString(), jsBuilder.ToString(), content.body);
+            source = source.Replace("<div class=\"img-place-holder\"></div>", "<img height=\"300\" width=\"100%\" src=\"" + content + "\"/>");
+
+            return source;
         }
     }
 }
