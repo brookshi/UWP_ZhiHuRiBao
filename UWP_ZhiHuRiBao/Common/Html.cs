@@ -27,6 +27,15 @@ namespace Brook.ZhiHuRiBao.Common
 
         private const string _jsTemplate = "<script src=\"{0}\" type=\"text/javascript\"></script>";
 
+        private const string _headerTemplate = "<div style=\"position:relative; height:250;  background-image:url({0}); background-size:100% 100%; text-align:center; line-height:300px\">"
+                                               +"<table style = \"position:absolute; Bottom:30px; color:white; font-weight:bold; font-size:30;\" >"
+                                               +"<tr><td style=\"width:20px\"></td><td>{1}</td><td style=\"width:20px\"></td></tr>"
+                                               +"</table>"
+                                               +"<table style=\"position:absolute; right:4px; margin:0,20; Bottom:8px;color:white;font-size:15;\">"
+                                               + "<tr><td>{2}</td><td style=\"width:20px\"></td></tr>"
+                                               + "</table>"
+                                               +"</div>";
+
         public static string Constructor(MainContent content)
         {
             var cssBuilder = new StringBuilder();
@@ -35,8 +44,10 @@ namespace Brook.ZhiHuRiBao.Common
             content.css.ForEach(o => cssBuilder.Append(string.Format(_cssTemplate, o)));
             content.js.ForEach(o => jsBuilder.Append(string.Format(_jsTemplate, o)));
 
+            var header = string.Format(_headerTemplate, content.image, content.title, content.image_source);
             var source = string.Format(_htmlTemplate, content.title, cssBuilder.ToString(), jsBuilder.ToString(), content.body);
-            source = source.Replace("<div class=\"img-place-holder\"></div>", "<img height=\"300\" width=\"100%\" src=\"" + content + "\"/>");
+
+            source = source.Replace("<div class=\"img-place-holder\"></div>", header);
 
             return source;
         }
