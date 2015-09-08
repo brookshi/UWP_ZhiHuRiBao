@@ -125,6 +125,7 @@
     <None Include="UWP_ZhiHuRiBao_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\header_background.png" />
     <Content Include="Properties\Default.rd.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
