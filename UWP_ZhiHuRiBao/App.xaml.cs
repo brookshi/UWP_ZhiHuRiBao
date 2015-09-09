@@ -2,6 +2,7 @@
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -69,8 +70,24 @@ namespace Brook.ZhiHuRiBao
                 // 参数
                 rootFrame.Navigate(typeof(MainPage), e.Arguments);
             }
+            SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
             // 确保当前窗口处于活动状态
             Window.Current.Activate();
+        }
+        //this.NavigationCacheMode = NavigationCacheMode.Required; add for page
+        //SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+        private void App_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame == null)
+                return;
+
+            // If we can go back and the event has not already been handled, do so.
+            if (rootFrame.CanGoBack && e.Handled == false)
+            {
+                e.Handled = true;
+                rootFrame.GoBack();
+            }
         }
 
         void InitHttpClient()

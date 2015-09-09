@@ -49,6 +49,13 @@ namespace Brook.ZhiHuRiBao.Pages
             }
         }
 
+        private int _mode = 0;
+        public int Mode
+        {
+            get { return _mode; }
+            set { _mode = value; }
+        }
+
         public override void Init()
         {
             RequestMainList(DateTime.Now, false);
