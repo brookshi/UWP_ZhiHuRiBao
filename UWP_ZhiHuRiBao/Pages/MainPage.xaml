@@ -16,6 +16,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Elements/Story.xaml"/>
+                <ResourceDictionary Source="../Elements/Comment.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
@@ -27,26 +28,32 @@
                         <AdaptiveTrigger MinWindowWidth="1000"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="DataContext.Mode" Value="1"/>
+                        <Setter Target="MainView.DataContext.Mode" Value="1"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <Grid.RowDefinitions>
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ui:CustomTitleBar x:Name="TitleBar" Grid.Row="0">
-        </ui:CustomTitleBar>
-        <SplitView x:Name="MainView" Grid.Row="1" VerticalContentAlignment="Bottom" DisplayMode="CompactInline" OpenPaneLength="350" CompactPaneLength="80">
+            <Button Content="asf" Click="Button_Click"/>
+        </ui:CustomTitleBar>-->
+        <SplitView x:Name="MainView" DisplayMode="CompactInline" OpenPaneLength="360" CompactPaneLength="80">
             <SplitView.Pane>
                 <ListView x:Name="CategoryListView" SelectionMode="Single" ItemsSource="{x:Bind MainList}" ItemTemplate="{StaticResource Story}" IsItemClickEnabled="True" ItemClick="MainListView_ItemClick">
                 </ListView>
             </SplitView.Pane>
             <RelativePanel>
                 <ListView x:Name="MainListView" Width="360" RelativePanel.AlignLeftWithPanel="True" SelectionMode="Single" ItemsSource="{x:Bind MainList}" ItemTemplate="{StaticResource Story}" IsItemClickEnabled="True" ItemClick="MainListView_ItemClick"/>
-                <WebView x:Name="MainContent" RelativePanel.RightOf="MainListView" RelativePanel.LeftOf="CommentListView" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignTopWithPanel="True" utils:WebViewExtend.Content="{Binding HtmlSource}"/>
-                <ListView x:Name="CommentListView" Width="320" RelativePanel.AlignRightWithPanel="True" SelectionMode="Single" ItemsSource="{x:Bind MainList}" ItemTemplate="{StaticResource Story}" IsItemClickEnabled="True" ItemClick="MainListView_ItemClick"/>
+                <SplitView PanePlacement="Right" DisplayMode="Inline" IsPaneOpen="True" OpenPaneLength="320" CompactPaneLength="0" 
+                           RelativePanel.RightOf="MainListView" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignRightWithPanel="True" >
+                    <SplitView.Pane>
+                        <ListView x:Name="CommentListView" Width="320" SelectionMode="Single" ItemsSource="{x:Bind CommentList}" ItemTemplate="{StaticResource Comment}" IsItemClickEnabled="True" ItemClick="MainListView_ItemClick"/>
+                    </SplitView.Pane>
+                    <WebView x:Name="MainContent" utils:WebViewExtend.Content="{Binding HtmlSource}"/>
+                </SplitView>
             </RelativePanel>
         </SplitView>
     </Grid>

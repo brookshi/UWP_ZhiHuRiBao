@@ -1,0 +1,18 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Brook.ZhiHuRiBao.Elements">
+
+    <DataTemplate x:Key="Comment">
+        <RelativePanel>
+            <Image x:Name="Comment_Avatar" Stretch="Fill" Width="48" Height="48" Margin="5">
+                <Image.Source>
+                    <BitmapImage UriSource="{Binding avatar}"/>
+                </Image.Source>
+            </Image>
+            <TextBlock x:Name="Comment_Author" Margin="5" Text="{Binding author}" FontWeight="Bold" RelativePanel.RightOf="Comment_Avatar" RelativePanel.AlignVerticalCenterWith="Comment_Avatar"/>
+            <TextBlock x:Name="Comment_Content" Margin="5" TextWrapping="Wrap" Text="{Binding content}" RelativePanel.RightOf="Comment_Avatar" RelativePanel.Below="Comment_Avatar"/>
+        </RelativePanel>
+    </DataTemplate>
+
+</ResourceDictionary>

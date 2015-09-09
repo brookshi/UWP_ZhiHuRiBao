@@ -1,4 +1,5 @@
-﻿using Brook.ZhiHuRiBao.Pages;
+﻿using Brook.ZhiHuRiBao.Common;
+using Brook.ZhiHuRiBao.Pages;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -39,7 +40,7 @@ namespace Brook.ZhiHuRiBao
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                this.DebugSettings.EnableFrameRateCounter = true;
+                this.DebugSettings.EnableFrameRateCounter = false;
             }
 #endif
             Frame rootFrame = Window.Current.Content as Frame;
@@ -93,7 +94,7 @@ namespace Brook.ZhiHuRiBao
         void InitHttpClient()
         {
             XPHttpClient.DefaultClient.HttpConfig
-                .SetBaseUrl("http://news-at.zhihu.com/api/4/")
+                .SetBaseUrl(UrlFunctions.BaseUrl)
                 .ApplyConfig();
         }
 

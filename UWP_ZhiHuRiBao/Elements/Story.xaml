@@ -4,7 +4,7 @@
     xmlns:local="using:Brook.ZhiHuRiBao.Elements">
 
     <DataTemplate x:Key="Story">
-        <RelativePanel Height="auto">
+        <RelativePanel>
             <Image x:Name="MainItem_Image" Stretch="Fill" Width="70" Height="70" Margin="5"
                    RelativePanel.AlignVerticalCenterWithPanel="True">
                 <Image.Source>

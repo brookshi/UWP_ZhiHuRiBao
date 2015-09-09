@@ -16,6 +16,7 @@
 
 using Brook.ZhiHuRiBao.Common;
 using Brook.ZhiHuRiBao.Models;
+using Brook.ZhiHuRiBao.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,9 +32,11 @@ namespace Brook.ZhiHuRiBao.Pages
     {
         private readonly ObservableCollection<Story> _mainList = new ObservableCollection<Story>();
 
-        public ObservableCollection<Story> MainList {
-            get { return _mainList; }
-        }
+        public ObservableCollection<Story> MainList { get { return _mainList; } }
+
+        private readonly ObservableCollection<Comment> _commentList = new ObservableCollection<Comment>();
+
+        public ObservableCollection<Comment> CommentList { get { return _commentList; } }
 
         private string _htmlSource = string.Empty;
         public string HtmlSource
@@ -66,7 +69,7 @@ namespace Brook.ZhiHuRiBao.Pages
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
                 .AddUrlSegements("dt", dt.AddDays(1).ToString("yyyyMMdd"));
             SerializerFactory.ReplaceSerializer(typeof(JsonSerializer), new SimpleJsonSerializer());
-            XPHttpClient.DefaultClient.GetAsync("stories/before/{dt}", httpParam, new XPResponseHandler<MainData>()
+            XPHttpClient.DefaultClient.GetAsync(UrlFunctions.Stories, httpParam, new XPResponseHandler<MainData>()
             {
                 OnSuccess = (response, list) => 
                 {
@@ -86,16 +89,17 @@ namespace Brook.ZhiHuRiBao.Pages
 
         public void RequestMainContent(string id)
         {
-            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
-                .AddUrlSegements("id", id);
-            XPHttpClient.DefaultClient.GetAsync("story/{id}", httpParam, new XPResponseHandler<MainContent>()
-            {
-                OnSuccess = (response, content) =>
-                {
-                    HtmlSource = Html.Constructor(content);
-                },
-                OnFailed = response => { }
-            });
+            DataRequester.RequestDataForStory<MainContent>(id, UrlFunctions.StoryContent, content => { HtmlSource = Html.Constructor(content); });
+        }
+
+        public void RequestComments(string id, bool isGetMore)
+        {
+            if (!isGetMore)
+                CommentList.Clear();
+
+            DataRequester.RequestDataForStory<Comments>(id, UrlFunctions.LongComment, obj => { obj.comments.ForEach(o => CommentList.Add(o)); });
+
+            DataRequester.RequestDataForStory<Comments>(id, UrlFunctions.ShortComment, obj => { obj.comments.ForEach(o => CommentList.Add(o)); });
         }
     }
 }
