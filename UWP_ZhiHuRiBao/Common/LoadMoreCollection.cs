@@ -34,14 +34,22 @@ namespace Brook.ZhiHuRiBao.Common
         {
             return AsyncInfo.Run(async c =>
             {
+                if (Start != null) Start();
+
                 uint count = 0;
                 T obj = await LoadMoreData(out count);
                 HasMoreItems = count != 0;
+
+                if (Finish != null) Finish();
 
                 return new LoadMoreItemsResult() { Count = count };
             });
         }
 
         protected abstract Task<T> LoadMoreData(out uint count);
+
+        public Action Start { get; set; }
+
+        public Action Finish { get; set; }
     }
 }
