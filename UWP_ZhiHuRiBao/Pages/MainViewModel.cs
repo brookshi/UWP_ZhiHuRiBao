@@ -23,6 +23,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Data;
 using XPHttp;
 using XPHttp.Serializer;
 
@@ -43,6 +44,8 @@ namespace Brook.ZhiHuRiBao.Pages
         private readonly ObservableCollection<Comment> _commentList = new ObservableCollection<Comment>();
 
         public ObservableCollection<Comment> CommentList { get { return _commentList; } }
+
+        private string LastCommentId { get { return CommentList.Count > 0 ? CommentList.Last().id.ToString() : null; } }
 
         private string _htmlSource = string.Empty;
         public string HtmlSource
@@ -100,27 +103,27 @@ namespace Brook.ZhiHuRiBao.Pages
 
         public void RequestComments(string id, bool isGetMore)
         {
+            string before = null;
+
             if (!isGetMore)
                 CommentList.Clear();
+            else
+                before = LastCommentId;
 
-            DataRequester.RequestLongComment(id, Urls.LongComment, obj => 
-            {
-                obj.comments.ForEach(o => CommentList.Add(o));
-                if(CommentList.Count < Config.GetMaxRowCountForMainList() && obj.comments.Count != 0)
-                {
-                    RequestComments(id, true);
-                }
-            });
+            RequestLongComments(id, before);
         }
 
-        void RequestLongComments(string id, string before, bool isMore)
+        void RequestLongComments(string id, string before)
         {
             DataRequester.RequestLongComment(id, before, obj =>
             {
                 obj.comments.ForEach(o => CommentList.Add(o));
-                if (CommentList.Count < Config.GetMaxRowCountForMainList() && obj.comments.Count != 0)
+                if (CommentList.Count < Config.GetMaxRowCountForMainList())
                 {
-                    RequestComments(id, true);
+                    if (obj.comments.Count != 0)
+                        RequestLongComments(id, LastCommentId);
+                    else
+                        RequestShortComments(id, LastCommentId);
                 }
             });
         }
@@ -132,9 +135,10 @@ namespace Brook.ZhiHuRiBao.Pages
                 obj.comments.ForEach(o => CommentList.Add(o));
                 if (CommentList.Count < Config.GetMaxRowCountForMainList() && obj.comments.Count != 0)
                 {
-                    RequestShortComment(id, CommentList.Last().id.ToString());
+                    RequestShortComments(id, CommentList.Last().id.ToString());
                 }
             });
         }
+
     }
 }

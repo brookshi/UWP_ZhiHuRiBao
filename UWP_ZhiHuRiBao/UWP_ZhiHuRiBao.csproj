@@ -102,6 +102,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Html.cs" />
+    <Compile Include="Common\LoadMoreCollection.cs" />
     <Compile Include="Common\PageBase.cs" />
     <Compile Include="Common\Urls.cs" />
     <Compile Include="Common\ViewModelBase.cs" />
