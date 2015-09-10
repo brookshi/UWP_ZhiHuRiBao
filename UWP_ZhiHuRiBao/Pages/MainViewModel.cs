@@ -30,6 +30,12 @@ namespace Brook.ZhiHuRiBao.Pages
 {
     public class MainViewModel : ViewModelBase
     {
+        private string _currentDate;
+
+        private int _currentCommentPage = 0;
+
+        private int _currentMainListPage = 0;
+
         private readonly ObservableCollection<Story> _mainList = new ObservableCollection<Story>();
 
         public ObservableCollection<Story> MainList { get { return _mainList; } }
@@ -61,24 +67,24 @@ namespace Brook.ZhiHuRiBao.Pages
 
         public override void Init()
         {
-            RequestMainList(DateTime.Now, false);
+            RequestMainList(false);
         }
 
-        void RequestMainList(DateTime dt, bool isGetMore)
+        void Reset()
         {
-            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
-                .AddUrlSegements("dt", dt.AddDays(1).ToString("yyyyMMdd"));
-            SerializerFactory.ReplaceSerializer(typeof(JsonSerializer), new SimpleJsonSerializer());
-            XPHttpClient.DefaultClient.GetAsync(UrlFunctions.Stories, httpParam, new XPResponseHandler<MainData>()
-            {
-                OnSuccess = (response, list) => 
-                {
-                    if (!isGetMore)
-                        MainList.Clear();
+            _currentDate = DateTime.Now.AddDays(1).ToString("yyyyMMdd");
+            MainList.Clear();
+        }
 
-                    AppendData(list);
-                },
-                OnFailed = response => { }
+        void RequestMainList(bool isGetMore)
+        {
+            DataRequester.RequestStories(_currentDate, data =>
+            {
+                if (!isGetMore)
+                    Reset();
+
+                _currentDate = data.date;
+                AppendData(data);
             });
         }
 
@@ -89,7 +95,7 @@ namespace Brook.ZhiHuRiBao.Pages
 
         public void RequestMainContent(string id)
         {
-            DataRequester.RequestDataForStory<MainContent>(id, UrlFunctions.StoryContent, content => { HtmlSource = Html.Constructor(content); });
+            DataRequester.RequestStoryContent(id, content => { HtmlSource = Html.Constructor(content); });
         }
 
         public void RequestComments(string id, bool isGetMore)
@@ -97,9 +103,38 @@ namespace Brook.ZhiHuRiBao.Pages
             if (!isGetMore)
                 CommentList.Clear();
 
-            DataRequester.RequestDataForStory<Comments>(id, UrlFunctions.LongComment, obj => { obj.comments.ForEach(o => CommentList.Add(o)); });
+            DataRequester.RequestLongComment(id, Urls.LongComment, obj => 
+            {
+                obj.comments.ForEach(o => CommentList.Add(o));
+                if(CommentList.Count < Config.GetMaxRowCountForMainList() && obj.comments.Count != 0)
+                {
+                    RequestComments(id, true);
+                }
+            });
+        }
 
-            DataRequester.RequestDataForStory<Comments>(id, UrlFunctions.ShortComment, obj => { obj.comments.ForEach(o => CommentList.Add(o)); });
+        void RequestLongComments(string id, string before, bool isMore)
+        {
+            DataRequester.RequestLongComment(id, before, obj =>
+            {
+                obj.comments.ForEach(o => CommentList.Add(o));
+                if (CommentList.Count < Config.GetMaxRowCountForMainList() && obj.comments.Count != 0)
+                {
+                    RequestComments(id, true);
+                }
+            });
+        }
+
+        void RequestShortComments(string id, string before)
+        {
+            DataRequester.RequestShortComment(id, before, obj =>
+            {
+                obj.comments.ForEach(o => CommentList.Add(o));
+                if (CommentList.Count < Config.GetMaxRowCountForMainList() && obj.comments.Count != 0)
+                {
+                    RequestShortComment(id, CommentList.Last().id.ToString());
+                }
+            });
         }
     }
 }

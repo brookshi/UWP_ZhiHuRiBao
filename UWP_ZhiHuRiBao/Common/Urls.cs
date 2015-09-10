@@ -22,16 +22,20 @@ using System.Threading.Tasks;
 
 namespace Brook.ZhiHuRiBao.Common
 {
-    public static class UrlFunctions
+    public static class Urls
     {
         public const string BaseUrl = "http://news-at.zhihu.com/api/4/";
 
-        public const string Stories = "stories/before/{dt}";
+        public const string Stories = "stories/before/{before}";
 
         public const string StoryContent = "story/{id}";
 
         public const string LongComment = "story/{id}/long-comments";
 
+        public const string LongComment_More = "story/{id}/long-comments/before/{before}";
+
         public const string ShortComment = "story/{id}/short-comments";
+
+        public const string ShortComment_More = "story/{id}/short-comments/before/{before}";
     }
 }

@@ -103,7 +103,7 @@
     </Compile>
     <Compile Include="Common\Html.cs" />
     <Compile Include="Common\PageBase.cs" />
-    <Compile Include="Common\UrlFunctions.cs" />
+    <Compile Include="Common\Urls.cs" />
     <Compile Include="Common\ViewModelBase.cs" />
     <Compile Include="Elements\CustomTitleBar.xaml.cs">
       <DependentUpon>CustomTitleBar.xaml</DependentUpon>
@@ -120,6 +120,7 @@
     <Compile Include="Models\MainData.cs" />
     <Compile Include="Pages\MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Config.cs" />
     <Compile Include="Utils\DataRequester.cs" />
     <Compile Include="Utils\RickTextBlockHtml.cs" />
     <Compile Include="Utils\WebViewExtend.cs" />

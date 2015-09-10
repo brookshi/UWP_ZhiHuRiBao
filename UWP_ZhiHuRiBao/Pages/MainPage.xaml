@@ -40,7 +40,7 @@
         <ui:CustomTitleBar x:Name="TitleBar" Grid.Row="0">
             <Button Content="asf" Click="Button_Click"/>
         </ui:CustomTitleBar>-->
-        <SplitView x:Name="MainView" DisplayMode="CompactInline" OpenPaneLength="360" CompactPaneLength="80">
+        <SplitView x:Name="MainView" DisplayMode="CompactInline" CompactPaneLength="80">
             <SplitView.Pane>
                 <ListView x:Name="CategoryListView" SelectionMode="Single" ItemsSource="{x:Bind MainList}" ItemTemplate="{StaticResource Story}" IsItemClickEnabled="True" ItemClick="MainListView_ItemClick">
                 </ListView>

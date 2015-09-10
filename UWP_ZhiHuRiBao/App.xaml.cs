@@ -1,9 +1,11 @@
 ﻿using Brook.ZhiHuRiBao.Common;
 using Brook.ZhiHuRiBao.Pages;
+using Brook.ZhiHuRiBao.Utils;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -36,6 +38,7 @@ namespace Brook.ZhiHuRiBao
         /// <param name="e">有关启动请求和过程的详细信息。</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            InitConfig();
             InitHttpClient();
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
@@ -91,10 +94,18 @@ namespace Brook.ZhiHuRiBao
             }
         }
 
+        void InitConfig()
+        {
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+            var bounds = ApplicationView.GetForCurrentView().VisibleBounds;
+            Config.ScreenWidth = bounds.Width;
+            Config.ScreenHeight = bounds.Height;
+        }
+
         void InitHttpClient()
         {
             XPHttpClient.DefaultClient.HttpConfig
-                .SetBaseUrl(UrlFunctions.BaseUrl)
+                .SetBaseUrl(Urls.BaseUrl)
                 .ApplyConfig();
         }
 

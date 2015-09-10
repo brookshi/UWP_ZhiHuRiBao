@@ -14,6 +14,8 @@
 //   limitations under the License. 
 #endregion
 
+using Brook.ZhiHuRiBao.Common;
+using Brook.ZhiHuRiBao.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,10 +27,31 @@ namespace Brook.ZhiHuRiBao.Utils
 {
     public class DataRequester
     {
-        public static void RequestDataForStory<T>(string id, string functionUrl, Action<T> onSuccess)
+        public static void RequestStories(string before, Action<MainData> onSuccess)
+        {
+            RequestDataForStory("", before, Urls.Stories, onSuccess);
+        }
+
+        public static void RequestStoryContent(string id, Action<MainContent> onSuccess)
+        {
+            RequestDataForStory(id, "", Urls.StoryContent, onSuccess);
+        }
+
+        public static void RequestLongComment(string id, string before, Action<Comments> onSuccess)
+        {
+            RequestDataForStory(id, before, string.IsNullOrEmpty(before) ? Urls.LongComment : Urls.LongComment_More, onSuccess);
+        }
+
+        public static void RequestShortComment(string id, string before, Action<Comments> onSuccess)
+        {
+            RequestDataForStory(id, before, string.IsNullOrEmpty(before) ? Urls.ShortComment : Urls.ShortComment_More, onSuccess);
+        }
+
+        public static void RequestDataForStory<T>(string id, string before, string functionUrl, Action<T> onSuccess)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
-                .AddUrlSegements("id", id);
+                .AddUrlSegements("id", id)
+                .AddUrlSegements("before", before);
             XPHttpClient.DefaultClient.GetAsync(functionUrl, httpParam, new XPResponseHandler<T>()
             {
                 OnSuccess = (response, content) => onSuccess(content),
