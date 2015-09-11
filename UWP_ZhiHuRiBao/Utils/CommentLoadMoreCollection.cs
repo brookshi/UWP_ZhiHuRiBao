@@ -29,11 +29,11 @@ namespace Brook.ZhiHuRiBao.Utils
 
         private string LastCommentId { get { return Count > 0 ? this.Last().id.ToString() : null; } }
 
-        protected override Task<int> GetData()
+        protected override Task<int> LoadData()
         {
+            RequestComments();
             return Task.Run(() =>
             {
-                RequestComments();
                 return Count;
             });
         }
@@ -46,10 +46,10 @@ namespace Brook.ZhiHuRiBao.Utils
 
         void RequestComments()
         {
-            if (string.IsNullOrEmpty(CurrentStoryId))
-                throw new Exception("invalid story id");
-
-            RequestLongComments();
+            if (!string.IsNullOrEmpty(CurrentStoryId))
+            {
+                RequestLongComments();
+            }
         }
 
         async void RequestLongComments()

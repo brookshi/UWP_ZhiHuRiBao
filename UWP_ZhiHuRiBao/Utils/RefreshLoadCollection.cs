@@ -37,7 +37,7 @@ namespace Brook.ZhiHuRiBao.Utils
             {
                 if (Start != null) Start();
 
-                int count = await GetData();
+                int count = await LoadData();
 
                 HasMoreItems = count != 0;
 
@@ -50,10 +50,10 @@ namespace Brook.ZhiHuRiBao.Utils
         public void Refresh()
         {
             Clear();
-            GetData();
+            LoadData();
         }
 
-        protected abstract Task<int> GetData();
+        protected abstract Task<int> LoadData();
 
         public Action Start { get; set; }
 

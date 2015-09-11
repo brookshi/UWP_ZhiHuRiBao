@@ -69,6 +69,7 @@ namespace Brook.ZhiHuRiBao.Pages
 
         public override void Init()
         {
+            Reset();
             RequestMainList(false);
         }
 

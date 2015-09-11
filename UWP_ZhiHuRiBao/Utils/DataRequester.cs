@@ -51,8 +51,8 @@ namespace Brook.ZhiHuRiBao.Utils
         public static Task<T> RequestDataForStory<T>(string id, string before, string functionUrl)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
-                .AddUrlSegements("id", id)
-                .AddUrlSegements("before", before);
+                .AddUrlSegements("id", id ?? "")
+                .AddUrlSegements("before", before ?? "");
 
             return XPHttpClient.DefaultClient.GetAsync<T>(functionUrl, httpParam);
         }
