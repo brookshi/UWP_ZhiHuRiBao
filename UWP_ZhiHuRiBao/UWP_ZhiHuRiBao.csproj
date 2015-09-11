@@ -102,7 +102,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Html.cs" />
-    <Compile Include="Common\LoadMoreCollection.cs" />
+    <Compile Include="Common\ISupportRefresh.cs" />
+    <Compile Include="Utils\CommentLoadMoreCollection.cs" />
+    <Compile Include="Utils\RefreshLoadCollection.cs" />
     <Compile Include="Common\PageBase.cs" />
     <Compile Include="Common\Urls.cs" />
     <Compile Include="Common\ViewModelBase.cs" />
@@ -176,7 +178,6 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

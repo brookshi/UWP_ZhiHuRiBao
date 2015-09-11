@@ -14,6 +14,7 @@
 //   limitations under the License. 
 #endregion
 
+using Brook.ZhiHuRiBao.Common;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,11 +25,11 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Xaml.Data;
 
-namespace Brook.ZhiHuRiBao.Common
+namespace Brook.ZhiHuRiBao.Utils
 {
-    public abstract class LoadMoreCollection<T> : ObservableCollection<T>, ISupportIncrementalLoading
+    public abstract class RefreshLoadCollection<T> : ObservableCollection<T>, ISupportIncrementalLoading, ISupportRefresh
     {
-        public bool HasMoreItems { get; set; } = true;
+        public bool HasMoreItems { get; private set; } = true;
 
         public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint unuseCount)
         {
@@ -36,17 +37,23 @@ namespace Brook.ZhiHuRiBao.Common
             {
                 if (Start != null) Start();
 
-                uint count = 0;
-                T obj = await LoadMoreData(out count);
+                int count = await GetData();
+
                 HasMoreItems = count != 0;
 
                 if (Finish != null) Finish();
 
-                return new LoadMoreItemsResult() { Count = count };
+                return new LoadMoreItemsResult() { Count = (uint)count };
             });
         }
 
-        protected abstract Task<T> LoadMoreData(out uint count);
+        public void Refresh()
+        {
+            Clear();
+            GetData();
+        }
+
+        protected abstract Task<int> GetData();
 
         public Action Start { get; set; }
 

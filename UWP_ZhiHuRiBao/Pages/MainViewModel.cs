@@ -41,11 +41,10 @@ namespace Brook.ZhiHuRiBao.Pages
 
         public ObservableCollection<Story> MainList { get { return _mainList; } }
 
-        private readonly ObservableCollection<Comment> _commentList = new ObservableCollection<Comment>();
+        private readonly CommentLoadMoreCollection _commentList = new CommentLoadMoreCollection();
 
-        public ObservableCollection<Comment> CommentList { get { return _commentList; } }
+        public CommentLoadMoreCollection CommentList { get { return _commentList; } }
 
-        private string LastCommentId { get { return CommentList.Count > 0 ? CommentList.Last().id.ToString() : null; } }
 
         private string _htmlSource = string.Empty;
         public string HtmlSource
@@ -79,16 +78,15 @@ namespace Brook.ZhiHuRiBao.Pages
             MainList.Clear();
         }
 
-        void RequestMainList(bool isGetMore)
+        async void RequestMainList(bool isGetMore)
         {
-            DataRequester.RequestStories(_currentDate, data =>
-            {
-                if (!isGetMore)
-                    Reset();
+            var stories = await DataRequester.GetStories(_currentDate);
 
-                _currentDate = data.date;
-                AppendData(data);
-            });
+            if (!isGetMore)
+                Reset();
+
+            _currentDate = stories.date;
+            AppendData(stories);
         }
 
         void AppendData(MainData data)
@@ -96,49 +94,15 @@ namespace Brook.ZhiHuRiBao.Pages
             data.stories.ForEach(o => MainList.Add(o));
         }
 
-        public void RequestMainContent(string id)
+        public async void RequestMainContent(string id)
         {
-            DataRequester.RequestStoryContent(id, content => { HtmlSource = Html.Constructor(content); });
+            var content = await DataRequester.RequestStoryContent(id);
+            HtmlSource = Html.Constructor(content);
         }
 
-        public void RequestComments(string id, bool isGetMore)
+        void RefreshComments(string storyId)
         {
-            string before = null;
 
-            if (!isGetMore)
-                CommentList.Clear();
-            else
-                before = LastCommentId;
-
-            RequestLongComments(id, before);
         }
-
-        void RequestLongComments(string id, string before)
-        {
-            DataRequester.RequestLongComment(id, before, obj =>
-            {
-                obj.comments.ForEach(o => CommentList.Add(o));
-                if (CommentList.Count < Config.GetMaxRowCountForMainList())
-                {
-                    if (obj.comments.Count != 0)
-                        RequestLongComments(id, LastCommentId);
-                    else
-                        RequestShortComments(id, LastCommentId);
-                }
-            });
-        }
-
-        void RequestShortComments(string id, string before)
-        {
-            DataRequester.RequestShortComment(id, before, obj =>
-            {
-                obj.comments.ForEach(o => CommentList.Add(o));
-                if (CommentList.Count < Config.GetMaxRowCountForMainList() && obj.comments.Count != 0)
-                {
-                    RequestShortComments(id, CommentList.Last().id.ToString());
-                }
-            });
-        }
-
     }
 }

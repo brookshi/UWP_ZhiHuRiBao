@@ -18,6 +18,7 @@ using Brook.ZhiHuRiBao.Common;
 using Brook.ZhiHuRiBao.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,35 +28,33 @@ namespace Brook.ZhiHuRiBao.Utils
 {
     public class DataRequester
     {
-        public static void RequestStories(string before, Action<MainData> onSuccess)
+        public static Task<MainData> GetStories(string before)
         {
-            RequestDataForStory("", before, Urls.Stories, onSuccess);
+            return RequestDataForStory<MainData>("", before, Urls.Stories);
         }
 
-        public static void RequestStoryContent(string id, Action<MainContent> onSuccess)
+        public static Task<MainContent> RequestStoryContent(string storyId)
         {
-            RequestDataForStory(id, "", Urls.StoryContent, onSuccess);
+            return RequestDataForStory<MainContent>(storyId, "", Urls.StoryContent);
+        }
+       
+        public static Task<Comments> RequestLongComment(string id, string before)
+        {
+            return RequestDataForStory<Comments>(id, before, string.IsNullOrEmpty(before) ? Urls.LongComment : Urls.LongComment_More);
         }
 
-        public static void RequestLongComment(string id, string before, Action<Comments> onSuccess)
+        public static Task<Comments> RequestShortComment(string id, string before)
         {
-            RequestDataForStory(id, before, string.IsNullOrEmpty(before) ? Urls.LongComment : Urls.LongComment_More, onSuccess);
+            return RequestDataForStory<Comments>(id, before, string.IsNullOrEmpty(before) ? Urls.ShortComment : Urls.ShortComment_More);
         }
 
-        public static void RequestShortComment(string id, string before, Action<Comments> onSuccess)
-        {
-            RequestDataForStory(id, before, string.IsNullOrEmpty(before) ? Urls.ShortComment : Urls.ShortComment_More, onSuccess);
-        }
-
-        public static void RequestDataForStory<T>(string id, string before, string functionUrl, Action<T> onSuccess)
+        public static Task<T> RequestDataForStory<T>(string id, string before, string functionUrl)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
                 .AddUrlSegements("id", id)
                 .AddUrlSegements("before", before);
-            XPHttpClient.DefaultClient.GetAsync(functionUrl, httpParam, new XPResponseHandler<T>()
-            {
-                OnSuccess = (response, content) => onSuccess(content),
-            });
+
+            return XPHttpClient.DefaultClient.GetAsync<T>(functionUrl, httpParam);
         }
     }
 }

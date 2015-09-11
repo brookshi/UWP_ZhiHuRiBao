@@ -26,8 +26,9 @@ namespace Brook.ZhiHuRiBao.Pages
 
         private void MainListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            GetVM<MainViewModel>().RequestMainContent((e.ClickedItem as Story).id.ToString());
-            GetVM<MainViewModel>().RequestComments((e.ClickedItem as Story).id.ToString(), false);
+            var storyId = (e.ClickedItem as Story).id.ToString();
+            GetVM<MainViewModel>().RequestMainContent(storyId);
+            GetVM<MainViewModel>().CommentList.Refresh(storyId);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
