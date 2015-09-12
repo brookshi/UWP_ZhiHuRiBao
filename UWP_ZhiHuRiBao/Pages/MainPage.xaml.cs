@@ -8,6 +8,8 @@ using Brook.ZhiHuRiBao.Models;
 using Brook.ZhiHuRiBao.Common;
 using XPHttp;
 using Windows.UI.Core;
+using Brook.ZhiHuRiBao.Utils;
+using Windows.UI.Xaml.Media;
 
 namespace Brook.ZhiHuRiBao.Pages
 {
@@ -18,11 +20,37 @@ namespace Brook.ZhiHuRiBao.Pages
             this.InitializeComponent();
             Initalize();
             NavigationCacheMode = NavigationCacheMode.Required;
+            CommentListView.Loaded += (s, e) =>
+            {
+                var view = GetScrollViewer(CommentListView);
+                view.ViewChanged += (sender, arg) =>
+                {
+                    if (view.ExtentHeight - view.VerticalOffset - view.ViewportHeight < 300)
+                    {
+                        CommentList.RequestComments();
+                    }
+                };
+            };
+        }
+
+        public static ScrollViewer GetScrollViewer(DependencyObject obj)
+        {
+            if (obj is ScrollViewer)
+                return obj as ScrollViewer;
+
+            for(int i=0;i<VisualTreeHelper.GetChildrenCount(obj);i++)
+            {
+                var view = GetScrollViewer(VisualTreeHelper.GetChild(obj, i));
+                if (view != null)
+                    return view;
+            }
+
+            return null;
         }
 
         public ObservableCollection<Story> MainList { get { return GetVM<MainViewModel>().MainList; } }
 
-        public ObservableCollection<Comment> CommentList { get { return GetVM<MainViewModel>().CommentList; } }
+        public CommentLoadMoreCollection CommentList { get { return GetVM<MainViewModel>().CommentList; } }
 
         private void MainListView_ItemClick(object sender, ItemClickEventArgs e)
         {

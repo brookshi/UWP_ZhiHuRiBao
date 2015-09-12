@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,11 @@ namespace Brook.ZhiHuRiBao.Models
     public class Comments
     {
         public List<Comment> comments { get; set; }
+    }
+
+    public class GroupComments : ObservableCollection<Comment>
+    {
+        public string category { get; set; }
     }
 
     public class ReplyTo

@@ -8,6 +8,6 @@ namespace Brook.ZhiHuRiBao.Common
 {
     public interface ISupportRefresh
     {
-        void Refresh();
+        void Refresh(bool needClear);
     }
 }

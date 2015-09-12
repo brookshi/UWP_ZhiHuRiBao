@@ -5,7 +5,7 @@
 
     <DataTemplate x:Key="Comment">
         <RelativePanel>
-            <Image x:Name="Comment_Avatar" Stretch="Fill" Width="48" Height="48" Margin="5">
+            <Image x:Name="Comment_Avatar" Stretch="Fill" Width="36" Height="36" Margin="5">
                 <Image.Source>
                     <BitmapImage UriSource="{Binding avatar}"/>
                 </Image.Source>
@@ -13,6 +13,12 @@
             <TextBlock x:Name="Comment_Author" Margin="5" Text="{Binding author}" FontWeight="Bold" RelativePanel.RightOf="Comment_Avatar" RelativePanel.AlignVerticalCenterWith="Comment_Avatar"/>
             <TextBlock x:Name="Comment_Content" Margin="5" TextWrapping="Wrap" Text="{Binding content}" RelativePanel.RightOf="Comment_Avatar" RelativePanel.Below="Comment_Avatar"/>
         </RelativePanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CommentHeader">
+        <Border BorderThickness="0,0,0,2" BorderBrush="Black">
+            <TextBlock Margin="5" Text="{Binding category}" FontWeight="SemiBold"/>
+        </Border>
     </DataTemplate>
 
 </ResourceDictionary>

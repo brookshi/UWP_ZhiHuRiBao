@@ -18,34 +18,55 @@ using Brook.ZhiHuRiBao.Common;
 using Brook.ZhiHuRiBao.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Brook.ZhiHuRiBao.Utils
 {
-    public class CommentLoadMoreCollection : RefreshLoadCollection<Comment>
+    public class CommentLoadMoreCollection : RefreshLoadCollection<GroupComments>
     {
+        public CommentLoadMoreCollection()
+        {
+            Add(new GroupComments() { category = "长评论" });
+            Add(new GroupComments() { category = "短评论" });
+        }
+
         public string CurrentStoryId { get; set; }
 
         string _lastRequestFlag;
 
-        string LastCommentId { get { return Count > 0 ? this.Last().id.ToString() : null; } }
+        string LastCommentId
+        {
+            get
+            {
+                if (Count == 0)
+                    return string.Empty;
+
+                return ShortComments.Count > 0 ? ShortComments.Last().id.ToString() : 
+                    (LongComments.Count > 0 ? LongComments.Last().id.ToString() : null);
+            }
+        }
 
         private CommentType _commonType = CommentType.Long;
+
+        public ObservableCollection<Comment> LongComments { get { return this[0]; } }
+
+        public ObservableCollection<Comment> ShortComments { get { return this[1]; } }
 
         protected override Task<int> LoadData()
         {
             RequestComments();
             return Task.Run(() =>
             {
-                return Count;
+                return LongComments.Count + ShortComments.Count;
             });
         }
 
         protected override bool NeedRequest()
         {
-            return !string.IsNullOrEmpty(CurrentStoryId) && _lastRequestFlag != _commonType.ToString() + LastCommentId;
+            return Count > 0 && !string.IsNullOrEmpty(CurrentStoryId) && _lastRequestFlag != _commonType.ToString() + LastCommentId;
         }
 
         public void Refresh(string storyId)
@@ -53,18 +74,20 @@ namespace Brook.ZhiHuRiBao.Utils
             CurrentStoryId = storyId;
 
             Reset();
-            Refresh();
+            Refresh(false);
         }
 
         public void Reset()
         {
+            LongComments.Clear();
+            ShortComments.Clear();
             _commonType = CommentType.Long;
             _lastRequestFlag = null;
         }
 
-        void RequestComments()
+        public void RequestComments()
         {
-            if (string.IsNullOrEmpty(CurrentStoryId))
+            if (!NeedRequest())
                 return;
 
             _lastRequestFlag = _commonType.ToString() + LastCommentId;
@@ -77,7 +100,7 @@ namespace Brook.ZhiHuRiBao.Utils
         async void RequestLongComments()
         {
             var longComment = await DataRequester.RequestLongComment(CurrentStoryId, LastCommentId);
-            longComment.comments.ForEach(o => Add(o));
+            longComment.comments.ForEach(o => { LongComments.Add(o); });
 
             if (longComment.comments.Count == 0)
                 RequestShortComments();
@@ -87,7 +110,7 @@ namespace Brook.ZhiHuRiBao.Utils
         {
             var shortComment = await DataRequester.RequestShortComment(CurrentStoryId, _commonType == CommentType.Long ? null : LastCommentId);
             _commonType = CommentType.Short;
-            shortComment.comments.ForEach(o => Add(o));
+            shortComment.comments.ForEach(o => { ShortComments.Add(o); });
         }
     }
 }

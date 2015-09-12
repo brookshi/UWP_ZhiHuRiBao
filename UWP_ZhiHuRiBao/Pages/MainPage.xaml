@@ -18,6 +18,7 @@
                 <ResourceDictionary Source="../Elements/Story.xaml"/>
                 <ResourceDictionary Source="../Elements/Comment.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <CollectionViewSource x:Name="CommentGroup" Source="{x:Bind CommentList, Mode=OneWay}" IsSourceGrouped="True" />
         </ResourceDictionary>
     </Page.Resources>
     <Grid>
@@ -50,8 +51,12 @@
                 <SplitView PanePlacement="Right" DisplayMode="Inline" IsPaneOpen="True" OpenPaneLength="320" CompactPaneLength="0" 
                            RelativePanel.RightOf="MainListView" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignRightWithPanel="True" >
                     <SplitView.Pane>
-                        <ListView x:Name="CommentListView" Width="320" SelectionMode="Single" ItemsSource="{x:Bind CommentList}" ItemTemplate="{StaticResource Comment}" 
-                                  IsItemClickEnabled="True"/>
+                        <ListView x:Name="CommentListView" Width="320" SelectionMode="Single" ItemsSource="{x:Bind CommentGroup.View}" ItemTemplate="{StaticResource Comment}" 
+                                  IsItemClickEnabled="True" ShowsScrollingPlaceholders="True">
+                            <ListView.GroupStyle>
+                                <GroupStyle HeaderTemplate="{StaticResource CommentHeader}"/>
+                            </ListView.GroupStyle>
+                        </ListView>
                     </SplitView.Pane>
                     <WebView x:Name="MainContent" utils:WebViewExtend.Content="{Binding HtmlSource}"/>
                 </SplitView>

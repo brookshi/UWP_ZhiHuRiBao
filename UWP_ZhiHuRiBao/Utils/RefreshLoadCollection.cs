@@ -52,10 +52,12 @@ namespace Brook.ZhiHuRiBao.Utils
             });
         }
 
-        public void Refresh()
+        public void Refresh(bool needClear)
         {
+            if (needClear)
+                Clear();
+
             _isStarted = true;
-            Clear();
             LoadData();
         }
 
