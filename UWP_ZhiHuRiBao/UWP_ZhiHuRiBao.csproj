@@ -101,6 +101,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\CommentType.cs" />
     <Compile Include="Common\Html.cs" />
     <Compile Include="Common\ISupportRefresh.cs" />
     <Compile Include="Utils\CommentLoadMoreCollection.cs" />

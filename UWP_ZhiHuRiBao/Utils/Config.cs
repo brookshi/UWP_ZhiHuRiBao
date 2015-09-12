@@ -23,5 +23,9 @@ namespace Brook.ZhiHuRiBao.Utils
         {
             return GetMaxRowCount(100);
         }
+
+        public static int CommentPageRowCount {
+            get { return MinRowCountForList; }
+        }
     }
 }

@@ -33,10 +33,6 @@ namespace Brook.ZhiHuRiBao.Pages
     {
         private string _currentDate;
 
-        private int _currentCommentPage = 0;
-
-        private int _currentMainListPage = 0;
-
         private readonly ObservableCollection<Story> _mainList = new ObservableCollection<Story>();
 
         public ObservableCollection<Story> MainList { get { return _mainList; } }
@@ -101,9 +97,9 @@ namespace Brook.ZhiHuRiBao.Pages
             HtmlSource = Html.Constructor(content);
         }
 
-        void RefreshComments(string storyId)
+        public void RefreshComments(string storyId)
         {
-
+            CommentList.Refresh(storyId);
         }
     }
 }

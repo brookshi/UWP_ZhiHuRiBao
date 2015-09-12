@@ -14,6 +14,7 @@
 //   limitations under the License. 
 #endregion
 
+using Brook.ZhiHuRiBao.Common;
 using Brook.ZhiHuRiBao.Models;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,11 @@ namespace Brook.ZhiHuRiBao.Utils
     {
         public string CurrentStoryId { get; set; }
 
-        private string LastCommentId { get { return Count > 0 ? this.Last().id.ToString() : null; } }
+        string _lastRequestFlag;
+
+        string LastCommentId { get { return Count > 0 ? this.Last().id.ToString() : null; } }
+
+        private CommentType _commonType = CommentType.Long;
 
         protected override Task<int> LoadData()
         {
@@ -38,45 +43,51 @@ namespace Brook.ZhiHuRiBao.Utils
             });
         }
 
+        protected override bool NeedRequest()
+        {
+            return !string.IsNullOrEmpty(CurrentStoryId) && _lastRequestFlag != _commonType.ToString() + LastCommentId;
+        }
+
         public void Refresh(string storyId)
         {
             CurrentStoryId = storyId;
+
+            Reset();
             Refresh();
+        }
+
+        public void Reset()
+        {
+            _commonType = CommentType.Long;
+            _lastRequestFlag = null;
         }
 
         void RequestComments()
         {
-            if (!string.IsNullOrEmpty(CurrentStoryId))
-            {
+            if (string.IsNullOrEmpty(CurrentStoryId))
+                return;
+
+            _lastRequestFlag = _commonType.ToString() + LastCommentId;
+            if (_commonType == CommentType.Long)
                 RequestLongComments();
-            }
+            else if (_commonType == CommentType.Short)
+                RequestShortComments();
         }
 
         async void RequestLongComments()
         {
-            string LastCommentId = Count > 0 ? this.Last().id.ToString() : null;
             var longComment = await DataRequester.RequestLongComment(CurrentStoryId, LastCommentId);
             longComment.comments.ForEach(o => Add(o));
 
-            if (Count < Config.GetMaxRowCountForMainList())
-            {
-                if (longComment.comments.Count != 0)
-                    RequestLongComments();
-                else
-                    RequestShortComments();
-            }
+            if (longComment.comments.Count == 0)
+                RequestShortComments();
         }
 
         async void RequestShortComments()
         {
-            var shortComment = await DataRequester.RequestShortComment(CurrentStoryId, LastCommentId);
+            var shortComment = await DataRequester.RequestShortComment(CurrentStoryId, _commonType == CommentType.Long ? null : LastCommentId);
+            _commonType = CommentType.Short;
             shortComment.comments.ForEach(o => Add(o));
-
-            if (Count < Config.GetMaxRowCountForMainList() && shortComment.comments.Count != 0)
-            {
-                RequestShortComments();
-            }
         }
-
     }
 }

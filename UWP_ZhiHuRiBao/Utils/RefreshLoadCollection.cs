@@ -21,6 +21,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Xaml.Data;
@@ -30,9 +31,13 @@ namespace Brook.ZhiHuRiBao.Utils
     public abstract class RefreshLoadCollection<T> : ObservableCollection<T>, ISupportIncrementalLoading, ISupportRefresh
     {
         public bool HasMoreItems { get; private set; } = true;
+        private bool _isStarted = false;
 
         public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint unuseCount)
         {
+            if (!_isStarted || !NeedRequest())
+                return Task.Run(() => { return new LoadMoreItemsResult() { Count = 0 }; }).AsAsyncOperation();
+
             return AsyncInfo.Run(async c =>
             {
                 if (Start != null) Start();
@@ -49,9 +54,12 @@ namespace Brook.ZhiHuRiBao.Utils
 
         public void Refresh()
         {
+            _isStarted = true;
             Clear();
             LoadData();
         }
+
+        protected abstract bool NeedRequest();
 
         protected abstract Task<int> LoadData();
 

@@ -51,7 +51,7 @@
                            RelativePanel.RightOf="MainListView" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignRightWithPanel="True" >
                     <SplitView.Pane>
                         <ListView x:Name="CommentListView" Width="320" SelectionMode="Single" ItemsSource="{x:Bind CommentList}" ItemTemplate="{StaticResource Comment}" 
-                                  IsItemClickEnabled="True" ItemClick="MainListView_ItemClick"/>
+                                  IsItemClickEnabled="True"/>
                     </SplitView.Pane>
                     <WebView x:Name="MainContent" utils:WebViewExtend.Content="{Binding HtmlSource}"/>
                 </SplitView>

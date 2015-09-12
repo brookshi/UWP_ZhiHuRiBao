@@ -28,7 +28,7 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             var storyId = (e.ClickedItem as Story).id.ToString();
             GetVM<MainViewModel>().RequestMainContent(storyId);
-            GetVM<MainViewModel>().CommentList.Refresh(storyId);
+            GetVM<MainViewModel>().RefreshComments(storyId);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
