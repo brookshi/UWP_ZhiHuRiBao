@@ -1,0 +1,64 @@
+﻿<Page
+    x:Class="ListViewSample.SimpleListViewSample"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ListViewSample"
+    xmlns:ui="using:XamlListView.Samples.SimpleListViewSample" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:ListViewSample.Model"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <!-- When using x:Bind, you need to set x:DataType -->
+        <DataTemplate x:Name="ContactListViewTemplate" x:DataType="data:Contact">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Ellipse x:Name="Ellipse"
+                         Grid.RowSpan="2"
+                         Width ="32"
+                         Height="32"
+                         Margin="6"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center"
+                         Fill="LightGray"/>
+                <TextBlock Grid.Column="1"
+                           Text="{x:Bind Name}" 
+                           x:Phase="1"  
+                           Style="{ThemeResource BaseTextBlockStyle}"
+                           Margin="12,6,0,0"/>
+                <TextBlock  Grid.Column="1"
+                            Grid.Row="1"
+                            Text="{x:Bind Position}" 
+                            x:Phase="2"
+                            Style="{ThemeResource BodyTextBlockStyle}"
+                            Margin="12,0,0,6"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    <ui:RefreshLoadPanel x:Name="RefreshPanel" Width="500" Height="500" RefreshAction="{x:Bind RefreshAction}">
+        <Border Background="Black">
+            <ListView x:Name="MasterListView" 
+                  SelectionMode="Single"
+                  IsItemClickEnabled="False"
+                  ShowsScrollingPlaceholders="False"
+                  ItemTemplate="{StaticResource ContactListViewTemplate }"
+                  >
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+
+        </Border>
+        <Rectangle Fill="Blue" Opacity="0"/>
+    </ui:RefreshLoadPanel>
+        
+</Page>
