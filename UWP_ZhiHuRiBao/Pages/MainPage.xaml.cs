@@ -10,6 +10,8 @@ using XPHttp;
 using Windows.UI.Core;
 using Brook.ZhiHuRiBao.Utils;
 using Windows.UI.Xaml.Media;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 
 namespace Brook.ZhiHuRiBao.Pages
 {
@@ -19,6 +21,8 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             this.InitializeComponent();
             Initalize();
+            UpdateBarStyle((Color)Application.Current.Resources["ColorPrimary"]);
+            
             NavigationCacheMode = NavigationCacheMode.Required;
             CommentListView.Loaded += (s, e) =>
             {
@@ -31,6 +35,12 @@ namespace Brook.ZhiHuRiBao.Pages
                     }
                 };
             };
+        }
+
+        void UpdateBarStyle(Color color)
+        {
+            ApplicationView.GetForCurrentView().TitleBar.BackgroundColor = color;
+            ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = color;
         }
 
         public static ScrollViewer GetScrollViewer(DependencyObject obj)

@@ -10,6 +10,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     mc:Ignorable="d"
     xmlns:llm="using:LLM"
+    xmlns:xp="using:XP"
     xmlns:convert="using:Brook.ZhiHuRiBao.Converters">
     
     <Page.DataContext>
@@ -38,14 +39,26 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <!--<Grid.RowDefinitions>
+        <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ui:CustomTitleBar x:Name="TitleBar" Grid.Row="0">
-            <Button Content="asf" Click="Button_Click"/>
-        </ui:CustomTitleBar>-->
-        <SplitView x:Name="MainView" DisplayMode="CompactInline" CompactPaneLength="80">
+        <RelativePanel Background="{StaticResource BrushPrimary}">
+            <xp:XPButton x:Name="MenuButton"
+                         IconPosition="OnlyIcon"
+                         Background="Transparent"
+                         Foreground="White"
+                         PointerOverBackground="#33000000"
+                         PressedBackground="#88000000"
+                         Width="48"
+                         Height="48"
+                         IconSize="20" >
+                <xp:XPButton.Icon>
+                    <FontIcon Glyph="&#xE700;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                </xp:XPButton.Icon>
+            </xp:XPButton>
+        </RelativePanel>
+        <SplitView x:Name="MainView" Grid.Row="1" DisplayMode="Overlay" CompactPaneLength="80">
             <SplitView.Pane>
                 <ListView x:Name="CategoryListView" SelectionMode="Single" ItemsSource="{x:Bind MainList}" ItemTemplate="{StaticResource Story}" IsItemClickEnabled="True" ItemClick="MainListView_ItemClick">
                 </ListView>
