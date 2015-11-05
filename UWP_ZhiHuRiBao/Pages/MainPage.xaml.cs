@@ -52,6 +52,8 @@ namespace Brook.ZhiHuRiBao.Pages
 
         public CommentLoadMoreCollection CommentList { get { return GetVM<MainViewModel>().CommentList; } }
 
+        public bool IsDesktopDevice { get { return !LLM.Utils.IsOnMobile; } }
+
         private void MainListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var storyId = (e.ClickedItem as Story).id.ToString();

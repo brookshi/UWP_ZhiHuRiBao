@@ -3,12 +3,16 @@
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
-      "HtmlAgilityPack/1.4.9": {
+      "LLMListView/0.0.4": {
+        "dependencies": {
+          "XPShadow": "[0.0.8, )",
+          "XPButton": "[0.0.1, )"
+        },
         "compile": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
+          "lib/uap10.0/LLMListView.dll": {}
         },
         "runtime": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
+          "lib/uap10.0/LLMListView.dll": {}
         }
       },
       "LLQNotifier/0.2.1": {
@@ -1583,6 +1587,24 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Win2D.uwp/1.7.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
+          "lib/uap10.0/Workaround1200257.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
+          "lib/uap10.0/Workaround1200257.dll": {}
+        }
+      },
+      "XPButton/0.0.1": {
+        "compile": {
+          "lib/uap10.0/XPButton.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/XPButton.dll": {}
+        }
+      },
       "XPHttp/0.2.3": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
@@ -1590,15 +1612,30 @@
         "runtime": {
           "lib/uap10.0/XPHttp.dll": {}
         }
+      },
+      "XPShadow/0.0.8": {
+        "dependencies": {
+          "Win2D.uwp": "[1.7.0, )"
+        },
+        "compile": {
+          "lib/uap10.0/XPShadow.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/XPShadow.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm": {
-      "HtmlAgilityPack/1.4.9": {
+      "LLMListView/0.0.4": {
+        "dependencies": {
+          "XPShadow": "[0.0.8, )",
+          "XPButton": "[0.0.1, )"
+        },
         "compile": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
+          "lib/uap10.0/LLMListView.dll": {}
         },
         "runtime": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
+          "lib/uap10.0/LLMListView.dll": {}
         }
       },
       "LLQNotifier/0.2.1": {
@@ -3263,6 +3300,27 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Win2D.uwp/1.7.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
+          "lib/uap10.0/Workaround1200257.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
+          "lib/uap10.0/Workaround1200257.dll": {}
+        },
+        "native": {
+          "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {}
+        }
+      },
+      "XPButton/0.0.1": {
+        "compile": {
+          "lib/uap10.0/XPButton.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/XPButton.dll": {}
+        }
+      },
       "XPHttp/0.2.3": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
@@ -3270,15 +3328,30 @@
         "runtime": {
           "lib/uap10.0/XPHttp.dll": {}
         }
+      },
+      "XPShadow/0.0.8": {
+        "dependencies": {
+          "Win2D.uwp": "[1.7.0, )"
+        },
+        "compile": {
+          "lib/uap10.0/XPShadow.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/XPShadow.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
-      "HtmlAgilityPack/1.4.9": {
+      "LLMListView/0.0.4": {
+        "dependencies": {
+          "XPShadow": "[0.0.8, )",
+          "XPButton": "[0.0.1, )"
+        },
         "compile": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
+          "lib/uap10.0/LLMListView.dll": {}
         },
         "runtime": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
+          "lib/uap10.0/LLMListView.dll": {}
         }
       },
       "LLQNotifier/0.2.1": {
@@ -4915,6 +4988,27 @@
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Win2D.uwp/1.7.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
+          "lib/uap10.0/Workaround1200257.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
+          "lib/uap10.0/Workaround1200257.dll": {}
+        },
+        "native": {
+          "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {}
+        }
+      },
+      "XPButton/0.0.1": {
+        "compile": {
+          "lib/uap10.0/XPButton.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/XPButton.dll": {}
+        }
+      },
       "XPHttp/0.2.3": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
@@ -4922,15 +5016,30 @@
         "runtime": {
           "lib/uap10.0/XPHttp.dll": {}
         }
+      },
+      "XPShadow/0.0.8": {
+        "dependencies": {
+          "Win2D.uwp": "[1.7.0, )"
+        },
+        "compile": {
+          "lib/uap10.0/XPShadow.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/XPShadow.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x86": {
-      "HtmlAgilityPack/1.4.9": {
+      "LLMListView/0.0.4": {
+        "dependencies": {
+          "XPShadow": "[0.0.8, )",
+          "XPButton": "[0.0.1, )"
+        },
         "compile": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
+          "lib/uap10.0/LLMListView.dll": {}
         },
         "runtime": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
+          "lib/uap10.0/LLMListView.dll": {}
         }
       },
       "LLQNotifier/0.2.1": {
@@ -6600,6 +6709,27 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Win2D.uwp/1.7.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
+          "lib/uap10.0/Workaround1200257.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
+          "lib/uap10.0/Workaround1200257.dll": {}
+        },
+        "native": {
+          "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {}
+        }
+      },
+      "XPButton/0.0.1": {
+        "compile": {
+          "lib/uap10.0/XPButton.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/XPButton.dll": {}
+        }
+      },
       "XPHttp/0.2.3": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
@@ -6607,15 +6737,30 @@
         "runtime": {
           "lib/uap10.0/XPHttp.dll": {}
         }
+      },
+      "XPShadow/0.0.8": {
+        "dependencies": {
+          "Win2D.uwp": "[1.7.0, )"
+        },
+        "compile": {
+          "lib/uap10.0/XPShadow.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/XPShadow.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
-      "HtmlAgilityPack/1.4.9": {
+      "LLMListView/0.0.4": {
+        "dependencies": {
+          "XPShadow": "[0.0.8, )",
+          "XPButton": "[0.0.1, )"
+        },
         "compile": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
+          "lib/uap10.0/LLMListView.dll": {}
         },
         "runtime": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
+          "lib/uap10.0/LLMListView.dll": {}
         }
       },
       "LLQNotifier/0.2.1": {
@@ -8252,6 +8397,27 @@
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Win2D.uwp/1.7.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
+          "lib/uap10.0/Workaround1200257.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
+          "lib/uap10.0/Workaround1200257.dll": {}
+        },
+        "native": {
+          "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {}
+        }
+      },
+      "XPButton/0.0.1": {
+        "compile": {
+          "lib/uap10.0/XPButton.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/XPButton.dll": {}
+        }
+      },
       "XPHttp/0.2.3": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
@@ -8259,15 +8425,30 @@
         "runtime": {
           "lib/uap10.0/XPHttp.dll": {}
         }
+      },
+      "XPShadow/0.0.8": {
+        "dependencies": {
+          "Win2D.uwp": "[1.7.0, )"
+        },
+        "compile": {
+          "lib/uap10.0/XPShadow.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/XPShadow.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x64": {
-      "HtmlAgilityPack/1.4.9": {
+      "LLMListView/0.0.4": {
+        "dependencies": {
+          "XPShadow": "[0.0.8, )",
+          "XPButton": "[0.0.1, )"
+        },
         "compile": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
+          "lib/uap10.0/LLMListView.dll": {}
         },
         "runtime": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
+          "lib/uap10.0/LLMListView.dll": {}
         }
       },
       "LLQNotifier/0.2.1": {
@@ -9937,6 +10118,27 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Win2D.uwp/1.7.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
+          "lib/uap10.0/Workaround1200257.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
+          "lib/uap10.0/Workaround1200257.dll": {}
+        },
+        "native": {
+          "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {}
+        }
+      },
+      "XPButton/0.0.1": {
+        "compile": {
+          "lib/uap10.0/XPButton.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/XPButton.dll": {}
+        }
+      },
       "XPHttp/0.2.3": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
@@ -9944,15 +10146,30 @@
         "runtime": {
           "lib/uap10.0/XPHttp.dll": {}
         }
+      },
+      "XPShadow/0.0.8": {
+        "dependencies": {
+          "Win2D.uwp": "[1.7.0, )"
+        },
+        "compile": {
+          "lib/uap10.0/XPShadow.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/XPShadow.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
-      "HtmlAgilityPack/1.4.9": {
+      "LLMListView/0.0.4": {
+        "dependencies": {
+          "XPShadow": "[0.0.8, )",
+          "XPButton": "[0.0.1, )"
+        },
         "compile": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
+          "lib/uap10.0/LLMListView.dll": {}
         },
         "runtime": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
+          "lib/uap10.0/LLMListView.dll": {}
         }
       },
       "LLQNotifier/0.2.1": {
@@ -11589,6 +11806,27 @@
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Win2D.uwp/1.7.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
+          "lib/uap10.0/Workaround1200257.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
+          "lib/uap10.0/Workaround1200257.dll": {}
+        },
+        "native": {
+          "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {}
+        }
+      },
+      "XPButton/0.0.1": {
+        "compile": {
+          "lib/uap10.0/XPButton.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/XPButton.dll": {}
+        }
+      },
       "XPHttp/0.2.3": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
@@ -11596,46 +11834,34 @@
         "runtime": {
           "lib/uap10.0/XPHttp.dll": {}
         }
+      },
+      "XPShadow/0.0.8": {
+        "dependencies": {
+          "Win2D.uwp": "[1.7.0, )"
+        },
+        "compile": {
+          "lib/uap10.0/XPShadow.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/XPShadow.dll": {}
+        }
       }
     }
   },
   "libraries": {
-    "HtmlAgilityPack/1.4.9": {
-      "sha512": "anZIsi7bbHZ35ZZzvCA+gVWC/mEXVhcJjJvxr3wzUEDsOE4uk0Fa0ZiaxVn83AZpVKVO4RHyqamPkzzJbMUgmQ==",
+    "LLMListView/0.0.4": {
+      "sha512": "UxlWKXOIyjm6stGrADiPRmEbd//eK513rKJVqsx4wrywsKAXueuEdKmGpSQufxuHjLcHHfSRWrccmBkCO6Cugw==",
       "type": "Package",
       "files": [
         "_rels/.rels",
-        "HtmlAgilityPack.nuspec",
-        "HAPIcon.png",
-        "readme.txt",
-        "lib/Net20/HtmlAgilityPack.dll",
-        "lib/Net20/HtmlAgilityPack.pdb",
-        "lib/Net20/HtmlAgilityPack.xml",
-        "lib/Net40/HtmlAgilityPack.dll",
-        "lib/Net40/HtmlAgilityPack.pdb",
-        "lib/Net40/HtmlAgilityPack.XML",
-        "lib/Net40-client/HtmlAgilityPack.dll",
-        "lib/Net40-client/HtmlAgilityPack.pdb",
-        "lib/Net40-client/HtmlAgilityPack.xml",
-        "lib/Net45/HtmlAgilityPack.dll",
-        "lib/Net45/HtmlAgilityPack.pdb",
-        "lib/Net45/HtmlAgilityPack.XML",
-        "lib/NetCore45/HtmlAgilityPack.dll",
-        "lib/NetCore45/HtmlAgilityPack.pdb",
-        "lib/NetCore45/HtmlAgilityPack.pri",
-        "lib/NetCore45/HtmlAgilityPack.xml",
-        "lib/portable-net45+netcore45+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.dll",
-        "lib/portable-net45+netcore45+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.pdb",
-        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.dll",
-        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.pdb",
-        "lib/sl4/HtmlAgilityPack.dll",
-        "lib/sl4/HtmlAgilityPack.pdb",
-        "lib/sl4/HtmlAgilityPack.XML",
-        "lib/sl5/HtmlAgilityPack.dll",
-        "lib/sl5/HtmlAgilityPack.pdb",
-        "lib/sl5/HtmlAgilityPack.XML",
-        "lib/sl3-wp/_._",
-        "package/services/metadata/core-properties/43fdb80a5711487696f5a99b6d1418d0.psmdcp",
+        "LLMListView.nuspec",
+        "lib/uap10.0/LLMListView/Properties/LLMListView.rd.xml",
+        "lib/uap10.0/LLMListView/Generic.xbf",
+        "lib/uap10.0/LLMListView/LLMListView.xr.xml",
+        "lib/uap10.0/LLMListView.dll",
+        "lib/uap10.0/LLMListView.pdb",
+        "lib/uap10.0/LLMListView.pri",
+        "package/services/metadata/core-properties/9edd9bbf0075473a9c9fe3209e17c3c9.psmdcp",
         "[Content_Types].xml"
       ]
     },
@@ -15049,6 +15275,43 @@
         "[Content_Types].xml"
       ]
     },
+    "Win2D.uwp/1.7.0": {
+      "sha512": "q1/BSLPlwzAjh96AOLM0y+qELWn/+hHcUvELNqELf1fX6zFfSAp7eRFamOXuazTDvPKzr0YeQ8J5ErE8oYkRBA==",
+      "type": "Package",
+      "files": [
+        "_rels/.rels",
+        "Win2D.uwp.nuspec",
+        "Win2d.githash.txt",
+        "build/native/Win2D.uwp.targets",
+        "include/Microsoft.Graphics.Canvas.h",
+        "include/Microsoft.Graphics.Canvas.native.h",
+        "lib/uap10.0/Microsoft.Graphics.Canvas.winmd",
+        "lib/uap10.0/Microsoft.Graphics.Canvas.xml",
+        "lib/uap10.0/en/Microsoft.Graphics.Canvas.xml",
+        "lib/uap10.0/Workaround1200257.dll",
+        "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll",
+        "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll",
+        "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll",
+        "package/services/metadata/core-properties/804e31f876b743ed933710f3069c4090.psmdcp",
+        "[Content_Types].xml"
+      ]
+    },
+    "XPButton/0.0.1": {
+      "sha512": "bHKjJxPjpYrMmK4h/iIXNVJee9UWx63OxCt+ObUibFmUGntklXUaxM9M3e2oTR+vHbyc3NnATkXY08/kfAyohQ==",
+      "type": "Package",
+      "files": [
+        "_rels/.rels",
+        "XPButton.nuspec",
+        "lib/uap10.0/XPButton/Properties/XPButton.rd.xml",
+        "lib/uap10.0/XPButton/Generic.xbf",
+        "lib/uap10.0/XPButton/XPButton.xr.xml",
+        "lib/uap10.0/XPButton.dll",
+        "lib/uap10.0/XPButton.pdb",
+        "lib/uap10.0/XPButton.pri",
+        "package/services/metadata/core-properties/33c683154f7047ec8dd1c17937e739e9.psmdcp",
+        "[Content_Types].xml"
+      ]
+    },
     "XPHttp/0.2.3": {
       "sha512": "KZRS+kM82JDI3JNOMvPM9Gzmx2sl8NZAaMLYD0irJdoavEmJJCprn8NjiNkjCeepk0ZHMx6r/LSDScjDdGK+6g==",
       "type": "Package",
@@ -15060,11 +15323,27 @@
         "package/services/metadata/core-properties/8a0e1cd275e143c8bba52f39a23b0c5c.psmdcp",
         "[Content_Types].xml"
       ]
+    },
+    "XPShadow/0.0.8": {
+      "sha512": "1NGQCph9pLRcSM/JriaBfqlpwZYpN2lsbNQGHbOPYapAxxOzE14HMq1MSuxAxmejmKKqP7cuc+QNGQMG2CbyOw==",
+      "type": "Package",
+      "files": [
+        "_rels/.rels",
+        "XPShadow.nuspec",
+        "lib/uap10.0/XPShadow/Properties/XPShadow.rd.xml",
+        "lib/uap10.0/XPShadow/Generic.xbf",
+        "lib/uap10.0/XPShadow/XPShadow.xr.xml",
+        "lib/uap10.0/XPShadow.dll",
+        "lib/uap10.0/XPShadow.pdb",
+        "lib/uap10.0/XPShadow.pri",
+        "package/services/metadata/core-properties/50728a8a79d54e5b959024b9584e1e38.psmdcp",
+        "[Content_Types].xml"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "": [
-      "HtmlAgilityPack >= 1.4.9",
+      "LLMListView >= 0.0.4",
       "LLQNotifier >= 0.2.1",
       "Microsoft.ApplicationInsights >= 1.0.0",
       "Microsoft.ApplicationInsights.PersistenceChannel >= 1.0.0",

@@ -84,6 +84,21 @@ namespace Brook.ZhiHuRiBao.Pages
 
             _currentDate = stories.date;
             AppendData(stories);
+
+            if(!isGetMore)
+            {
+                AutoDisplayFirstStory();
+            }
+        }
+
+        private void AutoDisplayFirstStory()
+        {
+            var firstStory = MainList.First();
+            if (firstStory == null)
+                return;
+
+            RequestMainContent(firstStory.id.ToString());
+            RefreshComments(firstStory.id.ToString());
         }
 
         void AppendData(MainData data)
