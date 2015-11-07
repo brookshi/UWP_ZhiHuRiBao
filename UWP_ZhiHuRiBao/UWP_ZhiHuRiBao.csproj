@@ -104,8 +104,10 @@
     <Compile Include="Common\CommentType.cs" />
     <Compile Include="Common\Html.cs" />
     <Compile Include="Common\ISupportRefresh.cs" />
+    <Compile Include="Common\StoryDataTemplateSelector.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Utils\CommentLoadMoreCollection.cs" />
+    <Compile Include="Utils\Misc.cs" />
     <Compile Include="Utils\ObservableCollectionExtended.cs" />
     <Compile Include="Utils\RefreshLoadCollection.cs" />
     <Compile Include="Common\PageBase.cs" />
@@ -128,12 +130,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Config.cs" />
     <Compile Include="Utils\DataRequester.cs" />
+    <Compile Include="Utils\StringUtil.cs" />
     <Compile Include="Utils\WebViewExtend.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <PRIResource Include="strings\zh-CN\Resources.resw" />
     <None Include="UWP_ZhiHuRiBao_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +184,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

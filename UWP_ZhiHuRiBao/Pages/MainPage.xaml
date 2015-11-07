@@ -25,6 +25,12 @@
             </ResourceDictionary.MergedDictionaries>
             <CollectionViewSource x:Name="CommentGroup" Source="{x:Bind CommentList, Mode=OneWay}" IsSourceGrouped="True" />
             <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <DataTemplate x:Key="GroupHeader">
+                <Border>
+                    <TextBlock Margin="5" Text="{Binding title}" FontSize="14" Foreground="Gray"/>
+                </Border>
+            </DataTemplate>
+            <common:StoryDataTemplateSelector x:Key="StoryDataTemplateSelector" ItemTemplate="{StaticResource Story}" GroupTemplate="{StaticResource GroupHeader}"/>
         </ResourceDictionary>
     </Page.Resources>
     <Grid>
@@ -61,7 +67,7 @@
         </RelativePanel>
         <SplitView x:Name="MainView" Grid.Row="1" DisplayMode="Overlay" CompactPaneLength="80">
             <SplitView.Pane>
-                <ListView x:Name="CategoryListView" SelectionMode="Single" ItemsSource="{x:Bind MainList}" ItemTemplate="{StaticResource Story}" IsItemClickEnabled="True" ItemClick="MainListView_ItemClick">
+                <ListView x:Name="CategoryListView" SelectionMode="Single" ItemTemplate="{StaticResource Story}" IsItemClickEnabled="True" ItemClick="MainListView_ItemClick">
                 </ListView>
             </SplitView.Pane>
             <RelativePanel>
@@ -69,8 +75,7 @@
                                  Width="400" 
                                  RelativePanel.AlignLeftWithPanel="True" 
                                  SelectionMode="Single" 
-                                 ItemsSource="{x:Bind MainList}" 
-                                 ItemTemplate="{StaticResource Story}" 
+                                 ItemsSource="{x:Bind StoryList}" 
                                  IsItemClickEnabled="True" 
                                  ItemClick="MainListView_ItemClick"
                                  CanPullToRefresh="True"
@@ -78,10 +83,11 @@
                                  RefreshButtonBackground="{ThemeResource BrushPrimary}"
                                  RefreshProgressRingBrush="{ThemeResource BrushPrimaryDark}"
                                  LoadMoreProgressBarBrush="{ThemeResource BrushPrimaryDark}"
-                                 Background="{ThemeResource BrushListBackground}">
+                                 Background="{ThemeResource BrushListBackground}"
+                                 ItemTemplateSelector="{StaticResource StoryDataTemplateSelector}">
                     <llm:LLMListView.HeaderTemplate>
                         <DataTemplate>
-                            <FlipView x:Name="ImageFlipView" Background="Transparent" ItemsSource="{Binding TopStories}" Height="250" Width="400" Margin="0, 0, 0, 10">
+                            <FlipView x:Name="ImageFlipView" Background="Transparent" ItemsSource="{Binding TopStoryList}" Height="250" Width="400" Margin="0, 0, 0, 10">
                                 <FlipView.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>

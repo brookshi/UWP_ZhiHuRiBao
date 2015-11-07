@@ -33,13 +33,13 @@ namespace Brook.ZhiHuRiBao.Pages
     {
         private string _currentDate;
 
-        private readonly ObservableCollectionExtended<Story> _mainList = new ObservableCollectionExtended<Story>();
+        private readonly ObservableCollectionExtended<Story> _storyDataList = new ObservableCollectionExtended<Story>();
 
-        public ObservableCollectionExtended<Story> MainList { get { return _mainList; } }
+        public ObservableCollectionExtended<Story> StoryDataList { get { return _storyDataList; } }
 
-        private List<TopStory> _topStories = new List<TopStory>();
+        private List<TopStory> _topStoryList = new List<TopStory>();
 
-        public List<TopStory> TopStories { get { return _topStories; } set { if (value != _topStories) { _topStories = value; Notify("TopStories"); } } }
+        public List<TopStory> TopStoryList { get { return _topStoryList; } set { if (value != _topStoryList) { _topStoryList = value; Notify("TopStoryList"); } } }
 
         private readonly CommentLoadMoreCollection _commentList = new CommentLoadMoreCollection();
 
@@ -101,8 +101,8 @@ namespace Brook.ZhiHuRiBao.Pages
         protected void Reset()
         {
             _currentDate = DateTime.Now.AddDays(1).ToString("yyyyMMdd");
-            MainList.Clear();
-            TopStories.Clear();
+            StoryDataList.Clear();
+            TopStoryList.Clear();
         }
 
         private async Task RequestMainList(bool isLoadingMore)
@@ -117,26 +117,27 @@ namespace Brook.ZhiHuRiBao.Pages
             {
                 Reset();
                 storyData = await DataRequester.GetLatestStories();
-                TopStories = storyData.top_stories;
+                TopStoryList = storyData.top_stories;
             }
 
             _currentDate = storyData.date;
-            MainList.AddRange(storyData.stories);
+            StoryDataList.Add(new Story() { title = StringUtil.GetStoryGroupName(_currentDate), type = Misc.Group_Name_Type });
+            StoryDataList.AddRange(storyData.stories);
 
             if (!isLoadingMore)
             {
-                AutoDisplayFirstStory();
+                AutoDisplayFirstStory(storyData.stories[0].id.ToString());
             }
         }
 
-        private void AutoDisplayFirstStory()
+        private void AutoDisplayFirstStory(string storyId)
         {
-            var firstStory = MainList.First();
+            var firstStory = StoryDataList.First();
             if (firstStory == null)
                 return;
 
-            RequestMainContent(firstStory.id.ToString());
-            RefreshComments(firstStory.id.ToString());
+            RequestMainContent(storyId);
+            RefreshComments(storyId);
         }
 
         public async void RequestMainContent(string id)

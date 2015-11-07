@@ -46,6 +46,8 @@ namespace Brook.ZhiHuRiBao.Pages
             MainListView.SetRefresh(true);
         }
 
+        private MainViewModel VM { get { return GetVM<MainViewModel>(); } }
+
         void UpdateBarStyle(Color color)
         {
             ApplicationView.GetForCurrentView().TitleBar.BackgroundColor = color;
@@ -67,9 +69,9 @@ namespace Brook.ZhiHuRiBao.Pages
             return null;
         }
 
-        public ObservableCollection<Story> MainList { get { return GetVM<MainViewModel>().MainList; } }
+        public ObservableCollection<Story> StoryList { get { return VM.StoryDataList; } }
 
-        public CommentLoadMoreCollection CommentList { get { return GetVM<MainViewModel>().CommentList; } }
+        public CommentLoadMoreCollection CommentList { get { return VM.CommentList; } }
 
         public bool IsDesktopDevice { get { return !LLM.Utils.IsOnMobile; } }
 
@@ -87,7 +89,11 @@ namespace Brook.ZhiHuRiBao.Pages
 
         private void MainListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var storyId = (e.ClickedItem as Story).id.ToString();
+            var story = e.ClickedItem as Story;
+            if (Misc.IsGroupItem(story.type))
+                return;
+
+            var storyId = story.id.ToString();
             GetVM<MainViewModel>().RequestMainContent(storyId);
             GetVM<MainViewModel>().RefreshComments(storyId);
         }
