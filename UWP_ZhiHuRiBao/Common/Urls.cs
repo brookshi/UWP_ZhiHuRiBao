@@ -28,6 +28,8 @@ namespace Brook.ZhiHuRiBao.Common
 
         public const string Stories = "stories/before/{before}";
 
+        public const string LatestStories = "stories/latest";
+
         public const string StoryContent = "story/{id}";
 
         public const string LongComment = "story/{id}/long-comments";

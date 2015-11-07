@@ -33,9 +33,13 @@ namespace Brook.ZhiHuRiBao.Pages
     {
         private string _currentDate;
 
-        private readonly ObservableCollection<Story> _mainList = new ObservableCollection<Story>();
+        private readonly ObservableCollectionExtended<Story> _mainList = new ObservableCollectionExtended<Story>();
 
-        public ObservableCollection<Story> MainList { get { return _mainList; } }
+        public ObservableCollectionExtended<Story> MainList { get { return _mainList; } }
+
+        private List<TopStory> _topStories = new List<TopStory>();
+
+        public List<TopStory> TopStories { get { return _topStories; } set { if (value != _topStories) { _topStories = value; Notify("TopStories"); } } }
 
         private readonly CommentLoadMoreCollection _commentList = new CommentLoadMoreCollection();
 
@@ -48,10 +52,24 @@ namespace Brook.ZhiHuRiBao.Pages
             get { return _htmlSource; }
             set
             {
-                if(value !=  _htmlSource)
+                if (value !=  _htmlSource)
                 {
                     _htmlSource = value;
                     Notify("HtmlSource");
+                }
+            }
+        }
+
+        private bool _isRefreshContent = false;
+        public bool IsRefreshContent
+        {
+            get { return _isRefreshContent; }
+            set
+            {
+                if(value != _isRefreshContent)
+                {
+                    _isRefreshContent = value;
+                    Notify("IsRefreshContent");
                 }
             }
         }
@@ -65,27 +83,47 @@ namespace Brook.ZhiHuRiBao.Pages
 
         public override void Init()
         {
-            Reset();
-            RequestMainList(false);
         }
 
-        void Reset()
+        public async Task Refresh()
+        {
+            Reset();
+            IsRefreshContent = true;
+            await RequestMainList(false);
+            IsRefreshContent = false;
+        }
+
+        public async Task LoadMore()
+        {
+            await RequestMainList(true);
+        }
+
+        protected void Reset()
         {
             _currentDate = DateTime.Now.AddDays(1).ToString("yyyyMMdd");
             MainList.Clear();
+            TopStories.Clear();
         }
 
-        async void RequestMainList(bool isGetMore)
+        private async Task RequestMainList(bool isLoadingMore)
         {
-            var stories = await DataRequester.GetStories(_currentDate);
+            MainData storyData = null;
 
-            if (!isGetMore)
+            if (isLoadingMore)
+            {
+                storyData = await DataRequester.GetStories(_currentDate);
+            }
+            else
+            {
                 Reset();
+                storyData = await DataRequester.GetLatestStories();
+                TopStories = storyData.top_stories;
+            }
 
-            _currentDate = stories.date;
-            AppendData(stories);
+            _currentDate = storyData.date;
+            MainList.AddRange(storyData.stories);
 
-            if(!isGetMore)
+            if (!isLoadingMore)
             {
                 AutoDisplayFirstStory();
             }
@@ -101,15 +139,12 @@ namespace Brook.ZhiHuRiBao.Pages
             RefreshComments(firstStory.id.ToString());
         }
 
-        void AppendData(MainData data)
-        {
-            data.stories.ForEach(o => MainList.Add(o));
-        }
-
         public async void RequestMainContent(string id)
         {
+            IsRefreshContent = true;
             var content = await DataRequester.RequestStoryContent(id);
             HtmlSource = Html.Constructor(content);
+            IsRefreshContent = false;
         }
 
         public void RefreshComments(string storyId)

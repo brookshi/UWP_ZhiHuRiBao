@@ -33,6 +33,11 @@ namespace Brook.ZhiHuRiBao.Utils
             return RequestDataForStory<MainData>("", before, Urls.Stories);
         }
 
+        public static Task<MainData> GetLatestStories()
+        {
+            return RequestDataForStory<MainData>("", "", Urls.LatestStories);
+        }
+
         public static Task<MainContent> RequestStoryContent(string storyId)
         {
             return RequestDataForStory<MainContent>(storyId, "", Urls.StoryContent);

@@ -21,9 +21,13 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             this.InitializeComponent();
             Initalize();
-            UpdateBarStyle((Color)Application.Current.Resources["ColorPrimary"]);
+            //UpdateBarStyle((Color)Application.Current.Resources["ColorPrimary"]);
             
             NavigationCacheMode = NavigationCacheMode.Required;
+            MainListView.Refresh = RefreshMainList;
+            MainListView.LoadMore = LoadMoreForMainList;
+
+            Loaded += MainPage_Loaded;
             CommentListView.Loaded += (s, e) =>
             {
                 var view = GetScrollViewer(CommentListView);
@@ -35,6 +39,11 @@ namespace Brook.ZhiHuRiBao.Pages
                     }
                 };
             };
+        }
+
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            MainListView.SetRefresh(true);
         }
 
         void UpdateBarStyle(Color color)
@@ -64,6 +73,18 @@ namespace Brook.ZhiHuRiBao.Pages
 
         public bool IsDesktopDevice { get { return !LLM.Utils.IsOnMobile; } }
 
+        private async void RefreshMainList()
+        {
+            await GetVM<MainViewModel>().Refresh();
+            MainListView.SetRefresh(false);
+        }
+
+        private async void LoadMoreForMainList()
+        {
+            await GetVM<MainViewModel>().LoadMore();
+            MainListView.FinishLoadingMore();
+        }
+
         private void MainListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var storyId = (e.ClickedItem as Story).id.ToString();
@@ -75,6 +96,12 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             Frame rootFrame = Window.Current.Content as Frame;
             rootFrame.Navigate(typeof(BlankPage1), true);
+        }
+
+        private void TapFlipImage(object sender, RoutedEventArgs e)
+        {
+            var id = (sender as FrameworkElement).Tag.ToString();
+            GetVM<MainViewModel>().RequestMainContent(id);
         }
     }
 }

@@ -106,6 +106,7 @@
     <Compile Include="Common\ISupportRefresh.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Utils\CommentLoadMoreCollection.cs" />
+    <Compile Include="Utils\ObservableCollectionExtended.cs" />
     <Compile Include="Utils\RefreshLoadCollection.cs" />
     <Compile Include="Common\PageBase.cs" />
     <Compile Include="Common\Urls.cs" />

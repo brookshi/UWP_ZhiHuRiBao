@@ -11,7 +11,8 @@
     mc:Ignorable="d"
     xmlns:llm="using:LLM"
     xmlns:xp="using:XP"
-    xmlns:convert="using:Brook.ZhiHuRiBao.Converters">
+    xmlns:convert="using:Brook.ZhiHuRiBao.Converters"
+    xmlns:data="using:Brook.ZhiHuRiBao.Models">
     
     <Page.DataContext>
         <local:MainViewModel/>
@@ -43,7 +44,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <RelativePanel Background="{StaticResource BrushPrimary}">
+        <RelativePanel Background="{ThemeResource BrushPrimary}">
             <xp:XPButton x:Name="MenuButton"
                          IconPosition="OnlyIcon"
                          Background="Transparent"
@@ -65,7 +66,7 @@
             </SplitView.Pane>
             <RelativePanel>
                 <llm:LLMListView x:Name="MainListView" 
-                                 Width="360" 
+                                 Width="400" 
                                  RelativePanel.AlignLeftWithPanel="True" 
                                  SelectionMode="Single" 
                                  ItemsSource="{x:Bind MainList}" 
@@ -73,7 +74,30 @@
                                  IsItemClickEnabled="True" 
                                  ItemClick="MainListView_ItemClick"
                                  CanPullToRefresh="True"
-                                 RefreshButtonVisibility="{x:Bind IsDesktopDevice, Converter={StaticResource BoolToVisibilityConverter}}">
+                                 RefreshButtonVisibility="{x:Bind IsDesktopDevice, Converter={StaticResource BoolToVisibilityConverter}}"
+                                 RefreshButtonBackground="{ThemeResource BrushPrimary}"
+                                 RefreshProgressRingBrush="{ThemeResource BrushPrimaryDark}"
+                                 LoadMoreProgressBarBrush="{ThemeResource BrushPrimaryDark}"
+                                 Background="{ThemeResource BrushListBackground}">
+                    <llm:LLMListView.HeaderTemplate>
+                        <DataTemplate>
+                            <FlipView x:Name="ImageFlipView" Background="Transparent" ItemsSource="{Binding TopStories}" Height="250" Width="400" Margin="0, 0, 0, 10">
+                                <FlipView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Image x:Name="MainItem_Image" Stretch="UniformToFill" VerticalAlignment="Center">
+                                                <Image.Source>
+                                                    <BitmapImage UriSource="{Binding image}"/>
+                                                </Image.Source>
+                                            </Image>
+                                            <Rectangle Fill="#33000000" Tapped="TapFlipImage" Tag="{Binding id}"/>
+                                            <TextBlock Margin="20" TextWrapping="Wrap" Text="{Binding title}" FontSize="20" IsHitTestVisible="False" FontWeight="SemiBold" Foreground="White" VerticalAlignment="Bottom"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </FlipView.ItemTemplate>
+                            </FlipView>
+                        </DataTemplate>
+                    </llm:LLMListView.HeaderTemplate>
                     <llm:LLMListView.ItemContainerStyle>
                         <Style TargetType="llm:LLMListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -90,7 +114,10 @@
                             </ListView.GroupStyle>
                         </ListView>
                     </SplitView.Pane>
-                    <WebView x:Name="MainContent" utils:WebViewExtend.Content="{Binding HtmlSource}"/>
+                    <Grid x:Name="MainContent" BorderBrush="{ThemeResource BrushMainSplitter}" BorderThickness="4, 0, 0, 4">
+                        <WebView utils:WebViewExtend.Content="{Binding HtmlSource}"/>
+                        <ProgressRing x:Name="MainContentProgressRing" Width="64" Height="64" VerticalAlignment="Center" HorizontalAlignment="Center" IsActive="{Binding IsRefreshContent}" Foreground="{ThemeResource BrushPrimaryDark}"/>
+                    </Grid>
                 </SplitView>
             </RelativePanel>
         </SplitView>
