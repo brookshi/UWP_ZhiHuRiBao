@@ -13,7 +13,7 @@
                         <BitmapImage UriSource="{Binding images[0]}"/>
                     </Image.Source>
                 </Image>
-                <TextBlock x:Name="MainItem_Content" Margin="8" TextWrapping="Wrap" Text="{Binding title}"
+                <TextBlock x:Name="MainItem_Content" Margin="8" TextWrapping="Wrap" Text="{Binding title}" LineHeight="24"
                            RelativePanel.RightOf="MainItem_Image" FontWeight="Medium" />
             </RelativePanel>
         </xp:Shadow>

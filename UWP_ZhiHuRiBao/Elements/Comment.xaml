@@ -11,7 +11,7 @@
                 </Image.Source>
             </Image>
             <TextBlock x:Name="Comment_Author" Margin="5" Text="{Binding author}" FontWeight="Bold" RelativePanel.RightOf="Comment_Avatar" RelativePanel.AlignVerticalCenterWith="Comment_Avatar"/>
-            <TextBlock x:Name="Comment_Content" Margin="5" TextWrapping="Wrap" Text="{Binding content}" RelativePanel.RightOf="Comment_Avatar" RelativePanel.Below="Comment_Avatar"/>
+            <TextBlock x:Name="Comment_Content" Margin="5" TextWrapping="Wrap" Text="{Binding content}" RelativePanel.RightOf="Comment_Avatar" RelativePanel.Below="Comment_Avatar" LineHeight="20" FontSize="14"/>
         </RelativePanel>
     </DataTemplate>
 
