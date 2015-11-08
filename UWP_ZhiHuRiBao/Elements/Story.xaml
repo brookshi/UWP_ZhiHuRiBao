@@ -18,4 +18,10 @@
             </RelativePanel>
         </xp:Shadow>
     </DataTemplate>
+
+    <DataTemplate x:Key="GroupHeader">
+        <Border>
+            <TextBlock Margin="5" Text="{Binding title}" FontSize="14" Foreground="Gray"/>
+        </Border>
+    </DataTemplate>
 </ResourceDictionary>

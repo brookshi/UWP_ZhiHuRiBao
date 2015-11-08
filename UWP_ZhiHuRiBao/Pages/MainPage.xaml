@@ -12,10 +12,11 @@
     xmlns:llm="using:LLM"
     xmlns:xp="using:XP"
     xmlns:convert="using:Brook.ZhiHuRiBao.Converters"
-    xmlns:data="using:Brook.ZhiHuRiBao.Models">
+    xmlns:data="using:Brook.ZhiHuRiBao.Models"
+    xmlns:vm="using:Brook.ZhiHuRiBao.ViewModels">
     
     <Page.DataContext>
-        <local:MainViewModel/>
+        <vm:MainViewModel/>
     </Page.DataContext>
     <Page.Resources>
         <ResourceDictionary>
@@ -23,16 +24,13 @@
                 <ResourceDictionary Source="../Elements/Story.xaml"/>
                 <ResourceDictionary Source="../Elements/Comment.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <CollectionViewSource x:Name="CommentGroup" Source="{x:Bind CommentList, Mode=OneWay}" IsSourceGrouped="True" />
+            
+            <CollectionViewSource x:Name="CommentGroup" Source="{x:Bind VM.CommentList, Mode=OneWay}" IsSourceGrouped="True" />
             <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-            <DataTemplate x:Key="GroupHeader">
-                <Border>
-                    <TextBlock Margin="5" Text="{Binding title}" FontSize="14" Foreground="Gray"/>
-                </Border>
-            </DataTemplate>
             <common:StoryDataTemplateSelector x:Key="StoryDataTemplateSelector" ItemTemplate="{StaticResource Story}" GroupTemplate="{StaticResource GroupHeader}"/>
         </ResourceDictionary>
     </Page.Resources>
+    
     <Grid>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
@@ -65,7 +63,7 @@
                 </xp:XPButton.Icon>
             </xp:XPButton>
         </RelativePanel>
-        <SplitView x:Name="MainView" Grid.Row="1" DisplayMode="Overlay" CompactPaneLength="80">
+        <SplitView x:Name="MainView" Background="{ThemeResource BrushListBackground}" Grid.Row="1" DisplayMode="Overlay" CompactPaneLength="80" PaneBackground="Transparent">
             <SplitView.Pane>
                 <ListView x:Name="CategoryListView" SelectionMode="Single" ItemTemplate="{StaticResource Story}" IsItemClickEnabled="True" ItemClick="MainListView_ItemClick">
                 </ListView>
@@ -75,7 +73,7 @@
                                  Width="400" 
                                  RelativePanel.AlignLeftWithPanel="True" 
                                  SelectionMode="Single" 
-                                 ItemsSource="{x:Bind StoryList}" 
+                                 ItemsSource="{x:Bind VM.StoryDataList}" 
                                  IsItemClickEnabled="True" 
                                  ItemClick="MainListView_ItemClick"
                                  CanPullToRefresh="True"
@@ -83,21 +81,20 @@
                                  RefreshButtonBackground="{ThemeResource BrushPrimary}"
                                  RefreshProgressRingBrush="{ThemeResource BrushPrimaryDark}"
                                  LoadMoreProgressBarBrush="{ThemeResource BrushPrimaryDark}"
-                                 Background="{ThemeResource BrushListBackground}"
                                  ItemTemplateSelector="{StaticResource StoryDataTemplateSelector}">
                     <llm:LLMListView.HeaderTemplate>
-                        <DataTemplate>
-                            <FlipView x:Name="ImageFlipView" Background="Transparent" ItemsSource="{Binding TopStoryList}" Height="250" Width="400" Margin="0, 0, 0, 10">
+                        <DataTemplate x:DataType="vm:MainViewModel">
+                            <FlipView x:Name="ImageFlipView" ItemsSource="{x:Bind TopStoryList, Mode=OneWay}" Height="250" Width="400" Margin="0, 0, 0, 10">
                                 <FlipView.ItemTemplate>
-                                    <DataTemplate>
+                                    <DataTemplate x:DataType="data:TopStory">
                                         <Grid>
                                             <Image x:Name="MainItem_Image" Stretch="UniformToFill" VerticalAlignment="Center">
                                                 <Image.Source>
-                                                    <BitmapImage UriSource="{Binding image}"/>
+                                                    <BitmapImage UriSource="{x:Bind image}"/>
                                                 </Image.Source>
                                             </Image>
-                                            <Rectangle Fill="#33000000" Tapped="TapFlipImage" Tag="{Binding id}"/>
-                                            <TextBlock Margin="20" TextWrapping="Wrap" Text="{Binding title}" FontSize="20" IsHitTestVisible="False" FontWeight="SemiBold" Foreground="White" VerticalAlignment="Bottom"/>
+                                            <Rectangle Fill="#33000000" Tapped="TapFlipImage" Tag="{x:Bind id}"/>
+                                            <TextBlock Margin="20" TextWrapping="Wrap" Text="{x:Bind title}" FontSize="20" IsHitTestVisible="False" FontWeight="SemiBold" Foreground="White" VerticalAlignment="Bottom"/>
                                         </Grid>
                                     </DataTemplate>
                                 </FlipView.ItemTemplate>
@@ -110,17 +107,28 @@
                         </Style>
                     </llm:LLMListView.ItemContainerStyle>
                 </llm:LLMListView>
-                <SplitView PanePlacement="Right" DisplayMode="Inline" IsPaneOpen="True" OpenPaneLength="320" CompactPaneLength="0" 
+                <SplitView PanePlacement="Right" DisplayMode="Inline" IsPaneOpen="True" OpenPaneLength="320" CompactPaneLength="0" PaneBackground="Transparent"
                            RelativePanel.RightOf="MainListView" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignRightWithPanel="True" >
                     <SplitView.Pane>
-                        <ListView x:Name="CommentListView" Width="320" SelectionMode="Single" ItemsSource="{x:Bind CommentGroup.View}" ItemTemplate="{StaticResource Comment}" 
-                                  IsItemClickEnabled="True" ShowsScrollingPlaceholders="True">
-                            <ListView.GroupStyle>
+                        <llm:LLMListView x:Name="CommentListView" 
+                                         Width="320" 
+                                         SelectionMode="Single"
+                                         ItemsSource="{x:Bind CommentGroup.View}" 
+                                         ItemTemplate="{StaticResource Comment}" 
+                                         IsItemClickEnabled="True" ShowsScrollingPlaceholders="True"
+                                         RefreshProgressRingBrush="{ThemeResource BrushPrimaryDark}"
+                                         LoadMoreProgressBarBrush="{ThemeResource BrushPrimaryDark}">   
+                            <llm:LLMListView.GroupStyle>
                                 <GroupStyle HeaderTemplate="{StaticResource CommentHeader}"/>
-                            </ListView.GroupStyle>
-                        </ListView>
+                            </llm:LLMListView.GroupStyle>
+                            <llm:LLMListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                </Style>
+                            </llm:LLMListView.ItemContainerStyle>
+                        </llm:LLMListView>
                     </SplitView.Pane>
-                    <Grid x:Name="MainContent" BorderBrush="{ThemeResource BrushMainSplitter}" BorderThickness="4, 0, 0, 4">
+                    <Grid x:Name="MainContent" BorderBrush="{ThemeResource BrushMainSplitter}" BorderThickness="4, 0">
                         <WebView utils:WebViewExtend.Content="{Binding HtmlSource}"/>
                         <ProgressRing x:Name="MainContentProgressRing" Width="64" Height="64" VerticalAlignment="Center" HorizontalAlignment="Center" IsActive="{Binding IsRefreshContent}" Foreground="{ThemeResource BrushPrimaryDark}"/>
                     </Grid>

@@ -29,8 +29,8 @@ namespace Brook.ZhiHuRiBao.Utils
     {
         public CommentLoadMoreCollection()
         {
-            Add(new GroupComments() { category = "长评论" });
-            Add(new GroupComments() { category = "短评论" });
+            Add(new GroupComments() { GroupName = "长评论" });
+            Add(new GroupComments() { GroupName = "短评论" });
         }
 
         public string CurrentStoryId { get; set; }

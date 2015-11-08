@@ -14,6 +14,7 @@
 //   limitations under the License. 
 #endregion
 
+using Brook.ZhiHuRiBao.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,9 +29,9 @@ namespace Brook.ZhiHuRiBao.Models
         public List<Comment> comments { get; set; }
     }
 
-    public class GroupComments : ObservableCollection<Comment>
+    public class GroupComments : ObservableCollectionExtended<Comment>
     {
-        public string category { get; set; }
+        public string GroupName { get; set; }
     }
 
     public class ReplyTo

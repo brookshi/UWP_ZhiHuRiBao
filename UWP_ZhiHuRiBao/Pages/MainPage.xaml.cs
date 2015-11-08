@@ -12,6 +12,8 @@ using Brook.ZhiHuRiBao.Utils;
 using Windows.UI.Xaml.Media;
 using Windows.UI;
 using Windows.UI.ViewManagement;
+using Brook.ZhiHuRiBao.ViewModels;
+using System;
 
 namespace Brook.ZhiHuRiBao.Pages
 {
@@ -21,24 +23,16 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             this.InitializeComponent();
             Initalize();
-            //UpdateBarStyle((Color)Application.Current.Resources["ColorPrimary"]);
-            
             NavigationCacheMode = NavigationCacheMode.Required;
+            //UpdateBarStyle((Color)Application.Current.Resources["ColorPrimary"]);
+
             MainListView.Refresh = RefreshMainList;
-            MainListView.LoadMore = LoadMoreForMainList;
+            MainListView.LoadMore = LoadMoreStories;
+
+            CommentListView.Refresh = RefreshCommentList;
+            CommentListView.LoadMore = LoadMoreComments;
 
             Loaded += MainPage_Loaded;
-            CommentListView.Loaded += (s, e) =>
-            {
-                var view = GetScrollViewer(CommentListView);
-                view.ViewChanged += (sender, arg) =>
-                {
-                    if (view.ExtentHeight - view.VerticalOffset - view.ViewportHeight < 300)
-                    {
-                        CommentList.RequestComments();
-                    }
-                };
-            };
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
@@ -46,7 +40,7 @@ namespace Brook.ZhiHuRiBao.Pages
             MainListView.SetRefresh(true);
         }
 
-        private MainViewModel VM { get { return GetVM<MainViewModel>(); } }
+        public MainViewModel VM { get { return GetVM<MainViewModel>(); } }
 
         void UpdateBarStyle(Color color)
         {
@@ -69,22 +63,31 @@ namespace Brook.ZhiHuRiBao.Pages
             return null;
         }
 
-        public ObservableCollection<Story> StoryList { get { return VM.StoryDataList; } }
-
-        public CommentLoadMoreCollection CommentList { get { return VM.CommentList; } }
-
         public bool IsDesktopDevice { get { return !LLM.Utils.IsOnMobile; } }
 
         private async void RefreshMainList()
         {
-            await GetVM<MainViewModel>().Refresh();
+            await VM.Refresh();
             MainListView.SetRefresh(false);
+            DisplayStory(VM.FirstStoryId);
         }
 
-        private async void LoadMoreForMainList()
+        private async void LoadMoreStories()
         {
-            await GetVM<MainViewModel>().LoadMore();
+            await VM.LoadMore();
             MainListView.FinishLoadingMore();
+        }
+
+        private async void RefreshCommentList()
+        {
+            await VM.RequestComments(VM.CurrentStoryId, false);
+            CommentListView.SetRefresh(false);
+        }
+
+        private async void LoadMoreComments()
+        {
+            await VM.RequestComments(VM.CurrentStoryId, true);
+            CommentListView.FinishLoadingMore();
         }
 
         private void MainListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -94,8 +97,7 @@ namespace Brook.ZhiHuRiBao.Pages
                 return;
 
             var storyId = story.id.ToString();
-            GetVM<MainViewModel>().RequestMainContent(storyId);
-            GetVM<MainViewModel>().RefreshComments(storyId);
+            DisplayStory(storyId);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -106,8 +108,15 @@ namespace Brook.ZhiHuRiBao.Pages
 
         private void TapFlipImage(object sender, RoutedEventArgs e)
         {
-            var id = (sender as FrameworkElement).Tag.ToString();
-            GetVM<MainViewModel>().RequestMainContent(id);
+            var storyId = (sender as FrameworkElement).Tag.ToString();
+            DisplayStory(storyId);
+        }
+
+        private void DisplayStory(string storyId)
+        {
+            VM.CurrentStoryId = storyId;
+            VM.RequestMainContent(storyId);
+            CommentListView.SetRefresh(true);
         }
     }
 }

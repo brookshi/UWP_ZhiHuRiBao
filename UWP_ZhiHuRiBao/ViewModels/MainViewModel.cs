@@ -27,11 +27,12 @@ using Windows.UI.Xaml.Data;
 using XPHttp;
 using XPHttp.Serializer;
 
-namespace Brook.ZhiHuRiBao.Pages
+namespace Brook.ZhiHuRiBao.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
         private string _currentDate;
+        private CommentType _currCommentType = CommentType.Long;
 
         private readonly ObservableCollectionExtended<Story> _storyDataList = new ObservableCollectionExtended<Story>();
 
@@ -41,9 +42,9 @@ namespace Brook.ZhiHuRiBao.Pages
 
         public List<TopStory> TopStoryList { get { return _topStoryList; } set { if (value != _topStoryList) { _topStoryList = value; Notify("TopStoryList"); } } }
 
-        private readonly CommentLoadMoreCollection _commentList = new CommentLoadMoreCollection();
+        private readonly ObservableCollectionExtended<GroupComments> _commentList = new ObservableCollectionExtended<GroupComments>();
 
-        public CommentLoadMoreCollection CommentList { get { return _commentList; } }
+        public ObservableCollectionExtended<GroupComments> CommentList { get { return _commentList; } }
 
 
         private string _htmlSource = string.Empty;
@@ -81,13 +82,25 @@ namespace Brook.ZhiHuRiBao.Pages
             set { _mode = value; }
         }
 
+        public string FirstStoryId
+        {
+            get { return StoryDataList.First(o=>!Misc.IsGroupItem(o.type))?.id.ToString() ?? null; }
+        }
+
+        public string LastCommentId
+        {
+            get { return CommentList.Last().LastOrDefault()?.id.ToString() ?? null; }
+        }
+
+        public string CurrentStoryId { get; set; }
+
         public override void Init()
         {
         }
 
         public async Task Refresh()
         {
-            Reset();
+            ResetStorys();
             IsRefreshContent = true;
             await RequestMainList(false);
             IsRefreshContent = false;
@@ -98,7 +111,7 @@ namespace Brook.ZhiHuRiBao.Pages
             await RequestMainList(true);
         }
 
-        protected void Reset()
+        protected void ResetStorys()
         {
             _currentDate = DateTime.Now.AddDays(1).ToString("yyyyMMdd");
             StoryDataList.Clear();
@@ -115,42 +128,74 @@ namespace Brook.ZhiHuRiBao.Pages
             }
             else
             {
-                Reset();
+                ResetStorys();
                 storyData = await DataRequester.GetLatestStories();
                 TopStoryList = storyData.top_stories;
             }
 
-            _currentDate = storyData.date;
             StoryDataList.Add(new Story() { title = StringUtil.GetStoryGroupName(_currentDate), type = Misc.Group_Name_Type });
             StoryDataList.AddRange(storyData.stories);
 
-            if (!isLoadingMore)
-            {
-                AutoDisplayFirstStory(storyData.stories[0].id.ToString());
-            }
+            _currentDate = storyData.date;
+            CurrentStoryId = FirstStoryId;
         }
 
-        private void AutoDisplayFirstStory(string storyId)
-        {
-            var firstStory = StoryDataList.First();
-            if (firstStory == null)
-                return;
-
-            RequestMainContent(storyId);
-            RefreshComments(storyId);
-        }
-
-        public async void RequestMainContent(string id)
+        public async void RequestMainContent(string storyId)
         {
             IsRefreshContent = true;
-            var content = await DataRequester.RequestStoryContent(id);
+            var content = await DataRequester.RequestStoryContent(storyId);
             HtmlSource = Html.Constructor(content);
             IsRefreshContent = false;
         }
 
-        public void RefreshComments(string storyId)
+        public async Task RequestComments(string storyId, bool isLoadingMore)
         {
-            CommentList.Refresh(storyId);
+            if (!isLoadingMore)
+            {
+                ResetComments();
+            }
+
+            if (_currCommentType == CommentType.Long)
+            {
+                await RequestLongComments(storyId, isLoadingMore);
+            }
+            else if (_currCommentType == CommentType.Short)
+            {
+                await RequestShortComments(storyId);
+            }
+        }
+
+        public void ResetComments()
+        {
+            CommentList.Clear();
+            _currCommentType = CommentType.Long;
+        }
+
+        private async Task RequestLongComments(string storyId, bool isLoadingMore)
+        {
+            if(!isLoadingMore)
+            {
+                ResetComments();
+                CommentList.Add(new GroupComments() { GroupName = StringUtil.GetCommentGroupName(CommentType.Long, "*") });
+            }
+            var longComment = await DataRequester.RequestLongComment(storyId, LastCommentId);
+            CommentList.First().AddRange(longComment.comments);
+
+            if (longComment == null || longComment.comments.Count < 20)
+            {
+                await RequestShortComments(storyId);
+            }
+        }
+
+        private async Task RequestShortComments(string storyId)
+        {
+            if(_currCommentType == CommentType.Long)
+            {
+                _currCommentType = CommentType.Short;
+                CommentList.Add(new GroupComments() { GroupName = StringUtil.GetCommentGroupName(CommentType.Short, "*") });
+            }
+            var shortComment = await DataRequester.RequestShortComment(storyId, _currCommentType == CommentType.Long ? null : LastCommentId);
+            CommentList.Last().AddRange(shortComment.comments);
         }
     }
 }

@@ -14,6 +14,7 @@
 //   limitations under the License. 
 #endregion
 
+using Brook.ZhiHuRiBao.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,11 @@ namespace Brook.ZhiHuRiBao.Utils
                 return GetString("LatestNews");
 
             return date.Month + GetString("Month") + date.Day + GetString("Day") + " " + DateToWeek(date);
+        }
+
+        public static string GetCommentGroupName(CommentType type, string count)
+        {
+            return count + GetString("CommentItem") + (type == CommentType.Long ? GetString("LongComment") : GetString("ShortComment"));
         }
 
         public static string DateToWeek(DateTime date)

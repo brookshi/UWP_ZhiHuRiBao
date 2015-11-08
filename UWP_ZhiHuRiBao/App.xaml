@@ -14,10 +14,13 @@
                     <Color x:Key="ColorPrimaryDark">#0288d1</Color>
                     <Color x:Key="ColorButton">#40c4ff</Color>
                     <Color x:Key="ColorListBackground">#f9f9f9</Color>
+                    <Color x:Key="ColorCommentSplitter">#e4e4e4</Color>
+                    
                     <SolidColorBrush x:Key="BrushPrimary" Color="{ThemeResource ColorPrimary}"/>
                     <SolidColorBrush x:Key="BrushPrimaryDark" Color="{ThemeResource ColorPrimaryDark}"/>
                     <SolidColorBrush x:Key="BrushButton" Color="{ThemeResource ColorButton}"/>
                     <SolidColorBrush x:Key="BrushListBackground" Color="{ThemeResource ColorListBackground}"/>
+                    <SolidColorBrush x:Key="BrushCommentSplitter" Color="{ThemeResource ColorCommentSplitter}"/>
                     <SolidColorBrush x:Key="BrushMainSplitter" Color="White"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
