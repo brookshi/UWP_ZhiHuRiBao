@@ -31,8 +31,13 @@ namespace Brook.ZhiHuRiBao.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        private const int Default_Category = -1;
         private string _currentDate;
         private CommentType _currCommentType = CommentType.Long;
+
+        private readonly ObservableCollectionExtended<Others> _categoryList = new ObservableCollectionExtended<Others>();
+
+        public ObservableCollectionExtended<Others> CategoryList { get { return _categoryList; } }
 
         private readonly ObservableCollectionExtended<Story> _storyDataList = new ObservableCollectionExtended<Story>();
 
@@ -94,8 +99,16 @@ namespace Brook.ZhiHuRiBao.ViewModels
 
         public string CurrentStoryId { get; set; }
 
+        public int CurrentCategory { get; set; } = Default_Category;
+
         public override void Init()
         {
+        }
+
+        public async void InitCategories()
+        {
+            var categories = await DataRequester.RequestCategory();
+            CategoryList.AddRange(categories.others);
         }
 
         public async Task Refresh()

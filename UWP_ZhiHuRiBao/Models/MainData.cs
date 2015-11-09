@@ -45,5 +45,4 @@ namespace Brook.ZhiHuRiBao.Models
         public List<Story> stories { get; set; }
         public List<TopStory> top_stories { get; set; }
     }
-
 }

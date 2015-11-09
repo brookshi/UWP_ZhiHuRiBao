@@ -30,35 +30,40 @@ namespace Brook.ZhiHuRiBao.Utils
     {
         public static Task<MainData> GetStories(string before)
         {
-            return RequestData<MainData>("", before, Urls.Stories);
+            return RequestDataForStory<MainData>("", before, Urls.Stories);
         }
 
         public static Task<MainData> GetLatestStories()
         {
-            return RequestData<MainData>("", "", Urls.LatestStories);
+            return RequestDataForStory<MainData>("", "", Urls.LatestStories);
         }
 
         public static Task<MainContent> RequestStoryContent(string storyId)
         {
-            return RequestData<MainContent>(storyId, "", Urls.StoryContent);
+            return RequestDataForStory<MainContent>(storyId, "", Urls.StoryContent);
         }
 
         public static Task<CommentInfo> RequestCommentInfo(string storyId)
         {
-            return RequestData<CommentInfo>(storyId, Urls.CommentInfo);
+            return RequestDataForStory<CommentInfo>(storyId, Urls.CommentInfo);
         }
        
         public static Task<Comments> RequestLongComment(string id, string before)
         {
-            return RequestData<Comments>(id, before, string.IsNullOrEmpty(before) ? Urls.LongComment : Urls.LongComment_More);
+            return RequestDataForStory<Comments>(id, before, string.IsNullOrEmpty(before) ? Urls.LongComment : Urls.LongComment_More);
         }
 
         public static Task<Comments> RequestShortComment(string id, string before)
         {
-            return RequestData<Comments>(id, before, string.IsNullOrEmpty(before) ? Urls.ShortComment : Urls.ShortComment_More);
+            return RequestDataForStory<Comments>(id, before, string.IsNullOrEmpty(before) ? Urls.ShortComment : Urls.ShortComment_More);
         }
 
-        public static Task<T> RequestData<T>(string id, string before, string functionUrl)
+        public static Task<Categories> RequestCategory()
+        {
+            return XPHttpClient.DefaultClient.GetAsync<Categories>(Urls.BaseUrl + Urls.Categories, null);
+        }
+
+        public static Task<T> RequestDataForStory<T>(string id, string before, string functionUrl)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
                 .AddUrlSegements("id", id ?? "")
@@ -67,7 +72,7 @@ namespace Brook.ZhiHuRiBao.Utils
             return XPHttpClient.DefaultClient.GetAsync<T>(functionUrl, httpParam);
         }
 
-        public static Task<T> RequestData<T>(string id, string functionUrl)
+        public static Task<T> RequestDataForStory<T>(string id, string functionUrl)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
                 .AddUrlSegements("id", id ?? "");
