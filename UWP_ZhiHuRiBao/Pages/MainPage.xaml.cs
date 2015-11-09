@@ -109,7 +109,10 @@ namespace Brook.ZhiHuRiBao.Pages
         private void TapFlipImage(object sender, RoutedEventArgs e)
         {
             var storyId = (sender as FrameworkElement).Tag.ToString();
-            DisplayStory(storyId);
+            if (storyId != Misc.Unvalid_Image_Id.ToString())
+            {
+                DisplayStory(storyId);
+            }
         }
 
         private void DisplayStory(string storyId)
@@ -117,6 +120,18 @@ namespace Brook.ZhiHuRiBao.Pages
             VM.CurrentStoryId = storyId;
             VM.RequestMainContent(storyId);
             CommentListView.SetRefresh(true);
+        }
+
+        private void MenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainView.IsPaneOpen = !MainView.IsPaneOpen;
+        }
+
+        private void CategoryListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var category = e.ClickedItem as Others;
+            VM.CurrentCategoryId = category.id;
+            MainListView.SetRefresh(true);
         }
     }
 }

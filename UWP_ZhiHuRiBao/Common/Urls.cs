@@ -14,6 +14,7 @@
 //   limitations under the License. 
 #endregion
 
+using Brook.ZhiHuRiBao.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,20 +29,34 @@ namespace Brook.ZhiHuRiBao.Common
 
         public const string Categories = "themes";
 
+        public const string CategoryStories = "theme/{categoryid}/before/{before}";
+
+        public const string CategoryLatestStories = "theme/{categoryid}";
+
         public const string Stories = "stories/before/{before}";
 
         public const string LatestStories = "stories/latest";
 
-        public const string StoryContent = "story/{id}";
+        public const string StoryContent = "story/{storyid}";
 
-        public const string CommentInfo = "story-extra/{id}";
+        public const string CommentInfo = "story-extra/{storyid}";
 
-        public const string LongComment = "story/{id}/long-comments";
+        public const string LongComment = "story/{storyid}/long-comments";
 
-        public const string LongComment_More = "story/{id}/long-comments/before/{before}";
+        public const string LongComment_More = "story/{storyid}/long-comments/before/{before}";
 
-        public const string ShortComment = "story/{id}/short-comments";
+        public const string ShortComment = "story/{storyid}/short-comments";
 
-        public const string ShortComment_More = "story/{id}/short-comments/before/{before}";
+        public const string ShortComment_More = "story/{storyid}/short-comments/before/{before}";
+
+        public static string GetStoriesUrl(int categoryId)
+        {
+            return categoryId == Misc.Default_Category_Id ? Stories : CategoryStories;
+        }
+
+        public static string GetLatestStoriesUrl(int categoryId)
+        {
+            return categoryId == Misc.Default_Category_Id ? LatestStories : CategoryLatestStories;
+        }
     }
 }

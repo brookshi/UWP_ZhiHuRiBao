@@ -27,7 +27,7 @@
             
             <CollectionViewSource x:Name="CommentGroup" Source="{x:Bind VM.CommentList, Mode=OneWay}" IsSourceGrouped="True" />
             <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-            <common:StoryDataTemplateSelector x:Key="StoryDataTemplateSelector" ItemTemplate="{StaticResource Story}" GroupTemplate="{StaticResource GroupHeader}"/>
+            <common:StoryDataTemplateSelector x:Key="StoryDataTemplateSelector" ImageTemplate="{StaticResource Story}" NoImageTemplate="{StaticResource StoryWithoutImage}" GroupTemplate="{StaticResource GroupHeader}"/>
             <DataTemplate x:Key="CategoryItem">
                 <TextBlock Text="{Binding name}"/>
             </DataTemplate>
@@ -60,20 +60,22 @@
                          PressedBackground="#88000000"
                          Width="48"
                          Height="48"
-                         IconSize="20" >
+                         IconSize="20"
+                         Click="MenuButton_Click">
                 <xp:XPButton.Icon>
                     <FontIcon Glyph="&#xE700;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                 </xp:XPButton.Icon>
             </xp:XPButton>
         </RelativePanel>
-        <SplitView x:Name="MainView" Background="{ThemeResource BrushListBackground}" Grid.Row="1" DisplayMode="Overlay" CompactPaneLength="80" PaneBackground="Transparent">
+        <SplitView x:Name="MainView" Background="{ThemeResource BrushListBackground}" Grid.Row="1" DisplayMode="Overlay" OpenPaneLength="320" PaneBackground="White">
             <SplitView.Pane>
                 <ListView x:Name="CategoryListView" 
                           SelectionMode="Single" 
+                          Width="300"
                           ItemTemplate="{StaticResource CategoryItem}" 
                           IsItemClickEnabled="True" 
-                          ItemClick="MainListView_ItemClick"
-                          ItemsSource="{x:Bind VM.CategoryList}">
+                          ItemsSource="{x:Bind VM.CategoryList}"
+                          ItemClick="CategoryListView_ItemClick">
                 </ListView>
             </SplitView.Pane>
             <RelativePanel>

@@ -28,14 +28,24 @@ namespace Brook.ZhiHuRiBao.Utils
 {
     public class DataRequester
     {
-        public static Task<MainData> GetStories(string before)
+        public static Task<MainData> RequestStories(string before)
         {
             return RequestDataForStory<MainData>("", before, Urls.Stories);
         }
 
-        public static Task<MainData> GetLatestStories()
+        public static Task<MainData> RequestLatestStories()
         {
-            return RequestDataForStory<MainData>("", "", Urls.LatestStories);
+            return RequestDataForStory<MainData>("", Urls.LatestStories);
+        }
+
+        public static Task<MinorData> RequestCategoryStories(string categoryId, string before)
+        {
+            return RequestDataForCategory<MinorData>(categoryId, before, Urls.CategoryStories);
+        }
+
+        public static Task<MinorData> RequestCategoryLatestStories(string categoryId)
+        {
+            return RequestDataForCategory<MinorData>(categoryId, "", Urls.CategoryLatestStories);
         }
 
         public static Task<MainContent> RequestStoryContent(string storyId)
@@ -48,34 +58,44 @@ namespace Brook.ZhiHuRiBao.Utils
             return RequestDataForStory<CommentInfo>(storyId, Urls.CommentInfo);
         }
        
-        public static Task<Comments> RequestLongComment(string id, string before)
+        public static Task<Comments> RequestLongComment(string storyId, string before)
         {
-            return RequestDataForStory<Comments>(id, before, string.IsNullOrEmpty(before) ? Urls.LongComment : Urls.LongComment_More);
+            return RequestDataForStory<Comments>(storyId, before, string.IsNullOrEmpty(before) ? Urls.LongComment : Urls.LongComment_More);
         }
 
-        public static Task<Comments> RequestShortComment(string id, string before)
+        public static Task<Comments> RequestShortComment(string storyId, string before)
         {
-            return RequestDataForStory<Comments>(id, before, string.IsNullOrEmpty(before) ? Urls.ShortComment : Urls.ShortComment_More);
+            return RequestDataForStory<Comments>(storyId, before, string.IsNullOrEmpty(before) ? Urls.ShortComment : Urls.ShortComment_More);
         }
 
         public static Task<Categories> RequestCategory()
         {
-            return XPHttpClient.DefaultClient.GetAsync<Categories>(Urls.BaseUrl + Urls.Categories, null);
+            return XPHttpClient.DefaultClient.GetAsync<Categories>(Urls.Categories, null);
         }
 
-        public static Task<T> RequestDataForStory<T>(string id, string before, string functionUrl)
+        public static Task<T> RequestDataForStory<T>(string storyId, string before, string functionUrl)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
-                .AddUrlSegements("id", id ?? "")
+                .AddUrlSegements("storyid", storyId ?? "")
                 .AddUrlSegements("before", before ?? "");
 
             return XPHttpClient.DefaultClient.GetAsync<T>(functionUrl, httpParam);
         }
 
-        public static Task<T> RequestDataForStory<T>(string id, string functionUrl)
+        public static Task<T> RequestDataForStory<T>(string storyId, string functionUrl)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
-                .AddUrlSegements("id", id ?? "");
+                .AddUrlSegements("storyid", storyId ?? "");
+
+            return XPHttpClient.DefaultClient.GetAsync<T>(functionUrl, httpParam);
+        }
+
+        public static Task<T> RequestDataForCategory<T>(string categoryId, string before, string functionUrl)
+        {
+
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .AddUrlSegements("categoryid", categoryId.ToString())
+                .AddUrlSegements("before", before ?? "");
 
             return XPHttpClient.DefaultClient.GetAsync<T>(functionUrl, httpParam);
         }

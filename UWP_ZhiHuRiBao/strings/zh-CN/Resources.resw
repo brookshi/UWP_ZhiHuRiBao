@@ -123,6 +123,9 @@
   <data name="Day" xml:space="preserve">
     <value>日</value>
   </data>
+  <data name="DefaultCategory" xml:space="preserve">
+    <value>首页</value>
+  </data>
   <data name="Friday" xml:space="preserve">
     <value>星期五</value>
   </data>

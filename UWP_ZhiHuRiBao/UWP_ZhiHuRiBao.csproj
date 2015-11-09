@@ -104,6 +104,7 @@
     <Compile Include="Common\CommentType.cs" />
     <Compile Include="Common\Html.cs" />
     <Compile Include="Common\ISupportRefresh.cs" />
+    <Compile Include="Common\NoImageTrigger.cs" />
     <Compile Include="Common\StoryDataTemplateSelector.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Models\Category.cs" />

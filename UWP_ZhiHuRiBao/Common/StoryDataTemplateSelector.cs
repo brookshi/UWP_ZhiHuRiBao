@@ -28,9 +28,11 @@ namespace Brook.ZhiHuRiBao.Common
 {
     public class StoryDataTemplateSelector : DataTemplateSelector
     {
-        public DataTemplate ItemTemplate { get; set; }
+        public DataTemplate ImageTemplate { get; set; }
 
         public DataTemplate GroupTemplate { get; set; }
+
+        public DataTemplate NoImageTemplate { get; set; }
 
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
@@ -40,7 +42,12 @@ namespace Brook.ZhiHuRiBao.Common
                 return GroupTemplate;
             }
 
-            return ItemTemplate;
+            if(story.images == null || story.images.Count == 0 || string.IsNullOrEmpty(story.images[0]))
+            {
+                return NoImageTemplate;
+            }
+
+            return ImageTemplate;
         }
     }
 }

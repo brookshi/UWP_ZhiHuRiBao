@@ -31,11 +31,10 @@ namespace Brook.ZhiHuRiBao.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private const int Default_Category = -1;
         private string _currentDate;
         private CommentType _currCommentType = CommentType.Long;
 
-        private readonly ObservableCollectionExtended<Others> _categoryList = new ObservableCollectionExtended<Others>();
+        private readonly ObservableCollectionExtended<Others> _categoryList = new ObservableCollectionExtended<Others>() { new Others() { id = -1, name = StringUtil.GetString("DefaultCategory") } };
 
         public ObservableCollectionExtended<Others> CategoryList { get { return _categoryList; } }
 
@@ -99,15 +98,20 @@ namespace Brook.ZhiHuRiBao.ViewModels
 
         public string CurrentStoryId { get; set; }
 
-        public int CurrentCategory { get; set; } = Default_Category;
+        public int CurrentCategoryId { get; set; } = Misc.Default_Category_Id;
+
 
         public override void Init()
         {
+            InitCategories();
         }
 
         public async void InitCategories()
         {
             var categories = await DataRequester.RequestCategory();
+            if (categories == null)
+                return;
+
             CategoryList.AddRange(categories.others);
         }
 
@@ -116,7 +120,7 @@ namespace Brook.ZhiHuRiBao.ViewModels
             ResetStorys();
             await RequestMainList(false);
 
-            if (StoryDataList.Count < 20)
+            if (StoryDataList.Count < Misc.Page_Count)
             {
                 await LoadMore();
             }
@@ -136,17 +140,29 @@ namespace Brook.ZhiHuRiBao.ViewModels
 
         private async Task RequestMainList(bool isLoadingMore)
         {
+            if(CurrentCategoryId == Misc.Default_Category_Id)
+            {
+                await RequestDefaultCategoryData(isLoadingMore);
+            }
+            else
+            {
+                await RequestMinorCategoryData(isLoadingMore);
+            }
+        }
+
+        private async Task RequestDefaultCategoryData(bool isLoadingMore)
+        {
             MainData storyData = null;
 
             if (isLoadingMore)
             {
-                storyData = await DataRequester.GetStories(_currentDate);
+                storyData = await DataRequester.RequestStories(_currentDate);
             }
             else
             {
                 ResetStorys();
-                storyData = await DataRequester.GetLatestStories();
-                if(storyData != null)
+                storyData = await DataRequester.RequestLatestStories();
+                if (storyData != null)
                 {
                     TopStoryList = storyData.top_stories;
                     CurrentStoryId = storyData.stories.First().id.ToString();
@@ -158,6 +174,33 @@ namespace Brook.ZhiHuRiBao.ViewModels
             _currentDate = storyData.date;
 
             StoryDataList.Add(new Story() { title = StringUtil.GetStoryGroupName(_currentDate), type = Misc.Group_Name_Type });
+            StoryDataList.AddRange(storyData.stories);
+        }
+
+        private async Task RequestMinorCategoryData(bool isLoadingMore)
+        {
+            MinorData storyData = null;
+
+            if (isLoadingMore)
+            {
+                storyData = await DataRequester.RequestCategoryStories(CurrentCategoryId.ToString(), _currentDate);
+            }
+            else
+            {
+                ResetStorys();
+                storyData = await DataRequester.RequestCategoryLatestStories(CurrentCategoryId.ToString());
+                if (storyData != null)
+                {
+                    var firstStoryId = storyData.stories.First().id;
+                    TopStoryList = new List<TopStory>() { new TopStory() { image = storyData.background, id = Misc.Unvalid_Image_Id, title = storyData.description } };
+                    CurrentStoryId = firstStoryId.ToString();
+                }
+            }
+            if (storyData == null)
+                return;
+
+            _currentDate = storyData.stories.Last().id.ToString();
+
             StoryDataList.AddRange(storyData.stories);
         }
 
@@ -204,7 +247,7 @@ namespace Brook.ZhiHuRiBao.ViewModels
 
             CommentList.First().AddRange(longComment.comments);
 
-            if (longComment == null || longComment.comments.Count < 20)
+            if (longComment == null || longComment.comments.Count < Misc.Page_Count)
             {
                 await RequestShortComments(storyId);
             }

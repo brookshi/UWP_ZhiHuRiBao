@@ -19,22 +19,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 
-namespace Brook.ZhiHuRiBao.Utils
+namespace Brook.ZhiHuRiBao.Common
 {
-    public static class Misc
+    public class NoImageTrigger : StateTriggerBase
     {
-        public const int Group_Name_Type = -100;
-
-        public const int Default_Category_Id = -1;
-
-        public const int Page_Count = 30;
-
-        public const int Unvalid_Image_Id = -1;
-
-        public static bool IsGroupItem(int type)
+        public string Image
         {
-            return Group_Name_Type == type;
+            get { return (string)GetValue(ImageProperty); }
+            set { SetValue(ImageProperty, value); }
         }
+        public static readonly DependencyProperty ImageProperty =
+            DependencyProperty.Register("Image", typeof(string), typeof(NoImageTrigger), new PropertyMetadata("", (s,e)=> {
+                var trigger = s as NoImageTrigger;
+                if (trigger == null)
+                    return;
+
+                trigger.SetActive(e.NewValue.ToString() == "");
+            }));
     }
 }
