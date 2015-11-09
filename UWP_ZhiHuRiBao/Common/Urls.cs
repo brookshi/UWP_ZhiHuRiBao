@@ -32,6 +32,8 @@ namespace Brook.ZhiHuRiBao.Common
 
         public const string StoryContent = "story/{id}";
 
+        public const string CommentInfo = "story-extra/{id}";
+
         public const string LongComment = "story/{id}/long-comments";
 
         public const string LongComment_More = "story/{id}/long-comments/before/{before}";

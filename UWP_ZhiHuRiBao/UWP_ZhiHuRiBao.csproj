@@ -106,6 +106,7 @@
     <Compile Include="Common\ISupportRefresh.cs" />
     <Compile Include="Common\StoryDataTemplateSelector.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Models\CommentInfo.cs" />
     <Compile Include="Utils\CommentLoadMoreCollection.cs" />
     <Compile Include="Utils\Misc.cs" />
     <Compile Include="Utils\ObservableCollectionExtended.cs" />

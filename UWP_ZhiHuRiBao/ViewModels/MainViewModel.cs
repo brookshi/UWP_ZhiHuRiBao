@@ -53,7 +53,7 @@ namespace Brook.ZhiHuRiBao.ViewModels
             get { return _htmlSource; }
             set
             {
-                if (value !=  _htmlSource)
+                if (value != _htmlSource)
                 {
                     _htmlSource = value;
                     Notify("HtmlSource");
@@ -101,9 +101,12 @@ namespace Brook.ZhiHuRiBao.ViewModels
         public async Task Refresh()
         {
             ResetStorys();
-            IsRefreshContent = true;
             await RequestMainList(false);
-            IsRefreshContent = false;
+
+            if (StoryDataList.Count < 20)
+            {
+                await LoadMore();
+            }
         }
 
         public async Task LoadMore()
@@ -130,21 +133,29 @@ namespace Brook.ZhiHuRiBao.ViewModels
             {
                 ResetStorys();
                 storyData = await DataRequester.GetLatestStories();
-                TopStoryList = storyData.top_stories;
+                if(storyData != null)
+                {
+                    TopStoryList = storyData.top_stories;
+                    CurrentStoryId = storyData.stories.First().id.ToString();
+                }
             }
+            if (storyData == null)
+                return;
+
+            _currentDate = storyData.date;
 
             StoryDataList.Add(new Story() { title = StringUtil.GetStoryGroupName(_currentDate), type = Misc.Group_Name_Type });
             StoryDataList.AddRange(storyData.stories);
-
-            _currentDate = storyData.date;
-            CurrentStoryId = FirstStoryId;
         }
 
         public async void RequestMainContent(string storyId)
         {
             IsRefreshContent = true;
             var content = await DataRequester.RequestStoryContent(storyId);
-            HtmlSource = Html.Constructor(content);
+            if(content != null)
+            {
+                HtmlSource = Html.Constructor(content);
+            }
             IsRefreshContent = false;
         }
 
@@ -153,6 +164,7 @@ namespace Brook.ZhiHuRiBao.ViewModels
             if (!isLoadingMore)
             {
                 ResetComments();
+                await InitCommentInfo(storyId);
             }
 
             if (_currCommentType == CommentType.Long)
@@ -173,12 +185,10 @@ namespace Brook.ZhiHuRiBao.ViewModels
 
         private async Task RequestLongComments(string storyId, bool isLoadingMore)
         {
-            if(!isLoadingMore)
-            {
-                ResetComments();
-                CommentList.Add(new GroupComments() { GroupName = StringUtil.GetCommentGroupName(CommentType.Long, "*") });
-            }
             var longComment = await DataRequester.RequestLongComment(storyId, LastCommentId);
+            if (longComment == null)
+                return;
+
             CommentList.First().AddRange(longComment.comments);
 
             if (longComment == null || longComment.comments.Count < 20)
@@ -192,10 +202,25 @@ namespace Brook.ZhiHuRiBao.ViewModels
             if(_currCommentType == CommentType.Long)
             {
                 _currCommentType = CommentType.Short;
-                CommentList.Add(new GroupComments() { GroupName = StringUtil.GetCommentGroupName(CommentType.Short, "*") });
             }
             var shortComment = await DataRequester.RequestShortComment(storyId, _currCommentType == CommentType.Long ? null : LastCommentId);
+            if (shortComment == null)
+                return;
+
             CommentList.Last().AddRange(shortComment.comments);
+        }
+
+        private async Task InitCommentInfo(string storyId)
+        {
+            var commentInfo = await DataRequester.RequestCommentInfo(storyId);
+            if (commentInfo == null)
+                return;
+
+            if(CommentList.Count == 0)
+            {
+                CommentList.Add(new GroupComments() { GroupName = StringUtil.GetCommentGroupName(CommentType.Long, commentInfo.long_comments.ToString()) });
+                CommentList.Add(new GroupComments() { GroupName = StringUtil.GetCommentGroupName(CommentType.Short, commentInfo.short_comments.ToString()) });
+            }
         }
     }
 }

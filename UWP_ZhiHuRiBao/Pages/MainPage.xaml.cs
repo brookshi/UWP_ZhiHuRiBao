@@ -69,7 +69,7 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             await VM.Refresh();
             MainListView.SetRefresh(false);
-            DisplayStory(VM.FirstStoryId);
+            DisplayStory(VM.CurrentStoryId);
         }
 
         private async void LoadMoreStories()
