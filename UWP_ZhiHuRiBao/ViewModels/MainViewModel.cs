@@ -51,16 +51,16 @@ namespace Brook.ZhiHuRiBao.ViewModels
         public ObservableCollectionExtended<GroupComments> CommentList { get { return _commentList; } }
 
 
-        private string _htmlSource = string.Empty;
-        public string HtmlSource
+        private MainContent _mainHtmlContent;
+        public MainContent MainHtmlContent
         {
-            get { return _htmlSource; }
+            get { return _mainHtmlContent; }
             set
             {
-                if (value != _htmlSource)
+                if (value != _mainHtmlContent)
                 {
-                    _htmlSource = value;
-                    Notify("HtmlSource");
+                    _mainHtmlContent = value;
+                    Notify("MainHtmlContent");
                 }
             }
         }
@@ -210,7 +210,8 @@ namespace Brook.ZhiHuRiBao.ViewModels
             var content = await DataRequester.RequestStoryContent(storyId);
             if(content != null)
             {
-                HtmlSource = Html.Constructor(content);
+                Html.ArrangeMainContent(content);
+                MainHtmlContent = content;
             }
             IsRefreshContent = false;
         }

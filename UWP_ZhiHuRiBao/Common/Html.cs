@@ -38,8 +38,16 @@ namespace Brook.ZhiHuRiBao.Common
                                                +"</div>"
                                                +"</div>";
 
-        public static string Constructor(MainContent content)
+        public static void ArrangeMainContent(MainContent content)
         {
+            content.body = ConstructorHtml(content);
+        }
+
+        public static string ConstructorHtml(MainContent content)
+        {
+            if (string.IsNullOrEmpty(content.body))
+                return string.Empty;
+
             var cssBuilder = new StringBuilder();
             var jsBuilder = new StringBuilder();
 

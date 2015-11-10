@@ -110,13 +110,14 @@
                     </RelativePanel>
                     <ListView x:Name="CategoryListView" 
                           SelectionMode="Single" 
-                          Margin="16, 0, 0, 0"
+                          Margin="0, 12, 0, 0"
                           Width="300"
                           ItemTemplate="{StaticResource CategoryItem}" 
                           IsItemClickEnabled="True" 
                           ItemsSource="{x:Bind VM.CategoryList}"
                           ItemClick="CategoryListView_ItemClick"
-                          RelativePanel.Below="LoginPanel"/>
+                          RelativePanel.Below="LoginPanel">
+                    </ListView>
                 </RelativePanel>
             </SplitView.Pane>
             <RelativePanel>
@@ -180,7 +181,7 @@
                         </llm:LLMListView>
                     </SplitView.Pane>
                     <Grid x:Name="MainContent" BorderBrush="{ThemeResource BrushMainSplitter}" BorderThickness="4, 0">
-                        <WebView utils:WebViewExtend.Content="{Binding HtmlSource}"/>
+                        <WebView utils:WebViewExtend.Content="{Binding MainHtmlContent}"/>
                         <ProgressRing x:Name="MainContentProgressRing" Width="64" Height="64" VerticalAlignment="Center" HorizontalAlignment="Center" IsActive="{Binding IsRefreshContent}" Foreground="{ThemeResource BrushPrimaryDark}"/>
                     </Grid>
                 </SplitView>

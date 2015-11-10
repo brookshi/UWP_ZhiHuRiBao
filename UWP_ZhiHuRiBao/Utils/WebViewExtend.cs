@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Brook.ZhiHuRiBao.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace Brook.ZhiHuRiBao.Utils
     public class WebViewExtend : DependencyObject
     {
         public static readonly DependencyProperty ContentProperty =
-            DependencyProperty.Register("Content", typeof(string), typeof(WebViewExtend), new PropertyMetadata(null, LoadHtmlSource));
+            DependencyProperty.Register("Content", typeof(MainContent), typeof(WebViewExtend), new PropertyMetadata(null, LoadHtmlSource));
 
         private static void LoadHtmlSource(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -19,7 +20,18 @@ namespace Brook.ZhiHuRiBao.Utils
             if (webView == null)
                 return;
 
-            webView.NavigateToString(e.NewValue as string);
+            var mainHtmlContent = e.NewValue as MainContent;
+            if (mainHtmlContent == null)
+                return;
+
+            if (!string.IsNullOrEmpty(mainHtmlContent.body))
+            {
+                webView.NavigateToString(mainHtmlContent.body);
+            }
+            else if(!string.IsNullOrEmpty(mainHtmlContent.share_url))
+            {
+                webView.Navigate(new Uri(mainHtmlContent.share_url));
+            }
         }
 
         public static void SetContent(DependencyObject obj, string value)
