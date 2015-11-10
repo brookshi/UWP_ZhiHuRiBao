@@ -147,6 +147,9 @@
   <data name="Month" xml:space="preserve">
     <value>月</value>
   </data>
+  <data name="PleaseLogin" xml:space="preserve">
+    <value>请登录</value>
+  </data>
   <data name="Saturday" xml:space="preserve">
     <value>星期六</value>
   </data>

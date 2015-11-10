@@ -70,13 +70,13 @@
         <SplitView x:Name="MainView" Background="{ThemeResource BrushListBackground}" Grid.Row="1" DisplayMode="Overlay" OpenPaneLength="320" PaneBackground="White">
             <SplitView.Pane>
                 <RelativePanel>
-                    <RelativePanel x:Name="LoginPanel" Background="{ThemeResource BrushPrimary}" Height="200" Width="320">
+                    <RelativePanel x:Name="LoginPanel" Background="{ThemeResource BrushPrimary}" Height="120" Width="320">
                         <Ellipse x:Name="UserPhoto" Width="48" Height="48" Margin="4">
                             <Ellipse.Fill>
                                 <ImageBrush  Stretch="Fill"/>
                             </Ellipse.Fill>
                         </Ellipse>
-                        <TextBlock x:Name="UserName" Foreground="White"
+                        <TextBlock x:Name="UserName" x:Uid="PleaseLogin" Foreground="White" 
                                    RelativePanel.RightOf="UserPhoto"/>
                         <xp:XPButton x:Name="FavButton" BorderThickness="0"
                                      Margin="12, 0, 0, 12"
@@ -110,6 +110,7 @@
                     </RelativePanel>
                     <ListView x:Name="CategoryListView" 
                           SelectionMode="Single" 
+                          Margin="16, 0, 0, 0"
                           Width="300"
                           ItemTemplate="{StaticResource CategoryItem}" 
                           IsItemClickEnabled="True" 
