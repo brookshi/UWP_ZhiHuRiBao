@@ -33,6 +33,9 @@ namespace Brook.ZhiHuRiBao.Pages
             CommentListView.LoadMore = LoadMoreComments;
 
             Loaded += MainPage_Loaded;
+
+            FavButton.Content = StringUtil.GetString("Favorite");
+            DownloadButton.Content = StringUtil.GetString("DownloadOffline");
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)

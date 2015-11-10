@@ -69,14 +69,54 @@
         </RelativePanel>
         <SplitView x:Name="MainView" Background="{ThemeResource BrushListBackground}" Grid.Row="1" DisplayMode="Overlay" OpenPaneLength="320" PaneBackground="White">
             <SplitView.Pane>
-                <ListView x:Name="CategoryListView" 
+                <RelativePanel>
+                    <RelativePanel x:Name="LoginPanel" Background="{ThemeResource BrushPrimary}" Height="200" Width="320">
+                        <Ellipse x:Name="UserPhoto" Width="48" Height="48" Margin="4">
+                            <Ellipse.Fill>
+                                <ImageBrush  Stretch="Fill"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock x:Name="UserName" Foreground="White"
+                                   RelativePanel.RightOf="UserPhoto"/>
+                        <xp:XPButton x:Name="FavButton" BorderThickness="0"
+                                     Margin="12, 0, 0, 12"
+                                     Background="Transparent"
+                                     PointerOverBackground="#33000000"
+                                     Foreground="White"
+                                     IconPosition="Left"
+                                     IconInterval="12"
+                                     x:Uid="Favorite"
+                                     Content=""
+                                     RelativePanel.AlignBottomWithPanel="True">
+                            <xp:XPButton.Icon>
+                                <FontIcon Glyph="&#xf005;" FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome"/>
+                            </xp:XPButton.Icon>
+                        </xp:XPButton>
+                        <xp:XPButton x:Name="DownloadButton" BorderThickness="0"
+                                     Margin="0, 0, 12, 12"
+                                     Background="Transparent"
+                                     PointerOverBackground="#33000000"
+                                     Foreground="White"
+                                     IconPosition="Left"
+                                     IconInterval="12"
+                                     x:Uid="DownloadOffline"
+                                     Content=""
+                                     RelativePanel.AlignBottomWithPanel="True"
+                                     RelativePanel.AlignRightWithPanel="True">
+                            <xp:XPButton.Icon>
+                                <FontIcon Glyph="&#xf019;" FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome"/>
+                            </xp:XPButton.Icon>
+                        </xp:XPButton>
+                    </RelativePanel>
+                    <ListView x:Name="CategoryListView" 
                           SelectionMode="Single" 
                           Width="300"
                           ItemTemplate="{StaticResource CategoryItem}" 
                           IsItemClickEnabled="True" 
                           ItemsSource="{x:Bind VM.CategoryList}"
-                          ItemClick="CategoryListView_ItemClick">
-                </ListView>
+                          ItemClick="CategoryListView_ItemClick"
+                          RelativePanel.Below="LoginPanel"/>
+                </RelativePanel>
             </SplitView.Pane>
             <RelativePanel>
                 <llm:LLMListView x:Name="MainListView" 
