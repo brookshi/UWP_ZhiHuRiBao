@@ -34,5 +34,14 @@ namespace Brook.ZhiHuRiBao.Utils
             _webViewInstance.SetBinding(WebViewExtend.ContentProperty, new Binding() { Source = source, Path = new PropertyPath(path) });
             return _webViewInstance;
         }
+
+        public static void RemoveParent()
+        {
+            var parent = _webViewInstance.Parent as Panel;
+            if (parent == null)
+                return;
+
+            parent.Children.Remove(_webViewInstance);
+        }
     }
 }

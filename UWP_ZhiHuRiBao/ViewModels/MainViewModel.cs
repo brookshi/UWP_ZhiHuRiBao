@@ -50,42 +50,6 @@ namespace Brook.ZhiHuRiBao.ViewModels
 
         public ObservableCollectionExtended<GroupComments> CommentList { get { return _commentList; } }
 
-
-        private MainContent _mainHtmlContent;
-        public MainContent MainHtmlContent
-        {
-            get { return _mainHtmlContent; }
-            set
-            {
-                if (value != _mainHtmlContent)
-                {
-                    _mainHtmlContent = value;
-                    Notify("MainHtmlContent");
-                }
-            }
-        }
-
-        private bool _isRefreshContent = false;
-        public bool IsRefreshContent
-        {
-            get { return _isRefreshContent; }
-            set
-            {
-                if(value != _isRefreshContent)
-                {
-                    _isRefreshContent = value;
-                    Notify("IsRefreshContent");
-                }
-            }
-        }
-
-        private int _mode = 0;
-        public int Mode
-        {
-            get { return _mode; }
-            set { _mode = value; }
-        }
-
         public string FirstStoryId
         {
             get { return StoryDataList.First(o=>!Misc.IsGroupItem(o.type))?.id.ToString() ?? null; }
@@ -168,6 +132,7 @@ namespace Brook.ZhiHuRiBao.ViewModels
                     CurrentStoryId = storyData.stories.First().id.ToString();
                 }
             }
+
             if (storyData == null)
                 return;
 
@@ -202,18 +167,6 @@ namespace Brook.ZhiHuRiBao.ViewModels
             _currentDate = storyData.stories.Last().id.ToString();
 
             StoryDataList.AddRange(storyData.stories);
-        }
-
-        public async void RequestMainContent(string storyId)
-        {
-            IsRefreshContent = true;
-            var content = await DataRequester.RequestStoryContent(storyId);
-            if(content != null)
-            {
-                Html.ArrangeMainContent(content);
-                MainHtmlContent = content;
-            }
-            IsRefreshContent = false;
         }
 
         public async Task RequestComments(string storyId, bool isLoadingMore)

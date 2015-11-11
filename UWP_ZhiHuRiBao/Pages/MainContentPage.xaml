@@ -1,0 +1,17 @@
+﻿<Page
+    x:Class="Brook.ZhiHuRiBao.Pages.MainContentPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Brook.ZhiHuRiBao.Pages"
+    xmlns:ui="using:CN.Brook.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:vm="using:Brook.ZhiHuRiBao.ViewModels">
+    <Page.DataContext>
+        <vm:MainContentViewModel/>
+    </Page.DataContext>
+    <Grid x:Name="MainContent" BorderBrush="{ThemeResource BrushMainSplitter}" BorderThickness="4, 0">
+        <ProgressRing x:Name="MainContentProgressRing" Width="64" Height="64" VerticalAlignment="Center" HorizontalAlignment="Center" IsActive="{Binding IsRefreshContent}" Foreground="{ThemeResource BrushPrimaryDark}"/>
+    </Grid>
+</Page>

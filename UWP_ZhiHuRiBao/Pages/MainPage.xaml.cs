@@ -24,7 +24,6 @@ namespace Brook.ZhiHuRiBao.Pages
             this.InitializeComponent();
             Initalize();
             NavigationCacheMode = NavigationCacheMode.Required;
-            MainContent.Children.Add(WebViewUtil.GetWebViewWithBinding(VM, "MainHtmlContent"));
             //UpdateBarStyle((Color)Application.Current.Resources["ColorPrimary"]);
 
             MainListView.Refresh = RefreshMainList;
@@ -37,7 +36,6 @@ namespace Brook.ZhiHuRiBao.Pages
 
             FavButton.Content = StringUtil.GetString("Favorite");
             DownloadButton.Content = StringUtil.GetString("DownloadOffline");
-
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
@@ -51,21 +49,6 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             ApplicationView.GetForCurrentView().TitleBar.BackgroundColor = color;
             ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = color;
-        }
-
-        public static ScrollViewer GetScrollViewer(DependencyObject obj)
-        {
-            if (obj is ScrollViewer)
-                return obj as ScrollViewer;
-
-            for(int i=0;i<VisualTreeHelper.GetChildrenCount(obj);i++)
-            {
-                var view = GetScrollViewer(VisualTreeHelper.GetChild(obj, i));
-                if (view != null)
-                    return view;
-            }
-
-            return null;
         }
 
         public bool IsDesktopDevice { get { return !LLM.Utils.IsOnMobile; } }
@@ -105,12 +88,6 @@ namespace Brook.ZhiHuRiBao.Pages
             DisplayStory(storyId);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Frame rootFrame = Window.Current.Content as Frame;
-            rootFrame.Navigate(typeof(BlankPage1), true);
-        }
-
         private void TapFlipImage(object sender, RoutedEventArgs e)
         {
             var storyId = (sender as FrameworkElement).Tag.ToString();
@@ -123,7 +100,7 @@ namespace Brook.ZhiHuRiBao.Pages
         private void DisplayStory(string storyId)
         {
             VM.CurrentStoryId = storyId;
-            VM.RequestMainContent(storyId);
+            MainContentFrame.Navigate(typeof(MainContentPage), storyId);
             CommentListView.SetRefresh(true);
         }
 
