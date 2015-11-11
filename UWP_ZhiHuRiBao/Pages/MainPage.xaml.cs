@@ -24,6 +24,7 @@ namespace Brook.ZhiHuRiBao.Pages
             this.InitializeComponent();
             Initalize();
             NavigationCacheMode = NavigationCacheMode.Required;
+            MainContent.Children.Add(WebViewUtil.GetWebViewWithBinding(VM, "MainHtmlContent"));
             //UpdateBarStyle((Color)Application.Current.Resources["ColorPrimary"]);
 
             MainListView.Refresh = RefreshMainList;
@@ -36,6 +37,7 @@ namespace Brook.ZhiHuRiBao.Pages
 
             FavButton.Content = StringUtil.GetString("Favorite");
             DownloadButton.Content = StringUtil.GetString("DownloadOffline");
+
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)

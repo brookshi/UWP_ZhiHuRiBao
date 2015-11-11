@@ -181,7 +181,7 @@
                         </llm:LLMListView>
                     </SplitView.Pane>
                     <Grid x:Name="MainContent" BorderBrush="{ThemeResource BrushMainSplitter}" BorderThickness="4, 0">
-                        <WebView utils:WebViewExtend.Content="{Binding MainHtmlContent}"/>
+                        <!--<WebView utils:WebViewExtend.Content="{Binding MainHtmlContent}"/>-->
                         <ProgressRing x:Name="MainContentProgressRing" Width="64" Height="64" VerticalAlignment="Center" HorizontalAlignment="Center" IsActive="{Binding IsRefreshContent}" Foreground="{ThemeResource BrushPrimaryDark}"/>
                     </Grid>
                 </SplitView>
