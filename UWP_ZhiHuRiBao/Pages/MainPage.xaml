@@ -44,7 +44,7 @@
                 </VisualState>
                 <VisualState >
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="800"/>
+                        <AdaptiveTrigger MinWindowWidth="900"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="StoryContentView.IsPaneOpen" Value="false"/>

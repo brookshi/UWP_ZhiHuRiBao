@@ -21,7 +21,7 @@ namespace Brook.ZhiHuRiBao.Pages
     {
         public MainViewModel VM { get { return GetVM<MainViewModel>(); } }
 
-        public bool IsDesktopDevice { get { return !LLM.Utils.IsOnMobile; } }
+        public bool IsDesktopDevice { get { return UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Mouse; } }// !LLM.Utils.IsOnMobile; } }
 
         public MainPage()
         {
