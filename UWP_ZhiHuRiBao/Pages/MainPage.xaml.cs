@@ -29,9 +29,6 @@ namespace Brook.ZhiHuRiBao.Pages
             MainListView.Refresh = RefreshMainList;
             MainListView.LoadMore = LoadMoreStories;
 
-            CommentListView.Refresh = RefreshCommentList;
-            CommentListView.LoadMore = LoadMoreComments;
-
             Loaded += MainPage_Loaded;
 
             FavButton.Content = StringUtil.GetString("Favorite");
@@ -66,18 +63,6 @@ namespace Brook.ZhiHuRiBao.Pages
             MainListView.FinishLoadingMore();
         }
 
-        private async void RefreshCommentList()
-        {
-            await VM.RequestComments(VM.CurrentStoryId, false);
-            CommentListView.SetRefresh(false);
-        }
-
-        private async void LoadMoreComments()
-        {
-            await VM.RequestComments(VM.CurrentStoryId, true);
-            CommentListView.FinishLoadingMore();
-        }
-
         private void MainListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var story = e.ClickedItem as Story;
@@ -101,7 +86,7 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             VM.CurrentStoryId = storyId;
             MainContentFrame.Navigate(typeof(MainContentPage), storyId);
-            CommentListView.SetRefresh(true);
+            CommentFrame.Navigate(typeof(CommentPage), storyId);
         }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)

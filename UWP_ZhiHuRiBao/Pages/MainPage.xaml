@@ -22,10 +22,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Elements/Story.xaml"/>
-                <ResourceDictionary Source="../Elements/Comment.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            
-            <CollectionViewSource x:Name="CommentGroup" Source="{x:Bind VM.CommentList, Mode=OneWay}" IsSourceGrouped="True" />
             <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <common:StoryDataTemplateSelector x:Key="StoryDataTemplateSelector" ImageTemplate="{StaticResource Story}" NoImageTemplate="{StaticResource StoryWithoutImage}" GroupTemplate="{StaticResource GroupHeader}"/>
             <DataTemplate x:Key="CategoryItem">
@@ -159,26 +156,10 @@
                         </Style>
                     </llm:LLMListView.ItemContainerStyle>
                 </llm:LLMListView>
-                <SplitView PanePlacement="Right" DisplayMode="Inline" IsPaneOpen="True" OpenPaneLength="320" CompactPaneLength="0" PaneBackground="Transparent"
+                <SplitView x:Name="StoryContentView" PanePlacement="Right" DisplayMode="Inline" IsPaneOpen="True" OpenPaneLength="320" CompactPaneLength="0" PaneBackground="Transparent"
                            RelativePanel.RightOf="MainListView" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignRightWithPanel="True" >
                     <SplitView.Pane>
-                        <llm:LLMListView x:Name="CommentListView" 
-                                         Width="320" 
-                                         SelectionMode="Single"
-                                         ItemsSource="{x:Bind CommentGroup.View}" 
-                                         ItemTemplate="{StaticResource Comment}" 
-                                         IsItemClickEnabled="True" ShowsScrollingPlaceholders="True"
-                                         RefreshProgressRingBrush="{ThemeResource BrushPrimaryDark}"
-                                         LoadMoreProgressBarBrush="{ThemeResource BrushPrimaryDark}">   
-                            <llm:LLMListView.GroupStyle>
-                                <GroupStyle HeaderTemplate="{StaticResource CommentHeader}"/>
-                            </llm:LLMListView.GroupStyle>
-                            <llm:LLMListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem">
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                </Style>
-                            </llm:LLMListView.ItemContainerStyle>
-                        </llm:LLMListView>
+                       <Frame x:Name="CommentFrame"/>
                     </SplitView.Pane>
                     <Frame x:Name="MainContentFrame" />
                 </SplitView>

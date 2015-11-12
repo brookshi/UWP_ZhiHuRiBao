@@ -111,6 +111,9 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CommentInfo.cs" />
     <Compile Include="Models\MinorData.cs" />
+    <Compile Include="Pages\CommentPage.xaml.cs">
+      <DependentUpon>CommentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\CommentLoadMoreCollection.cs" />
     <Compile Include="Utils\Misc.cs" />
     <Compile Include="Utils\ObservableCollectionExtended.cs" />
@@ -132,6 +135,7 @@
     </Compile>
     <Compile Include="Models\MainData.cs" />
     <Compile Include="Utils\WebViewUtil.cs" />
+    <Compile Include="ViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\MainContentViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -178,6 +182,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Pages\CommentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MainContentPage.xaml">
       <SubType>Designer</SubType>

@@ -32,7 +32,6 @@ namespace Brook.ZhiHuRiBao.ViewModels
     public class MainViewModel : ViewModelBase
     {
         private string _currentDate;
-        private CommentType _currCommentType = CommentType.Long;
 
         private readonly ObservableCollectionExtended<Others> _categoryList = new ObservableCollectionExtended<Others>() { new Others() { id = -1, name = StringUtil.GetString("DefaultCategory") } };
 
@@ -45,19 +44,10 @@ namespace Brook.ZhiHuRiBao.ViewModels
         private List<TopStory> _topStoryList = new List<TopStory>();
 
         public List<TopStory> TopStoryList { get { return _topStoryList; } set { if (value != _topStoryList) { _topStoryList = value; Notify("TopStoryList"); } } }
-
-        private readonly ObservableCollectionExtended<GroupComments> _commentList = new ObservableCollectionExtended<GroupComments>();
-
-        public ObservableCollectionExtended<GroupComments> CommentList { get { return _commentList; } }
-
+       
         public string FirstStoryId
         {
             get { return StoryDataList.First(o=>!Misc.IsGroupItem(o.type))?.id.ToString() ?? null; }
-        }
-
-        public string LastCommentId
-        {
-            get { return CommentList.Last().LastOrDefault()?.id.ToString() ?? null; }
         }
 
         public string CurrentStoryId { get; set; }
@@ -169,68 +159,5 @@ namespace Brook.ZhiHuRiBao.ViewModels
             StoryDataList.AddRange(storyData.stories);
         }
 
-        public async Task RequestComments(string storyId, bool isLoadingMore)
-        {
-            if (!isLoadingMore)
-            {
-                ResetComments();
-                await InitCommentInfo(storyId);
-            }
-
-            if (_currCommentType == CommentType.Long)
-            {
-                await RequestLongComments(storyId, isLoadingMore);
-            }
-            else if (_currCommentType == CommentType.Short)
-            {
-                await RequestShortComments(storyId);
-            }
-        }
-
-        public void ResetComments()
-        {
-            CommentList.Clear();
-            _currCommentType = CommentType.Long;
-        }
-
-        private async Task RequestLongComments(string storyId, bool isLoadingMore)
-        {
-            var longComment = await DataRequester.RequestLongComment(storyId, LastCommentId);
-            if (longComment == null)
-                return;
-
-            CommentList.First().AddRange(longComment.comments);
-
-            if (longComment == null || longComment.comments.Count < Misc.Page_Count)
-            {
-                await RequestShortComments(storyId);
-            }
-        }
-
-        private async Task RequestShortComments(string storyId)
-        {
-            if(_currCommentType == CommentType.Long)
-            {
-                _currCommentType = CommentType.Short;
-            }
-            var shortComment = await DataRequester.RequestShortComment(storyId, _currCommentType == CommentType.Long ? null : LastCommentId);
-            if (shortComment == null)
-                return;
-
-            CommentList.Last().AddRange(shortComment.comments);
-        }
-
-        private async Task InitCommentInfo(string storyId)
-        {
-            var commentInfo = await DataRequester.RequestCommentInfo(storyId);
-            if (commentInfo == null)
-                return;
-
-            if(CommentList.Count == 0)
-            {
-                CommentList.Add(new GroupComments() { GroupName = StringUtil.GetCommentGroupName(CommentType.Long, commentInfo.long_comments.ToString()) });
-                CommentList.Add(new GroupComments() { GroupName = StringUtil.GetCommentGroupName(CommentType.Short, commentInfo.short_comments.ToString()) });
-            }
-        }
     }
 }

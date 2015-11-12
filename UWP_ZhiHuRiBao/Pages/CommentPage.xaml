@@ -1,0 +1,41 @@
+﻿<Page
+    x:Class="Brook.ZhiHuRiBao.Pages.CommentPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Brook.ZhiHuRiBao.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:llm="using:LLM"
+    xmlns:vm="using:Brook.ZhiHuRiBao.ViewModels">
+    <Page.DataContext>
+        <vm:CommentViewModel />
+    </Page.DataContext>
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Elements/Comment.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <CollectionViewSource x:Name="CommentGroup" Source="{x:Bind VM.CommentList, Mode=OneWay}" IsSourceGrouped="True" />
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <llm:LLMListView x:Name="CommentListView" 
+                    Width="320" 
+                    SelectionMode="Single"
+                    ItemsSource="{x:Bind CommentGroup.View}" 
+                    ItemTemplate="{StaticResource Comment}" 
+                    IsItemClickEnabled="True" ShowsScrollingPlaceholders="True"
+                    RefreshProgressRingBrush="{ThemeResource BrushPrimaryDark}"
+                    LoadMoreProgressBarBrush="{ThemeResource BrushPrimaryDark}">    
+        <llm:LLMListView.GroupStyle>
+            <GroupStyle HeaderTemplate="{StaticResource CommentHeader}"/>
+        </llm:LLMListView.GroupStyle>
+        <llm:LLMListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            </Style>
+        </llm:LLMListView.ItemContainerStyle>
+    </llm:LLMListView>
+</Page>

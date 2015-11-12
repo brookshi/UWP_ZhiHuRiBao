@@ -8,10 +8,8 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Brook.ZhiHuRiBao.Pages
 {
-    public sealed partial class MainContentPage
+    public sealed partial class MainContentPage : Page
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public MainContentViewModel VM { get { return DataContext as MainContentViewModel; } }
 
         public MainContentPage()
@@ -30,7 +28,5 @@ namespace Brook.ZhiHuRiBao.Pages
                 VM.UpdateStoryId(storyId);
             }
         }
-
-        
     }
 }
