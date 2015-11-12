@@ -36,10 +36,27 @@
             <VisualStateGroup>
                 <VisualState >
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1000"/>
+                        <AdaptiveTrigger MinWindowWidth="1300"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="MainView.DataContext.Mode" Value="1"/>
+                        <Setter Target="StoryContentView.IsPaneOpen" Value="true"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState >
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="StoryContentView.IsPaneOpen" Value="false"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState >
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="StoryContentView.Visibility" Value="Collapsed"/>
+                        <Setter Target="MainListView.Width" Value="auto"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -108,7 +125,7 @@
                     <ListView x:Name="CategoryListView" 
                           SelectionMode="Single" 
                           Margin="0, 12, 0, 0"
-                          Width="300"
+                          Width="320"
                           ItemTemplate="{StaticResource CategoryItem}" 
                           IsItemClickEnabled="True" 
                           ItemsSource="{x:Bind VM.CategoryList}"
@@ -133,7 +150,7 @@
                                  ItemTemplateSelector="{StaticResource StoryDataTemplateSelector}">
                     <llm:LLMListView.HeaderTemplate>
                         <DataTemplate x:DataType="vm:MainViewModel">
-                            <FlipView x:Name="ImageFlipView" ItemsSource="{x:Bind TopStoryList, Mode=OneWay}" Height="250" Width="400" Margin="0, 0, 0, 10">
+                            <FlipView x:Name="ImageFlipView" ItemsSource="{x:Bind TopStoryList, Mode=OneWay}" Height="250" Width="auto" Margin="0, 0, 0, 10">
                                 <FlipView.ItemTemplate>
                                     <DataTemplate x:DataType="data:TopStory">
                                         <Grid>

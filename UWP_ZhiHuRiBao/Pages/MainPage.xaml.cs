@@ -19,6 +19,10 @@ namespace Brook.ZhiHuRiBao.Pages
 {
     public sealed partial class MainPage : PageBase
     {
+        public MainViewModel VM { get { return GetVM<MainViewModel>(); } }
+
+        public bool IsDesktopDevice { get { return !LLM.Utils.IsOnMobile; } }
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -39,16 +43,6 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             MainListView.SetRefresh(true);
         }
-
-        public MainViewModel VM { get { return GetVM<MainViewModel>(); } }
-
-        void UpdateBarStyle(Color color)
-        {
-            ApplicationView.GetForCurrentView().TitleBar.BackgroundColor = color;
-            ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = color;
-        }
-
-        public bool IsDesktopDevice { get { return !LLM.Utils.IsOnMobile; } }
 
         private async void RefreshMainList()
         {
@@ -75,6 +69,8 @@ namespace Brook.ZhiHuRiBao.Pages
 
         private void TapFlipImage(object sender, RoutedEventArgs e)
         {
+            MainView.IsPaneOpen = false;
+
             var storyId = (sender as FrameworkElement).Tag.ToString();
             if (storyId != Misc.Unvalid_Image_Id.ToString())
             {
