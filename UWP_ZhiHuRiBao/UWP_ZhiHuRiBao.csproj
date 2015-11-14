@@ -104,6 +104,9 @@
     </Compile>
     <Compile Include="Common\AppUIStatus.cs" />
     <Compile Include="Common\CommentType.cs" />
+    <Compile Include="Elements\ToolBar.xaml.cs">
+      <DependentUpon>ToolBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\Html.cs" />
     <Compile Include="Common\StoryDataTemplateSelector.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
@@ -179,6 +182,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Elements\ToolBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\CommentPage.xaml">
       <SubType>Designer</SubType>

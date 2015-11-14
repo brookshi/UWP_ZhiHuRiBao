@@ -13,7 +13,8 @@
     xmlns:xp="using:XP"
     xmlns:convert="using:Brook.ZhiHuRiBao.Converters"
     xmlns:data="using:Brook.ZhiHuRiBao.Models"
-    xmlns:vm="using:Brook.ZhiHuRiBao.ViewModels">
+    xmlns:vm="using:Brook.ZhiHuRiBao.ViewModels"
+    xmlns:element="using:Brook.ZhiHuRiBao.Elements">
     
     <Page.DataContext>
         <vm:MainViewModel/>
@@ -32,8 +33,8 @@
             </DataTemplate>
         </ResourceDictionary>
     </Page.Resources>
-    
-    <Grid>
+
+    <Grid SizeChanged="Page_SizeChanged">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState >
@@ -46,7 +47,7 @@
                 </VisualState>
                 <VisualState >
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="900"/>
+                        <AdaptiveTrigger MinWindowWidth="{Binding Source={StaticResource Config}, Path=MinWidth_UIStatus_ListAndContent}"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="StoryContentView.IsPaneOpen" Value="false"/>
@@ -59,6 +60,9 @@
                     <VisualState.Setters>
                         <Setter Target="StoryContentView.Visibility" Value="Collapsed"/>
                         <Setter Target="MainListView.Width" Value="auto"/>
+                        <Setter Target="CommentButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="LikeButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="FavButton.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -67,22 +71,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <RelativePanel Background="{ThemeResource BrushPrimary}">
-            <xp:XPButton x:Name="MenuButton"
-                         IconPosition="OnlyIcon"
-                         Background="Transparent"
-                         Foreground="White"
-                         PointerOverBackground="#33000000"
-                         PressedBackground="#88000000"
-                         Width="48"
-                         Height="48"
-                         IconSize="20"
-                         Click="MenuButton_Click">
-                <xp:XPButton.Icon>
-                    <FontIcon Glyph="&#xE700;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                </xp:XPButton.Icon>
-            </xp:XPButton>
-        </RelativePanel>
+        <element:ToolBar/>
         <SplitView x:Name="MainView" Background="{ThemeResource BrushListBackground}" Grid.Row="1" DisplayMode="Overlay" OpenPaneLength="320" PaneBackground="White">
             <SplitView.Pane>
                 <RelativePanel>
@@ -94,7 +83,7 @@
                         </Ellipse>
                         <TextBlock x:Name="UserName" x:Uid="PleaseLogin" Foreground="White" 
                                    RelativePanel.RightOf="UserPhoto"/>
-                        <xp:XPButton x:Name="FavButton" BorderThickness="0"
+                        <xp:XPButton x:Name="MyFav" BorderThickness="0"
                                      Margin="12, 0, 0, 12"
                                      Background="Transparent"
                                      PointerOverBackground="#33000000"

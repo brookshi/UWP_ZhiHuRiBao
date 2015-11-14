@@ -6,8 +6,8 @@
     xmlns:common="using:Brook.ZhiHuRiBao.Common">
 
     <DataTemplate x:Key="Story">
-        <xp:Shadow Z_Depth="1" CornerRadius="5">
-            <RelativePanel Background="White" CornerRadius="5" Height="88">
+        <!--<xp:Shadow Z_Depth="1" CornerRadius="5">-->
+        <RelativePanel Background="#33FF0000" CornerRadius="5" Height="88">
                 <Image x:Name="MainItem_Image" Stretch="UniformToFill" Height="80" Width="80" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8">
                     <Image.Source>
                         <BitmapImage x:Name="Bitmap" UriSource="{Binding images[0]}"/>
@@ -16,7 +16,7 @@
                 <TextBlock x:Name="MainItem_Content" Margin="8" TextWrapping="Wrap" Text="{Binding title}" LineHeight="24"
                            RelativePanel.RightOf="MainItem_Image" FontWeight="Medium" />
                 </RelativePanel>
-        </xp:Shadow>
+        <!--</xp:Shadow>-->
     </DataTemplate>
 
     <DataTemplate x:Key="StoryWithoutImage">

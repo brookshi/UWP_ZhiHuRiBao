@@ -67,9 +67,13 @@ namespace Brook.ZhiHuRiBao.ViewModels
             IsRefreshContent = false;
         }
 
-        public void UpdateStoryId(string storyId)
+        public void UpdateStoryId(object storyId)
         {
-            CurrentStoryId = storyId;
+            if(storyId != null && !string.IsNullOrEmpty(storyId.ToString()))
+            {
+                CurrentStoryId = storyId.ToString();
+            }
+
             RequestMainContent();
         }
     }

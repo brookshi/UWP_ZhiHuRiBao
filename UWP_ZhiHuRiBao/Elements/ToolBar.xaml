@@ -1,0 +1,63 @@
+﻿<UserControl
+    x:Class="Brook.ZhiHuRiBao.Elements.ToolBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Brook.ZhiHuRiBao.Elements"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:xp="using:XP">
+
+    <RelativePanel Background="{ThemeResource BrushPrimary}">
+        <xp:XPButton x:Name="MenuButton"
+                         IconPosition="OnlyIcon"
+                         Background="Transparent"
+                         Foreground="White"
+                         PointerOverBackground="#33000000"
+                         PressedBackground="#88000000"
+                         Width="48"
+                         Height="48"
+                         IconSize="20"
+                         Click="MenuButton_Click">
+            <xp:XPButton.Icon>
+                <FontIcon Glyph="&#xE700;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            </xp:XPButton.Icon>
+        </xp:XPButton>
+        <xp:XPButton x:Name="CommentButton"
+                         IconPosition="Left"
+                         Background="Transparent"
+                         Foreground="White"
+                         PointerOverBackground="#33000000"
+                         PressedBackground="#88000000"
+                         Width="48"
+                         Height="48"
+                         IconSize="20"
+                         Click="CommentButton_Click"
+                         Icon="Comment"
+                         RelativePanel.AlignRightWithPanel="True" />
+        <xp:XPButton x:Name="LikeButton"
+                         IconPosition="Left"
+                         Background="Transparent"
+                         Foreground="White"
+                         PointerOverBackground="#33000000"
+                         PressedBackground="#88000000"
+                         Width="48"
+                         Height="48"
+                         IconSize="20"
+                         Click="LikeButton_Click"
+                         Icon="Like"
+                         RelativePanel.LeftOf="CommentButton" />
+        <xp:XPButton x:Name="FavButton"
+                         IconPosition="OnlyIcon"
+                         Background="Transparent"
+                         Foreground="White"
+                         PointerOverBackground="#33000000"
+                         PressedBackground="#88000000"
+                         Width="48"
+                         Height="48"
+                         IconSize="20"
+                         Click="FavButton_Click"
+                         Icon="SolidStar"
+                         RelativePanel.LeftOf="LikeButton" />
+    </RelativePanel>
+</UserControl>

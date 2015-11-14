@@ -15,18 +15,19 @@ namespace Brook.ZhiHuRiBao.Pages
         public MainContentPage()
         {
             InitializeComponent();
-            WebViewUtil.RemoveParent();
-            MainContent.Children.Add(WebViewUtil.GetWebViewWithBinding(VM, "MainHtmlContent"));
+            NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-            var storyId = e.Parameter.ToString();
-            if(!string.IsNullOrEmpty(storyId))
+            WebViewUtil.AddWebViewWithBinding(MainContent, VM, "MainHtmlContent");
+
+            if (Config.UIStatus == AppUIStatus.List)
             {
-                VM.UpdateStoryId(storyId);
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
             }
+
+            VM.UpdateStoryId(e.Parameter);
         }
     }
 }

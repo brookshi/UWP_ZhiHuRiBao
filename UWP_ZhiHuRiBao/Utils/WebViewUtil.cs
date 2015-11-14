@@ -28,21 +28,43 @@ namespace Brook.ZhiHuRiBao.Utils
 {
     public static class WebViewUtil
     {
+        private readonly static object _parentLocker = new object();
+
+        private readonly static List<Panel> _webViewParents = new List<Panel>();
+
         private readonly static WebView _webViewInstance = new WebView();
 
-        public static WebView GetWebViewWithBinding(object source, string path)
+        public static void AddWebViewWithBinding(Panel parent, object source, string path)
         {
+            RemoveParent();
             _webViewInstance.SetBinding(WebViewExtend.ContentProperty, new Binding() { Source = source, Path = new PropertyPath(path) });
-            return _webViewInstance;
+            lock(_parentLocker)
+            {
+                parent.Children.Add(_webViewInstance);
+                if (!_webViewParents.Contains(parent))
+                {
+                    _webViewParents.Add(parent);
+                }
+            }
         }
+
+        public static bool IsParent(Panel panel)
+        {
+            return panel.Children.Contains(_webViewInstance);
+        }
+
+        public static bool HasParent { get { return _webViewInstance.Parent is Panel; } }
 
         public static void RemoveParent()
         {
-            var parent = _webViewInstance.Parent as Panel;
-            if (parent == null)
-                return;
-
-            parent.Children.Remove(_webViewInstance);
+            lock(_parentLocker)
+            {
+                _webViewParents.ForEach(panel =>
+                {
+                    if (panel.Children.Contains(_webViewInstance))
+                        panel.Children.Remove(_webViewInstance);
+                });
+            }
         }
     }
 }

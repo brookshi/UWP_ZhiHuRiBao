@@ -34,20 +34,24 @@ namespace Brook.ZhiHuRiBao.Pages
 
             Loaded += MainPage_Loaded;
 
-            FavButton.Content = StringUtil.GetString("Favorite");
+            MyFav.Content = StringUtil.GetString("Favorite");
             DownloadButton.Content = StringUtil.GetString("DownloadOffline");
+            MainListView.SetRefresh(true);
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            MainListView.SetRefresh(true);
         }
 
         private async void RefreshMainList()
         {
             await VM.Refresh();
             MainListView.SetRefresh(false);
-            DisplayStory(VM.CurrentStoryId);
+
+            if (Config.UIStatus == AppUIStatus.All)
+            {
+                DisplayStory(VM.CurrentStoryId);
+            }
         }
 
         private async void LoadMoreStories()
@@ -80,13 +84,19 @@ namespace Brook.ZhiHuRiBao.Pages
         private void DisplayStory(string storyId)
         {
             VM.CurrentStoryId = storyId;
-            MainContentFrame.Navigate(typeof(MainContentPage), storyId);
-            CommentFrame.Navigate(typeof(CommentPage), storyId);
-        }
-
-        private void MenuButton_Click(object sender, RoutedEventArgs e)
-        {
-            MainView.IsPaneOpen = !MainView.IsPaneOpen;
+            if(Config.UIStatus == AppUIStatus.All)
+            {
+                MainContentFrame.Navigate(typeof(MainContentPage), storyId);
+                CommentFrame.Navigate(typeof(CommentPage), storyId);
+            }
+            else if(Config.UIStatus == AppUIStatus.ListAndContent)
+            {
+                MainContentFrame.Navigate(typeof(MainContentPage), storyId);
+            }
+            else
+            {
+                ((Frame)Window.Current.Content).Navigate(typeof(MainContentPage), storyId);
+            }
         }
 
         private void CategoryListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -94,6 +104,14 @@ namespace Brook.ZhiHuRiBao.Pages
             var category = e.ClickedItem as Others;
             VM.CurrentCategoryId = category.id;
             MainListView.SetRefresh(true);
+        }
+
+        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if(e.PreviousSize.Width < Config.MinWidth_UIStatus_ListAndContent && e.NewSize.Width > Config.MinWidth_UIStatus_ListAndContent)
+            {
+                MainContentFrame.Navigate(typeof(MainContentPage), VM.CurrentStoryId);
+            }
         }
     }
 }
