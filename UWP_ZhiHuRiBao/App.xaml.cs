@@ -97,9 +97,6 @@ namespace Brook.ZhiHuRiBao
         void InitConfig()
         {
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
-            var bounds = ApplicationView.GetForCurrentView().VisibleBounds;
-            Config.ScreenWidth = bounds.Width;
-            Config.ScreenHeight = bounds.Height;
         }
 
         void InitHttpClient()

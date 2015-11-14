@@ -45,11 +45,6 @@ namespace Brook.ZhiHuRiBao.ViewModels
 
         public List<TopStory> TopStoryList { get { return _topStoryList; } set { if (value != _topStoryList) { _topStoryList = value; Notify("TopStoryList"); } } }
        
-        public string FirstStoryId
-        {
-            get { return StoryDataList.First(o=>!Misc.IsGroupItem(o.type))?.id.ToString() ?? null; }
-        }
-
         public string CurrentStoryId { get; set; }
 
         public int CurrentCategoryId { get; set; } = Misc.Default_Category_Id;

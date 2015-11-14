@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Brook.ZhiHuRiBao.Utils
+namespace Brook.ZhiHuRiBao.Common
 {
     public class WebViewExtend : DependencyObject
     {

@@ -21,7 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Brook.ZhiHuRiBao.Common
+namespace Brook.ZhiHuRiBao.Utils
 {
     public static class Urls
     {

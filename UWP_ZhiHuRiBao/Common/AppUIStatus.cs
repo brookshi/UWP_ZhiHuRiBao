@@ -19,24 +19,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Xaml;
 
 namespace Brook.ZhiHuRiBao.Common
 {
-    public class NoImageTrigger : StateTriggerBase
+    public enum AppUIStatus
     {
-        public string Image
-        {
-            get { return (string)GetValue(ImageProperty); }
-            set { SetValue(ImageProperty, value); }
-        }
-        public static readonly DependencyProperty ImageProperty =
-            DependencyProperty.Register("Image", typeof(string), typeof(NoImageTrigger), new PropertyMetadata("", (s,e)=> {
-                var trigger = s as NoImageTrigger;
-                if (trigger == null)
-                    return;
-
-                trigger.SetActive(e.NewValue.ToString() == "");
-            }));
+        All = 0,
+        ListAndContent,
+        List,
     }
 }

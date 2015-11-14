@@ -23,7 +23,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Brook.ZhiHuRiBao.Utils
+namespace Brook.ZhiHuRiBao.Common
 {
     public class ObservableCollectionExtended<T> : ObservableCollection<T>
     {

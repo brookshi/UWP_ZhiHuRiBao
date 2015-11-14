@@ -21,14 +21,13 @@ namespace Brook.ZhiHuRiBao.Pages
     {
         public MainViewModel VM { get { return GetVM<MainViewModel>(); } }
 
-        public bool IsDesktopDevice { get { return UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Mouse; } }// !LLM.Utils.IsOnMobile; } }
+        public bool IsDesktopDevice { get { return UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Mouse; } }
 
         public MainPage()
         {
             this.InitializeComponent();
             Initalize();
             NavigationCacheMode = NavigationCacheMode.Required;
-            //UpdateBarStyle((Color)Application.Current.Resources["ColorPrimary"]);
 
             MainListView.Refresh = RefreshMainList;
             MainListView.LoadMore = LoadMoreStories;

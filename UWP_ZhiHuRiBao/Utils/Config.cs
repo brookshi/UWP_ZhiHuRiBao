@@ -1,31 +1,40 @@
-﻿using System;
+﻿using Brook.ZhiHuRiBao.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.ViewManagement;
 
 namespace Brook.ZhiHuRiBao.Utils
 {
     public class Config
     {
-        public static int MinRowCountForList = 20;
+        public static int MinWidth_UIStatus_All { get { return 1300; } }
 
-        public static double ScreenHeight { get; set; }
+        public static int MinWidth_UIStatus_ListAndContent { get { return 1000; } }
 
-        public static double ScreenWidth { get; set; }
+        public static int MinWidth_UIStatus_List { get { return 0; } }
 
-        public static int GetMaxRowCount(double rowHeight)
+        public static double ScreenWidth
         {
-            return Math.Max(MinRowCountForList, (int)(Math.Max(ScreenHeight, ScreenWidth) / rowHeight));
+            get
+            {
+                return ApplicationView.GetForCurrentView().VisibleBounds.Width;
+            }
         }
 
-        public static int GetMaxRowCountForMainList()
+        public static AppUIStatus UIStatus
         {
-            return GetMaxRowCount(100);
-        }
-
-        public static int CommentPageRowCount {
-            get { return MinRowCountForList; }
+            get
+            {
+                if (ScreenWidth >= MinWidth_UIStatus_All)
+                    return AppUIStatus.All;
+                else if (ScreenWidth >= MinWidth_UIStatus_ListAndContent && ScreenWidth < MinWidth_UIStatus_All)
+                    return AppUIStatus.ListAndContent;
+                else
+                    return AppUIStatus.List;
+            }
         }
     }
 }

@@ -23,6 +23,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Elements/Story.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <utils:Config x:Key="Config"/>
+            
             <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <common:StoryDataTemplateSelector x:Key="StoryDataTemplateSelector" ImageTemplate="{StaticResource Story}" NoImageTemplate="{StaticResource StoryWithoutImage}" GroupTemplate="{StaticResource GroupHeader}"/>
             <DataTemplate x:Key="CategoryItem">
@@ -36,7 +38,7 @@
             <VisualStateGroup>
                 <VisualState >
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1300"/>
+                        <AdaptiveTrigger MinWindowWidth="{Binding Source={StaticResource Config}, Path=MinWidth_UIStatus_All}"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="StoryContentView.IsPaneOpen" Value="true"/>
@@ -52,7 +54,7 @@
                 </VisualState>
                 <VisualState >
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0"/>
+                        <AdaptiveTrigger MinWindowWidth="{Binding Source={StaticResource Config}, Path=MinWidth_UIStatus_List}"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="StoryContentView.Visibility" Value="Collapsed"/>

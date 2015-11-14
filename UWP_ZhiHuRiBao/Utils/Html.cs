@@ -17,7 +17,7 @@
 using Brook.ZhiHuRiBao.Models;
 using System.Text;
 
-namespace Brook.ZhiHuRiBao.Common
+namespace Brook.ZhiHuRiBao.Utils
 {
     public static class Html
     {
