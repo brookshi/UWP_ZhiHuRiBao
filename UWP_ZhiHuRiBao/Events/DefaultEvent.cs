@@ -22,7 +22,20 @@ using System.Threading.Tasks;
 
 namespace Brook.ZhiHuRiBao.Events
 {
+    public enum EventType
+    {
+        CommentCount,
+        LikeCount,
+        ClickMenu,
+        ClickComment,
+        ClickLike,
+        ClickFav,
+    }
+
     public class DefaultEvent
     {
+        public EventType EventType { get; set; }
+
+        public int Count { get; set; }
     }
 }

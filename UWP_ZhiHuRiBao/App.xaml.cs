@@ -1,6 +1,7 @@
 ﻿using Brook.ZhiHuRiBao.Common;
 using Brook.ZhiHuRiBao.Pages;
 using Brook.ZhiHuRiBao.Utils;
+using LLQ;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -96,6 +97,7 @@ namespace Brook.ZhiHuRiBao
 
         void InitConfig()
         {
+            LLQNotifier.MainDispatcher = Window.Current.Dispatcher;
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
         }
 

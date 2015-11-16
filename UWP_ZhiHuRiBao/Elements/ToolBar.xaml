@@ -23,6 +23,7 @@
                 <FontIcon Glyph="&#xE700;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </xp:XPButton.Icon>
         </xp:XPButton>
+        <TextBlock x:Name="TitleText" Text="{x:Bind Title}" Foreground="White" />
         <xp:XPButton x:Name="CommentButton"
                          IconPosition="Left"
                          Background="Transparent"
@@ -45,6 +46,7 @@
                          PressedBackground="#88000000"
                          CheckedIconForeground="Red"
                          IsToggleMode="True"
+                         IsChecked="{x:Bind IsCommentChecked}"
                          Height="48"
                          IconSize="20"
                          Click="LikeButton_Click"

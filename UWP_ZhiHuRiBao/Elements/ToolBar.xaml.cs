@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Brook.ZhiHuRiBao.Events;
+using LLQ;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -36,6 +38,13 @@ namespace Brook.ZhiHuRiBao.Elements
         public static readonly DependencyProperty IsCommentCheckedProperty =
             DependencyProperty.Register("IsCommentChecked", typeof(bool), typeof(ToolBar), new PropertyMetadata(false));
 
+        public string Title
+        {
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
+        }
+        public static readonly DependencyProperty TitleProperty =
+            DependencyProperty.Register("Title", typeof(string), typeof(ToolBar), new PropertyMetadata(""));
 
         private string _commentCount = "0";
         public string CommentCount
@@ -68,6 +77,41 @@ namespace Brook.ZhiHuRiBao.Elements
         public ToolBar()
         {
             this.InitializeComponent();
+            LLQNotifier.Default.Register(this);
+        }
+
+        [SubscriberCallback(typeof(DefaultEvent))]
+        private void Subscriber(DefaultEvent param)
+        {
+            switch(param.EventType)
+            {
+                case EventType.CommentCount:
+                    CommentCount = param.Count.ToString();
+                    break;
+                case EventType.LikeCount:
+                    LikeCount = param.Count.ToString();
+                    break;
+            }
+        }
+
+        private void MenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickMenu });
+        }
+
+        private void CommentButton_Click(object sender, RoutedEventArgs e)
+        {
+            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickComment });
+        }
+
+        private void LikeButton_Click(object sender, RoutedEventArgs e)
+        {
+            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickLike });
+        }
+
+        private void FavButton_Click(object sender, RoutedEventArgs e)
+        {
+            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickFav });
         }
 
         private void Notify(string property)
@@ -75,20 +119,5 @@ namespace Brook.ZhiHuRiBao.Elements
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
-
-        private void MenuButton_Click(object sender, RoutedEventArgs e)
-        {
-            //MainView.IsPaneOpen = !MainView.IsPaneOpen;
-        }
-
-        private void CommentButton_Click(object sender, RoutedEventArgs e)
-        { }
-
-        private void LikeButton_Click(object sender, RoutedEventArgs e)
-        { }
-
-        private void FavButton_Click(object sender, RoutedEventArgs e)
-        { }
-
     }
 }
