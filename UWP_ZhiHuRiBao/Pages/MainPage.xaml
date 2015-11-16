@@ -1,35 +1,38 @@
-﻿<common:PageBase
-    x:Class="Brook.ZhiHuRiBao.Pages.MainPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Brook.ZhiHuRiBao.Pages"
-    xmlns:ui="using:CN.Brook.UI"
-    xmlns:common="using:Brook.ZhiHuRiBao.Common"
-    xmlns:utils="using:Brook.ZhiHuRiBao.Utils"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    mc:Ignorable="d"
-    xmlns:llm="using:LLM"
-    xmlns:xp="using:XP"
-    xmlns:convert="using:Brook.ZhiHuRiBao.Converters"
-    xmlns:data="using:Brook.ZhiHuRiBao.Models"
-    xmlns:vm="using:Brook.ZhiHuRiBao.ViewModels"
-    xmlns:element="using:Brook.ZhiHuRiBao.Elements">
-    
+﻿<common:PageBase x:Class="Brook.ZhiHuRiBao.Pages.MainPage"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:common="using:Brook.ZhiHuRiBao.Common"
+                 xmlns:convert="using:Brook.ZhiHuRiBao.Converters"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:data="using:Brook.ZhiHuRiBao.Models"
+                 xmlns:element="using:Brook.ZhiHuRiBao.Elements"
+                 xmlns:llm="using:LLM"
+                 xmlns:local="using:Brook.ZhiHuRiBao.Pages"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:ui="using:CN.Brook.UI"
+                 xmlns:utils="using:Brook.ZhiHuRiBao.Utils"
+                 xmlns:vm="using:Brook.ZhiHuRiBao.ViewModels"
+                 xmlns:xp="using:XP"
+                 mc:Ignorable="d">
+
     <Page.DataContext>
-        <vm:MainViewModel/>
+        <vm:MainViewModel />
     </Page.DataContext>
+
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Elements/Story.xaml"/>
+                <ResourceDictionary Source="../Elements/Story.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <utils:Config x:Key="Config"/>
-            
-            <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-            <common:StoryDataTemplateSelector x:Key="StoryDataTemplateSelector" ImageTemplate="{StaticResource Story}" NoImageTemplate="{StaticResource StoryWithoutImage}" GroupTemplate="{StaticResource GroupHeader}"/>
+            <utils:Config x:Key="Config" />
+
+            <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <common:StoryDataTemplateSelector x:Key="StoryDataTemplateSelector"
+                                              GroupTemplate="{StaticResource GroupHeader}"
+                                              ImageTemplate="{StaticResource Story}"
+                                              NoImageTemplate="{StaticResource StoryWithoutImage}" />
             <DataTemplate x:Key="CategoryItem">
-                <TextBlock Text="{Binding name}"/>
+                <TextBlock Text="{Binding name}" />
             </DataTemplate>
         </ResourceDictionary>
     </Page.Resources>
@@ -37,121 +40,147 @@
     <Grid SizeChanged="Page_SizeChanged">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
-                <VisualState >
+                <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="{Binding Source={StaticResource Config}, Path=MinWidth_UIStatus_All}"/>
+                        <AdaptiveTrigger MinWindowWidth="{Binding Source={StaticResource Config}, Path=MinWidth_UIStatus_All}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="StoryContentView.IsPaneOpen" Value="true"/>
+                        <Setter Target="StoryContentView.IsPaneOpen" Value="true" />
                     </VisualState.Setters>
                 </VisualState>
-                <VisualState >
+                <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="{Binding Source={StaticResource Config}, Path=MinWidth_UIStatus_ListAndContent}"/>
+                        <AdaptiveTrigger MinWindowWidth="{Binding Source={StaticResource Config}, Path=MinWidth_UIStatus_ListAndContent}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="StoryContentView.IsPaneOpen" Value="false"/>
+                        <Setter Target="StoryContentView.IsPaneOpen" Value="false" />
                     </VisualState.Setters>
                 </VisualState>
-                <VisualState >
+                <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="{Binding Source={StaticResource Config}, Path=MinWidth_UIStatus_List}"/>
+                        <AdaptiveTrigger MinWindowWidth="{Binding Source={StaticResource Config}, Path=MinWidth_UIStatus_List}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="StoryContentView.Visibility" Value="Collapsed"/>
-                        <Setter Target="MainListView.Width" Value="auto"/>
-                        <Setter Target="CommentButton.Visibility" Value="Collapsed"/>
-                        <Setter Target="LikeButton.Visibility" Value="Collapsed"/>
-                        <Setter Target="FavButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="StoryContentView.Visibility" Value="Collapsed" />
+                        <Setter Target="MainListView.Width" Value="auto" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <element:ToolBar/>
-        <SplitView x:Name="MainView" Background="{ThemeResource BrushListBackground}" Grid.Row="1" DisplayMode="Overlay" OpenPaneLength="320" PaneBackground="White">
+        <element:ToolBar />
+        <SplitView x:Name="MainView"
+                   Grid.Row="1"
+                   Background="{ThemeResource BrushListBackground}"
+                   DisplayMode="Overlay"
+                   OpenPaneLength="320"
+                   PaneBackground="White">
             <SplitView.Pane>
                 <RelativePanel>
-                    <RelativePanel x:Name="LoginPanel" Background="{ThemeResource BrushPrimary}" Height="120" Width="320">
-                        <Ellipse x:Name="UserPhoto" Width="48" Height="48" Margin="4">
+                    <RelativePanel x:Name="LoginPanel"
+                                   Width="320"
+                                   Height="120"
+                                   Background="{ThemeResource BrushPrimary}">
+                        <Ellipse x:Name="UserPhoto"
+                                 Width="48"
+                                 Height="48"
+                                 Margin="4">
                             <Ellipse.Fill>
-                                <ImageBrush  Stretch="Fill"/>
+                                <ImageBrush Stretch="Fill" />
                             </Ellipse.Fill>
                         </Ellipse>
-                        <TextBlock x:Name="UserName" x:Uid="PleaseLogin" Foreground="White" 
-                                   RelativePanel.RightOf="UserPhoto"/>
-                        <xp:XPButton x:Name="MyFav" BorderThickness="0"
+                        <TextBlock x:Uid="PleaseLogin"
+                                   x:Name="UserName"
+                                   Foreground="White"
+                                   RelativePanel.RightOf="UserPhoto" />
+                        <xp:XPButton x:Uid="Favorite"
+                                     x:Name="MyFav"
                                      Margin="12, 0, 0, 12"
                                      Background="Transparent"
-                                     PointerOverBackground="#33000000"
-                                     Foreground="White"
-                                     IconPosition="Left"
-                                     IconInterval="12"
-                                     x:Uid="Favorite"
+                                     BorderThickness="0"
                                      Content=""
+                                     Foreground="White"
+                                     IconInterval="12"
+                                     IconPosition="Left"
+                                     PointerOverBackground="#33000000"
                                      RelativePanel.AlignBottomWithPanel="True">
                             <xp:XPButton.Icon>
-                                <FontIcon Glyph="&#xf005;" FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome"/>
+                                <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf005;" />
                             </xp:XPButton.Icon>
                         </xp:XPButton>
-                        <xp:XPButton x:Name="DownloadButton" BorderThickness="0"
+                        <xp:XPButton x:Uid="DownloadOffline"
+                                     x:Name="DownloadButton"
                                      Margin="0, 0, 12, 12"
                                      Background="Transparent"
-                                     PointerOverBackground="#33000000"
-                                     Foreground="White"
-                                     IconPosition="Left"
-                                     IconInterval="12"
-                                     x:Uid="DownloadOffline"
+                                     BorderThickness="0"
                                      Content=""
+                                     Foreground="White"
+                                     IconInterval="12"
+                                     IconPosition="Left"
+                                     PointerOverBackground="#33000000"
                                      RelativePanel.AlignBottomWithPanel="True"
                                      RelativePanel.AlignRightWithPanel="True">
                             <xp:XPButton.Icon>
-                                <FontIcon Glyph="&#xf019;" FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome"/>
+                                <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf019;" />
                             </xp:XPButton.Icon>
                         </xp:XPButton>
                     </RelativePanel>
-                    <ListView x:Name="CategoryListView" 
-                          SelectionMode="Single" 
-                          Margin="0, 12, 0, 0"
-                          Width="320"
-                          ItemTemplate="{StaticResource CategoryItem}" 
-                          IsItemClickEnabled="True" 
-                          ItemsSource="{x:Bind VM.CategoryList}"
-                          ItemClick="CategoryListView_ItemClick"
-                          RelativePanel.Below="LoginPanel">
-                    </ListView>
+                    <ListView x:Name="CategoryListView"
+                              Width="320"
+                              Margin="0, 12, 0, 0"
+                              IsItemClickEnabled="True"
+                              ItemClick="CategoryListView_ItemClick"
+                              ItemTemplate="{StaticResource CategoryItem}"
+                              ItemsSource="{x:Bind VM.CategoryList}"
+                              RelativePanel.Below="LoginPanel"
+                              SelectionMode="Single" />
                 </RelativePanel>
             </SplitView.Pane>
             <RelativePanel>
-                <llm:LLMListView x:Name="MainListView" 
-                                 Width="400" 
-                                 RelativePanel.AlignLeftWithPanel="True" 
-                                 SelectionMode="Single" 
-                                 ItemsSource="{x:Bind VM.StoryDataList}" 
-                                 IsItemClickEnabled="True" 
-                                 ItemClick="MainListView_ItemClick"
+                <llm:LLMListView x:Name="MainListView"
+                                 Width="400"
                                  CanPullToRefresh="True"
-                                 RefreshButtonVisibility="{x:Bind IsDesktopDevice, Converter={StaticResource BoolToVisibilityConverter}}"
-                                 RefreshButtonBackground="{ThemeResource BrushPrimary}"
-                                 RefreshProgressRingBrush="{ThemeResource BrushPrimaryDark}"
+                                 IsItemClickEnabled="True"
+                                 ItemClick="MainListView_ItemClick"
+                                 ItemTemplateSelector="{StaticResource StoryDataTemplateSelector}"
+                                 ItemsSource="{x:Bind VM.StoryDataList}"
                                  LoadMoreProgressBarBrush="{ThemeResource BrushPrimaryDark}"
-                                 ItemTemplateSelector="{StaticResource StoryDataTemplateSelector}">
+                                 RefreshButtonBackground="{ThemeResource BrushPrimary}"
+                                 RefreshButtonVisibility="{x:Bind IsDesktopDevice, Converter={StaticResource BoolToVisibilityConverter}}"
+                                 RefreshProgressRingBrush="{ThemeResource BrushPrimaryDark}"
+                                 RelativePanel.AlignLeftWithPanel="True"
+                                 SelectionMode="Single">
                     <llm:LLMListView.HeaderTemplate>
                         <DataTemplate x:DataType="vm:MainViewModel">
-                            <FlipView x:Name="ImageFlipView" ItemsSource="{x:Bind TopStoryList, Mode=OneWay}" Height="250" Width="auto" Margin="0, 0, 0, 10">
+                            <FlipView x:Name="ImageFlipView"
+                                      Width="auto"
+                                      Height="250"
+                                      Margin="0, 0, 0, 10"
+                                      ItemsSource="{x:Bind TopStoryList, Mode=OneWay}">
                                 <FlipView.ItemTemplate>
                                     <DataTemplate x:DataType="data:TopStory">
                                         <Grid>
-                                            <Image x:Name="MainItem_Image" Stretch="UniformToFill" VerticalAlignment="Center">
+                                            <Image x:Name="MainItem_Image"
+                                                   VerticalAlignment="Center"
+                                                   Stretch="UniformToFill">
                                                 <Image.Source>
-                                                    <BitmapImage UriSource="{x:Bind image}"/>
+                                                    <BitmapImage UriSource="{x:Bind image}" />
                                                 </Image.Source>
                                             </Image>
-                                            <Rectangle Fill="#33000000" Tapped="TapFlipImage" Tag="{x:Bind id}"/>
-                                            <TextBlock Margin="20" TextWrapping="Wrap" Text="{x:Bind title}" FontSize="20" IsHitTestVisible="False" FontWeight="SemiBold" Foreground="White" VerticalAlignment="Bottom"/>
+                                            <Rectangle Fill="#33000000"
+                                                       Tag="{x:Bind id}"
+                                                       Tapped="TapFlipImage" />
+                                            <TextBlock Margin="20"
+                                                       VerticalAlignment="Bottom"
+                                                       FontSize="20"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="White"
+                                                       IsHitTestVisible="False"
+                                                       Text="{x:Bind title}"
+                                                       TextWrapping="Wrap" />
                                         </Grid>
                                     </DataTemplate>
                                 </FlipView.ItemTemplate>
@@ -160,14 +189,23 @@
                     </llm:LLMListView.HeaderTemplate>
                     <llm:LLMListView.ItemContainerStyle>
                         <Style TargetType="llm:LLMListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                         </Style>
                     </llm:LLMListView.ItemContainerStyle>
                 </llm:LLMListView>
-                <SplitView x:Name="StoryContentView" PanePlacement="Right" DisplayMode="Inline" IsPaneOpen="True" OpenPaneLength="320" CompactPaneLength="0" PaneBackground="Transparent"
-                           RelativePanel.RightOf="MainListView" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignRightWithPanel="True" >
+                <SplitView x:Name="StoryContentView"
+                           CompactPaneLength="0"
+                           DisplayMode="Inline"
+                           IsPaneOpen="True"
+                           OpenPaneLength="320"
+                           PaneBackground="Transparent"
+                           PanePlacement="Right"
+                           RelativePanel.AlignBottomWithPanel="True"
+                           RelativePanel.AlignRightWithPanel="True"
+                           RelativePanel.AlignTopWithPanel="True"
+                           RelativePanel.RightOf="MainListView">
                     <SplitView.Pane>
-                       <Frame x:Name="CommentFrame"/>
+                        <Frame x:Name="CommentFrame" />
                     </SplitView.Pane>
                     <Frame x:Name="MainContentFrame" />
                 </SplitView>

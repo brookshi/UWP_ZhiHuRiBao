@@ -37,6 +37,8 @@ namespace Brook.ZhiHuRiBao.Pages
             MyFav.Content = StringUtil.GetString("Favorite");
             DownloadButton.Content = StringUtil.GetString("DownloadOffline");
             MainListView.SetRefresh(true);
+
+            LLQNotifier.Default.Register(this);
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
@@ -111,6 +113,17 @@ namespace Brook.ZhiHuRiBao.Pages
             if(e.PreviousSize.Width < Config.MinWidth_UIStatus_ListAndContent && e.NewSize.Width > Config.MinWidth_UIStatus_ListAndContent)
             {
                 MainContentFrame.Navigate(typeof(MainContentPage), VM.CurrentStoryId);
+            }
+        }
+
+        [SubscriberCallback(typeof(DefaultEvent))]
+        private void Subscriber(DefaultEvent param)
+        {
+            switch(param.EventType)
+            {
+                case EventType.ClickMenu:
+                    MainView.IsPaneOpen = !MainView.IsPaneOpen;
+                    break;
             }
         }
     }
