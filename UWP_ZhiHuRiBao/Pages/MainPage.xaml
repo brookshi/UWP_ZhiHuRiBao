@@ -71,7 +71,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <element:ToolBar />
+        <element:ToolBar Category="{x:Bind VM.CategoryName, Mode=OneWay}" />
         <SplitView x:Name="MainView"
                    Grid.Row="1"
                    Background="{ThemeResource BrushListBackground}"

@@ -49,11 +49,7 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             await VM.Refresh();
             MainListView.SetRefresh(false);
-
-            if (Config.UIStatus == AppUIStatus.All)
-            {
-                DisplayStory(VM.CurrentStoryId);
-            }
+            DisplayStory(VM.CurrentStoryId);
         }
 
         private async void LoadMoreStories()
@@ -105,7 +101,9 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             var category = e.ClickedItem as Others;
             VM.CurrentCategoryId = category.id;
+            VM.CategoryName = category.name;
             MainListView.SetRefresh(true);
+            MainView.IsPaneOpen = !MainView.IsPaneOpen;
         }
 
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)

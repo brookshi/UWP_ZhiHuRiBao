@@ -36,7 +36,7 @@ namespace Brook.ZhiHuRiBao.Elements
             set { SetValue(IsCommentCheckedProperty, value); }
         }
         public static readonly DependencyProperty IsCommentCheckedProperty =
-            DependencyProperty.Register("IsCommentChecked", typeof(bool), typeof(ToolBar), new PropertyMetadata(false));
+            DependencyProperty.Register("IsCommentChecked", typeof(bool), typeof(ToolBar), new PropertyMetadata(true));
 
         public string Title
         {
@@ -45,6 +45,16 @@ namespace Brook.ZhiHuRiBao.Elements
         }
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register("Title", typeof(string), typeof(ToolBar), new PropertyMetadata(""));
+
+        public string Category
+        {
+            get { return (string)GetValue(CategoryProperty); }
+            set { SetValue(CategoryProperty, value); }
+        }
+        public static readonly DependencyProperty CategoryProperty =
+            DependencyProperty.Register("Category", typeof(string), typeof(ToolBar), new PropertyMetadata(""));
+
+
 
         private string _commentCount = "0";
         public string CommentCount

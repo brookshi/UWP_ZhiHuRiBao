@@ -33,6 +33,7 @@
                         <Setter Target="CommentButton.Visibility" Value="Collapsed" />
                         <Setter Target="LikeButton.Visibility" Value="Collapsed" />
                         <Setter Target="FavButton.Visibility" Value="Collapsed" />
+                        <Setter Target="CommentButton.IsChecked" Value="false" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -52,9 +53,14 @@
                     <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE700;" />
                 </xp:XPButton.Icon>
             </xp:XPButton>
-            <TextBlock x:Name="TitleText"
+            <TextBlock x:Name="CategoryText"
                        Foreground="White"
-                       Text="{x:Bind Title}" />
+                       Text="{x:Bind Category, Mode=OneWay}"
+                       Margin="10, 0, 0, 0"
+                       FontWeight="Medium"
+                       FontSize="16"
+                       RelativePanel.RightOf="MenuButton"
+                       RelativePanel.AlignVerticalCenterWith="MenuButton"/>
             <xp:XPButton x:Name="CommentButton"
                          Height="48"
                          Background="Transparent"
@@ -64,10 +70,13 @@
                          Icon="Comment"
                          IconPosition="Left"
                          IconSize="20"
-                         IsChecked="true"
+                         IsChecked="{x:Bind IsCommentChecked, Mode=OneWay}"
                          IsToggleMode="true"
                          PointerOverBackground="#33000000"
                          PressedBackground="#88000000"
+                         CheckedBackground="#66000000"
+                         CheckedPointerOverBackground="#33000000"
+                         CheckedPressedBackground="#88000000"
                          RelativePanel.AlignRightWithPanel="True" />
             <xp:XPButton x:Name="LikeButton"
                          Height="48"

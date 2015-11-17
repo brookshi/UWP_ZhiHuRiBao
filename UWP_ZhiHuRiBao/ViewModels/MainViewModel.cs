@@ -49,6 +49,19 @@ namespace Brook.ZhiHuRiBao.ViewModels
 
         public int CurrentCategoryId { get; set; } = Misc.Default_Category_Id;
 
+        private string _categoryName = "";
+        public string CategoryName
+        {
+            get { return _categoryName; }
+            set
+            {
+                if(value != _categoryName)
+                {
+                    _categoryName = value;
+                    Notify("CategoryName");
+                }
+            }
+        }
 
         public override void Init()
         {
@@ -62,6 +75,11 @@ namespace Brook.ZhiHuRiBao.ViewModels
                 return;
 
             CategoryList.AddRange(categories.others);
+            
+            if(CategoryList.Count > 0)
+            {
+                CategoryName = CategoryList[0].name;
+            }
         }
 
         public async Task Refresh()
