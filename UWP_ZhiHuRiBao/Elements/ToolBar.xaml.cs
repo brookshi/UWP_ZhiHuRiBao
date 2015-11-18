@@ -1,4 +1,5 @@
-﻿using Brook.ZhiHuRiBao.Events;
+﻿using Brook.ZhiHuRiBao.Common;
+using Brook.ZhiHuRiBao.Events;
 using LLQ;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,8 @@ namespace Brook.ZhiHuRiBao.Elements
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public ToolBarHost Host { get; set; }
+
         public string Title
         {
             get { return (string)GetValue(TitleProperty); }
@@ -37,7 +40,6 @@ namespace Brook.ZhiHuRiBao.Elements
         }
         public static readonly DependencyProperty CategoryProperty =
             DependencyProperty.Register("Category", typeof(string), typeof(ToolBar), new PropertyMetadata(""));
-
 
 
         private string _commentCount = "0";

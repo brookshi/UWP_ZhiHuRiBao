@@ -104,7 +104,8 @@
     </Compile>
     <Compile Include="Common\AppUIStatus.cs" />
     <Compile Include="Common\CommentType.cs" />
-    <Compile Include="Common\UIStatusTrigger.cs" />
+    <Compile Include="Common\ToolBarHost.cs" />
+    <Compile Include="Common\ToolBarTrigger.cs" />
     <Compile Include="Elements\ToolBar.xaml.cs">
       <DependentUpon>ToolBar.xaml</DependentUpon>
     </Compile>
@@ -183,10 +184,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
-    <Page Include="Elements\ToolBarForContent.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Elements\ToolBar.xaml">
       <SubType>Designer</SubType>
