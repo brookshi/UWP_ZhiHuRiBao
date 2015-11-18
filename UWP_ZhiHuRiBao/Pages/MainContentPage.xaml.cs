@@ -5,6 +5,7 @@ using System.ComponentModel;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml;
 
 namespace Brook.ZhiHuRiBao.Pages
 {
@@ -26,8 +27,9 @@ namespace Brook.ZhiHuRiBao.Pages
             {
                 SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
             }
-
             VM.UpdateStoryId(e.Parameter);
         }
+
+        public Visibility ToolBarVisibility { get { return Config.UIStatus == AppUIStatus.List ? Visibility.Visible : Visibility.Collapsed; } }
     }
 }

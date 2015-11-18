@@ -82,14 +82,10 @@ namespace Brook.ZhiHuRiBao.Pages
         private void DisplayStory(string storyId)
         {
             VM.CurrentStoryId = storyId;
-            if(Config.UIStatus == AppUIStatus.All)
+            if(Config.UIStatus == AppUIStatus.All || Config.UIStatus == AppUIStatus.ListAndContent)
             {
                 MainContentFrame.Navigate(typeof(MainContentPage), storyId);
                 CommentFrame.Navigate(typeof(CommentPage), storyId);
-            }
-            else if(Config.UIStatus == AppUIStatus.ListAndContent)
-            {
-                MainContentFrame.Navigate(typeof(MainContentPage), storyId);
             }
             else
             {
@@ -121,6 +117,9 @@ namespace Brook.ZhiHuRiBao.Pages
             {
                 case EventType.ClickMenu:
                     MainView.IsPaneOpen = !MainView.IsPaneOpen;
+                    break;
+                case EventType.ClickComment:
+                    StoryContentView.IsPaneOpen = !StoryContentView.IsPaneOpen;
                     break;
             }
         }

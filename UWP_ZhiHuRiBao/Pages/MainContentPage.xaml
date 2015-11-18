@@ -6,20 +6,28 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:ui="using:CN.Brook.UI"
       xmlns:vm="using:Brook.ZhiHuRiBao.ViewModels"
+      xmlns:element="using:Brook.ZhiHuRiBao.Elements"
       mc:Ignorable="d">
     <Page.DataContext>
         <vm:MainContentViewModel />
     </Page.DataContext>
-
-    <Grid x:Name="MainContent"
-          BorderBrush="{ThemeResource BrushMainSplitter}"
-          BorderThickness="4, 0">
-        <ProgressRing x:Name="MainContentProgressRing"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <element:ToolBar Category="{x:Bind VM.Title}" Visibility="{x:Bind ToolBarVisibility}"/>
+        <Grid x:Name="MainContent"
+              Grid.Row="1"
+              BorderBrush="{ThemeResource BrushMainSplitter}"
+              BorderThickness="4, 0">
+            <ProgressRing x:Name="MainContentProgressRing"
                       Width="64"
                       Height="64"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center"
                       Foreground="{ThemeResource BrushPrimaryDark}"
                       IsActive="{Binding IsRefreshContent}" />
+        </Grid>
     </Grid>
 </Page>

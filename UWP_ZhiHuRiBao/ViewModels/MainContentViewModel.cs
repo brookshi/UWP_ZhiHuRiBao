@@ -52,6 +52,11 @@ namespace Brook.ZhiHuRiBao.ViewModels
             }
         }
 
+        public string Title
+        {
+            get { return StringUtil.GetString("ContentTitle"); }
+        }
+
         public async void RequestMainContent()
         {
             if (string.IsNullOrEmpty(CurrentStoryId))

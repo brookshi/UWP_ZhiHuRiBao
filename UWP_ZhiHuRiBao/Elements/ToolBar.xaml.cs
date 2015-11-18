@@ -22,22 +22,6 @@ namespace Brook.ZhiHuRiBao.Elements
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public bool IsCommentButtonToggleMode
-        {
-            get { return (bool)GetValue(IsCommentButtonToggleModeProperty); }
-            set { SetValue(IsCommentButtonToggleModeProperty, value); }
-        }
-        public static readonly DependencyProperty IsCommentButtonToggleModeProperty =
-            DependencyProperty.Register("IsCommentButtonToggleMode", typeof(bool), typeof(ToolBar), new PropertyMetadata(true));
-
-        public bool IsCommentChecked
-        {
-            get { return (bool)GetValue(IsCommentCheckedProperty); }
-            set { SetValue(IsCommentCheckedProperty, value); }
-        }
-        public static readonly DependencyProperty IsCommentCheckedProperty =
-            DependencyProperty.Register("IsCommentChecked", typeof(bool), typeof(ToolBar), new PropertyMetadata(true));
-
         public string Title
         {
             get { return (string)GetValue(TitleProperty); }

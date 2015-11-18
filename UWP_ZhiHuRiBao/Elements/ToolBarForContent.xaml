@@ -8,50 +8,15 @@
              xmlns:xp="using:XP"
              mc:Ignorable="d">
 
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <utils:Config x:Key="Config" />
-        </ResourceDictionary>
-    </UserControl.Resources>
-
     <Grid>
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="State">
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="{Binding Source={StaticResource Config}, Path=MinWidth_UIStatus_List}" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="CommentButton.Visibility" Value="Collapsed" />
-                        <Setter Target="LikeButton.Visibility" Value="Collapsed" />
-                        <Setter Target="FavButton.Visibility" Value="Collapsed" />
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
         <RelativePanel Background="{ThemeResource BrushPrimary}">
-            <xp:XPButton x:Name="MenuButton"
-                         Width="48"
-                         Height="48"
-                         Background="Transparent"
-                         Click="MenuButton_Click"
-                         Foreground="White"
-                         IconPosition="OnlyIcon"
-                         IconSize="20"
-                         PointerOverBackground="#33000000"
-                         PressedBackground="#88000000">
-                <xp:XPButton.Icon>
-                    <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE700;" />
-                </xp:XPButton.Icon>
-            </xp:XPButton>
             <TextBlock x:Name="CategoryText"
                        Foreground="White"
                        Text="{x:Bind Category, Mode=OneWay}"
                        Margin="10, 0, 0, 0"
                        FontWeight="Medium"
                        FontSize="16"
-                       RelativePanel.RightOf="MenuButton"
-                       RelativePanel.AlignVerticalCenterWith="MenuButton"/>
+                       RelativePanel.AlignVerticalCenterWithPanel="True"/>
             <xp:XPButton x:Name="CommentButton"
                          Height="48"
                          Background="Transparent"

@@ -54,6 +54,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="StoryContentView.IsPaneOpen" Value="false" />
+                        <Setter Target="StoryContentView.DisplayMode" Value="Overlay" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -198,7 +199,7 @@
                            DisplayMode="Inline"
                            IsPaneOpen="True"
                            OpenPaneLength="320"
-                           PaneBackground="Transparent"
+                           PaneBackground="{ThemeResource BrushListBackground}"
                            PanePlacement="Right"
                            RelativePanel.AlignBottomWithPanel="True"
                            RelativePanel.AlignRightWithPanel="True"
