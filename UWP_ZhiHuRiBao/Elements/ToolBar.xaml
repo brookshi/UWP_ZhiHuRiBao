@@ -20,7 +20,10 @@
             <VisualStateGroup x:Name="State">
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <common:ToolBarTrigger TargetElement="{x:Bind Path=ToolBarGrid}" MaxWidth="1000" CurrentToolBarHost="{x:Bind Host}" TargetToolBarHost="MainPage" />
+                        <common:ToolBarTrigger MaxWidth="1000"
+                                               CurrentToolBarHost="{x:Bind Host}"
+                                               TargetElement="{x:Bind Path=ToolBarGrid}"
+                                               TargetToolBarHost="MainPage" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="CommentButton.Visibility" Value="Collapsed" />
@@ -30,11 +33,28 @@
                 </VisualState>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <common:ToolBarTrigger TargetElement="{x:Bind Path=ToolBarGrid}" MaxWidth="10000" CurrentToolBarHost="{x:Bind Host}" TargetToolBarHost="ContentPage" />
+                        <common:ToolBarTrigger MaxWidth="10000"
+                                               CurrentToolBarHost="{x:Bind Host}"
+                                               TargetElement="{x:Bind Path=ToolBarGrid}"
+                                               TargetToolBarHost="ContentPage" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="MenuButton.Visibility" Value="Collapsed" />
-                        <Setter Target="CategoryText.(RelativePanel.RightOf)" Value=""/>
+                        <Setter Target="CategoryText.(RelativePanel.RightOf)" Value="" />
+                        <Setter Target="CategoryText.Margin" Value="20, 0, 0, 0" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <common:ToolBarTrigger MaxWidth="10000"
+                                               CurrentToolBarHost="{x:Bind Host}"
+                                               TargetElement="{x:Bind Path=ToolBarGrid}"
+                                               TargetToolBarHost="CommentPage" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MenuButton.Visibility" Value="Collapsed" />
+                        <Setter Target="CategoryText.(RelativePanel.RightOf)" Value="" />
+                        <Setter Target="CategoryText.Margin" Value="20, 0, 0, 0" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

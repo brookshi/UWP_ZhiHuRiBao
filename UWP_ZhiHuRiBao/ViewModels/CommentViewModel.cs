@@ -24,6 +24,11 @@ namespace Brook.ZhiHuRiBao.ViewModels
             get { return CommentList.Last().LastOrDefault()?.id.ToString() ?? null; }
         }
 
+        public string Title
+        {
+            get { return StringUtil.GetString("CommentTitle"); }
+        }
+
         public async Task RequestComments(bool isLoadingMore)
         {
             if (!isLoadingMore)

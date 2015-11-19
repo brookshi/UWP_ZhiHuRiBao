@@ -120,6 +120,9 @@
   <data name="CommentItem" xml:space="preserve">
     <value>条</value>
   </data>
+  <data name="CommentTitle" xml:space="preserve">
+    <value>评论</value>
+  </data>
   <data name="ContentTitle" xml:space="preserve">
     <value>正文</value>
   </data>

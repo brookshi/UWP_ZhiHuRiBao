@@ -26,5 +26,6 @@ namespace Brook.ZhiHuRiBao.Common
     {
         MainPage,
         ContentPage,
+        CommentPage,
     }
 }

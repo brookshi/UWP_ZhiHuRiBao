@@ -1,4 +1,6 @@
-﻿using Brook.ZhiHuRiBao.ViewModels;
+﻿using Brook.ZhiHuRiBao.Common;
+using Brook.ZhiHuRiBao.Utils;
+using Brook.ZhiHuRiBao.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,6 +23,8 @@ namespace Brook.ZhiHuRiBao.Pages
     public sealed partial class CommentPage : Page
     {
         public CommentViewModel VM { get { return DataContext as CommentViewModel; } }
+
+        public Visibility ToolBarVisibility { get { return Config.UIStatus == AppUIStatus.List ? Visibility.Visible : Visibility.Collapsed; } }
 
         public CommentPage()
         {
