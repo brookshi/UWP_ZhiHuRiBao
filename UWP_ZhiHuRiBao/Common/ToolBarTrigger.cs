@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 
 namespace Brook.ZhiHuRiBao.Common
 {
@@ -11,16 +6,19 @@ namespace Brook.ZhiHuRiBao.Common
     {
         public ToolBarHost TargetToolBarHost { get; set; } = ToolBarHost.MainPage;
 
-        public ToolBarHost CurrentToolBarHost
+        public ToolBarHost CurrentToolBarHost { get; set; }
+
+        public double MaxWidth { get; set; }
+
+        private FrameworkElement _targetElement;
+        public FrameworkElement TargetElement
         {
-            get { return (ToolBarHost)GetValue(CurrentToolBarHostProperty); }
-            set { SetValue(CurrentToolBarHostProperty, value); }
-        }
-        public static readonly DependencyProperty CurrentToolBarHostProperty =
-            DependencyProperty.Register("CurrentToolBarHost", typeof(ToolBarHost), typeof(ToolBarTrigger), new PropertyMetadata(ToolBarHost.MainPage, (s, e)=>
+            get { return _targetElement; }
+            set
             {
-                var trigger = (ToolBarTrigger)s;
-                trigger.SetActive((ToolBarHost)e.NewValue == trigger.TargetToolBarHost);
-            }));
+                _targetElement = value;
+                _targetElement.SizeChanged += (s, e)=> SetActive(e.NewSize.Width < MaxWidth && CurrentToolBarHost == TargetToolBarHost);
+            }
+        }
     }
 }

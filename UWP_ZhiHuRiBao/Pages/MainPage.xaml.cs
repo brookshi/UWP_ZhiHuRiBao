@@ -43,6 +43,7 @@ namespace Brook.ZhiHuRiBao.Pages
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
         private async void RefreshMainList()

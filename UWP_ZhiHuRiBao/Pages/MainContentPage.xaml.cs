@@ -6,6 +6,8 @@ using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml;
+using LLQ;
+using Brook.ZhiHuRiBao.Events;
 
 namespace Brook.ZhiHuRiBao.Pages
 {
@@ -17,6 +19,7 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Required;
+            LLQNotifier.Default.Register(this);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -31,5 +34,16 @@ namespace Brook.ZhiHuRiBao.Pages
         }
 
         public Visibility ToolBarVisibility { get { return Config.UIStatus == AppUIStatus.List ? Visibility.Visible : Visibility.Collapsed; } }
+
+        [SubscriberCallback(typeof(DefaultEvent))]
+        private void Subscriber(DefaultEvent param)
+        {
+            switch (param.EventType)
+            {
+                case EventType.ClickComment:
+                    ((Frame)Window.Current.Content).Navigate(typeof(CommentPage), VM.CurrentStoryId);
+                    break;
+            }
+        }
     }
 }

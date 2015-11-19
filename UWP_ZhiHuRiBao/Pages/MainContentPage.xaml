@@ -16,7 +16,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <element:ToolBar Category="{x:Bind VM.Title}" Visibility="{x:Bind ToolBarVisibility}" />
+        <element:ToolBar Category="{x:Bind VM.Title}" Host="ContentPage" Visibility="{x:Bind ToolBarVisibility}" />
         <Grid x:Name="MainContent"
               Grid.Row="1"
               BorderBrush="{ThemeResource BrushMainSplitter}"

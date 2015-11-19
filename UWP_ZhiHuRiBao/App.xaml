@@ -6,8 +6,6 @@
     RequestedTheme="Light">
     <Application.Resources>
         <ResourceDictionary>
-        
-
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Default">
                     <Color x:Key="ColorPrimary">#03a9f4</Color>
