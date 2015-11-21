@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
@@ -28,6 +29,18 @@ namespace Brook.ZhiHuRiBao.Utils
 {
     public static class WebViewUtil
     {
+        static WebViewUtil()
+        {
+            _webViewInstance.ScriptNotify += async (s, e) =>
+            {
+                string data = e.Value;
+                if (!string.IsNullOrEmpty(data) && data.StartsWith(Html.NotifyPrex))
+                {
+                    await Launcher.LaunchUriAsync(new Uri(data.Substring(Html.NotifyPrex.Length)));
+                }
+            };
+        }
+
         private readonly static object _parentLocker = new object();
 
         private readonly static List<Panel> _webViewParents = new List<Panel>();
@@ -36,6 +49,7 @@ namespace Brook.ZhiHuRiBao.Utils
 
         public static void AddWebViewWithBinding(Panel parent, object source, string path)
         {
+            Clear();
             RemoveParent();
             _webViewInstance.SetBinding(WebViewExtend.ContentProperty, new Binding() { Source = source, Path = new PropertyPath(path) });
             lock(_parentLocker)
@@ -46,6 +60,11 @@ namespace Brook.ZhiHuRiBao.Utils
                     _webViewParents.Add(parent);
                 }
             }
+        }
+
+        public static void Clear()
+        {
+            _webViewInstance.NavigateToString("");
         }
 
         public static bool IsParent(Panel panel)

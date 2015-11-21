@@ -26,7 +26,7 @@
             </ResourceDictionary.MergedDictionaries>
             <utils:Config x:Key="Config" />
 
-            <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <common:StoryDataTemplateSelector x:Key="StoryDataTemplateSelector"
                                               GroupTemplate="{StaticResource GroupHeader}"
                                               ImageTemplate="{StaticResource Story}"
@@ -150,7 +150,8 @@
                                  ItemsSource="{x:Bind VM.StoryDataList}"
                                  LoadMoreProgressBarBrush="{ThemeResource BrushPrimaryDark}"
                                  RefreshButtonBackground="{ThemeResource BrushPrimary}"
-                                 RefreshButtonVisibility="{x:Bind IsDesktopDevice, Converter={StaticResource BoolToVisibilityConverter}}"
+                                 RefreshButtonVisibility="{x:Bind IsDesktopDevice, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                 RefreshProgressBarBrush="{ThemeResource BrushPrimaryDark}"
                                  RefreshProgressRingBrush="{ThemeResource BrushPrimaryDark}"
                                  RelativePanel.AlignLeftWithPanel="True"
                                  SelectionMode="Single">

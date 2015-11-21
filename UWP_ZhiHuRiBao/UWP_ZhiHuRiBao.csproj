@@ -111,7 +111,7 @@
     </Compile>
     <Compile Include="Utils\Html.cs" />
     <Compile Include="Common\StoryDataTemplateSelector.cs" />
-    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CommentInfo.cs" />
     <Compile Include="Models\MinorData.cs" />
@@ -205,7 +205,6 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

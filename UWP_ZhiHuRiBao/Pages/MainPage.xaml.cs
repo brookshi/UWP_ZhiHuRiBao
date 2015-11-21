@@ -50,7 +50,10 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             await VM.Refresh();
             MainListView.SetRefresh(false);
-            DisplayStory(VM.CurrentStoryId);
+            if (!Config.IsSinglePage)
+            {
+                DisplayStory(VM.CurrentStoryId);
+            }
         }
 
         private async void LoadMoreStories()

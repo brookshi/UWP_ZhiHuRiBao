@@ -3,7 +3,7 @@
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
-      "LLMListView/0.0.5": {
+      "LLMListView/0.0.6": {
         "dependencies": {
           "XPShadow": "[0.1.1, )",
           "XPButton": "[0.0.4, )"
@@ -1626,7 +1626,7 @@
       }
     },
     "UAP,Version=v10.0/win10-arm": {
-      "LLMListView/0.0.5": {
+      "LLMListView/0.0.6": {
         "dependencies": {
           "XPShadow": "[0.1.1, )",
           "XPButton": "[0.0.4, )"
@@ -3342,7 +3342,7 @@
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
-      "LLMListView/0.0.5": {
+      "LLMListView/0.0.6": {
         "dependencies": {
           "XPShadow": "[0.1.1, )",
           "XPButton": "[0.0.4, )"
@@ -5030,7 +5030,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x86": {
-      "LLMListView/0.0.5": {
+      "LLMListView/0.0.6": {
         "dependencies": {
           "XPShadow": "[0.1.1, )",
           "XPButton": "[0.0.4, )"
@@ -6751,7 +6751,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
-      "LLMListView/0.0.5": {
+      "LLMListView/0.0.6": {
         "dependencies": {
           "XPShadow": "[0.1.1, )",
           "XPButton": "[0.0.4, )"
@@ -8439,7 +8439,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x64": {
-      "LLMListView/0.0.5": {
+      "LLMListView/0.0.6": {
         "dependencies": {
           "XPShadow": "[0.1.1, )",
           "XPButton": "[0.0.4, )"
@@ -10160,7 +10160,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
-      "LLMListView/0.0.5": {
+      "LLMListView/0.0.6": {
         "dependencies": {
           "XPShadow": "[0.1.1, )",
           "XPButton": "[0.0.4, )"
@@ -11849,8 +11849,8 @@
     }
   },
   "libraries": {
-    "LLMListView/0.0.5": {
-      "sha512": "URO4Euogr3CcLZjWN3qSUXCThrq6klDVRpQm2/M03ESM04eaY8jd54+rkO8nbPnFu3tgqD4rh8rjt17JKoNiBg==",
+    "LLMListView/0.0.6": {
+      "sha512": "DFEWbsJyeTNtveWXM2DX1du2y0mi4c8NPDFAfWqw11lKfnLuHUp3sFvBAOV8cM9v03FGnARVOmJNIZDc/1hH1A==",
       "type": "Package",
       "files": [
         "_rels/.rels",
@@ -11861,7 +11861,7 @@
         "lib/uap10.0/LLMListView.dll",
         "lib/uap10.0/LLMListView.pdb",
         "lib/uap10.0/LLMListView.pri",
-        "package/services/metadata/core-properties/6c90a39ebc0d4e6786db0c748a87539f.psmdcp",
+        "package/services/metadata/core-properties/afd43e6713944eac994e15b76ffd0175.psmdcp",
         "[Content_Types].xml"
       ]
     },
@@ -15348,7 +15348,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "LLMListView >= 0.0.5",
+      "LLMListView >= 0.0.6",
       "LLQNotifier >= 0.5.0",
       "Microsoft.ApplicationInsights >= 1.0.0",
       "Microsoft.ApplicationInsights.PersistenceChannel >= 1.0.0",

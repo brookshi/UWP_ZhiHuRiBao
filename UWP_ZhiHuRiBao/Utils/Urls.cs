@@ -25,6 +25,8 @@ namespace Brook.ZhiHuRiBao.Utils
 {
     public static class Urls
     {
+        public const string LocalUrlPrefx = "http://daily.zhihu.com";
+
         public const string BaseUrl = "http://news-at.zhihu.com/api/4/";
 
         public const string Categories = "themes";

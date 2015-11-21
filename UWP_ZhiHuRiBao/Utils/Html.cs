@@ -21,11 +21,15 @@ namespace Brook.ZhiHuRiBao.Utils
 {
     public static class Html
     {
-        private const string _htmlTemplate = "<html><head><meta charset = \"utf-8\" > {0} {1} </head> {2} </html> ";
+        public const string NotifyPrex = "LinkNotify:";
+
+        private const string _htmlTemplate = "<html><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes\" /><head><meta charset = \"utf-8\" > {0} {1} </head> {2} {3}</html> ";
 
         private const string _cssTemplate = "<link rel=\"Stylesheet\" type=\"text/css\" href=\"{0}\" />";
 
         private const string _jsTemplate = "<script src=\"{0}\" type=\"text/javascript\"></script>";
+
+        private const string _notifyScript = "<script type=\"text/javascript\">for (var i = 0; i < document.links.length; i++) { document.links[i].onclick = function() { window.external.notify('"+ NotifyPrex + "' + this.href); return false; } }</script>";
 
         private const string _headerTemplate = "<div style=\"position:relative; height:250;  background-image:url({0}); background-size:100% 100%;\">"
                                                + "<div style=\"position:relative; height:250;  background-image:url(ms-appx-web:///Assets/header_background.png); background-size:100% 100%;\">"
@@ -55,7 +59,7 @@ namespace Brook.ZhiHuRiBao.Utils
             content.js.ForEach(o => jsBuilder.Append(string.Format(_jsTemplate, o)));
 
             var header = string.Format(_headerTemplate, content.image, content.title, content.image_source);
-            var source = string.Format(_htmlTemplate, cssBuilder.ToString(), jsBuilder.ToString(), content.body);
+            var source = string.Format(_htmlTemplate, cssBuilder.ToString(), jsBuilder.ToString(), content.body, _notifyScript);
 
             source = source.Replace("<div class=\"img-place-holder\"></div>", header);
 

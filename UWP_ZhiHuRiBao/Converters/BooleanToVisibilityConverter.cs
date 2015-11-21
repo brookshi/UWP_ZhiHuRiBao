@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Data;
 
 namespace Brook.ZhiHuRiBao.Converters
 {
-    public class BoolToVisibilityConverter : IValueConverter
+    public class BooleanToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
