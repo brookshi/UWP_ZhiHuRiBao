@@ -105,9 +105,10 @@ namespace Brook.ZhiHuRiBao.Pages
 
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if(e.PreviousSize.Width < Config.MinWidth_UIStatus_ListAndContent && e.NewSize.Width > Config.MinWidth_UIStatus_ListAndContent)
+            if(Config.IsPageSwitched(e.PreviousSize, e.NewSize) && !string.IsNullOrEmpty(VM.CurrentStoryId))
             {
                 MainContentFrame.Navigate(typeof(MainContentPage), VM.CurrentStoryId);
+                CommentFrame.Navigate(typeof(CommentPage), VM.CurrentStoryId);
             }
         }
 
@@ -120,7 +121,10 @@ namespace Brook.ZhiHuRiBao.Pages
                     MainView.IsPaneOpen = !MainView.IsPaneOpen;
                     break;
                 case EventType.ClickComment:
-                    StoryContentView.IsPaneOpen = !StoryContentView.IsPaneOpen;
+                    if (!Config.IsSinglePage)
+                    {
+                        StoryContentView.IsPaneOpen = !StoryContentView.IsPaneOpen;
+                    }
                     break;
             }
         }

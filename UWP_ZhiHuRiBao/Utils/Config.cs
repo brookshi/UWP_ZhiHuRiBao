@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.UI.ViewManagement;
 
 namespace Brook.ZhiHuRiBao.Utils
@@ -35,6 +36,18 @@ namespace Brook.ZhiHuRiBao.Utils
                 else
                     return AppUIStatus.List;
             }
+        }
+
+        public static bool IsSinglePage { get { return UIStatus == AppUIStatus.List; } }
+
+        public static bool IsSinglePageStatus(AppUIStatus uiStatus)
+        {
+            return uiStatus == AppUIStatus.List;
+        }
+
+        public static bool IsPageSwitched(Size previousSize, Size newSize)
+        {
+            return previousSize.Width < MinWidth_UIStatus_ListAndContent && newSize.Width > MinWidth_UIStatus_ListAndContent;
         }
     }
 }

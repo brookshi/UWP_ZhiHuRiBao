@@ -28,11 +28,12 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <element:ToolBar Category="{x:Bind VM.Title}"
-                         Host="ContentPage"
+        <element:ToolBar Height="48"
+                         Category="{x:Bind VM.Title}"
+                         Host="CommentPage"
                          Visibility="{x:Bind ToolBarVisibility}" />
         <llm:LLMListView x:Name="CommentListView"
-                         Width="320"
+                         Grid.Row="1"
                          IsItemClickEnabled="True"
                          ItemTemplate="{StaticResource Comment}"
                          ItemsSource="{x:Bind CommentGroup.View}"

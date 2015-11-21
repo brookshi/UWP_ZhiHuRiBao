@@ -15,7 +15,7 @@
           "lib/uap10.0/LLMListView.dll": {}
         }
       },
-      "LLQNotifier/0.3.0": {
+      "LLQNotifier/0.5.0": {
         "compile": {
           "lib/uap10.0/LLQNotifier.dll": {}
         },
@@ -1638,7 +1638,7 @@
           "lib/uap10.0/LLMListView.dll": {}
         }
       },
-      "LLQNotifier/0.3.0": {
+      "LLQNotifier/0.5.0": {
         "compile": {
           "lib/uap10.0/LLQNotifier.dll": {}
         },
@@ -3354,7 +3354,7 @@
           "lib/uap10.0/LLMListView.dll": {}
         }
       },
-      "LLQNotifier/0.3.0": {
+      "LLQNotifier/0.5.0": {
         "compile": {
           "lib/uap10.0/LLQNotifier.dll": {}
         },
@@ -5042,7 +5042,7 @@
           "lib/uap10.0/LLMListView.dll": {}
         }
       },
-      "LLQNotifier/0.3.0": {
+      "LLQNotifier/0.5.0": {
         "compile": {
           "lib/uap10.0/LLQNotifier.dll": {}
         },
@@ -6763,7 +6763,7 @@
           "lib/uap10.0/LLMListView.dll": {}
         }
       },
-      "LLQNotifier/0.3.0": {
+      "LLQNotifier/0.5.0": {
         "compile": {
           "lib/uap10.0/LLQNotifier.dll": {}
         },
@@ -8451,7 +8451,7 @@
           "lib/uap10.0/LLMListView.dll": {}
         }
       },
-      "LLQNotifier/0.3.0": {
+      "LLQNotifier/0.5.0": {
         "compile": {
           "lib/uap10.0/LLQNotifier.dll": {}
         },
@@ -10172,7 +10172,7 @@
           "lib/uap10.0/LLMListView.dll": {}
         }
       },
-      "LLQNotifier/0.3.0": {
+      "LLQNotifier/0.5.0": {
         "compile": {
           "lib/uap10.0/LLQNotifier.dll": {}
         },
@@ -11865,8 +11865,8 @@
         "[Content_Types].xml"
       ]
     },
-    "LLQNotifier/0.3.0": {
-      "sha512": "/vRSDMDL3GnqnovXIkwXjlIJRS+FpFKgod5pG0avQq5CP3XWVtL6nmRWhF0a9DS0QcjfZcP9nHzCp/oB5UmdKA==",
+    "LLQNotifier/0.5.0": {
+      "sha512": "YxAJMcfMW+7vlj8bVfu94puJoFm6xnZZllJpul80942cbFt3B+W5bT+hwRm9UG39swCQWu0XQqnZXUHuF3mYBA==",
       "type": "Package",
       "files": [
         "_rels/.rels",
@@ -11875,7 +11875,7 @@
         "lib/uap10.0/LLQNotifier.dll",
         "lib/uap10.0/LLQNotifier.pdb",
         "lib/uap10.0/LLQNotifier.pri",
-        "package/services/metadata/core-properties/9c8ce4b21f514ba585527648b0962fa1.psmdcp",
+        "package/services/metadata/core-properties/0beb9d87c13c4c0e9155967d1c3fb90f.psmdcp",
         "[Content_Types].xml"
       ]
     },
@@ -15346,7 +15346,7 @@
   "projectFileDependencyGroups": {
     "": [
       "LLMListView >= 0.0.4",
-      "LLQNotifier >= 0.3.0",
+      "LLQNotifier >= 0.5.0",
       "Microsoft.ApplicationInsights >= 1.0.0",
       "Microsoft.ApplicationInsights.PersistenceChannel >= 1.0.0",
       "Microsoft.ApplicationInsights.WindowsApps >= 1.0.0",

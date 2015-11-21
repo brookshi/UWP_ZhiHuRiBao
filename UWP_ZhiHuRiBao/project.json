@@ -1,7 +1,7 @@
 ﻿{
   "dependencies": {
     "LLMListView": "0.0.4",
-    "LLQNotifier": "0.3.0",
+    "LLQNotifier": "0.5.0",
     "Microsoft.ApplicationInsights": "1.0.0",
     "Microsoft.ApplicationInsights.PersistenceChannel": "1.0.0",
     "Microsoft.ApplicationInsights.WindowsApps": "1.0.0",
