@@ -1,13 +1,13 @@
 ﻿{
   "dependencies": {
-    "LLMListView": "0.0.4",
+    "LLMListView": "0.0.5",
     "LLQNotifier": "0.5.0",
     "Microsoft.ApplicationInsights": "1.0.0",
     "Microsoft.ApplicationInsights.PersistenceChannel": "1.0.0",
     "Microsoft.ApplicationInsights.WindowsApps": "1.0.0",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
     "XPButton": "0.0.4",
-    "XPHttp": "0.2.3"
+    "XPHttp": "0.2.4"
   },
   "frameworks": {
     "uap10.0": {}

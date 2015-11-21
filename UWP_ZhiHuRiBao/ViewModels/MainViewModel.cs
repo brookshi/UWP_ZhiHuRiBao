@@ -164,7 +164,7 @@ namespace Brook.ZhiHuRiBao.ViewModels
                     CurrentStoryId = firstStoryId.ToString();
                 }
             }
-            if (storyData == null)
+            if (storyData == null || storyData.stories.Count == 0)
                 return;
 
             _currentDate = storyData.stories.Last().id.ToString();

@@ -3,10 +3,10 @@
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
-      "LLMListView/0.0.4": {
+      "LLMListView/0.0.5": {
         "dependencies": {
-          "XPShadow": "[0.0.8, )",
-          "XPButton": "[0.0.1, )"
+          "XPShadow": "[0.1.1, )",
+          "XPButton": "[0.0.4, )"
         },
         "compile": {
           "lib/uap10.0/LLMListView.dll": {}
@@ -1605,7 +1605,7 @@
           "lib/uap10.0/XPButton.dll": {}
         }
       },
-      "XPHttp/0.2.3": {
+      "XPHttp/0.2.4": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
         },
@@ -1613,7 +1613,7 @@
           "lib/uap10.0/XPHttp.dll": {}
         }
       },
-      "XPShadow/0.0.8": {
+      "XPShadow/0.1.1": {
         "dependencies": {
           "Win2D.uwp": "[1.7.0, )"
         },
@@ -1626,10 +1626,10 @@
       }
     },
     "UAP,Version=v10.0/win10-arm": {
-      "LLMListView/0.0.4": {
+      "LLMListView/0.0.5": {
         "dependencies": {
-          "XPShadow": "[0.0.8, )",
-          "XPButton": "[0.0.1, )"
+          "XPShadow": "[0.1.1, )",
+          "XPButton": "[0.0.4, )"
         },
         "compile": {
           "lib/uap10.0/LLMListView.dll": {}
@@ -3321,7 +3321,7 @@
           "lib/uap10.0/XPButton.dll": {}
         }
       },
-      "XPHttp/0.2.3": {
+      "XPHttp/0.2.4": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
         },
@@ -3329,7 +3329,7 @@
           "lib/uap10.0/XPHttp.dll": {}
         }
       },
-      "XPShadow/0.0.8": {
+      "XPShadow/0.1.1": {
         "dependencies": {
           "Win2D.uwp": "[1.7.0, )"
         },
@@ -3342,10 +3342,10 @@
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
-      "LLMListView/0.0.4": {
+      "LLMListView/0.0.5": {
         "dependencies": {
-          "XPShadow": "[0.0.8, )",
-          "XPButton": "[0.0.1, )"
+          "XPShadow": "[0.1.1, )",
+          "XPButton": "[0.0.4, )"
         },
         "compile": {
           "lib/uap10.0/LLMListView.dll": {}
@@ -5009,7 +5009,7 @@
           "lib/uap10.0/XPButton.dll": {}
         }
       },
-      "XPHttp/0.2.3": {
+      "XPHttp/0.2.4": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
         },
@@ -5017,7 +5017,7 @@
           "lib/uap10.0/XPHttp.dll": {}
         }
       },
-      "XPShadow/0.0.8": {
+      "XPShadow/0.1.1": {
         "dependencies": {
           "Win2D.uwp": "[1.7.0, )"
         },
@@ -5030,10 +5030,10 @@
       }
     },
     "UAP,Version=v10.0/win10-x86": {
-      "LLMListView/0.0.4": {
+      "LLMListView/0.0.5": {
         "dependencies": {
-          "XPShadow": "[0.0.8, )",
-          "XPButton": "[0.0.1, )"
+          "XPShadow": "[0.1.1, )",
+          "XPButton": "[0.0.4, )"
         },
         "compile": {
           "lib/uap10.0/LLMListView.dll": {}
@@ -6730,7 +6730,7 @@
           "lib/uap10.0/XPButton.dll": {}
         }
       },
-      "XPHttp/0.2.3": {
+      "XPHttp/0.2.4": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
         },
@@ -6738,7 +6738,7 @@
           "lib/uap10.0/XPHttp.dll": {}
         }
       },
-      "XPShadow/0.0.8": {
+      "XPShadow/0.1.1": {
         "dependencies": {
           "Win2D.uwp": "[1.7.0, )"
         },
@@ -6751,10 +6751,10 @@
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
-      "LLMListView/0.0.4": {
+      "LLMListView/0.0.5": {
         "dependencies": {
-          "XPShadow": "[0.0.8, )",
-          "XPButton": "[0.0.1, )"
+          "XPShadow": "[0.1.1, )",
+          "XPButton": "[0.0.4, )"
         },
         "compile": {
           "lib/uap10.0/LLMListView.dll": {}
@@ -8418,7 +8418,7 @@
           "lib/uap10.0/XPButton.dll": {}
         }
       },
-      "XPHttp/0.2.3": {
+      "XPHttp/0.2.4": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
         },
@@ -8426,7 +8426,7 @@
           "lib/uap10.0/XPHttp.dll": {}
         }
       },
-      "XPShadow/0.0.8": {
+      "XPShadow/0.1.1": {
         "dependencies": {
           "Win2D.uwp": "[1.7.0, )"
         },
@@ -8439,10 +8439,10 @@
       }
     },
     "UAP,Version=v10.0/win10-x64": {
-      "LLMListView/0.0.4": {
+      "LLMListView/0.0.5": {
         "dependencies": {
-          "XPShadow": "[0.0.8, )",
-          "XPButton": "[0.0.1, )"
+          "XPShadow": "[0.1.1, )",
+          "XPButton": "[0.0.4, )"
         },
         "compile": {
           "lib/uap10.0/LLMListView.dll": {}
@@ -10139,7 +10139,7 @@
           "lib/uap10.0/XPButton.dll": {}
         }
       },
-      "XPHttp/0.2.3": {
+      "XPHttp/0.2.4": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
         },
@@ -10147,7 +10147,7 @@
           "lib/uap10.0/XPHttp.dll": {}
         }
       },
-      "XPShadow/0.0.8": {
+      "XPShadow/0.1.1": {
         "dependencies": {
           "Win2D.uwp": "[1.7.0, )"
         },
@@ -10160,10 +10160,10 @@
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
-      "LLMListView/0.0.4": {
+      "LLMListView/0.0.5": {
         "dependencies": {
-          "XPShadow": "[0.0.8, )",
-          "XPButton": "[0.0.1, )"
+          "XPShadow": "[0.1.1, )",
+          "XPButton": "[0.0.4, )"
         },
         "compile": {
           "lib/uap10.0/LLMListView.dll": {}
@@ -11827,7 +11827,7 @@
           "lib/uap10.0/XPButton.dll": {}
         }
       },
-      "XPHttp/0.2.3": {
+      "XPHttp/0.2.4": {
         "compile": {
           "lib/uap10.0/XPHttp.dll": {}
         },
@@ -11835,7 +11835,7 @@
           "lib/uap10.0/XPHttp.dll": {}
         }
       },
-      "XPShadow/0.0.8": {
+      "XPShadow/0.1.1": {
         "dependencies": {
           "Win2D.uwp": "[1.7.0, )"
         },
@@ -11849,8 +11849,8 @@
     }
   },
   "libraries": {
-    "LLMListView/0.0.4": {
-      "sha512": "UxlWKXOIyjm6stGrADiPRmEbd//eK513rKJVqsx4wrywsKAXueuEdKmGpSQufxuHjLcHHfSRWrccmBkCO6Cugw==",
+    "LLMListView/0.0.5": {
+      "sha512": "URO4Euogr3CcLZjWN3qSUXCThrq6klDVRpQm2/M03ESM04eaY8jd54+rkO8nbPnFu3tgqD4rh8rjt17JKoNiBg==",
       "type": "Package",
       "files": [
         "_rels/.rels",
@@ -11861,7 +11861,7 @@
         "lib/uap10.0/LLMListView.dll",
         "lib/uap10.0/LLMListView.pdb",
         "lib/uap10.0/LLMListView.pri",
-        "package/services/metadata/core-properties/9edd9bbf0075473a9c9fe3209e17c3c9.psmdcp",
+        "package/services/metadata/core-properties/6c90a39ebc0d4e6786db0c748a87539f.psmdcp",
         "[Content_Types].xml"
       ]
     },
@@ -15314,45 +15314,48 @@
         "[Content_Types].xml"
       ]
     },
-    "XPHttp/0.2.3": {
-      "sha512": "KZRS+kM82JDI3JNOMvPM9Gzmx2sl8NZAaMLYD0irJdoavEmJJCprn8NjiNkjCeepk0ZHMx6r/LSDScjDdGK+6g==",
+    "XPHttp/0.2.4": {
+      "sha512": "zLz4Oz+w6+UOtf97vGIfhm7OgXZYo61AMoCp8sqoZM9XjF7H1Vo89W1ywRbr4+XqqGLNX3rq1eMdzhR0PSCAFw==",
       "type": "Package",
       "files": [
         "_rels/.rels",
         "XPHttp.nuspec",
         "lib/uap10.0/XPHttp/Properties/XPHttp.rd.xml",
         "lib/uap10.0/XPHttp.dll",
-        "package/services/metadata/core-properties/8a0e1cd275e143c8bba52f39a23b0c5c.psmdcp",
+        "lib/uap10.0/XPHttp.pdb",
+        "lib/uap10.0/XPHttp.pri",
+        "package/services/metadata/core-properties/7c16ae6627d8462590e56c6faf73df3b.psmdcp",
         "[Content_Types].xml"
       ]
     },
-    "XPShadow/0.0.8": {
-      "sha512": "1NGQCph9pLRcSM/JriaBfqlpwZYpN2lsbNQGHbOPYapAxxOzE14HMq1MSuxAxmejmKKqP7cuc+QNGQMG2CbyOw==",
+    "XPShadow/0.1.1": {
+      "sha512": "Kk1PGDOq+ObcsrZnub32Qo9E+0/WYdBwy/gf40uJXB39FSsjZXARnD82dioq1xRKqVkJomN4QJj/PEDBya7IlA==",
       "type": "Package",
       "files": [
         "_rels/.rels",
         "XPShadow.nuspec",
+        "lib/uap10.0/XPShadow/Properties/Generic.xbf",
         "lib/uap10.0/XPShadow/Properties/XPShadow.rd.xml",
         "lib/uap10.0/XPShadow/Generic.xbf",
         "lib/uap10.0/XPShadow/XPShadow.xr.xml",
         "lib/uap10.0/XPShadow.dll",
         "lib/uap10.0/XPShadow.pdb",
         "lib/uap10.0/XPShadow.pri",
-        "package/services/metadata/core-properties/50728a8a79d54e5b959024b9584e1e38.psmdcp",
+        "package/services/metadata/core-properties/24b4677efaa24b888f5361491950b74e.psmdcp",
         "[Content_Types].xml"
       ]
     }
   },
   "projectFileDependencyGroups": {
     "": [
-      "LLMListView >= 0.0.4",
+      "LLMListView >= 0.0.5",
       "LLQNotifier >= 0.5.0",
       "Microsoft.ApplicationInsights >= 1.0.0",
       "Microsoft.ApplicationInsights.PersistenceChannel >= 1.0.0",
       "Microsoft.ApplicationInsights.WindowsApps >= 1.0.0",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
       "XPButton >= 0.0.4",
-      "XPHttp >= 0.2.3"
+      "XPHttp >= 0.2.4"
     ],
     "UAP,Version=v10.0": []
   }

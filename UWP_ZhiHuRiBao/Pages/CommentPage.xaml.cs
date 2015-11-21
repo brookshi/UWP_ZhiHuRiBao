@@ -48,10 +48,9 @@ namespace Brook.ZhiHuRiBao.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var storyId = e.Parameter.ToString();
-            if (!string.IsNullOrEmpty(storyId))
+            if (e.Parameter != null && !string.IsNullOrEmpty(e.Parameter.ToString()))
             {
-                VM.CurrentStoryId = storyId;
+                VM.CurrentStoryId = e.Parameter.ToString();
                 CommentListView.SetRefresh(true);
             }
         }
