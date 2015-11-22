@@ -14,6 +14,8 @@ using Windows.UI;
 using Windows.UI.ViewManagement;
 using Brook.ZhiHuRiBao.ViewModels;
 using System;
+using WeiboSDKForWinRT;
+using Windows.UI.Popups;
 
 namespace Brook.ZhiHuRiBao.Pages
 {
@@ -130,6 +132,19 @@ namespace Brook.ZhiHuRiBao.Pages
                     }
                     break;
             }
+        }
+
+        private void UserPhoto_Click(object sender, RoutedEventArgs e)
+        {
+            ClientOAuth oauth = new ClientOAuth();
+            SdkData.AppKey = "2626289114";
+            SdkData.AppSecret = "d0b05d8a84f64b2ef509dc1934f7c3a1";
+            SdkData.RedirectUri = "http://sns.whalecloud.com/sina2/callback";
+            oauth.LoginCallback += (isSuccess, err, response) =>
+            {
+               
+            };
+            oauth.BeginOAuth();
         }
     }
 }

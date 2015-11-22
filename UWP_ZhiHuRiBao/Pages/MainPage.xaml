@@ -85,14 +85,21 @@
                                    Width="320"
                                    Height="120"
                                    Background="{ThemeResource BrushPrimary}">
-                        <Ellipse x:Name="UserPhoto"
+                        <!--<Ellipse x:Name="UserPhoto"
                                  Width="48"
                                  Height="48"
                                  Margin="4">
                             <Ellipse.Fill>
                                 <ImageBrush Stretch="Fill" />
                             </Ellipse.Fill>
-                        </Ellipse>
+                        </Ellipse>-->
+                        <xp:XPButton x:Name="UserPhoto"
+                                     Width="48"
+                                     Height="48"
+                                     Margin="4"
+                                     Background="Gray"
+                                     Click="UserPhoto_Click"
+                                     IconPosition="OnlyIcon" />
                         <TextBlock x:Uid="PleaseLogin"
                                    x:Name="UserName"
                                    Foreground="White"
