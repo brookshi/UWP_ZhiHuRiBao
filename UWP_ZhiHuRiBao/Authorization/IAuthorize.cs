@@ -11,5 +11,9 @@ namespace Brook.ZhiHuRiBao.Authorization
         void Login(Action<bool, object> loginCallback);
 
         void Logout(Action<bool, object> logoutCallback);
+
+        string Token { get; }
+
+        bool IsIsAuthorized { get; }
     }
 }

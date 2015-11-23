@@ -102,6 +102,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Authorization\AuthoAttribution.cs" />
+    <Compile Include="Authorization\AuthorizationHelper.cs" />
     <Compile Include="Authorization\IAuthorize.cs" />
     <Compile Include="Authorization\LoginType.cs" />
     <Compile Include="Authorization\SinaAuthorization.cs" />

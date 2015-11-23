@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WeiboSDKForWinRT;
+using Windows.Storage;
 
 namespace Brook.ZhiHuRiBao.Authorization
 {
+    [AuthoAttribution(LoginType.Sina)]
     public class SinaAuthorization : IAuthorize
     {
         public readonly static SinaAuthorization Instance = new SinaAuthorization();
@@ -19,6 +21,22 @@ namespace Brook.ZhiHuRiBao.Authorization
         }
 
         private ClientOAuth oauth = new ClientOAuth();
+
+        public string Token
+        {
+            get
+            {
+                return null;
+            }
+        }
+
+        public bool IsIsAuthorized
+        {
+            get
+            {
+                return oauth.IsAuthorized;
+            }
+        }
 
         public void Login(Action<bool, object> loginCallback)
         {
