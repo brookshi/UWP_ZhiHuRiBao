@@ -102,6 +102,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Authorization\IAuthorize.cs" />
+    <Compile Include="Authorization\LoginType.cs" />
+    <Compile Include="Authorization\SinaAuthorization.cs" />
     <Compile Include="Common\AppUIStatus.cs" />
     <Compile Include="Common\CommentType.cs" />
     <Compile Include="Common\ToolBarHost.cs" />
@@ -213,9 +216,7 @@
       <HintPath>dll\WeiboSDKForWinRT.winmd</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Authorization\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
