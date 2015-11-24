@@ -67,8 +67,15 @@ namespace Brook.ZhiHuRiBao.Authorization
         {
             if (loginType == LoginType.None)
             {
-                if()
+                if(loginCallback != null)
+                {
+                    loginCallback(false, null);
+                }
+                return;
             }
+
+            if (!Authorizations.ContainsKey(CurrentLoginType))
+                throw new NotSupportedException();
         }
     }
 }

@@ -105,7 +105,6 @@
     <Compile Include="Authorization\AuthoAttribution.cs" />
     <Compile Include="Authorization\AuthorizationHelper.cs" />
     <Compile Include="Authorization\IAuthorize.cs" />
-    <Compile Include="Authorization\LoginCallback.cs" />
     <Compile Include="Authorization\LoginType.cs" />
     <Compile Include="Authorization\SinaAuthorization.cs" />
     <Compile Include="Common\AppUIStatus.cs" />
