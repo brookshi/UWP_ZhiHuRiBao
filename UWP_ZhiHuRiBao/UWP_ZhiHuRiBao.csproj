@@ -105,6 +105,7 @@
     <Compile Include="Authorization\AuthoAttribution.cs" />
     <Compile Include="Authorization\AuthorizationHelper.cs" />
     <Compile Include="Authorization\IAuthorize.cs" />
+    <Compile Include="Authorization\LoginCallback.cs" />
     <Compile Include="Authorization\LoginType.cs" />
     <Compile Include="Authorization\SinaAuthorization.cs" />
     <Compile Include="Common\AppUIStatus.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Utils\Misc.cs" />
     <Compile Include="Common\ObservableCollectionExtended.cs" />
     <Compile Include="Common\PageBase.cs" />
+    <Compile Include="Utils\StorageUtil.cs" />
     <Compile Include="Utils\Urls.cs" />
     <Compile Include="Common\ViewModelBase.cs" />
     <Compile Include="Elements\CustomTitleBar.xaml.cs">
@@ -150,6 +152,7 @@
     <Compile Include="Utils\DataRequester.cs" />
     <Compile Include="Utils\StringUtil.cs" />
     <Compile Include="Common\WebViewExtend.cs" />
+    <Compile Include="ViewModels\StorageInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

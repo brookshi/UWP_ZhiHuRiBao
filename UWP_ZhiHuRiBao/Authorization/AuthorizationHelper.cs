@@ -21,17 +21,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using Windows.UI.Xaml;
+using Brook.ZhiHuRiBao.Utils;
 
 namespace Brook.ZhiHuRiBao.Authorization
 {
     public static class AuthorizationHelper
     {
-        private static LoginType CurrentLoginType { get; set; }
+        private static LoginType CurrentLoginType { get; set; } = LoginType.None;
 
         public readonly static Dictionary<LoginType, IAuthorize> Authorizations = new Dictionary<LoginType, IAuthorize>();
 
         static AuthorizationHelper()
         {
+            string loginType;
+            if(StorageUtil.TryGet(StorageUtil.CurrentLoginTypeKey, out loginType))
+            {
+                CurrentLoginType = LoginTypeClass.ToEnum(loginType);
+            }
+
             var currentAssembly = Application.Current.GetType().GetTypeInfo().Assembly;
             var authorizeTypes = currentAssembly.DefinedTypes.Where(type => type.ImplementedInterfaces.Any(inter => inter == typeof(IAuthorize))).ToList();
 
@@ -45,15 +52,23 @@ namespace Brook.ZhiHuRiBao.Authorization
 
         private static IAuthorize GetAuthorization(TypeInfo typeInfo)
         {
-            return (IAuthorize)typeInfo.GetDeclaredField("Instance").GetValue(null);//.GetType().GetRuntimeProperty("Instance").GetValue(null);
+            return (IAuthorize)typeInfo.GetDeclaredField("Instance").GetValue(null);
+        }
+
+        public static void AutoLogin(Action<bool, object> loginCallback)
+        {
+            if (!Authorizations.ContainsKey(CurrentLoginType))
+                throw new NotSupportedException();
+
+            Authorizations[CurrentLoginType].Login(loginCallback);
         }
 
         public static void Login(LoginType loginType, Action<bool, object> loginCallback)
         {
-            if (!Authorizations.ContainsKey(loginType))
-                throw new NotSupportedException();
-
-            Authorizations[loginType].Login(loginCallback);
+            if (loginType == LoginType.None)
+            {
+                if()
+            }
         }
     }
 }

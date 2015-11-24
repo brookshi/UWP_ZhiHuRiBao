@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Brook.ZhiHuRiBao.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,11 @@ namespace Brook.ZhiHuRiBao.Authorization
     [AuthoAttribution(LoginType.Sina)]
     public class SinaAuthorization : IAuthorize
     {
+        public const string SinaTokenKey = "SinaToken";
+
         public readonly static SinaAuthorization Instance = new SinaAuthorization();
+
+        private ClientOAuth oauth = new ClientOAuth();
 
         static SinaAuthorization()
         {
@@ -20,14 +25,19 @@ namespace Brook.ZhiHuRiBao.Authorization
             SdkData.RedirectUri = "http://sns.whalecloud.com/sina2/callback";
         }
 
-        private ClientOAuth oauth = new ClientOAuth();
+        public SinaAuthorization()
+        {
+            string token;
+            if(StorageUtil.TryGet(SinaTokenKey, out token))
+            {
+                Token = token;
+            }
+        }
 
         public string Token
         {
-            get
-            {
-                return null;
-            }
+            get;
+            private set;
         }
 
         public bool IsIsAuthorized
@@ -42,6 +52,11 @@ namespace Brook.ZhiHuRiBao.Authorization
         {
             oauth.LoginCallback += (isSuccess, err, response) =>
             {
+                if(isSuccess)
+                {
+                    Token = response.AccessToken;
+                    StorageUtil.Add(SinaTokenKey, Token);
+                }
                 if(loginCallback != null)
                 {
                     loginCallback(isSuccess, response);
@@ -52,6 +67,8 @@ namespace Brook.ZhiHuRiBao.Authorization
 
         public void Logout(Action<bool, object> logoutCallback)
         {
+            Token = null;
+            StorageUtil.Remove(SinaTokenKey);
         }
     }
 }
