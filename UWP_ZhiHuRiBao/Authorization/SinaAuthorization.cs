@@ -1,4 +1,5 @@
-﻿using Brook.ZhiHuRiBao.Utils;
+﻿using Brook.ZhiHuRiBao.Common;
+using Brook.ZhiHuRiBao.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Brook.ZhiHuRiBao.Authorization
 
         public readonly static SinaAuthorization Instance = new SinaAuthorization();
 
-        private ClientOAuth oauth = new ClientOAuth();
+        private ClientOAuth _oauth = new ClientOAuth();
 
         static SinaAuthorization()
         {
@@ -40,17 +41,17 @@ namespace Brook.ZhiHuRiBao.Authorization
             private set;
         }
 
-        public bool IsIsAuthorized
+        public bool IsAuthorized
         {
             get
             {
-                return oauth.IsAuthorized;
+                return _oauth.IsAuthorized;
             }
         }
 
         public void Login(Action<bool, object> loginCallback)
         {
-            oauth.LoginCallback += (isSuccess, err, response) =>
+            _oauth.LoginCallback += (isSuccess, err, response) =>
             {
                 if(isSuccess)
                 {
@@ -62,7 +63,7 @@ namespace Brook.ZhiHuRiBao.Authorization
                     loginCallback(isSuccess, response);
                 }
             };
-            oauth.BeginOAuth();
+            _oauth.BeginOAuth();
         }
 
         public void Logout(Action<bool, object> logoutCallback)

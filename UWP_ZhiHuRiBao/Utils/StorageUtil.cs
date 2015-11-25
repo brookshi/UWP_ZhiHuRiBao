@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Brook.ZhiHuRiBao.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace Brook.ZhiHuRiBao.Utils
     public class StorageUtil
     {
         public const string CurrentLoginTypeKey = "LoginType";
+        public const string ZhiHuAuthoInfoKey = "ZhiHuAuthoInfoKey";
 
         static ApplicationDataContainer _localSetting = ApplicationData.Current.LocalSettings;
 

@@ -105,7 +105,7 @@
     <Compile Include="Authorization\AuthoAttribution.cs" />
     <Compile Include="Authorization\AuthorizationHelper.cs" />
     <Compile Include="Authorization\IAuthorize.cs" />
-    <Compile Include="Authorization\LoginType.cs" />
+    <Compile Include="Common\LoginType.cs" />
     <Compile Include="Authorization\SinaAuthorization.cs" />
     <Compile Include="Common\AppUIStatus.cs" />
     <Compile Include="Common\CommentType.cs" />
@@ -123,6 +123,7 @@
     <Compile Include="Pages\CommentPage.xaml.cs">
       <DependentUpon>CommentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\JsonSerializer.cs" />
     <Compile Include="Utils\Misc.cs" />
     <Compile Include="Common\ObservableCollectionExtended.cs" />
     <Compile Include="Common\PageBase.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Utils\StringUtil.cs" />
     <Compile Include="Common\WebViewExtend.cs" />
     <Compile Include="ViewModels\StorageInfo.cs" />
+    <Compile Include="ViewModels\ZhiHuAuthoInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

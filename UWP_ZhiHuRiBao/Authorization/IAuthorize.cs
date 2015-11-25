@@ -14,6 +14,6 @@ namespace Brook.ZhiHuRiBao.Authorization
 
         string Token { get; }
 
-        bool IsIsAuthorized { get; }
+        bool IsAuthorized { get; }
     }
 }

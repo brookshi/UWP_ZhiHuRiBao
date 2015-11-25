@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using Windows.UI.Xaml;
 using Brook.ZhiHuRiBao.Utils;
+using Brook.ZhiHuRiBao.ViewModels;
 
 namespace Brook.ZhiHuRiBao.Authorization
 {
@@ -29,7 +30,9 @@ namespace Brook.ZhiHuRiBao.Authorization
     {
         private static LoginType CurrentLoginType { get; set; } = LoginType.None;
 
-        public readonly static Dictionary<LoginType, IAuthorize> Authorizations = new Dictionary<LoginType, IAuthorize>();
+        private readonly static Dictionary<LoginType, IAuthorize> Authorizations = new Dictionary<LoginType, IAuthorize>();
+
+        private static ZhiHuAuthoInfo ZhiHuAuthoInfo { get; set; }
 
         static AuthorizationHelper()
         {
@@ -43,6 +46,7 @@ namespace Brook.ZhiHuRiBao.Authorization
             var authorizeTypes = currentAssembly.DefinedTypes.Where(type => type.ImplementedInterfaces.Any(inter => inter == typeof(IAuthorize))).ToList();
 
             authorizeTypes.ForEach(o => Authorizations[GetLoginType(o)] = GetAuthorization(o));
+
         }
 
         private static LoginType GetLoginType(TypeInfo typeInfo)
@@ -57,25 +61,41 @@ namespace Brook.ZhiHuRiBao.Authorization
 
         public static void AutoLogin(Action<bool, object> loginCallback)
         {
-            if (!Authorizations.ContainsKey(CurrentLoginType))
-                throw new NotSupportedException();
+            if (!CheckLoginType(CurrentLoginType, loginCallback))
+                return;
 
-            Authorizations[CurrentLoginType].Login(loginCallback);
+            var authorizer = Authorizations[CurrentLoginType];
+
+            if(!authorizer.IsAuthorized)
+            {
+                loginCallback(false, "login authoriztion expired");
+                return;
+            }
+
+            if(authorizer)
         }
 
         public static void Login(LoginType loginType, Action<bool, object> loginCallback)
         {
+            if (!CheckLoginType(CurrentLoginType, loginCallback))
+                return;
+        }
+
+        private static bool CheckLoginType(LoginType loginType, Action<bool, object> loginCallback)
+        {
             if (loginType == LoginType.None)
             {
-                if(loginCallback != null)
-                {
-                    loginCallback(false, null);
-                }
-                return;
+                loginCallback(false, "none login type");
+                return false;
             }
 
             if (!Authorizations.ContainsKey(CurrentLoginType))
-                throw new NotSupportedException();
+            {
+                loginCallback(false, "not support login type");
+                return false;
+            }
+
+            return true;
         }
     }
 }
