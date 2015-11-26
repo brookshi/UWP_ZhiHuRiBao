@@ -29,23 +29,16 @@ namespace Brook.ZhiHuRiBao.Authorization
 {
     public static class AuthorizationHelper
     {
+        public static bool IsLogin = false;
         private readonly static Dictionary<LoginType, IAuthorize> Authorizations = new Dictionary<LoginType, IAuthorize>();
-
-        private static ZhiHuAuthoInfo ZhiHuAuthoInfo { get; set; }
 
         static AuthorizationHelper()
         {
-            string zhiHuAuthoInfoContent;
-            if(StorageUtil.TryGet(StorageUtil.ZhiHuAuthoInfoKey, out zhiHuAuthoInfoContent))
-            {
-                ZhiHuAuthoInfo = LoginTypeClass.ToEnum(loginType);
-            }
-
             var currentAssembly = Application.Current.GetType().GetTypeInfo().Assembly;
+
             var authorizeTypes = currentAssembly.DefinedTypes.Where(type => type.ImplementedInterfaces.Any(inter => inter == typeof(IAuthorize))).ToList();
 
             authorizeTypes.ForEach(o => Authorizations[GetLoginType(o)] = GetAuthorization(o));
-
         }
 
         private static LoginType GetLoginType(TypeInfo typeInfo)
@@ -60,25 +53,94 @@ namespace Brook.ZhiHuRiBao.Authorization
 
         public static void AutoLogin()
         {
+            if (IsLogin)
+                return;
+
             string msg = string.Empty;
-            if (!CheckLoginType(CurrentLoginType, out msg))
+            var loginType = StorageUtil.StorageInfo.LoginType;
+            if (!CheckLoginType(loginType, out msg))
                 return;
 
-            var authorizer = Authorizations[CurrentLoginType];
-
+            var authorizer = Authorizations[loginType];
             if(!authorizer.IsAuthorized)
-            {
                 return;
-            }
 
-            
+            if (StorageUtil.StorageInfo.IsZhiHuAuthoVaild())
+            {
+                IsLogin = true;
+            }
+            else if(Authorizations[loginType].LoginData != null)
+            {
+                LoginZhiHu(loginType, null);
+            }
         }
 
         public static void Login(LoginType loginType, Action<bool, object> loginCallback)
         {
+            if (loginCallback == null)
+                loginCallback = (b, o) => { };
+
             string msg = string.Empty;
-            if (!CheckLoginType(CurrentLoginType, out msg))
+            if (!CheckLoginType(loginType, out msg))
+            {
+                loginCallback(false, msg);
                 return;
+            }
+            var authorizer = Authorizations[loginType];
+
+            if (authorizer.IsAuthorized && Authorizations[loginType].LoginData != null)
+            {
+                LoginZhiHu(loginType, loginCallback);
+            }
+            else
+            {
+                try
+                { 
+                    authorizer.Login((isSuccess, res)=>
+                    {
+                        if(isSuccess)
+                        {
+                            LoginZhiHu(loginType, loginCallback);
+                        }
+                        else
+                        {
+                            loginCallback(false, StringUtil.GetString("LoginFailed"));
+                        }
+                    });
+                }
+                catch(Exception ex)
+                {
+                    loginCallback(false, StringUtil.GetString("LoginFailed"));
+                }
+            }
+        }
+
+        private static async void LoginZhiHu(LoginType loginType, Action<bool, object> loginCallback)
+        {
+            var zhiHuAuthoData = await DataRequester.Login(Authorizations[loginType].LoginData);
+            if (zhiHuAuthoData == null)
+            {
+                loginCallback(false, StringUtil.GetString("LoginZhiHuFailed"));
+                return;
+            }
+            StorageUtil.StorageInfo.LoginType = loginType;
+            StorageUtil.StorageInfo.ZhiHuAuthoInfo = zhiHuAuthoData;
+            StorageUtil.UpdateStorageInfo();
+
+            IsLogin = true;
+            loginCallback(true, StringUtil.GetString("LoginSuccess"));
+        }
+
+        public static void Logout()
+        {
+            IsLogin = false;
+            string msg;
+            var loginType = StorageUtil.StorageInfo.LoginType;
+
+            if (CheckLoginType(loginType, out msg))
+            {
+                Authorizations[loginType].Logout();
+            }
         }
 
         private static bool CheckLoginType(LoginType loginType, out string msg)
@@ -86,13 +148,13 @@ namespace Brook.ZhiHuRiBao.Authorization
             msg = string.Empty;
             if (loginType == LoginType.None)
             {
-                msg = "none login type";
+                msg = StringUtil.GetString("NoneLoginType");
                 return false;
             }
 
-            if (!Authorizations.ContainsKey(CurrentLoginType))
+            if (!Authorizations.ContainsKey(loginType))
             {
-                msg = "not support login type";
+                msg = StringUtil.GetString("NotSupportLoginType");
                 return false;
             }
 

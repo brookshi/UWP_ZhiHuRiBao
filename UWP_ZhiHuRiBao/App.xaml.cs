@@ -1,8 +1,10 @@
-﻿using Brook.ZhiHuRiBao.Common;
+﻿using Brook.ZhiHuRiBao.Authorization;
+using Brook.ZhiHuRiBao.Common;
 using Brook.ZhiHuRiBao.Pages;
 using Brook.ZhiHuRiBao.Utils;
 using LLQ;
 using System;
+using System.Diagnostics;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Core;
@@ -23,12 +25,20 @@ namespace Brook.ZhiHuRiBao
                 Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            UnhandledException += App_UnhandledException;
+        }
+
+        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Debug.WriteLine(e.Exception.ToString());
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             InitConfig();
             InitHttpClient();
+            AuthorizationHelper.AutoLogin();
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {

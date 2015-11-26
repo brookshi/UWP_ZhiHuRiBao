@@ -85,25 +85,23 @@
                                    Width="320"
                                    Height="120"
                                    Background="{ThemeResource BrushPrimary}">
-                        <!--<Ellipse x:Name="UserPhoto"
-                                 Width="48"
-                                 Height="48"
-                                 Margin="4">
-                            <Ellipse.Fill>
-                                <ImageBrush Stretch="Fill" />
-                            </Ellipse.Fill>
-                        </Ellipse>-->
                         <xp:XPButton x:Name="UserPhoto"
-                                     Width="48"
                                      Height="48"
-                                     Margin="4"
-                                     Background="Gray"
+                                     Margin="12, 4, 0, 0"
+                                     Background="Transparent"
                                      Click="UserPhoto_Click"
-                                     IconPosition="OnlyIcon" />
-                        <TextBlock x:Uid="PleaseLogin"
-                                   x:Name="UserName"
-                                   Foreground="White"
-                                   RelativePanel.RightOf="UserPhoto" />
+                                     Content="{x:Bind VM.UserName}"
+                                     CornerRadius="0.5"
+                                     FontSize="16"
+                                     Foreground="White"
+                                     IconInterval="20"
+                                     IconPosition="Left"
+                                     PointerOverBackground="#22000000"
+                                     PressedBackground="#22000000">
+                            <xp:XPButton.Icon>
+                                <BitmapIcon UriSource="{x:Bind VM.UserPhotoUri, Mode=OneWay}" />
+                            </xp:XPButton.Icon>
+                        </xp:XPButton>
                         <xp:XPButton x:Uid="Favorite"
                                      x:Name="MyFav"
                                      Margin="12, 0, 0, 12"

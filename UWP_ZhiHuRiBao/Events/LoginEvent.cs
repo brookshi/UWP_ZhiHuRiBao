@@ -20,13 +20,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Brook.ZhiHuRiBao.ViewModels
+namespace Brook.ZhiHuRiBao.Events
 {
-    public class ZhiHuAuthoInfo
+    public class LoginEvent
     {
-        public string access_token { get; set; }
-        public List<string> bound_services { get; set; }
-        public string name { get; set; }
-        public string avatar { get; set; }
+        public bool IsLogin { get; set; }
     }
 }

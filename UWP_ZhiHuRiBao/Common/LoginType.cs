@@ -16,8 +16,8 @@ namespace Brook.ZhiHuRiBao.Common
     public static class LoginTypeClass
     {
         public const string NoneLoginType = "None";
-        public const string SinaLoginType = "Sina";
-        public const string QQLoginType = "QQ";
+        public const string SinaLoginType = "sina";
+        public const string QQLoginType = "qq";
 
         public static string Convert(this LoginType loginType)
         {

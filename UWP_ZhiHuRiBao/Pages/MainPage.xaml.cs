@@ -47,6 +47,10 @@ namespace Brook.ZhiHuRiBao.Pages
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+            if(AuthorizationHelper.IsLogin)
+            {
+                VM.UpdateUserInfo();
+            }
         }
 
         private async void RefreshMainList()
@@ -137,9 +141,9 @@ namespace Brook.ZhiHuRiBao.Pages
 
         private void UserPhoto_Click(object sender, RoutedEventArgs e)
         {
-            AuthorizationHelper.Login(LoginType.Sina, (isSuccess, response) =>
+            AuthorizationHelper.Login(LoginType.Sina, (isSuccess, msg) =>
             {
-
+                VM.UpdateUserInfo();
             });
         }
     }

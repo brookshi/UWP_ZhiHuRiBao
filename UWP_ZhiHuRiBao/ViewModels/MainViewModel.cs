@@ -63,6 +63,34 @@ namespace Brook.ZhiHuRiBao.ViewModels
             }
         }
 
+        private Uri _userPhotoUri = new Uri("ms-appx:///Assets/StoreLogo.png");
+        public Uri UserPhotoUri
+        {
+            get { return _userPhotoUri; }
+            set
+            {
+                if(value != _userPhotoUri)
+                {
+                    _userPhotoUri = value;
+                    Notify("UserPhotoUri");
+                }
+            }
+        }
+
+        private string _userName = StringUtil.GetString("PleaseLogin");
+        public string UserName
+        {
+            get { return _userName; }
+            set
+            {
+                if(value != _userName)
+                {
+                    _userName = value;
+                    Notify("UserName");
+                }
+            }
+        }
+
         public override void Init()
         {
             InitCategories();
@@ -172,5 +200,14 @@ namespace Brook.ZhiHuRiBao.ViewModels
             StoryDataList.AddRange(storyData.stories);
         }
 
+        public void UpdateUserInfo()
+        {
+            var info = StorageUtil.StorageInfo.ZhiHuAuthoInfo;
+            if (info == null)
+                return;
+
+            UserPhotoUri = new Uri(info.avatar);
+            UserName = info.name;
+        }
     }
 }

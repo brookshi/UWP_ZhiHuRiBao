@@ -29,6 +29,8 @@ namespace Brook.ZhiHuRiBao.Utils
 
         public const string BaseUrl = "http://news-at.zhihu.com/api/4/";
 
+        public const string Login = "login";
+
         public const string Categories = "themes";
 
         public const string CategoryStories = "theme/{categoryid}/before/{before}";

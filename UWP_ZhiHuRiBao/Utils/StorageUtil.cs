@@ -1,4 +1,5 @@
-﻿using Brook.ZhiHuRiBao.ViewModels;
+﻿using Brook.ZhiHuRiBao.Models;
+using Brook.ZhiHuRiBao.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +14,18 @@ namespace Brook.ZhiHuRiBao.Utils
     {
         public const string StorageInfoKey = "StorageInfo";
 
+        public const string LoginDataKey = "LoginData";
+
         static ApplicationDataContainer _localSetting = ApplicationData.Current.LocalSettings;
 
         public static StorageInfo StorageInfo;
 
         static StorageUtil()
         {
-            TryGetJsonObj(StorageInfoKey, out StorageInfo);
+            if(!TryGetJsonObj(StorageInfoKey, out StorageInfo))
+            {
+                StorageInfo = new StorageInfo();
+            }
         }
 
         public static void UpdateStorageInfo()
@@ -27,12 +33,17 @@ namespace Brook.ZhiHuRiBao.Utils
             if (StorageInfo == null)
                 return;
 
-            Add(StorageInfoKey, JsonSerializer.Serialize(StorageInfo));
+            AddObject(StorageInfoKey, StorageInfo);
         }
 
         public static void Add(string key, string value)
         {
             _localSetting.Values[key] = value;
+        }
+
+        public static void AddObject(string key, object value)
+        {
+            _localSetting.Values[key] = JsonSerializer.Serialize(value);
         }
 
         public static bool TryGet(string key, out string value)
@@ -63,8 +74,15 @@ namespace Brook.ZhiHuRiBao.Utils
         {
             if (_localSetting.Values.ContainsKey(key))
             {
-                var content = _localSetting.Values[key].ToString();
-                value = JsonSerializer.Deserialize<T>(content);
+                try {
+                    var content = _localSetting.Values[key].ToString();
+                    value = JsonSerializer.Deserialize<T>(content);
+                }
+                catch(Exception ex)
+                {
+                    value = default(T);
+                    return false;
+                }
                 return true;
             }
 

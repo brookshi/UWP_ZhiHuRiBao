@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Brook.ZhiHuRiBao.ViewModels
+namespace Brook.ZhiHuRiBao.Models
 {
     public class StorageInfo
     {
@@ -14,5 +14,7 @@ namespace Brook.ZhiHuRiBao.ViewModels
         public LoginType LoginType { get; set; } = LoginType.None;
 
         public bool IsCommentPanelOpen { get; set; } = true;
+
+        public bool IsZhiHuAuthoVaild() { return ZhiHuAuthoInfo != null && !string.IsNullOrEmpty(ZhiHuAuthoInfo.access_token); }
     }
 }

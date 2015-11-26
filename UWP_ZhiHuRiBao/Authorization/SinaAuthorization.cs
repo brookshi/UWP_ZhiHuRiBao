@@ -1,4 +1,5 @@
 ﻿using Brook.ZhiHuRiBao.Common;
+using Brook.ZhiHuRiBao.Models;
 using Brook.ZhiHuRiBao.Utils;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Brook.ZhiHuRiBao.Authorization
     [AuthoAttribution(LoginType.Sina)]
     public class SinaAuthorization : IAuthorize
     {
-        public const string SinaTokenKey = "SinaToken";
+        public const string LoginDataKey = "LoginData";
 
         public readonly static SinaAuthorization Instance = new SinaAuthorization();
 
@@ -28,17 +29,27 @@ namespace Brook.ZhiHuRiBao.Authorization
 
         public SinaAuthorization()
         {
-            string token;
-            if(StorageUtil.TryGet(SinaTokenKey, out token))
+            LoginData loginData;
+            if (StorageUtil.TryGetJsonObj(LoginDataKey, out loginData))
             {
-                Token = token;
+                LoginData = loginData;
             }
         }
 
-        public string Token
+        public LoginData LoginData { get; private set; }
+
+        private void UpdateLoginData(SdkAuth2Res res)
         {
-            get;
-            private set;
+            if (LoginData == null)
+                LoginData = new LoginData();
+
+            LoginData.access_token = res.AccessToken;
+            LoginData.expires_in = int.Parse(res.ExpriesIn);
+            LoginData.refresh_token = res.RefreshToken;
+            LoginData.source = LoginType.Sina.Convert();
+            LoginData.user = res.Uid;
+
+            StorageUtil.AddObject(LoginDataKey, LoginData);
         }
 
         public bool IsAuthorized
@@ -55,8 +66,7 @@ namespace Brook.ZhiHuRiBao.Authorization
             {
                 if(isSuccess)
                 {
-                    Token = response.AccessToken;
-                    StorageUtil.Add(SinaTokenKey, Token);
+                    UpdateLoginData(response);
                 }
                 if(loginCallback != null)
                 {
@@ -66,10 +76,9 @@ namespace Brook.ZhiHuRiBao.Authorization
             _oauth.BeginOAuth();
         }
 
-        public void Logout(Action<bool, object> logoutCallback)
+        public void Logout()
         {
-            Token = null;
-            StorageUtil.Remove(SinaTokenKey);
+            StorageUtil.Remove(LoginDataKey);
         }
     }
 }

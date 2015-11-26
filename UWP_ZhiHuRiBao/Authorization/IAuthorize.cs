@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Brook.ZhiHuRiBao.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,9 @@ namespace Brook.ZhiHuRiBao.Authorization
     {
         void Login(Action<bool, object> loginCallback);
 
-        void Logout(Action<bool, object> logoutCallback);
+        void Logout();
 
-        string Token { get; }
+        LoginData LoginData { get; }
 
         bool IsAuthorized { get; }
     }

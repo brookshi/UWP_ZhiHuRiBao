@@ -114,6 +114,8 @@
     <Compile Include="Elements\ToolBar.xaml.cs">
       <DependentUpon>ToolBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Events\LoginEvent.cs" />
+    <Compile Include="Models\LoginData.cs" />
     <Compile Include="Utils\Html.cs" />
     <Compile Include="Common\StoryDataTemplateSelector.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
@@ -152,8 +154,8 @@
     <Compile Include="Utils\DataRequester.cs" />
     <Compile Include="Utils\StringUtil.cs" />
     <Compile Include="Common\WebViewExtend.cs" />
-    <Compile Include="ViewModels\StorageInfo.cs" />
-    <Compile Include="ViewModels\ZhiHuAuthoInfo.cs" />
+    <Compile Include="Models\StorageInfo.cs" />
+    <Compile Include="Models\ZhiHuAuthoInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

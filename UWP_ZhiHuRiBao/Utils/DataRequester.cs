@@ -23,6 +23,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XPHttp;
+using XPHttp.HttpContent;
 
 namespace Brook.ZhiHuRiBao.Utils
 {
@@ -73,6 +74,12 @@ namespace Brook.ZhiHuRiBao.Utils
             return XPHttpClient.DefaultClient.GetAsync<Categories>(Urls.Categories, null);
         }
 
+        public static Task<ZhiHuAuthoInfo> Login(LoginData loginData)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder.SetBody(new HttpJsonContent(loginData));
+            return XPHttpClient.DefaultClient.PostAsync<ZhiHuAuthoInfo>(Urls.Login, httpParam);
+        }
+
         public static Task<T> RequestDataForStory<T>(string storyId, string before, string functionUrl)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
@@ -88,6 +95,11 @@ namespace Brook.ZhiHuRiBao.Utils
                 .AddUrlSegements("storyid", storyId ?? "");
 
             return XPHttpClient.DefaultClient.GetAsync<T>(functionUrl, httpParam);
+        }
+
+        internal static Task Login(object loginData)
+        {
+            throw new NotImplementedException();
         }
 
         public static Task<T> RequestDataForCategory<T>(string categoryId, string before, string functionUrl)
