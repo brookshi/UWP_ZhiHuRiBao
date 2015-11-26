@@ -32,7 +32,7 @@ namespace Brook.ZhiHuRiBao.Utils
             return _serialize.Serialize(obj);
         }
 
-        public static T Serialize<T>(string content)
+        public static T Deserialize<T>(string content)
         {
             return _serialize.Deserialize<T>(content);
         }

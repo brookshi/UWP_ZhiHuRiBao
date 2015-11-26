@@ -14,6 +14,7 @@
 //   limitations under the License. 
 #endregion
 
+using Brook.ZhiHuRiBao.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;

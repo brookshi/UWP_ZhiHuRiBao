@@ -11,10 +11,24 @@ namespace Brook.ZhiHuRiBao.Utils
 {
     public class StorageUtil
     {
-        public const string CurrentLoginTypeKey = "LoginType";
-        public const string ZhiHuAuthoInfoKey = "ZhiHuAuthoInfoKey";
+        public const string StorageInfoKey = "StorageInfo";
 
         static ApplicationDataContainer _localSetting = ApplicationData.Current.LocalSettings;
+
+        public static StorageInfo StorageInfo;
+
+        static StorageUtil()
+        {
+            TryGetJsonObj(StorageInfoKey, out StorageInfo);
+        }
+
+        public static void UpdateStorageInfo()
+        {
+            if (StorageInfo == null)
+                return;
+
+            Add(StorageInfoKey, JsonSerializer.Serialize(StorageInfo));
+        }
 
         public static void Add(string key, string value)
         {
@@ -42,6 +56,19 @@ namespace Brook.ZhiHuRiBao.Utils
             }
 
             value = -1;
+            return false;
+        }
+
+        public static bool TryGetJsonObj<T>(string key, out T value) where T : class
+        {
+            if (_localSetting.Values.ContainsKey(key))
+            {
+                var content = _localSetting.Values[key].ToString();
+                value = JsonSerializer.Deserialize<T>(content);
+                return true;
+            }
+
+            value = default(T);
             return false;
         }
 

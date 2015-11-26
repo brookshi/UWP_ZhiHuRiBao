@@ -23,23 +23,22 @@ using System.Reflection;
 using Windows.UI.Xaml;
 using Brook.ZhiHuRiBao.Utils;
 using Brook.ZhiHuRiBao.ViewModels;
+using Brook.ZhiHuRiBao.Common;
 
 namespace Brook.ZhiHuRiBao.Authorization
 {
     public static class AuthorizationHelper
     {
-        private static LoginType CurrentLoginType { get; set; } = LoginType.None;
-
         private readonly static Dictionary<LoginType, IAuthorize> Authorizations = new Dictionary<LoginType, IAuthorize>();
 
         private static ZhiHuAuthoInfo ZhiHuAuthoInfo { get; set; }
 
         static AuthorizationHelper()
         {
-            string loginType;
-            if(StorageUtil.TryGet(StorageUtil.CurrentLoginTypeKey, out loginType))
+            string zhiHuAuthoInfoContent;
+            if(StorageUtil.TryGet(StorageUtil.ZhiHuAuthoInfoKey, out zhiHuAuthoInfoContent))
             {
-                CurrentLoginType = LoginTypeClass.ToEnum(loginType);
+                ZhiHuAuthoInfo = LoginTypeClass.ToEnum(loginType);
             }
 
             var currentAssembly = Application.Current.GetType().GetTypeInfo().Assembly;
@@ -59,39 +58,41 @@ namespace Brook.ZhiHuRiBao.Authorization
             return (IAuthorize)typeInfo.GetDeclaredField("Instance").GetValue(null);
         }
 
-        public static void AutoLogin(Action<bool, object> loginCallback)
+        public static void AutoLogin()
         {
-            if (!CheckLoginType(CurrentLoginType, loginCallback))
+            string msg = string.Empty;
+            if (!CheckLoginType(CurrentLoginType, out msg))
                 return;
 
             var authorizer = Authorizations[CurrentLoginType];
 
             if(!authorizer.IsAuthorized)
             {
-                loginCallback(false, "login authoriztion expired");
                 return;
             }
 
-            if(authorizer)
+            
         }
 
         public static void Login(LoginType loginType, Action<bool, object> loginCallback)
         {
-            if (!CheckLoginType(CurrentLoginType, loginCallback))
+            string msg = string.Empty;
+            if (!CheckLoginType(CurrentLoginType, out msg))
                 return;
         }
 
-        private static bool CheckLoginType(LoginType loginType, Action<bool, object> loginCallback)
+        private static bool CheckLoginType(LoginType loginType, out string msg)
         {
+            msg = string.Empty;
             if (loginType == LoginType.None)
             {
-                loginCallback(false, "none login type");
+                msg = "none login type";
                 return false;
             }
 
             if (!Authorizations.ContainsKey(CurrentLoginType))
             {
-                loginCallback(false, "not support login type");
+                msg = "not support login type";
                 return false;
             }
 

@@ -11,8 +11,8 @@ namespace Brook.ZhiHuRiBao.ViewModels
     {
         public ZhiHuAuthoInfo ZhiHuAuthoInfo { get; set; }
 
-        public LoginType LoginType { get; set; }
+        public LoginType LoginType { get; set; } = LoginType.None;
 
-        public bool IsCommentPanelOpen { get; set; }
+        public bool IsCommentPanelOpen { get; set; } = true;
     }
 }
