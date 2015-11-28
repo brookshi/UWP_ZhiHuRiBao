@@ -25,16 +25,16 @@ namespace Brook.ZhiHuRiBao.Utils
 {
     public static class JsonSerializer
     {
-        private static SimpleJsonSerializer _serialize = new SimpleJsonSerializer();
+        static NewtonsoftJsonSerializer _serializer = new NewtonsoftJsonSerializer();
 
         public static string Serialize(object obj)
         {
-            return _serialize.Serialize(obj);
+            return _serializer.Serialize(obj);
         }
 
         public static T Deserialize<T>(string content)
         {
-            return _serialize.Deserialize<T>(content);
+            return _serializer.Deserialize<T>(content);
         }
     }
 }

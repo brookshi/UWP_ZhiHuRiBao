@@ -10,7 +10,6 @@ namespace Brook.ZhiHuRiBao.Models
 {
     public class Theme
     {
-        public Theme() { }
         public int id { get; set; }
         public bool subscribed { get; set; }
         public string name { get; set; }
@@ -18,7 +17,6 @@ namespace Brook.ZhiHuRiBao.Models
 
     public class Story
     {
-        public Story() { }
         public List<string> images { get; set; }
         public int type { get; set; }
         public int id { get; set; }
@@ -30,7 +28,6 @@ namespace Brook.ZhiHuRiBao.Models
 
     public class TopStory
     {
-        public TopStory() { }
         public string image { get; set; }
         public int type { get; set; }
         public int id { get; set; }
@@ -40,7 +37,6 @@ namespace Brook.ZhiHuRiBao.Models
 
     public class MainData
     {
-        public MainData() { }
         public string date { get; set; }
         public List<Story> stories { get; set; }
         public List<TopStory> top_stories { get; set; }

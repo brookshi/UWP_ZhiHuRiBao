@@ -15,7 +15,7 @@ namespace Brook.ZhiHuRiBao.Models
         public string name { get; set; }
     }
 
-    public class Categories
+    public class RootObject
     {
         public int limit { get; set; }
         public List<object> subscribed { get; set; }

@@ -51,7 +51,7 @@ namespace Brook.ZhiHuRiBao.Authorization
             return (IAuthorize)typeInfo.GetDeclaredField("Instance").GetValue(null);
         }
 
-        public static void AutoLogin()
+        public static void AutoLogin(Action loginSuccessCallback)
         {
             if (IsLogin)
                 return;
@@ -68,10 +68,13 @@ namespace Brook.ZhiHuRiBao.Authorization
             if (StorageUtil.StorageInfo.IsZhiHuAuthoVaild())
             {
                 IsLogin = true;
+                if(loginSuccessCallback != null)
+                    loginSuccessCallback();
             }
             else if(Authorizations[loginType].LoginData != null)
             {
-                LoginZhiHu(loginType, null);
+                Action<bool, object> callback = (isSuccess, res) => { if(loginSuccessCallback != null) loginSuccessCallback(); };
+                LoginZhiHu(loginType, callback);
             }
         }
 

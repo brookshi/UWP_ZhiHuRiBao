@@ -13,6 +13,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using XPHttp;
+using XPHttp.Serializer;
 
 namespace Brook.ZhiHuRiBao
 {
@@ -38,7 +39,6 @@ namespace Brook.ZhiHuRiBao
         {
             InitConfig();
             InitHttpClient();
-            AuthorizationHelper.AutoLogin();
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {

@@ -69,9 +69,9 @@ namespace Brook.ZhiHuRiBao.Utils
             return RequestDataForStory<Comments>(storyId, before, string.IsNullOrEmpty(before) ? Urls.ShortComment : Urls.ShortComment_More);
         }
 
-        public static Task<Categories> RequestCategory()
+        public static Task<RootObject> RequestCategory()
         {
-            return XPHttpClient.DefaultClient.GetAsync<Categories>(Urls.Categories, null);
+            return XPHttpClient.DefaultClient.GetAsync<RootObject>(Urls.Categories, null);
         }
 
         public static Task<ZhiHuAuthoInfo> Login(LoginData loginData)
@@ -97,14 +97,8 @@ namespace Brook.ZhiHuRiBao.Utils
             return XPHttpClient.DefaultClient.GetAsync<T>(functionUrl, httpParam);
         }
 
-        internal static Task Login(object loginData)
-        {
-            throw new NotImplementedException();
-        }
-
         public static Task<T> RequestDataForCategory<T>(string categoryId, string before, string functionUrl)
         {
-
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
                 .AddUrlSegements("categoryid", categoryId.ToString())
                 .AddUrlSegements("before", before ?? "");
