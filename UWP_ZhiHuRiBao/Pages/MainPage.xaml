@@ -27,6 +27,7 @@
             <utils:Config x:Key="Config" />
 
             <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <convert:BooleanReverseConverter x:Key="BooleanReverseConverter" />
             <common:StoryDataTemplateSelector x:Key="StoryDataTemplateSelector"
                                               GroupTemplate="{StaticResource GroupHeader}"
                                               ImageTemplate="{StaticResource Story}"
@@ -37,15 +38,29 @@
         </ResourceDictionary>
     </Page.Resources>
 
-    <Grid SizeChanged="Page_SizeChanged">
+    <Grid x:Name="MainGrid" SizeChanged="Page_SizeChanged">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="{Binding Source={StaticResource Config}, Path=MinWidth_UIStatus_All}" />
+                        <common:AdaptiveTriggerExtended ExtraCondition="{x:Bind IsCommentPanelOpen}"
+                                                        MinWindowWidth="{Binding Source={StaticResource Config},
+                                                                                 Path=MinWidth_UIStatus_All}"
+                                                        TargetElement="{x:Bind Path=MainGrid}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="StoryContentView.IsPaneOpen" Value="true" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <common:AdaptiveTriggerExtended ExtraCondition="{x:Bind IsCommentPanelOpen, Converter={StaticResource BooleanReverseConverter}}"
+                                                        MinWindowWidth="{Binding Source={StaticResource Config},
+                                                                                 Path=MinWidth_UIStatus_All}"
+                                                        TargetElement="{x:Bind Path=MainGrid}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="StoryContentView.IsPaneOpen" Value="false" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -104,8 +119,8 @@
                                      FontSize="16"
                                      Foreground="White"
                                      IconPosition="NoIcon"
-                                     PointerOverBackground="#22000000"
-                                     PressedBackground="#44000000"
+                                     PointerOverBackground="{StaticResource BrushPointerOver}"
+                                     PressedBackground="{StaticResource BrushPressed}"
                                      RelativePanel.AlignVerticalCenterWith="UserPhoto"
                                      RelativePanel.RightOf="UserPhoto" />
                         <xp:XPButton x:Uid="Favorite"
@@ -117,7 +132,8 @@
                                      Foreground="White"
                                      IconInterval="12"
                                      IconPosition="Left"
-                                     PointerOverBackground="#33000000"
+                                     PointerOverBackground="{StaticResource BrushPointerOver}"
+                                     PressedBackground="{StaticResource BrushPressed}"
                                      RelativePanel.AlignBottomWithPanel="True">
                             <xp:XPButton.Icon>
                                 <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf005;" />
@@ -132,7 +148,8 @@
                                      Foreground="White"
                                      IconInterval="12"
                                      IconPosition="Left"
-                                     PointerOverBackground="#33000000"
+                                     PointerOverBackground="{StaticResource BrushPointerOver}"
+                                     PressedBackground="{StaticResource BrushPressed}"
                                      RelativePanel.AlignBottomWithPanel="True"
                                      RelativePanel.AlignRightWithPanel="True">
                             <xp:XPButton.Icon>
@@ -211,7 +228,7 @@
                 <SplitView x:Name="StoryContentView"
                            CompactPaneLength="0"
                            DisplayMode="Inline"
-                           IsPaneOpen="True"
+                           IsPaneOpen="False"
                            OpenPaneLength="{StaticResource WidthCommentPanel}"
                            PaneBackground="{ThemeResource BrushListBackground}"
                            PanePlacement="Right"

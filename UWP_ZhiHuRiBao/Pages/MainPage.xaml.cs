@@ -27,6 +27,8 @@ namespace Brook.ZhiHuRiBao.Pages
 
         public bool IsDesktopDevice { get { return UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Mouse; } }
 
+        public bool IsCommentPanelOpen { get { return StorageUtil.StorageInfo.IsCommentPanelOpen; } }
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -80,8 +82,6 @@ namespace Brook.ZhiHuRiBao.Pages
 
         private void TapFlipImage(object sender, RoutedEventArgs e)
         {
-            MainView.IsPaneOpen = false;
-
             var storyId = (sender as FrameworkElement).Tag.ToString();
             if (storyId != Misc.Unvalid_Image_Id.ToString())
             {
@@ -109,7 +109,7 @@ namespace Brook.ZhiHuRiBao.Pages
             VM.CurrentCategoryId = category.id;
             VM.CategoryName = category.name;
             MainListView.SetRefresh(true);
-            MainView.IsPaneOpen = !MainView.IsPaneOpen;
+            ResetCategoryPanel();
         }
 
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -127,12 +127,17 @@ namespace Brook.ZhiHuRiBao.Pages
             switch(param.EventType)
             {
                 case EventType.ClickMenu:
-                    MainView.IsPaneOpen = !MainView.IsPaneOpen;
+                    ResetCategoryPanel();
                     break;
                 case EventType.ClickComment:
                     if (!Config.IsSinglePage)
                     {
                         StoryContentView.IsPaneOpen = !StoryContentView.IsPaneOpen;
+                    }
+
+                    if(Config.UIStatus == AppUIStatus.All)
+                    {
+                        StorageUtil.SetCommentPanelStatus(StoryContentView.IsPaneOpen);
                     }
                     break;
             }
@@ -144,6 +149,12 @@ namespace Brook.ZhiHuRiBao.Pages
             {
                 VM.UpdateUserInfo();
             });
+            ResetCategoryPanel();
+        }
+
+        private void ResetCategoryPanel()
+        {
+            MainView.IsPaneOpen = !MainView.IsPaneOpen;
         }
     }
 }

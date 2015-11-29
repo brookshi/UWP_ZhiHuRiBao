@@ -105,12 +105,14 @@
     <Compile Include="Authorization\AuthoAttribution.cs" />
     <Compile Include="Authorization\AuthorizationHelper.cs" />
     <Compile Include="Authorization\IAuthorize.cs" />
+    <Compile Include="Common\AdaptiveTriggerExtended.cs" />
     <Compile Include="Common\LoginType.cs" />
     <Compile Include="Authorization\SinaAuthorization.cs" />
     <Compile Include="Common\AppUIStatus.cs" />
     <Compile Include="Common\CommentType.cs" />
     <Compile Include="Common\ToolBarHost.cs" />
     <Compile Include="Common\ToolBarTrigger.cs" />
+    <Compile Include="Converters\BooleanReverseConverter.cs" />
     <Compile Include="Elements\ToolBar.xaml.cs">
       <DependentUpon>ToolBar.xaml</DependentUpon>
     </Compile>

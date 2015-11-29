@@ -22,7 +22,7 @@ namespace Brook.ZhiHuRiBao.Utils
 
         static StorageUtil()
         {
-            if(!TryGetJsonObj(StorageInfoKey, out StorageInfo))
+            if (!TryGetJsonObj(StorageInfoKey, out StorageInfo))
             {
                 StorageInfo = new StorageInfo();
             }
@@ -34,6 +34,12 @@ namespace Brook.ZhiHuRiBao.Utils
                 return;
 
             AddObject(StorageInfoKey, StorageInfo);
+        }
+
+        public static void SetCommentPanelStatus(bool isOpen)
+        {
+            StorageInfo.IsCommentPanelOpen = isOpen;
+            UpdateStorageInfo();
         }
 
         public static void Add(string key, string value)

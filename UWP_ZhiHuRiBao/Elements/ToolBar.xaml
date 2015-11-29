@@ -71,8 +71,8 @@
                          Foreground="White"
                          IconPosition="OnlyIcon"
                          IconSize="20"
-                         PointerOverBackground="#33000000"
-                         PressedBackground="#88000000">
+                         PointerOverBackground="{StaticResource BrushPointerOver}"
+                         PressedBackground="{StaticResource BrushPressed}">
                 <xp:XPButton.Icon>
                     <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE700;" />
                 </xp:XPButton.Icon>
@@ -95,8 +95,8 @@
                          Icon="Comment"
                          IconPosition="Left"
                          IconSize="20"
-                         PointerOverBackground="#33000000"
-                         PressedBackground="#88000000"
+                         PointerOverBackground="{StaticResource BrushPointerOver}"
+                         PressedBackground="{StaticResource BrushPressed}"
                          RelativePanel.AlignRightWithPanel="True" />
             <xp:XPButton x:Name="LikeButton"
                          Height="48"
@@ -104,8 +104,8 @@
                          Background="Transparent"
                          CheckedContent="{x:Bind LikeCount, Mode=OneWay}"
                          CheckedIconForeground="Red"
-                         CheckedPointerOverBackground="#33000000"
-                         CheckedPressedBackground="#88000000"
+                         CheckedPointerOverBackground="{StaticResource BrushPointerOver}"
+                         CheckedPressedBackground="{StaticResource BrushPressed}"
                          CheckedTextForeground="Red"
                          Click="LikeButton_Click"
                          Content="{x:Bind LikeCount, Mode=OneWay}"
@@ -114,24 +114,24 @@
                          IconPosition="Left"
                          IconSize="20"
                          IsToggleMode="true"
-                         PointerOverBackground="#33000000"
-                         PressedBackground="#88000000"
+                         PointerOverBackground="{StaticResource BrushPointerOver}"
+                         PressedBackground="{StaticResource BrushPointerOver}"
                          RelativePanel.LeftOf="CommentButton" />
             <xp:XPButton x:Name="FavButton"
                          Width="48"
                          Height="48"
                          Background="Transparent"
                          CheckedIconForeground="Yellow"
-                         CheckedPointerOverBackground="#33000000"
-                         CheckedPressedBackground="#88000000"
+                         CheckedPointerOverBackground="{StaticResource BrushPointerOver}"
+                         CheckedPressedBackground="{StaticResource BrushPressed}"
                          Click="FavButton_Click"
                          Foreground="White"
                          Icon="SolidStar"
                          IconPosition="OnlyIcon"
                          IconSize="20"
                          IsToggleMode="true"
-                         PointerOverBackground="#33000000"
-                         PressedBackground="#88000000"
+                         PointerOverBackground="{StaticResource BrushPointerOver}"
+                         PressedBackground="{StaticResource BrushPressed}"
                          RelativePanel.LeftOf="LikeButton" />
         </RelativePanel>
     </Grid>
