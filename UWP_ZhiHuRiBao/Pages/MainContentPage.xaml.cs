@@ -31,7 +31,7 @@ namespace Brook.ZhiHuRiBao.Pages
                 SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
             }
             CurrentUIStatus = Config.UIStatus;
-            VM.UpdateStoryId(e.Parameter);
+            VM.RequestStoryData();
         }
 
         public Visibility ToolBarVisibility { get { return Config.IsSinglePageStatus(CurrentUIStatus) ? Visibility.Visible : Visibility.Collapsed; } }
@@ -46,7 +46,7 @@ namespace Brook.ZhiHuRiBao.Pages
                 case EventType.ClickComment:
                     if (Config.IsSinglePageStatus(CurrentUIStatus))
                     {
-                        ((Frame)Window.Current.Content).Navigate(typeof(CommentPage), VM.CurrentStoryId);
+                        ((Frame)Window.Current.Content).Navigate(typeof(CommentPage));
                     }
                     break;
             }

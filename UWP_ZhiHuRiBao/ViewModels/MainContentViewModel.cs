@@ -14,16 +14,17 @@
 //   limitations under the License. 
 #endregion
 
+using Brook.ZhiHuRiBao.Authorization;
 using Brook.ZhiHuRiBao.Common;
+using Brook.ZhiHuRiBao.Events;
 using Brook.ZhiHuRiBao.Models;
 using Brook.ZhiHuRiBao.Utils;
+using LLQ;
 
 namespace Brook.ZhiHuRiBao.ViewModels
 {
     public class MainContentViewModel : ViewModelBase
     {
-        public string CurrentStoryId { get; set; }
-
         private MainContent _mainHtmlContent;
         public MainContent MainHtmlContent
         {
@@ -52,6 +53,11 @@ namespace Brook.ZhiHuRiBao.ViewModels
             }
         }
 
+        public MainContentViewModel()
+        {
+            LLQNotifier.Default.Register(this);
+        }
+
         public string Title
         {
             get { return StringUtil.GetString("ContentTitle"); }
@@ -72,14 +78,36 @@ namespace Brook.ZhiHuRiBao.ViewModels
             IsRefreshContent = false;
         }
 
-        public void UpdateStoryId(object storyId)
+        public async void RequestStoryExtraInfo()
         {
-            if(storyId != null && !string.IsNullOrEmpty(storyId.ToString()))
-            {
-                CurrentStoryId = storyId.ToString();
-            }
+            CurrentStoryExtraInfo = await DataRequester.RequestStoryExtraInfo(CurrentStoryId);
+            if (CurrentStoryExtraInfo == null)
+                return;
 
+            LLQNotifier.Default.Notify(new StoryExtraEvent() { StoryExtraInfo = CurrentStoryExtraInfo });
+        }
+
+        public void RequestStoryData()
+        {
             RequestMainContent();
+
+            RequestStoryExtraInfo();
+        }
+
+        [SubscriberCallback(typeof(DefaultEvent))]
+        private void Subscriber(DefaultEvent param)
+        {
+            if(!AuthorizationHelper.IsLogin)
+            {
+                //TODO: please login
+                return;
+            }
+            switch(param.EventType)
+            {
+                case EventType.ClickFav:
+                    DataRequester.SetStoryFavorite(CurrentStoryId, param.IsChecked);
+                    break;
+            }
         }
     }
 }

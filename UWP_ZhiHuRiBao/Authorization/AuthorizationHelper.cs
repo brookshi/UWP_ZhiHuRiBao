@@ -24,6 +24,7 @@ using Windows.UI.Xaml;
 using Brook.ZhiHuRiBao.Utils;
 using Brook.ZhiHuRiBao.ViewModels;
 using Brook.ZhiHuRiBao.Common;
+using XPHttp;
 
 namespace Brook.ZhiHuRiBao.Authorization
 {
@@ -68,7 +69,8 @@ namespace Brook.ZhiHuRiBao.Authorization
             if (StorageUtil.StorageInfo.IsZhiHuAuthoVaild())
             {
                 IsLogin = true;
-                if(loginSuccessCallback != null)
+                SetHttpAuthorization();
+                if (loginSuccessCallback != null)
                     loginSuccessCallback();
             }
             else if(Authorizations[loginType].LoginData != null)
@@ -131,7 +133,13 @@ namespace Brook.ZhiHuRiBao.Authorization
             StorageUtil.UpdateStorageInfo();
 
             IsLogin = true;
+            SetHttpAuthorization();
             loginCallback(true, StringUtil.GetString("LoginSuccess"));
+        }
+
+        private static void SetHttpAuthorization()
+        {
+            XPHttpClient.DefaultClient.HttpConfig.SetAuthorization("Bearer", StorageUtil.StorageInfo.ZhiHuAuthoInfo.access_token);
         }
 
         public static void Logout()

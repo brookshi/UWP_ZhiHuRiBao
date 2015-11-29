@@ -1,21 +1,9 @@
 ﻿using Brook.ZhiHuRiBao.Common;
 using Brook.ZhiHuRiBao.Events;
 using LLQ;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 namespace Brook.ZhiHuRiBao.Elements
 {
@@ -70,24 +58,47 @@ namespace Brook.ZhiHuRiBao.Elements
             }
         }
 
+        private bool _isLikeButtonChecked = false;
+        public bool IsLikeButtonChecked
+        {
+            get { return _isLikeButtonChecked; }
+            set
+            {
+                if (value != _isLikeButtonChecked)
+                {
+                    _isLikeButtonChecked = value;
+                    Notify("IsLikeButtonChecked");
+                }
+            }
+        }
+
+        private bool _isFavoriteButtonChecked = false;
+        public bool IsFavoriteButtonChecked
+        {
+            get { return _isFavoriteButtonChecked; }
+            set
+            {
+                if (value != _isFavoriteButtonChecked)
+                {
+                    _isFavoriteButtonChecked = value;
+                    Notify("IsFavoriteButtonChecked");
+                }
+            }
+        }
+
         public ToolBar()
         {
             this.InitializeComponent();
             LLQNotifier.Default.Register(this);
         }
 
-        [SubscriberCallback(typeof(DefaultEvent))]
-        private void Subscriber(DefaultEvent param)
+        [SubscriberCallback(typeof(StoryExtraEvent))]
+        private void Subscriber(StoryExtraEvent param)
         {
-            switch(param.EventType)
-            {
-                case EventType.CommentCount:
-                    CommentCount = param.Count.ToString();
-                    break;
-                case EventType.LikeCount:
-                    LikeCount = param.Count.ToString();
-                    break;
-            }
+            CommentCount = param.StoryExtraInfo.comments.ToString();
+            LikeCount = param.StoryExtraInfo.popularity.ToString();
+            IsLikeButtonChecked = param.StoryExtraInfo.vote_status == 1;
+            IsFavoriteButtonChecked = param.StoryExtraInfo.favorite;
         }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
@@ -102,12 +113,12 @@ namespace Brook.ZhiHuRiBao.Elements
 
         private void LikeButton_Click(object sender, RoutedEventArgs e)
         {
-            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickLike });
+            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickLike, IsChecked = !IsLikeButtonChecked });
         }
 
         private void FavButton_Click(object sender, RoutedEventArgs e)
         {
-            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickFav });
+            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickFav, IsChecked = !IsFavoriteButtonChecked });
         }
 
         private void Notify(string property)

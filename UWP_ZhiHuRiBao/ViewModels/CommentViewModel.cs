@@ -1,6 +1,8 @@
 ﻿using Brook.ZhiHuRiBao.Common;
+using Brook.ZhiHuRiBao.Events;
 using Brook.ZhiHuRiBao.Models;
 using Brook.ZhiHuRiBao.Utils;
+using LLQ;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,6 @@ namespace Brook.ZhiHuRiBao.ViewModels
     public class CommentViewModel : ViewModelBase
     {
         private CommentType _currCommentType = CommentType.Long;
-
-        public string CurrentStoryId { get; set; }
 
         private readonly ObservableCollectionExtended<GroupComments> _commentList = new ObservableCollectionExtended<GroupComments>();
 
@@ -29,12 +29,17 @@ namespace Brook.ZhiHuRiBao.ViewModels
             get { return StringUtil.GetString("CommentTitle"); }
         }
 
+        public CommentViewModel()
+        {
+            LLQNotifier.Default.Register(this);
+        }
+
         public async Task RequestComments(bool isLoadingMore)
         {
             if (!isLoadingMore)
             {
                 ResetComments();
-                await InitCommentInfo();
+                InitCommentInfo();
             }
 
             if (_currCommentType == CommentType.Long)
@@ -47,16 +52,12 @@ namespace Brook.ZhiHuRiBao.ViewModels
             }
         }
 
-        private async Task InitCommentInfo()
+        private void InitCommentInfo()
         {
-            var commentInfo = await DataRequester.RequestCommentInfo(CurrentStoryId);
-            if (commentInfo == null)
-                return;
-
             if (CommentList.Count == 0)
             {
-                CommentList.Add(new GroupComments() { GroupName = StringUtil.GetCommentGroupName(CommentType.Long, commentInfo.long_comments.ToString()) });
-                CommentList.Add(new GroupComments() { GroupName = StringUtil.GetCommentGroupName(CommentType.Short, commentInfo.short_comments.ToString()) });
+                CommentList.Add(new GroupComments() { GroupName = StringUtil.GetCommentGroupName(CommentType.Long, CurrentStoryExtraInfo.long_comments.ToString()) });
+                CommentList.Add(new GroupComments() { GroupName = StringUtil.GetCommentGroupName(CommentType.Short, CurrentStoryExtraInfo.short_comments.ToString()) });
             }
         }
 
@@ -91,6 +92,16 @@ namespace Brook.ZhiHuRiBao.ViewModels
                 return;
 
             CommentList.Last().AddRange(shortComment.comments);
+        }
+
+        [SubscriberCallback(typeof(StoryExtraEvent))]
+        private void Subscriber(StoryExtraEvent param)
+        {
+            if(CommentList.Count > 1)
+            {
+                CommentList[0].GroupName = StringUtil.GetCommentGroupName(CommentType.Long, CurrentStoryExtraInfo.long_comments.ToString());
+                CommentList[1].GroupName = StringUtil.GetCommentGroupName(CommentType.Short, CurrentStoryExtraInfo.short_comments.ToString());
+            }
         }
     }
 }

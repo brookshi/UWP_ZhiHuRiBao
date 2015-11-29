@@ -14,6 +14,7 @@
 //   limitations under the License. 
 #endregion
 
+using Brook.ZhiHuRiBao.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,6 +26,20 @@ namespace Brook.ZhiHuRiBao.Common
 {
     public class ViewModelBase : INotifyPropertyChanged
     {
+        public static string CurrentStoryId { get; set; }
+
+        public static StoryExtraInfo CurrentStoryExtraInfo { get; set; } = new StoryExtraInfo()
+        {
+            comments = 0,
+            favorite = false,
+            long_comments = 0,
+            normal_comments = 0,
+            popularity = 0,
+            post_reasons = 0,
+            short_comments = 0,
+            vote_status = 0,
+        };
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void Notify(string property)

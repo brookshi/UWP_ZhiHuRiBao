@@ -19,6 +19,7 @@ using Brook.ZhiHuRiBao.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,24 @@ namespace Brook.ZhiHuRiBao.Models
 
     public class GroupComments : ObservableCollectionExtended<Comment>
     {
-        public string GroupName { get; set; }
+        private string _groupName = "";
+        public string GroupName
+        {
+            get { return _groupName; }
+            set
+            {
+                if (value != _groupName)
+                {
+                    _groupName = value;
+                    Notify("GroupName");
+                }
+            }
+        }
+
+        protected void Notify(string property)
+        {
+            OnPropertyChanged(new PropertyChangedEventArgs(property));
+        }
     }
 
     public class ReplyTo

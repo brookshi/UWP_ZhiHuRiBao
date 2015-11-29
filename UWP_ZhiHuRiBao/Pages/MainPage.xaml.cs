@@ -51,7 +51,7 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
 
-            AuthorizationHelper.AutoLogin(VM.UpdateUserInfo);
+            AuthorizationHelper.AutoLogin(VM.LoginSuccess);
         }
 
         private async void RefreshMainList()
@@ -60,7 +60,7 @@ namespace Brook.ZhiHuRiBao.Pages
             MainListView.SetRefresh(false);
             if (!Config.IsSinglePage)
             {
-                DisplayStory(VM.CurrentStoryId);
+                DisplayStory(ViewModelBase.CurrentStoryId);
             }
         }
 
@@ -91,7 +91,7 @@ namespace Brook.ZhiHuRiBao.Pages
 
         private void DisplayStory(string storyId)
         {
-            VM.CurrentStoryId = storyId;
+            ViewModelBase.CurrentStoryId = storyId;
             if(Config.UIStatus == AppUIStatus.All || Config.UIStatus == AppUIStatus.ListAndContent)
             {
                 MainContentFrame.Navigate(typeof(MainContentPage), storyId);
@@ -114,10 +114,10 @@ namespace Brook.ZhiHuRiBao.Pages
 
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if(Config.IsPageSwitched(e.PreviousSize, e.NewSize) && !string.IsNullOrEmpty(VM.CurrentStoryId))
+            if(Config.IsPageSwitched(e.PreviousSize, e.NewSize) && !string.IsNullOrEmpty(ViewModelBase.CurrentStoryId))
             {
-                MainContentFrame.Navigate(typeof(MainContentPage), VM.CurrentStoryId);
-                CommentFrame.Navigate(typeof(CommentPage), VM.CurrentStoryId);
+                MainContentFrame.Navigate(typeof(MainContentPage));
+                CommentFrame.Navigate(typeof(CommentPage));
             }
         }
 
@@ -147,7 +147,7 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             AuthorizationHelper.Login(LoginType.Sina, (isSuccess, msg) =>
             {
-                VM.UpdateUserInfo();
+                VM.LoginSuccess();
             });
             ResetCategoryPanel();
         }

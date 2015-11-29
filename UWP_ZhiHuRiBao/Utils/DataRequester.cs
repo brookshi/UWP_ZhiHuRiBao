@@ -54,9 +54,9 @@ namespace Brook.ZhiHuRiBao.Utils
             return RequestDataForStory<MainContent>(storyId, "", Urls.StoryContent);
         }
 
-        public static Task<CommentInfo> RequestCommentInfo(string storyId)
+        public static Task<StoryExtraInfo> RequestStoryExtraInfo(string storyId)
         {
-            return RequestDataForStory<CommentInfo>(storyId, Urls.CommentInfo);
+            return RequestDataForStory<StoryExtraInfo>(storyId, Urls.StoryExtraInfo);
         }
        
         public static Task<Comments> RequestLongComment(string storyId, string before)
@@ -78,6 +78,20 @@ namespace Brook.ZhiHuRiBao.Utils
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder.SetBody(new HttpJsonContent(loginData));
             return XPHttpClient.DefaultClient.PostAsync<ZhiHuAuthoInfo>(Urls.Login, httpParam);
+        }
+
+        public static void SetStoryFavorite(string storyId, bool isFav)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .AddUrlSegements("storyid", storyId ?? "");
+            if (isFav)
+            {
+                XPHttpClient.DefaultClient.PostAsync(Urls.Favorite, httpParam, null);
+            }
+            else
+            {
+                XPHttpClient.DefaultClient.DeleteAsync(Urls.Favorite, httpParam, null);
+            }
         }
 
         public static Task<T> RequestDataForStory<T>(string storyId, string before, string functionUrl)

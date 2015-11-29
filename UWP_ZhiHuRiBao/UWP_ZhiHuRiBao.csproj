@@ -117,12 +117,13 @@
       <DependentUpon>ToolBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Events\LoginEvent.cs" />
+    <Compile Include="Events\StoryExtraEvent.cs" />
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="Utils\Html.cs" />
     <Compile Include="Common\StoryDataTemplateSelector.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\CommentInfo.cs" />
+    <Compile Include="Models\StoryExtraInfo.cs" />
     <Compile Include="Models\MinorData.cs" />
     <Compile Include="Pages\CommentPage.xaml.cs">
       <DependentUpon>CommentPage.xaml</DependentUpon>

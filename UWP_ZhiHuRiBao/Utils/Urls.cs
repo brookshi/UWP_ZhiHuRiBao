@@ -43,7 +43,7 @@ namespace Brook.ZhiHuRiBao.Utils
 
         public const string StoryContent = "story/{storyid}";
 
-        public const string CommentInfo = "story-extra/{storyid}";
+        public const string StoryExtraInfo = "story-extra/{storyid}";
 
         public const string LongComment = "story/{storyid}/long-comments";
 
@@ -52,6 +52,10 @@ namespace Brook.ZhiHuRiBao.Utils
         public const string ShortComment = "story/{storyid}/short-comments";
 
         public const string ShortComment_More = "story/{storyid}/short-comments/before/{before}";
+
+        public const string Vote = "vote/story/{storyid}";
+
+        public const string Favorite = "favorite/{storyid}";
 
         public static string GetStoriesUrl(int categoryId)
         {

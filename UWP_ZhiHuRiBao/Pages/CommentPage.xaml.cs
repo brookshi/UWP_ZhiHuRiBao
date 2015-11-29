@@ -48,9 +48,8 @@ namespace Brook.ZhiHuRiBao.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter != null && !string.IsNullOrEmpty(e.Parameter.ToString()))
+            if (!string.IsNullOrEmpty(ViewModelBase.CurrentStoryId))
             {
-                VM.CurrentStoryId = e.Parameter.ToString();
                 CommentListView.SetRefresh(true);
             }
         }

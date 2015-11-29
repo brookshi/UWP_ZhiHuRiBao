@@ -45,8 +45,6 @@ namespace Brook.ZhiHuRiBao.ViewModels
 
         public List<TopStory> TopStoryList { get { return _topStoryList; } set { if (value != _topStoryList) { _topStoryList = value; Notify("TopStoryList"); } } }
        
-        public string CurrentStoryId { get; set; }
-
         public int CurrentCategoryId { get; set; } = Misc.Default_Category_Id;
 
         private string _categoryName = "";
@@ -200,7 +198,7 @@ namespace Brook.ZhiHuRiBao.ViewModels
             StoryDataList.AddRange(storyData.stories);
         }
 
-        public void UpdateUserInfo()
+        public void LoginSuccess()
         {
             var info = StorageUtil.StorageInfo.ZhiHuAuthoInfo;
             if (info == null)

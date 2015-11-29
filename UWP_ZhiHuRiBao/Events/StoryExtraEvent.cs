@@ -14,6 +14,7 @@
 //   limitations under the License. 
 #endregion
 
+using Brook.ZhiHuRiBao.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,20 +23,8 @@ using System.Threading.Tasks;
 
 namespace Brook.ZhiHuRiBao.Events
 {
-    public enum EventType
+    public class StoryExtraEvent
     {
-        ClickMenu,
-        ClickComment,
-        ClickLike,
-        ClickFav,
-    }
-
-    public class DefaultEvent
-    {
-        public EventType EventType { get; set; }
-
-        public int Count { get; set; }
-
-        public bool IsChecked { get; set; }
+        public StoryExtraInfo StoryExtraInfo { get; set; }
     }
 }
