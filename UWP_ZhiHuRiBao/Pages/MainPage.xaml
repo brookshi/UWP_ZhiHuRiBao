@@ -32,7 +32,7 @@
                                               ImageTemplate="{StaticResource Story}"
                                               NoImageTemplate="{StaticResource StoryWithoutImage}" />
             <DataTemplate x:Key="CategoryItem">
-                <TextBlock Text="{Binding name}" />
+                <TextBlock Margin="12, 0, 0, 0" Text="{Binding name}" />
             </DataTemplate>
         </ResourceDictionary>
     </Page.Resources>
@@ -77,31 +77,37 @@
                    Grid.Row="1"
                    Background="{ThemeResource BrushListBackground}"
                    DisplayMode="Overlay"
-                   OpenPaneLength="320"
+                   OpenPaneLength="{StaticResource WidthCategoryPanel}"
                    PaneBackground="White">
             <SplitView.Pane>
                 <RelativePanel>
                     <RelativePanel x:Name="LoginPanel"
-                                   Width="320"
-                                   Height="120"
-                                   Background="{ThemeResource BrushPrimary}">
-                        <xp:XPButton x:Name="UserPhoto"
-                                     Height="48"
-                                     Margin="12, 4, 0, 0"
+                                   Height="{StaticResource HeightLoginPanel}"
+                                   Background="{ThemeResource BrushPrimary}"
+                                   RelativePanel.AlignLeftWithPanel="True"
+                                   RelativePanel.AlignRightWithPanel="True"
+                                   RelativePanel.AlignTopWithPanel="True">
+                        <Ellipse x:Name="UserPhoto"
+                                 Width="48"
+                                 Height="48"
+                                 Margin="20, 4, 0, 0"
+                                 Tapped="Login">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{x:Bind VM.UserPhotoUrl, Mode=OneWay}" Stretch="Fill" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <xp:XPButton x:Name="UserName"
+                                     Margin="10, 4, 0, 0"
                                      Background="Transparent"
-                                     Click="UserPhoto_Click"
-                                     Content="{x:Bind VM.UserName}"
-                                     CornerRadius="0.5"
+                                     Click="Login"
+                                     Content="{x:Bind VM.UserName, Mode=OneWay}"
                                      FontSize="16"
                                      Foreground="White"
-                                     IconInterval="20"
-                                     IconPosition="Left"
+                                     IconPosition="NoIcon"
                                      PointerOverBackground="#22000000"
-                                     PressedBackground="#22000000">
-                            <xp:XPButton.Icon>
-                                <BitmapIcon UriSource="{x:Bind VM.UserPhotoUri, Mode=OneWay}" />
-                            </xp:XPButton.Icon>
-                        </xp:XPButton>
+                                     PressedBackground="#44000000"
+                                     RelativePanel.AlignVerticalCenterWith="UserPhoto"
+                                     RelativePanel.RightOf="UserPhoto" />
                         <xp:XPButton x:Uid="Favorite"
                                      x:Name="MyFav"
                                      Margin="12, 0, 0, 12"
@@ -135,19 +141,21 @@
                         </xp:XPButton>
                     </RelativePanel>
                     <ListView x:Name="CategoryListView"
-                              Width="320"
                               Margin="0, 12, 0, 0"
                               IsItemClickEnabled="True"
                               ItemClick="CategoryListView_ItemClick"
                               ItemTemplate="{StaticResource CategoryItem}"
                               ItemsSource="{x:Bind VM.CategoryList}"
+                              RelativePanel.AlignBottomWithPanel="True"
+                              RelativePanel.AlignLeftWithPanel="True"
+                              RelativePanel.AlignRightWithPanel="True"
                               RelativePanel.Below="LoginPanel"
                               SelectionMode="Single" />
                 </RelativePanel>
             </SplitView.Pane>
             <RelativePanel>
                 <llm:LLMListView x:Name="MainListView"
-                                 Width="400"
+                                 Width="{StaticResource WidthStoryPanel}"
                                  CanPullToRefresh="True"
                                  IsItemClickEnabled="True"
                                  ItemClick="MainListView_ItemClick"
@@ -164,7 +172,7 @@
                         <DataTemplate x:DataType="vm:MainViewModel">
                             <FlipView x:Name="ImageFlipView"
                                       Width="auto"
-                                      Height="250"
+                                      Height="{StaticResource HeightFlipView}"
                                       Margin="0, 0, 0, 10"
                                       ItemsSource="{x:Bind TopStoryList, Mode=OneWay}">
                                 <FlipView.ItemTemplate>
@@ -204,7 +212,7 @@
                            CompactPaneLength="0"
                            DisplayMode="Inline"
                            IsPaneOpen="True"
-                           OpenPaneLength="320"
+                           OpenPaneLength="{StaticResource WidthCommentPanel}"
                            PaneBackground="{ThemeResource BrushListBackground}"
                            PanePlacement="Right"
                            RelativePanel.AlignBottomWithPanel="True"

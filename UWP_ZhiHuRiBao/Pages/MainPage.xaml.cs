@@ -17,6 +17,7 @@ using System;
 using WeiboSDKForWinRT;
 using Windows.UI.Popups;
 using Brook.ZhiHuRiBao.Authorization;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace Brook.ZhiHuRiBao.Pages
 {
@@ -137,7 +138,7 @@ namespace Brook.ZhiHuRiBao.Pages
             }
         }
 
-        private void UserPhoto_Click(object sender, RoutedEventArgs e)
+        private void Login(object sender, RoutedEventArgs e)
         {
             AuthorizationHelper.Login(LoginType.Sina, (isSuccess, msg) =>
             {

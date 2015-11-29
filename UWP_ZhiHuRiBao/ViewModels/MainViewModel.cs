@@ -63,16 +63,16 @@ namespace Brook.ZhiHuRiBao.ViewModels
             }
         }
 
-        private Uri _userPhotoUri = new Uri("ms-appx:///Assets/StoreLogo.png");
-        public Uri UserPhotoUri
+        private string _userPhotoUrl = "ms-appx:///Assets/StoreLogo.png";
+        public string UserPhotoUrl
         {
-            get { return _userPhotoUri; }
+            get { return _userPhotoUrl; }
             set
             {
-                if(value != _userPhotoUri)
+                if(value != _userPhotoUrl)
                 {
-                    _userPhotoUri = value;
-                    Notify("UserPhotoUri");
+                    _userPhotoUrl = value;
+                    Notify("UserPhotoUrl");
                 }
             }
         }
@@ -206,7 +206,7 @@ namespace Brook.ZhiHuRiBao.ViewModels
             if (info == null)
                 return;
 
-            UserPhotoUri = new Uri(info.avatar);
+            UserPhotoUrl = info.avatar;
             UserName = info.name;
         }
     }
