@@ -59,7 +59,7 @@ namespace Brook.ZhiHuRiBao.Utils
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
                 .AddUrlSegements("storyid", storyId ?? "")
-                .AddHeader("If-Modified-Since", DateTime.Now.ToString());
+                .SetIfModifiedSince(DateTime.Now);
 
             return XPHttpClient.DefaultClient.GetAsync<StoryExtraInfo>(Urls.StoryExtraInfo, httpParam);
         }
@@ -103,7 +103,9 @@ namespace Brook.ZhiHuRiBao.Utils
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
                 .AddUrlSegements("storyid", storyId ?? "")
-                .SetBody(new HttpStringContent(string.Format("data={0}", isLike ? "1" : "0"), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/x-www-form-urlencoded"));
+                .SetStringBody(string.Format("data={0}", isLike ? "1" : "0"))
+                .SetContentEncoding(Windows.Storage.Streams.UnicodeEncoding.Utf8)
+                .SetMediaType("application/x-www-form-urlencoded");
 
             XPHttpClient.DefaultClient.PostAsync(Urls.Vote, httpParam, null);
         }
