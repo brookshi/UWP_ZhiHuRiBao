@@ -22,6 +22,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Web.Http;
 using XPHttp;
 using XPHttp.HttpContent;
 
@@ -56,7 +57,11 @@ namespace Brook.ZhiHuRiBao.Utils
 
         public static Task<StoryExtraInfo> RequestStoryExtraInfo(string storyId)
         {
-            return RequestDataForStory<StoryExtraInfo>(storyId, Urls.StoryExtraInfo);
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .AddUrlSegements("storyid", storyId ?? "")
+                .AddHeader("If-Modified-Since", DateTime.Now.ToString());
+
+            return XPHttpClient.DefaultClient.GetAsync<StoryExtraInfo>(Urls.StoryExtraInfo, httpParam);
         }
        
         public static Task<Comments> RequestLongComment(string storyId, string before)
@@ -92,6 +97,15 @@ namespace Brook.ZhiHuRiBao.Utils
             {
                 XPHttpClient.DefaultClient.DeleteAsync(Urls.Favorite, httpParam, null);
             }
+        }
+
+        public static void SetStoryLike(string storyId, bool isLike)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .AddUrlSegements("storyid", storyId ?? "")
+                .SetBody(new HttpStringContent(string.Format("data={0}", isLike ? "1" : "0"), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/x-www-form-urlencoded"));
+
+            XPHttpClient.DefaultClient.PostAsync(Urls.Vote, httpParam, null);
         }
 
         public static Task<T> RequestDataForStory<T>(string storyId, string before, string functionUrl)

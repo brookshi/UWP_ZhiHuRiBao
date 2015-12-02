@@ -97,16 +97,15 @@ namespace Brook.ZhiHuRiBao.ViewModels
         [SubscriberCallback(typeof(DefaultEvent))]
         private void Subscriber(DefaultEvent param)
         {
-            if(!AuthorizationHelper.IsLogin)
-            {
-                //TODO: please login
-                return;
-            }
             switch(param.EventType)
             {
                 case EventType.ClickFav:
                     DataRequester.SetStoryFavorite(CurrentStoryId, param.IsChecked);
                     break;
+                case EventType.ClickLike:
+                    DataRequester.SetStoryLike(CurrentStoryId, param.IsChecked);
+                    break;
+
             }
         }
     }

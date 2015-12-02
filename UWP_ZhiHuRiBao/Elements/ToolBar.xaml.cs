@@ -130,8 +130,8 @@ namespace Brook.ZhiHuRiBao.Elements
                 return;
             }
 
-            LikeCount = (ViewModelBase.CurrentStoryExtraInfo.popularity + (e.IsChecked ? -1 : 1)).ToString();
-            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickLike, IsChecked = !e.IsChecked });
+            LikeCount = (int.Parse(LikeCount) + (e.IsChecked ? 1 : -1)).ToString();
+            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickLike, IsChecked = e.IsChecked });
         }
 
         private void FavStatusChanged(object sender, ToggleEventArgs e)
@@ -141,7 +141,7 @@ namespace Brook.ZhiHuRiBao.Elements
                 e.IsCancel = true;
                 return;
             }
-            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickFav, IsChecked = !e.IsChecked });
+            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickFav, IsChecked = e.IsChecked });
         }
 
         private void Notify(string property)

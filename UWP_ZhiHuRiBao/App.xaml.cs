@@ -92,6 +92,8 @@ namespace Brook.ZhiHuRiBao
             XPHttpClient.DefaultClient.HttpConfig
                 .SetBaseUrl(Urls.BaseUrl)
                 .ApplyConfig();
+
+            XPHttpClient.DefaultClient.HttpConfig.DefaultRequestHeader.IfModifiedSince = new DateTimeOffset(DateTime.Now);
         }
 
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
