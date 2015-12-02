@@ -1,9 +1,11 @@
-﻿using Brook.ZhiHuRiBao.Common;
+﻿using Brook.ZhiHuRiBao.Authorization;
+using Brook.ZhiHuRiBao.Common;
 using Brook.ZhiHuRiBao.Events;
 using LLQ;
 using System.ComponentModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using XP;
 
 namespace Brook.ZhiHuRiBao.Elements
 {
@@ -36,7 +38,7 @@ namespace Brook.ZhiHuRiBao.Elements
             get { return _commentCount; }
             set
             {
-                if(value != _commentCount)
+                if (value != _commentCount)
                 {
                     _commentCount = value;
                     Notify("CommentCount");
@@ -50,7 +52,7 @@ namespace Brook.ZhiHuRiBao.Elements
             get { return _likeCount; }
             set
             {
-                if(value != _likeCount)
+                if (value != _likeCount)
                 {
                     _likeCount = value;
                     Notify("LikeCount");
@@ -64,11 +66,8 @@ namespace Brook.ZhiHuRiBao.Elements
             get { return _isLikeButtonChecked; }
             set
             {
-                if (value != _isLikeButtonChecked)
-                {
-                    _isLikeButtonChecked = value;
-                    Notify("IsLikeButtonChecked");
-                }
+                _isLikeButtonChecked = value;
+                Notify("IsLikeButtonChecked");
             }
         }
 
@@ -78,18 +77,21 @@ namespace Brook.ZhiHuRiBao.Elements
             get { return _isFavoriteButtonChecked; }
             set
             {
-                if (value != _isFavoriteButtonChecked)
-                {
-                    _isFavoriteButtonChecked = value;
-                    Notify("IsFavoriteButtonChecked");
-                }
+                _isFavoriteButtonChecked = value;
+                Notify("IsFavoriteButtonChecked");
             }
         }
 
         public ToolBar()
         {
             this.InitializeComponent();
-            LLQNotifier.Default.Register(this);
+            Loaded += (s, e) =>
+            {
+                if (this.Visibility == Visibility.Visible)
+                {
+                    LLQNotifier.Default.Register(this);
+                }
+            };
         }
 
         [SubscriberCallback(typeof(StoryExtraEvent))]
@@ -99,6 +101,15 @@ namespace Brook.ZhiHuRiBao.Elements
             LikeCount = param.StoryExtraInfo.popularity.ToString();
             IsLikeButtonChecked = param.StoryExtraInfo.vote_status == 1;
             IsFavoriteButtonChecked = param.StoryExtraInfo.favorite;
+        }
+
+        [SubscriberCallback(typeof(OpenNewStoryEvent))]
+        public void Reset()
+        {
+            CommentCount = "0";
+            LikeCount = "0";
+            IsLikeButtonChecked = false;
+            IsFavoriteButtonChecked = false;
         }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
@@ -111,14 +122,26 @@ namespace Brook.ZhiHuRiBao.Elements
             LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickComment });
         }
 
-        private void LikeButton_Click(object sender, RoutedEventArgs e)
+        private void LikeStatusChanged(object sender, ToggleEventArgs e)
         {
-            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickLike, IsChecked = !IsLikeButtonChecked });
+            if (!AuthorizationHelper.IsLogin)
+            {
+                e.IsCancel = true;
+                return;
+            }
+
+            LikeCount = (ViewModelBase.CurrentStoryExtraInfo.popularity + (e.IsChecked ? -1 : 1)).ToString();
+            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickLike, IsChecked = !e.IsChecked });
         }
 
-        private void FavButton_Click(object sender, RoutedEventArgs e)
+        private void FavStatusChanged(object sender, ToggleEventArgs e)
         {
-            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickFav, IsChecked = !IsFavoriteButtonChecked });
+            if (!AuthorizationHelper.IsLogin)
+            {
+                e.IsCancel = true;
+                return;
+            }
+            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickFav, IsChecked = !e.IsChecked });
         }
 
         private void Notify(string property)

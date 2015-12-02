@@ -117,6 +117,7 @@
       <DependentUpon>ToolBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Events\LoginEvent.cs" />
+    <Compile Include="Events\OpenNewStoryEvent.cs" />
     <Compile Include="Events\StoryExtraEvent.cs" />
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="Utils\Html.cs" />

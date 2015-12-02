@@ -32,6 +32,7 @@ namespace Brook.ZhiHuRiBao.Pages
             }
             CurrentUIStatus = Config.UIStatus;
             VM.RequestStoryData();
+            LLQNotifier.Default.Notify(new OpenNewStoryEvent());
         }
 
         public Visibility ToolBarVisibility { get { return Config.IsSinglePageStatus(CurrentUIStatus) ? Visibility.Visible : Visibility.Collapsed; } }
