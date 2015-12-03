@@ -7,6 +7,7 @@
       xmlns:local="using:Brook.ZhiHuRiBao.Pages"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:vm="using:Brook.ZhiHuRiBao.ViewModels"
+      xmlns:xp="using:XP"
       mc:Ignorable="d">
     <Page.DataContext>
         <vm:CommentViewModel />
@@ -27,6 +28,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <element:ToolBar Height="48"
                          Category="{x:Bind VM.Title}"
@@ -50,5 +52,29 @@
                 </Style>
             </llm:LLMListView.ItemContainerStyle>
         </llm:LLMListView>
+        <Border Grid.Row="2"
+                BorderBrush="LightGray"
+                BorderThickness="0, 1, 0, 0">
+            <RelativePanel>
+                <RichEditBox x:Name="CommentText"
+                             Margin="4"
+                             RelativePanel.AlignBottomWithPanel="True"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True"
+                             RelativePanel.AlignVerticalCenterWithPanel="True"
+                             RelativePanel.LeftOf="SendBtn"
+                             TextWrapping="Wrap" />
+                <xp:XPButton x:Name="SendBtn"
+                             VerticalAlignment="Stretch"
+                             Background="Transparent"
+                             Foreground="Gray"
+                             Icon="Send"
+                             IconPosition="OnlyIcon"
+                             PointerOverBackground="{ThemeResource BrushPointerOver}"
+                             PressedBackground="{ThemeResource BrushPressed}"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignVerticalCenterWithPanel="True" />
+            </RelativePanel>
+        </Border>
     </Grid>
 </Page>
