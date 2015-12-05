@@ -53,6 +53,8 @@ namespace Brook.ZhiHuRiBao.Utils
 
         public const string ShortComment_More = "story/{storyid}/short-comments/before/{before}";
 
+        public const string SendComment = "news/{storyid}/comment";
+
         public const string Vote = "vote/story/{storyid}";
 
         public const string Favorite = "favorite/{storyid}";

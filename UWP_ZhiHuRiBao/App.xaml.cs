@@ -91,6 +91,7 @@ namespace Brook.ZhiHuRiBao
         {
             XPHttpClient.DefaultClient.HttpConfig
                 .SetBaseUrl(Urls.BaseUrl)
+                .SetUseHttpCache(false)
                 .ApplyConfig();
         }
 

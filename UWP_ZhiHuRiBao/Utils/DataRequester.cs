@@ -110,6 +110,15 @@ namespace Brook.ZhiHuRiBao.Utils
             XPHttpClient.DefaultClient.PostAsync(Urls.Vote, httpParam, null);
         }
 
+        public static async Task SendComment(string storyId, string content, int? replyCommentId)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .AddUrlSegements("storyid", storyId ?? "")
+                .SetObjectBody(new SendCommentData() { content = content, reply_to = replyCommentId }, HttpContentType.Json);
+
+            await XPHttpClient.DefaultClient.PostAsync(Urls.SendComment, httpParam);
+        }
+
         public static Task<T> RequestDataForStory<T>(string storyId, string before, string functionUrl)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder

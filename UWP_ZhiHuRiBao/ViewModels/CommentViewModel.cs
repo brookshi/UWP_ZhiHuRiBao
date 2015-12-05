@@ -29,6 +29,36 @@ namespace Brook.ZhiHuRiBao.ViewModels
             get { return StringUtil.GetString("CommentTitle"); }
         }
 
+        private bool _isReplingTo = true;
+        public bool IsReplingTo
+        {
+            get { return _isReplingTo; }
+            set
+            {
+                if(value != _isReplingTo)
+                {
+                    _isReplingTo = value;
+                    Notify("IsReplingTo");
+                }
+            }
+        }
+
+        private string _commentContent;
+        public string CommentContent
+        {
+            get { return _commentContent; }
+            set
+            {
+                if (value != _commentContent)
+                {
+                    _commentContent = value;
+                    Notify("CommentContent");
+                }
+            }
+        }
+
+        public int? ReplyCommentId { get; set; } = null;
+
         public CommentViewModel()
         {
             LLQNotifier.Default.Register(this);
@@ -92,6 +122,16 @@ namespace Brook.ZhiHuRiBao.ViewModels
                 return;
 
             CommentList.Last().AddRange(shortComment.comments);
+        }
+
+        public async Task SendComment()
+        {
+            await DataRequester.SendComment(CurrentStoryId, CommentContent, ReplyCommentId);
+        }
+
+        public void CancelReply()
+        {
+            IsReplingTo = false;
         }
 
         [SubscriberCallback(typeof(StoryExtraEvent))]

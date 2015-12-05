@@ -1613,7 +1613,7 @@
           "lib/uap10.0/XPButton.dll": {}
         }
       },
-      "XPHttp/0.3.5": {
+      "XPHttp/0.3.6": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
         },
@@ -3340,7 +3340,7 @@
           "lib/uap10.0/XPButton.dll": {}
         }
       },
-      "XPHttp/0.3.5": {
+      "XPHttp/0.3.6": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
         },
@@ -5039,7 +5039,7 @@
           "lib/uap10.0/XPButton.dll": {}
         }
       },
-      "XPHttp/0.3.5": {
+      "XPHttp/0.3.6": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
         },
@@ -6771,7 +6771,7 @@
           "lib/uap10.0/XPButton.dll": {}
         }
       },
-      "XPHttp/0.3.5": {
+      "XPHttp/0.3.6": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
         },
@@ -8470,7 +8470,7 @@
           "lib/uap10.0/XPButton.dll": {}
         }
       },
-      "XPHttp/0.3.5": {
+      "XPHttp/0.3.6": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
         },
@@ -10202,7 +10202,7 @@
           "lib/uap10.0/XPButton.dll": {}
         }
       },
-      "XPHttp/0.3.5": {
+      "XPHttp/0.3.6": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
         },
@@ -11901,7 +11901,7 @@
           "lib/uap10.0/XPButton.dll": {}
         }
       },
-      "XPHttp/0.3.5": {
+      "XPHttp/0.3.6": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
         },
@@ -15414,8 +15414,8 @@
         "[Content_Types].xml"
       ]
     },
-    "XPHttp/0.3.5": {
-      "sha512": "c+WxYCPhLXuFMGk57a+MvnzCgOymbftaVUQrtltooawzXqIogQbR3LdaAf2orTJJZqFebrbhB+6U6f1PL+hJjw==",
+    "XPHttp/0.3.6": {
+      "sha512": "CYU1349cfnopS5yYgfpj2qa5BY9IcTPJ8loQSJ68atepfEqolHgbmsfr7sKOxqJtq8xapKfKFlQv+PQM4O/j+g==",
       "type": "Package",
       "files": [
         "_rels/.rels",
@@ -15424,7 +15424,7 @@
         "lib/uap10.0/XPHttp.dll",
         "lib/uap10.0/XPHttp.pdb",
         "lib/uap10.0/XPHttp.pri",
-        "package/services/metadata/core-properties/5ac51b37c68547628c6e05a13c005cdf.psmdcp",
+        "package/services/metadata/core-properties/4506a6ef73c54181af7ae84af9bb5f1c.psmdcp",
         "[Content_Types].xml"
       ]
     },
@@ -15455,7 +15455,7 @@
       "Microsoft.ApplicationInsights.WindowsApps >= 1.0.0",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
       "XPButton >= 0.0.7",
-      "XPHttp >= 0.3.5"
+      "XPHttp >= 0.3.6"
     ],
     "UAP,Version=v10.0": []
   }

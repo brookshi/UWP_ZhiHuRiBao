@@ -119,6 +119,7 @@
     <Compile Include="Events\LoginEvent.cs" />
     <Compile Include="Events\OpenNewStoryEvent.cs" />
     <Compile Include="Events\StoryExtraEvent.cs" />
+    <Compile Include="Models\SendCommentData.cs" />
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="Utils\Html.cs" />
     <Compile Include="Common\StoryDataTemplateSelector.cs" />

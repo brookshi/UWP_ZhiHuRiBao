@@ -27,6 +27,9 @@
                     <SolidColorBrush x:Key="BrushMainSplitter" Color="White" />
                     <SolidColorBrush x:Key="BrushPointerOver" Color="#22000000" />
                     <SolidColorBrush x:Key="BrushPressed" Color="#44000000" />
+                    <SolidColorBrush x:Key="BrushCommentReplyToPointerOverForeground" Color="Red" />
+                    <SolidColorBrush x:Key="BrushCommentReplyToForeground" Color="Black" />
+                    <SolidColorBrush x:Key="BrushSendButton" Color="Gray" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>

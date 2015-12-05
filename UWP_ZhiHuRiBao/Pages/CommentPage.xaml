@@ -1,6 +1,7 @@
 ﻿<Page x:Class="Brook.ZhiHuRiBao.Pages.CommentPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:convert="using:Brook.ZhiHuRiBao.Converters"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:element="using:Brook.ZhiHuRiBao.Elements"
       xmlns:llm="using:LLM"
@@ -21,6 +22,7 @@
             <CollectionViewSource x:Name="CommentGroup"
                                   IsSourceGrouped="True"
                                   Source="{x:Bind VM.CommentList, Mode=OneWay}" />
+            <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
     </Page.Resources>
 
@@ -55,26 +57,49 @@
         <Border Grid.Row="2"
                 BorderBrush="LightGray"
                 BorderThickness="0, 1, 0, 0">
-            <RelativePanel>
-                <RichEditBox x:Name="CommentText"
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <xp:XPButton Background="Transparent"
+                             BorderThickness="0"
+                             Click="{x:Bind VM.CancelReply}"
+                             Content="回复中"
+                             FontSize="12"
+                             Foreground="{StaticResource BrushCommentReplyToForeground}"
+                             Icon="Clear"
+                             IconPosition="Right"
+                             IconSize="10"
+                             PointerOverIconForeground="{StaticResource BrushCommentReplyToPointerOverForeground}"
+                             PointerOverTextForeground="{StaticResource BrushCommentReplyToPointerOverForeground}"
+                             Visibility="{x:Bind VM.IsReplingTo, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
+                <RelativePanel Grid.Row="1">
+                    <TextBox x:Name="CommentText"
                              Margin="4"
+                             AcceptsReturn="True"
                              RelativePanel.AlignBottomWithPanel="True"
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignTopWithPanel="True"
                              RelativePanel.AlignVerticalCenterWithPanel="True"
                              RelativePanel.LeftOf="SendBtn"
+                             Text="{x:Bind VM.CommentContent, Mode=TwoWay}"
                              TextWrapping="Wrap" />
-                <xp:XPButton x:Name="SendBtn"
-                             VerticalAlignment="Stretch"
-                             Background="Transparent"
-                             Foreground="Gray"
-                             Icon="Send"
-                             IconPosition="OnlyIcon"
-                             PointerOverBackground="{ThemeResource BrushPointerOver}"
-                             PressedBackground="{ThemeResource BrushPressed}"
-                             RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.AlignVerticalCenterWithPanel="True" />
-            </RelativePanel>
+                    <xp:XPButton x:Name="SendBtn"
+                                 VerticalAlignment="Stretch"
+                                 Background="Transparent"
+                                 Click="{x:Bind SendComment}"
+                                 Foreground="{StaticResource BrushSendButton}"
+                                 Icon="Send"
+                                 IconPosition="OnlyIcon"
+                                 PointerOverBackground="Transparent"
+                                 PointerOverIconForeground="{StaticResource BrushPrimary}"
+                                 PressedBackground="{ThemeResource BrushPressed}"
+                                 PressedIconForeground="{StaticResource BrushPrimary}"
+                                 RelativePanel.AlignRightWithPanel="True"
+                                 RelativePanel.AlignVerticalCenterWithPanel="True" />
+                </RelativePanel>
+            </Grid>
         </Border>
     </Grid>
 </Page>

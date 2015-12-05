@@ -53,5 +53,15 @@ namespace Brook.ZhiHuRiBao.Pages
                 CommentListView.SetRefresh(true);
             }
         }
+
+        private async void SendComment()
+        {
+            if (string.IsNullOrEmpty(VM.CommentContent))
+                return;
+
+            await VM.SendComment();
+            VM.CommentContent = "";
+            CommentListView.SetRefresh(true);
+        }
     }
 }
