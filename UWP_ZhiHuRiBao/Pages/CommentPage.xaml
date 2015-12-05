@@ -1,6 +1,7 @@
 ﻿<Page x:Class="Brook.ZhiHuRiBao.Pages.CommentPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:common="using:Brook.ZhiHuRiBao.Common"
       xmlns:convert="using:Brook.ZhiHuRiBao.Converters"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:element="using:Brook.ZhiHuRiBao.Elements"
@@ -17,7 +18,7 @@
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Elements/Comment.xaml" />
+                <common:ResourceBackgroundClass />
             </ResourceDictionary.MergedDictionaries>
             <CollectionViewSource x:Name="CommentGroup"
                                   IsSourceGrouped="True"
@@ -65,7 +66,7 @@
                 <xp:XPButton Background="Transparent"
                              BorderThickness="0"
                              Click="{x:Bind VM.CancelReply}"
-                             Content="回复中"
+                             Content="{x:Bind VM.ReplyTip, Mode=OneWay}"
                              FontSize="12"
                              Foreground="{StaticResource BrushCommentReplyToForeground}"
                              Icon="Clear"

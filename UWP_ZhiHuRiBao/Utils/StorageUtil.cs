@@ -84,7 +84,7 @@ namespace Brook.ZhiHuRiBao.Utils
                     var content = _localSetting.Values[key].ToString();
                     value = JsonSerializer.Deserialize<T>(content);
                 }
-                catch(Exception ex)
+                catch(Exception)
                 {
                     value = default(T);
                     return false;

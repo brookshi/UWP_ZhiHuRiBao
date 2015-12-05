@@ -69,5 +69,29 @@ namespace Brook.ZhiHuRiBao.Utils
                     return string.Empty;
             }
         }
+
+        public static string DisplayTime(DateTime date)
+        {
+            const int MINUTE = 60;
+            TimeSpan ts = DateTime.Now - date;
+            double delta = ts.TotalSeconds;
+
+            if (delta < 0)
+            {
+                return "";
+            }
+
+            if (delta < 1 * MINUTE)
+            {
+                return ts.Seconds + GetString("BeforeSec");
+            }
+
+            if (delta < 60 * MINUTE)
+            {
+                return ts.Minutes + GetString("BeforeMin");
+            }
+
+            return date.ToString("MM-dd HH:mm");
+        }
     }
 }

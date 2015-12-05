@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BeforeMin" xml:space="preserve">
+    <value>分钟前</value>
+  </data>
+  <data name="BeforeSec" xml:space="preserve">
+    <value>秒前</value>
+  </data>
   <data name="CommentItem" xml:space="preserve">
     <value>条</value>
+  </data>
+  <data name="CommentPlaceholder" xml:space="preserve">
+    <value>不友善的言论会被删除，尝试讨论会被优先展示</value>
   </data>
   <data name="CommentTitle" xml:space="preserve">
     <value>评论</value>
@@ -170,6 +179,12 @@
   </data>
   <data name="PleaseLogin" xml:space="preserve">
     <value>请登录</value>
+  </data>
+  <data name="ReplyPostfixName" xml:space="preserve">
+    <value>\\{0} : </value>
+  </data>
+  <data name="ReplyTip" xml:space="preserve">
+    <value>回复{0} (点击取消)</value>
   </data>
   <data name="Saturday" xml:space="preserve">
     <value>星期六</value>

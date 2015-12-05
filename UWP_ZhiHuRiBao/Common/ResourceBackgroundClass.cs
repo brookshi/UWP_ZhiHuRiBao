@@ -20,22 +20,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Brook.ZhiHuRiBao.Events
+namespace Brook.ZhiHuRiBao.Common
 {
-    public enum EventType
+    public partial class ResourceBackgroundClass
     {
-        ClickMenu,
-        ClickComment,
-        ClickLike,
-        ClickFav,
-    }
-
-    public class DefaultEvent
-    {
-        public EventType EventType { get; set; }
-
-        public int Count { get; set; }
-
-        public bool IsChecked { get; set; }
+        public ResourceBackgroundClass()
+        {
+            InitializeComponent();
+        }
     }
 }

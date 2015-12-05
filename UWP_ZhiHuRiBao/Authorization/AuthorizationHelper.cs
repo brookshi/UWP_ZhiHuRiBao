@@ -113,7 +113,7 @@ namespace Brook.ZhiHuRiBao.Authorization
                         }
                     });
                 }
-                catch(Exception ex)
+                catch(Exception)
                 {
                     loginCallback(false, StringUtil.GetString("LoginFailed"));
                 }

@@ -110,14 +110,20 @@
     <Compile Include="Authorization\SinaAuthorization.cs" />
     <Compile Include="Common\AppUIStatus.cs" />
     <Compile Include="Common\CommentType.cs" />
+    <Compile Include="Common\ResourceBackgroundClass.cs" />
     <Compile Include="Common\ToolBarHost.cs" />
     <Compile Include="Common\ToolBarTrigger.cs" />
     <Compile Include="Converters\BooleanReverseConverter.cs" />
+    <Compile Include="Converters\TimeConverter.cs" />
+    <Compile Include="Elements\CommentToolBar.xaml.cs">
+      <DependentUpon>CommentToolBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Elements\ToolBar.xaml.cs">
       <DependentUpon>ToolBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Events\LoginEvent.cs" />
     <Compile Include="Events\OpenNewStoryEvent.cs" />
+    <Compile Include="Events\CommentEvent.cs" />
     <Compile Include="Events\StoryExtraEvent.cs" />
     <Compile Include="Models\SendCommentData.cs" />
     <Compile Include="Models\LoginData.cs" />
@@ -137,7 +143,7 @@
     <Compile Include="Utils\StorageUtil.cs" />
     <Compile Include="Utils\Urls.cs" />
     <Compile Include="Common\ViewModelBase.cs" />
-    <Compile Include="Events\DefaultEvent.cs" />
+    <Compile Include="Events\StoryEvent.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\MainContent.cs" />
     <Compile Include="Pages\MainContentPage.xaml.cs">
@@ -186,6 +192,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Elements\Comment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Elements\CommentToolBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

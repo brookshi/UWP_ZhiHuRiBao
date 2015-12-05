@@ -121,15 +121,15 @@ namespace Brook.ZhiHuRiBao.Pages
             }
         }
 
-        [SubscriberCallback(typeof(DefaultEvent))]
-        private void Subscriber(DefaultEvent param)
+        [SubscriberCallback(typeof(StoryEvent))]
+        private void Subscriber(StoryEvent param)
         {
-            switch(param.EventType)
+            switch(param.Type)
             {
-                case EventType.ClickMenu:
+                case StoryEventType.Menu:
                     ResetCategoryPanel();
                     break;
-                case EventType.ClickComment:
+                case StoryEventType.Comment:
                     if (!Config.IsSinglePage)
                     {
                         StoryContentView.IsPaneOpen = !StoryContentView.IsPaneOpen;

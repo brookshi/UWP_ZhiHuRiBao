@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="Brook.ZhiHuRiBao.Elements.CommentToolBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="using:Brook.ZhiHuRiBao.Elements"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xp="using:XP"
+             d:DesignHeight="300"
+             d:DesignWidth="400"
+             mc:Ignorable="d">
+
+    <RelativePanel>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="Owner">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CommentLike" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CommentReply" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CommentDel" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <xp:XPButton x:Name="CommentLike"
+                     Height="30"
+                     Background="Transparent"
+                     CheckedContent="{x:Bind CommentLikeCount, Mode=OneWay}"
+                     CheckedIconForeground="{ThemeResource BrushPrimary}"
+                     CheckedPointerOverIconForeground="{ThemeResource BrushPrimaryDark}"
+                     CheckedPointerOverTextForeground="{ThemeResource BrushPrimaryDark}"
+                     CheckedTextForeground="{ThemeResource BrushPrimaryDark}"
+                     Content="{x:Bind CommentLikeCount, Mode=OneWay}"
+                     FontSize="12"
+                     Foreground="{ThemeResource BrushCommentExtraInfoForeground}"
+                     IconSize="10"
+                     IsChecked="{x:Bind IsLikeComment, Mode=TwoWay}"
+                     IsToggleMode="True"
+                     OnToggleChanged="{x:Bind LikeComment}"
+                     PointerOverIconForeground="{ThemeResource BrushCommentInfoForeground}"
+                     PointerOverTextForeground="{ThemeResource BrushCommentInfoForeground}"
+                     PressedBackground="{ThemeResource BrushPointerOver}"
+                     RelativePanel.AlignRightWithPanel="True"
+                     RelativePanel.AlignTopWithPanel="True">
+            <xp:XPButton.Icon>
+                <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf164;" />
+            </xp:XPButton.Icon>
+        </xp:XPButton>
+        <xp:XPButton x:Name="CommentReply"
+                     Height="30"
+                     Background="Transparent"
+                     Click="{x:Bind ReplyComment}"
+                     Foreground="{ThemeResource BrushCommentExtraInfoForeground}"
+                     IconPosition="OnlyIcon"
+                     IconSize="10"
+                     PointerOverIconForeground="{ThemeResource BrushCommentInfoForeground}"
+                     PointerOverTextForeground="{ThemeResource BrushCommentInfoForeground}"
+                     PressedBackground="{ThemeResource BrushPointerOver}"
+                     RelativePanel.AlignVerticalCenterWith="CommentLike"
+                     RelativePanel.LeftOf="CommentLike">
+            <xp:XPButton.Icon>
+                <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf112;" />
+            </xp:XPButton.Icon>
+        </xp:XPButton>
+        <xp:XPButton x:Name="CommentDel"
+                     Height="30"
+                     Background="Transparent"
+                     Click="{x:Bind DelComment}"
+                     Foreground="{ThemeResource BrushCommentExtraInfoForeground}"
+                     IconPosition="OnlyIcon"
+                     IconSize="10"
+                     PointerOverIconForeground="{ThemeResource BrushCommentInfoForeground}"
+                     PointerOverTextForeground="{ThemeResource BrushCommentInfoForeground}"
+                     PressedBackground="{ThemeResource BrushPointerOver}"
+                     RelativePanel.AlignRightWithPanel="True"
+                     RelativePanel.AlignTopWithPanel="True"
+                     Visibility="Collapsed">
+            <xp:XPButton.Icon>
+                <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf1f8;" />
+            </xp:XPButton.Icon>
+        </xp:XPButton>
+    </RelativePanel>
+</UserControl>

@@ -29,7 +29,7 @@ namespace Brook.ZhiHuRiBao.ViewModels
             get { return StringUtil.GetString("CommentTitle"); }
         }
 
-        private bool _isReplingTo = true;
+        private bool _isReplingTo = false;
         public bool IsReplingTo
         {
             get { return _isReplingTo; }
@@ -39,6 +39,20 @@ namespace Brook.ZhiHuRiBao.ViewModels
                 {
                     _isReplingTo = value;
                     Notify("IsReplingTo");
+                }
+            }
+        }
+
+        private string _replyTip;
+        public string ReplyTip
+        {
+            get { return _replyTip; }
+            set
+            {
+                if(value != _replyTip)
+                {
+                    _replyTip = value;
+                    Notify("ReplyTip");
                 }
             }
         }
@@ -118,15 +132,31 @@ namespace Brook.ZhiHuRiBao.ViewModels
                 _currCommentType = CommentType.Short;
             }
             var shortComment = await DataRequester.RequestShortComment(CurrentStoryId, _currCommentType == CommentType.Long ? null : LastCommentId);
-            if (shortComment == null)
-                return;
-
-            CommentList.Last().AddRange(shortComment.comments);
+            if (shortComment != null)
+            {
+                CommentList.Last().AddRange(shortComment.comments);
+            }
         }
 
         public async Task SendComment()
         {
             await DataRequester.SendComment(CurrentStoryId, CommentContent, ReplyCommentId);
+        }
+
+        private void DeleteComment(string commentId)
+        {
+            DataRequester.DeleteComment(commentId);
+        }
+
+        private void LikeComment(string commentId, bool isLike)
+        {
+            if(isLike)
+            {
+                DataRequester.LikeComment(commentId);
+                return;
+            }
+
+            DataRequester.UnlikeComment(commentId);
         }
 
         public void CancelReply()
@@ -135,12 +165,31 @@ namespace Brook.ZhiHuRiBao.ViewModels
         }
 
         [SubscriberCallback(typeof(StoryExtraEvent))]
-        private void Subscriber(StoryExtraEvent param)
+        private void StoryExtraSubscriber(StoryExtraEvent param)
         {
             if(CommentList.Count > 1)
             {
                 CommentList[0].GroupName = StringUtil.GetCommentGroupName(CommentType.Long, CurrentStoryExtraInfo.long_comments.ToString());
                 CommentList[1].GroupName = StringUtil.GetCommentGroupName(CommentType.Short, CurrentStoryExtraInfo.short_comments.ToString());
+            }
+        }
+
+        [SubscriberCallback(typeof(CommentEvent))]
+        private void CommentSubscriber(CommentEvent param)
+        {
+            switch(param.Type)
+            {
+                case CommentEventType.Delete:
+                    DeleteComment(param.Comment.id.ToString());
+                    break;
+                case CommentEventType.Like:
+                    LikeComment(param.Comment.id.ToString(), param.IsLike);
+                    break;
+                case CommentEventType.Reply:
+                    ReplyCommentId = param.Comment.id;
+                    IsReplingTo = true;
+                    ReplyTip = string.Format(StringUtil.GetString("ReplyTip"), param.Comment.author);
+                    break;
             }
         }
     }

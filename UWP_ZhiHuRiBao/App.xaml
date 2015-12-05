@@ -30,6 +30,9 @@
                     <SolidColorBrush x:Key="BrushCommentReplyToPointerOverForeground" Color="Red" />
                     <SolidColorBrush x:Key="BrushCommentReplyToForeground" Color="Black" />
                     <SolidColorBrush x:Key="BrushSendButton" Color="Gray" />
+
+                    <SolidColorBrush x:Key="BrushCommentExtraInfoForeground" Color="Gray" />
+                    <SolidColorBrush x:Key="BrushCommentInfoForeground" Color="Black" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>

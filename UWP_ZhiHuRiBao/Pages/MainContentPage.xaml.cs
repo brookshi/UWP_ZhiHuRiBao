@@ -39,12 +39,12 @@ namespace Brook.ZhiHuRiBao.Pages
 
         public AppUIStatus CurrentUIStatus { get; set; }
 
-        [SubscriberCallback(typeof(DefaultEvent))]
-        private void Subscriber(DefaultEvent param)
+        [SubscriberCallback(typeof(StoryEvent))]
+        private void Subscriber(StoryEvent param)
         {
-            switch (param.EventType)
+            switch (param.Type)
             {
-                case EventType.ClickComment:
+                case StoryEventType.Comment:
                     if (Config.IsSinglePageStatus(CurrentUIStatus))
                     {
                         ((Frame)Window.Current.Content).Navigate(typeof(CommentPage));

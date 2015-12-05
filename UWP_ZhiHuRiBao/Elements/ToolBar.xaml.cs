@@ -114,12 +114,12 @@ namespace Brook.ZhiHuRiBao.Elements
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
         {
-            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickMenu });
+            LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Menu });
         }
 
         private void CommentButton_Click(object sender, RoutedEventArgs e)
         {
-            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickComment });
+            LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Comment });
         }
 
         private void LikeStatusChanged(object sender, ToggleEventArgs e)
@@ -131,7 +131,7 @@ namespace Brook.ZhiHuRiBao.Elements
             }
 
             LikeCount = (int.Parse(LikeCount) + (e.IsChecked ? 1 : -1)).ToString();
-            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickLike, IsChecked = e.IsChecked });
+            LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Like, IsChecked = e.IsChecked });
         }
 
         private void FavStatusChanged(object sender, ToggleEventArgs e)
@@ -141,7 +141,7 @@ namespace Brook.ZhiHuRiBao.Elements
                 e.IsCancel = true;
                 return;
             }
-            LLQNotifier.Default.Notify(new DefaultEvent() { EventType = EventType.ClickFav, IsChecked = e.IsChecked });
+            LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Fav, IsChecked = e.IsChecked });
         }
 
         private void Notify(string property)

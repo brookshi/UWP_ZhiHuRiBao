@@ -119,6 +119,32 @@ namespace Brook.ZhiHuRiBao.Utils
             await XPHttpClient.DefaultClient.PostAsync(Urls.SendComment, httpParam);
         }
 
+        public static void DeleteComment(string commentId)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                  .AddUrlSegements("commentid", commentId ?? "");
+
+            XPHttpClient.DefaultClient.DeleteAsync(Urls.DeleteComment, httpParam, null);
+        }
+
+        public static void LikeComment(string commentId)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .AddUrlSegements("commentid", commentId ?? "")
+                .SetContentEncoding(Windows.Storage.Streams.UnicodeEncoding.Utf8)
+                .SetMediaType("application/x-www-form-urlencoded");
+
+            XPHttpClient.DefaultClient.PostAsync(Urls.LikeComment, httpParam, null);
+        }
+
+        public static void UnlikeComment(string commentId)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .AddUrlSegements("commentid", commentId ?? "");
+
+            XPHttpClient.DefaultClient.PostAsync(Urls.LikeComment, httpParam, null);
+        }
+
         public static Task<T> RequestDataForStory<T>(string storyId, string before, string functionUrl)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder

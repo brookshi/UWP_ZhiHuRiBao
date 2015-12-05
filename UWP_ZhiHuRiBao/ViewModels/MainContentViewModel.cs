@@ -94,15 +94,15 @@ namespace Brook.ZhiHuRiBao.ViewModels
             RequestStoryExtraInfo();
         }
 
-        [SubscriberCallback(typeof(DefaultEvent))]
-        private void Subscriber(DefaultEvent param)
+        [SubscriberCallback(typeof(StoryEvent))]
+        private void Subscriber(StoryEvent param)
         {
-            switch(param.EventType)
+            switch(param.Type)
             {
-                case EventType.ClickFav:
+                case StoryEventType.Fav:
                     DataRequester.SetStoryFavorite(CurrentStoryId, param.IsChecked);
                     break;
-                case EventType.ClickLike:
+                case StoryEventType.Like:
                     DataRequester.SetStoryLike(CurrentStoryId, param.IsChecked);
                     break;
 

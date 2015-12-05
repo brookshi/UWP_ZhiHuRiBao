@@ -55,6 +55,10 @@ namespace Brook.ZhiHuRiBao.Utils
 
         public const string SendComment = "news/{storyid}/comment";
 
+        public const string DeleteComment = "comment/{commentid}";
+
+        public const string LikeComment = "vote/comment/{commentid}";
+
         public const string Vote = "vote/story/{storyid}";
 
         public const string Favorite = "favorite/{storyid}";
