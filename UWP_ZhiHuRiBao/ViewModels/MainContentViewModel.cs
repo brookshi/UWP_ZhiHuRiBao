@@ -55,7 +55,11 @@ namespace Brook.ZhiHuRiBao.ViewModels
 
         public MainContentViewModel()
         {
-            LLQNotifier.Default.Register(this);
+        }
+
+        static MainContentViewModel()
+        {
+            LLQNotifier.Default.Register(StoryExclusiveSubscriber.Instance); 
         }
 
         public string Title
@@ -94,18 +98,23 @@ namespace Brook.ZhiHuRiBao.ViewModels
             RequestStoryExtraInfo();
         }
 
-        [SubscriberCallback(typeof(StoryEvent))]
-        private void Subscriber(StoryEvent param)
+        internal class StoryExclusiveSubscriber
         {
-            switch(param.Type)
-            {
-                case StoryEventType.Fav:
-                    DataRequester.SetStoryFavorite(CurrentStoryId, param.IsChecked);
-                    break;
-                case StoryEventType.Like:
-                    DataRequester.SetStoryLike(CurrentStoryId, param.IsChecked);
-                    break;
+            internal static StoryExclusiveSubscriber Instance = new StoryExclusiveSubscriber();
 
+            [SubscriberCallback(typeof(StoryEvent))]
+            private void Subscriber(StoryEvent param)
+            {
+                switch (param.Type)
+                {
+                    case StoryEventType.Fav:
+                        DataRequester.SetStoryFavorite(CurrentStoryId, param.IsChecked);
+                        break;
+                    case StoryEventType.Like:
+                        DataRequester.SetStoryLike(CurrentStoryId, param.IsChecked);
+                        break;
+
+                }
             }
         }
     }

@@ -142,7 +142,7 @@ namespace Brook.ZhiHuRiBao.Utils
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
                 .AddUrlSegements("commentid", commentId ?? "");
 
-            XPHttpClient.DefaultClient.PostAsync(Urls.LikeComment, httpParam, null);
+            XPHttpClient.DefaultClient.DeleteAsync(Urls.LikeComment, httpParam, null);
         }
 
         public static Task<T> RequestDataForStory<T>(string storyId, string before, string functionUrl)

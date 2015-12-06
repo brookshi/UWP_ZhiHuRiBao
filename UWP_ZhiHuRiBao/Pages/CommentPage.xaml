@@ -39,7 +39,7 @@
                          Visibility="{x:Bind ToolBarVisibility}" />
         <llm:LLMListView x:Name="CommentListView"
                          Grid.Row="1"
-                         IsItemClickEnabled="True"
+                         IsItemClickEnabled="False"
                          ItemTemplate="{StaticResource Comment}"
                          ItemsSource="{x:Bind CommentGroup.View}"
                          LoadMoreProgressBarBrush="{ThemeResource BrushPrimaryDark}"
@@ -67,11 +67,12 @@
                              BorderThickness="0"
                              Click="{x:Bind VM.CancelReply}"
                              Content="{x:Bind VM.ReplyTip, Mode=OneWay}"
-                             FontSize="12"
+                             FontSize="10"
                              Foreground="{StaticResource BrushCommentReplyToForeground}"
                              Icon="Clear"
+                             IconForeground="{StaticResource BrushCommentReplyToPointerOverForeground}"
                              IconPosition="Right"
-                             IconSize="10"
+                             IconSize="8"
                              PointerOverIconForeground="{StaticResource BrushCommentReplyToPointerOverForeground}"
                              PointerOverTextForeground="{StaticResource BrushCommentReplyToPointerOverForeground}"
                              Visibility="{x:Bind VM.IsReplingTo, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />

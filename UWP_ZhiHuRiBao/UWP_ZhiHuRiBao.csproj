@@ -114,6 +114,7 @@
     <Compile Include="Common\ToolBarHost.cs" />
     <Compile Include="Common\ToolBarTrigger.cs" />
     <Compile Include="Converters\BooleanReverseConverter.cs" />
+    <Compile Include="Converters\ReplyAuthorFormatConverter.cs" />
     <Compile Include="Converters\TimeConverter.cs" />
     <Compile Include="Elements\CommentToolBar.xaml.cs">
       <DependentUpon>CommentToolBar.xaml</DependentUpon>

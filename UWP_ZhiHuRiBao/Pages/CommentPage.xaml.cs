@@ -3,6 +3,7 @@ using Brook.ZhiHuRiBao.Utils;
 using Brook.ZhiHuRiBao.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -26,6 +27,8 @@ namespace Brook.ZhiHuRiBao.Pages
 
         public Visibility ToolBarVisibility { get { return Config.UIStatus == AppUIStatus.List ? Visibility.Visible : Visibility.Collapsed; } }
 
+        private bool _isLoadComplete = false;
+
         public CommentPage()
         {
             this.InitializeComponent();
@@ -36,14 +39,27 @@ namespace Brook.ZhiHuRiBao.Pages
 
         private async void RefreshCommentList()
         {
+            Debug.WriteLine("refresh comment start");
             await VM.RequestComments(false);
             CommentListView.SetRefresh(false);
+            Debug.WriteLine("refresh comment end");
         }
 
         private async void LoadMoreComments()
         {
+            Debug.WriteLine("load more comment start");
+            if (_isLoadComplete)
+            {
+                CommentListView.FinishLoadingMore();
+                Debug.WriteLine("load more comment end");
+                return;
+            }
+
+            var preCount = VM.CurrentCommentCount;
             await VM.RequestComments(true);
             CommentListView.FinishLoadingMore();
+            _isLoadComplete = preCount == VM.CurrentCommentCount;
+            Debug.WriteLine("load more comment end");
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

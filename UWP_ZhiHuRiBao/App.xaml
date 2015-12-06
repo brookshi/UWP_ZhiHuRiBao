@@ -29,6 +29,7 @@
                     <SolidColorBrush x:Key="BrushPressed" Color="#44000000" />
                     <SolidColorBrush x:Key="BrushCommentReplyToPointerOverForeground" Color="Red" />
                     <SolidColorBrush x:Key="BrushCommentReplyToForeground" Color="Black" />
+                    <SolidColorBrush x:Key="BrushCommentReplyToContent" Color="Gray" />
                     <SolidColorBrush x:Key="BrushSendButton" Color="Gray" />
 
                     <SolidColorBrush x:Key="BrushCommentExtraInfoForeground" Color="Gray" />

@@ -29,6 +29,8 @@ namespace Brook.ZhiHuRiBao.Pages
 
         public bool IsCommentPanelOpen { get { return StorageUtil.StorageInfo.IsCommentPanelOpen; } }
 
+        private bool _isLoadComplete = false;
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -66,8 +68,16 @@ namespace Brook.ZhiHuRiBao.Pages
 
         private async void LoadMoreStories()
         {
+            if (_isLoadComplete)
+            {
+                MainListView.FinishLoadingMore();
+                return;
+            }
+
+            var preCount = VM.StoryDataList.Count;
             await VM.LoadMore();
             MainListView.FinishLoadingMore();
+            _isLoadComplete = preCount == VM.StoryDataList.Count;
         }
 
         private void MainListView_ItemClick(object sender, ItemClickEventArgs e)

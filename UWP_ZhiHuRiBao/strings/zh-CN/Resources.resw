@@ -181,10 +181,10 @@
     <value>请登录</value>
   </data>
   <data name="ReplyPostfixName" xml:space="preserve">
-    <value>\\{0} : </value>
+    <value>//{0} : </value>
   </data>
   <data name="ReplyTip" xml:space="preserve">
-    <value>回复{0} (点击取消)</value>
+    <value>回复 [{0}] (点击取消)</value>
   </data>
   <data name="Saturday" xml:space="preserve">
     <value>星期六</value>

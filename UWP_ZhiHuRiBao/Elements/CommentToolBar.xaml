@@ -39,6 +39,7 @@
                      Content="{x:Bind CommentLikeCount, Mode=OneWay}"
                      FontSize="12"
                      Foreground="{ThemeResource BrushCommentExtraInfoForeground}"
+                     IconForeground="{ThemeResource BrushCommentExtraInfoForeground}"
                      IconSize="10"
                      IsChecked="{x:Bind IsLikeComment, Mode=TwoWay}"
                      IsToggleMode="True"

@@ -78,6 +78,11 @@ namespace Brook.ZhiHuRiBao.ViewModels
             LLQNotifier.Default.Register(this);
         }
 
+        static CommentViewModel()
+        {
+            LLQNotifier.Default.Register(CommentExclusiveSubscriber.Instance);
+        }
+
         public async Task RequestComments(bool isLoadingMore)
         {
             if (!isLoadingMore)
@@ -111,6 +116,8 @@ namespace Brook.ZhiHuRiBao.ViewModels
             _currCommentType = CommentType.Long;
         }
 
+        public int CurrentCommentCount { get { return CommentList.Count > 1 ? CommentList[0].Count + CommentList[1].Count : 0; } }
+
         private async Task RequestLongComments(bool isLoadingMore)
         {
             var longComment = await DataRequester.RequestLongComment(CurrentStoryId, LastCommentId);
@@ -143,22 +150,6 @@ namespace Brook.ZhiHuRiBao.ViewModels
             await DataRequester.SendComment(CurrentStoryId, CommentContent, ReplyCommentId);
         }
 
-        private void DeleteComment(string commentId)
-        {
-            DataRequester.DeleteComment(commentId);
-        }
-
-        private void LikeComment(string commentId, bool isLike)
-        {
-            if(isLike)
-            {
-                DataRequester.LikeComment(commentId);
-                return;
-            }
-
-            DataRequester.UnlikeComment(commentId);
-        }
-
         public void CancelReply()
         {
             IsReplingTo = false;
@@ -179,17 +170,56 @@ namespace Brook.ZhiHuRiBao.ViewModels
         {
             switch(param.Type)
             {
-                case CommentEventType.Delete:
-                    DeleteComment(param.Comment.id.ToString());
-                    break;
-                case CommentEventType.Like:
-                    LikeComment(param.Comment.id.ToString(), param.IsLike);
-                    break;
                 case CommentEventType.Reply:
                     ReplyCommentId = param.Comment.id;
                     IsReplingTo = true;
                     ReplyTip = string.Format(StringUtil.GetString("ReplyTip"), param.Comment.author);
                     break;
+                case CommentEventType.Delete:
+                    if(CommentList.Count > 1)
+                    {
+                        var comment = CommentList[0].SingleOrDefault(o => o.id == param.Comment.id);
+                        if(comment != null)
+                        {
+                            CommentList[0].Remove(comment);
+                            return;
+                        }
+
+                        comment = CommentList[1].SingleOrDefault(o => o.id == param.Comment.id);
+                        if (comment != null)
+                        {
+                            CommentList[1].Remove(comment);
+                            return;
+                        }
+                    }
+                    break;
+            }
+        }
+
+        internal class CommentExclusiveSubscriber
+        {
+            internal static CommentExclusiveSubscriber Instance = new CommentExclusiveSubscriber();
+
+            [SubscriberCallback(typeof(CommentEvent))]
+            private void Subscriber(CommentEvent param)
+            {
+                var commentId = param.Comment.id.ToString();
+                switch (param.Type)
+                {
+                    case CommentEventType.Delete:
+                        DataRequester.DeleteComment(commentId);
+                        break;
+                    case CommentEventType.Like:
+                        if (param.IsLike)
+                        {
+                            DataRequester.LikeComment(commentId);
+                        }
+                        else
+                        {
+                            DataRequester.UnlikeComment(commentId);
+                        }
+                        break;
+                }
             }
         }
     }
