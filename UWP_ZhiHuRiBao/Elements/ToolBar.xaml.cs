@@ -1,6 +1,7 @@
 ﻿using Brook.ZhiHuRiBao.Authorization;
 using Brook.ZhiHuRiBao.Common;
 using Brook.ZhiHuRiBao.Events;
+using Brook.ZhiHuRiBao.Utils;
 using LLQ;
 using System.ComponentModel;
 using Windows.UI.Xaml;
@@ -126,6 +127,7 @@ namespace Brook.ZhiHuRiBao.Elements
         {
             if (!AuthorizationHelper.IsLogin)
             {
+                PopupMessage.DisplayMessageInRes("NeedLogin");
                 e.IsCancel = true;
                 return;
             }
@@ -138,6 +140,7 @@ namespace Brook.ZhiHuRiBao.Elements
         {
             if (!AuthorizationHelper.IsLogin)
             {
+                PopupMessage.DisplayMessageInRes("NeedLogin");
                 e.IsCancel = true;
                 return;
             }

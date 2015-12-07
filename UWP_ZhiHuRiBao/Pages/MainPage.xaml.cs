@@ -163,7 +163,15 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             AuthorizationHelper.Login(LoginType.Sina, (isSuccess, msg) =>
             {
-                VM.LoginSuccess();
+                if (isSuccess)
+                {
+                    VM.LoginSuccess();
+                    PopupMessage.DisplayMessageInRes("LoginSuccess");
+                }
+                else
+                {
+                    PopupMessage.DisplayMessageInRes("LoginFailed");
+                }
             });
             ResetCategoryPanel();
         }
@@ -175,7 +183,7 @@ namespace Brook.ZhiHuRiBao.Pages
 
         private void DownloadButton_Click(object sender, RoutedEventArgs e)
         {
-            PopupMessage.DisplayMessage("dasdf");
+            PopupMessage.DisplayMessageInRes("Inprogress");
         }
     }
 }

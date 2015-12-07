@@ -150,6 +150,9 @@
   <data name="Friday" xml:space="preserve">
     <value>星期五</value>
   </data>
+  <data name="Inprogress" xml:space="preserve">
+    <value>小弟努力开发中，请稍候</value>
+  </data>
   <data name="LatestNews" xml:space="preserve">
     <value>今日热闻</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="Month" xml:space="preserve">
     <value>月</value>
+  </data>
+  <data name="NeedLogin" xml:space="preserve">
+    <value>哥，点前要先登录哈</value>
   </data>
   <data name="NoneLoginType" xml:space="preserve">
     <value>无效登录</value>

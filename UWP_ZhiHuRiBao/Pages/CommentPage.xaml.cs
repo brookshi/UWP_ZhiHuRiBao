@@ -1,4 +1,5 @@
-﻿using Brook.ZhiHuRiBao.Common;
+﻿using Brook.ZhiHuRiBao.Authorization;
+using Brook.ZhiHuRiBao.Common;
 using Brook.ZhiHuRiBao.Utils;
 using Brook.ZhiHuRiBao.ViewModels;
 using System;
@@ -48,19 +49,15 @@ namespace Brook.ZhiHuRiBao.Pages
 
         private async void RefreshCommentList()
         {
-            Debug.WriteLine("refresh comment start");
             await VM.RequestComments(false);
             CommentListView.SetRefresh(false);
-            Debug.WriteLine("refresh comment end");
         }
 
         private async void LoadMoreComments()
         {
-            Debug.WriteLine("load more comment start");
             if (_isLoadComplete)
             {
                 CommentListView.FinishLoadingMore();
-                Debug.WriteLine("load more comment end");
                 return;
             }
 
@@ -68,7 +65,6 @@ namespace Brook.ZhiHuRiBao.Pages
             await VM.RequestComments(true);
             CommentListView.FinishLoadingMore();
             _isLoadComplete = preCount == VM.CurrentCommentCount;
-            Debug.WriteLine("load more comment end");
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -77,6 +73,12 @@ namespace Brook.ZhiHuRiBao.Pages
 
         private async void SendComment()
         {
+            if(!AuthorizationHelper.IsLogin)
+            {
+                PopupMessage.DisplayMessageInRes("NeedLogin");
+                return;
+            }
+
             if (string.IsNullOrEmpty(VM.CommentContent))
                 return;
 
