@@ -2,29 +2,14 @@
 using Brook.ZhiHuRiBao.Events;
 using Brook.ZhiHuRiBao.Models;
 using LLQ;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using XP;
 
 namespace Brook.ZhiHuRiBao.Elements
 {
     public sealed partial class CommentToolBar : UserControl
     {
-        const string Normal_State = "Normal";
-        const string Owner_State = "Owner";
-
         public CommentToolBar()
         {
             this.InitializeComponent();
@@ -38,9 +23,15 @@ namespace Brook.ZhiHuRiBao.Elements
         public static readonly DependencyProperty IsOwnerProperty =
             DependencyProperty.Register("IsOwner", typeof(bool), typeof(CommentToolBar), new PropertyMetadata(false, (s,d)=>
             {
-                var toolBar = (CommentToolBar)s;
-                VisualStateManager.GoToState(toolBar, toolBar.IsOwner ? Owner_State : Normal_State, false);
+                ((CommentToolBar)s).ResetCtrlVisible();
             }));
+
+        private void ResetCtrlVisible()
+        {
+            CommentLike.Visibility = IsOwner ? Visibility.Collapsed : Visibility.Visible;
+            CommentReply.Visibility = IsOwner ? Visibility.Collapsed : Visibility.Visible;
+            CommentDel.Visibility = IsOwner ? Visibility.Visible : Visibility.Collapsed;
+        }
 
         public int CommentLikeCount
         {
@@ -70,7 +61,7 @@ namespace Brook.ZhiHuRiBao.Elements
             LLQNotifier.Default.Notify(new CommentEvent() { Type = CommentEventType.Like, Comment = (Comment)DataContext, IsLike = e.IsChecked });
         }
 
-        private void ReplyComment()
+        private void ReplyComment(object sender, RoutedEventArgs e)
         {
             if (!AuthorizationHelper.IsLogin)
             {
@@ -80,7 +71,7 @@ namespace Brook.ZhiHuRiBao.Elements
             LLQNotifier.Default.Notify(new CommentEvent() { Type = CommentEventType.Reply, Comment = (Comment)DataContext });
         }
 
-        private void DelComment()
+        private void DelComment(object sender, RoutedEventArgs e)
         {
             if (!AuthorizationHelper.IsLogin)
             {

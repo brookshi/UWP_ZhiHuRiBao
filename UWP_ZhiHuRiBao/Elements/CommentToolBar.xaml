@@ -10,24 +10,6 @@
              mc:Ignorable="d">
 
     <RelativePanel>
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="Normal" />
-                <VisualState x:Name="Owner">
-                    <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CommentLike" Storyboard.TargetProperty="Visibility">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed" />
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CommentReply" Storyboard.TargetProperty="Visibility">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed" />
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CommentDel" Storyboard.TargetProperty="Visibility">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
-                        </ObjectAnimationUsingKeyFrames>
-                    </Storyboard>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
         <xp:XPButton x:Name="CommentLike"
                      Height="30"
                      Background="Transparent"
@@ -43,7 +25,7 @@
                      IconSize="10"
                      IsChecked="{x:Bind IsLikeComment, Mode=TwoWay}"
                      IsToggleMode="True"
-                     OnToggleChanged="{x:Bind LikeComment}"
+                     OnToggleChanged="LikeComment"
                      PointerOverIconForeground="{ThemeResource BrushCommentInfoForeground}"
                      PointerOverTextForeground="{ThemeResource BrushCommentInfoForeground}"
                      PressedBackground="{ThemeResource BrushPointerOver}"
@@ -56,7 +38,7 @@
         <xp:XPButton x:Name="CommentReply"
                      Height="30"
                      Background="Transparent"
-                     Click="{x:Bind ReplyComment}"
+                     Click="ReplyComment"
                      Foreground="{ThemeResource BrushCommentExtraInfoForeground}"
                      IconPosition="OnlyIcon"
                      IconSize="10"
@@ -72,7 +54,7 @@
         <xp:XPButton x:Name="CommentDel"
                      Height="30"
                      Background="Transparent"
-                     Click="{x:Bind DelComment}"
+                     Click="DelComment"
                      Foreground="{ThemeResource BrushCommentExtraInfoForeground}"
                      IconPosition="OnlyIcon"
                      IconSize="10"
@@ -86,5 +68,5 @@
                 <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf1f8;" />
             </xp:XPButton.Icon>
         </xp:XPButton>
-    </RelativePanel>
+        </RelativePanel>
 </UserControl>

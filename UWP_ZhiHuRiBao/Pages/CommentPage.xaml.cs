@@ -35,6 +35,15 @@ namespace Brook.ZhiHuRiBao.Pages
 
             CommentListView.Refresh = RefreshCommentList;
             CommentListView.LoadMore = LoadMoreComments;
+            Loaded += CommentPage_Loaded;
+        }
+
+        private void CommentPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(ViewModelBase.CurrentStoryId))
+            {
+                CommentListView.SetRefresh(true);
+            }
         }
 
         private async void RefreshCommentList()
@@ -64,10 +73,6 @@ namespace Brook.ZhiHuRiBao.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (!string.IsNullOrEmpty(ViewModelBase.CurrentStoryId))
-            {
-                CommentListView.SetRefresh(true);
-            }
         }
 
         private async void SendComment()
