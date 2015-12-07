@@ -46,6 +46,7 @@ namespace Brook.ZhiHuRiBao
             }
 #endif
             Frame rootFrame = Window.Current.Content as Frame;
+
             if (rootFrame == null)
             {
                 rootFrame = new Frame();
@@ -70,7 +71,7 @@ namespace Brook.ZhiHuRiBao
 
         private void App_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
+            Frame rootFrame = GetWindowFrame();
             if (rootFrame == null)
                 return;
 
@@ -81,7 +82,12 @@ namespace Brook.ZhiHuRiBao
             }
         }
 
-        void InitConfig()
+        public static Frame GetWindowFrame()
+        {
+            return Window.Current.Content as Frame;
+        }
+
+        public void InitConfig()
         {
             LLQNotifier.MainDispatcher = Window.Current.Dispatcher;
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;

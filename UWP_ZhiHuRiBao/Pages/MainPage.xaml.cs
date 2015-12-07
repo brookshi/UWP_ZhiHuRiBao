@@ -18,6 +18,7 @@ using WeiboSDKForWinRT;
 using Windows.UI.Popups;
 using Brook.ZhiHuRiBao.Authorization;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Brook.ZhiHuRiBao.Pages
 {
@@ -44,7 +45,6 @@ namespace Brook.ZhiHuRiBao.Pages
 
             MyFav.Content = StringUtil.GetString("Favorite");
             DownloadButton.Content = StringUtil.GetString("DownloadOffline");
-            MainListView.SetRefresh(true);
 
             LLQNotifier.Default.Register(this);
         }
@@ -54,6 +54,8 @@ namespace Brook.ZhiHuRiBao.Pages
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
 
             AuthorizationHelper.AutoLogin(VM.LoginSuccess);
+
+            MainListView.SetRefresh(true);
         }
 
         private async void RefreshMainList()
@@ -109,7 +111,11 @@ namespace Brook.ZhiHuRiBao.Pages
             }
             else
             {
-                ((Frame)Window.Current.Content).Navigate(typeof(MainContentPage), storyId);
+                Frame rootFrame = App.GetWindowFrame();
+                if (rootFrame == null)
+                    return;
+
+                rootFrame.Navigate(typeof(MainContentPage), storyId);
             }
         }
 
@@ -165,6 +171,11 @@ namespace Brook.ZhiHuRiBao.Pages
         private void ResetCategoryPanel()
         {
             MainView.IsPaneOpen = !MainView.IsPaneOpen;
+        }
+
+        private void DownloadButton_Click(object sender, RoutedEventArgs e)
+        {
+            PopupMessage.DisplayMessage("dasdf");
         }
     }
 }

@@ -47,7 +47,11 @@ namespace Brook.ZhiHuRiBao.Pages
                 case StoryEventType.Comment:
                     if (Config.IsSinglePageStatus(CurrentUIStatus))
                     {
-                        ((Frame)Window.Current.Content).Navigate(typeof(CommentPage));
+                        Frame rootFrame = App.GetWindowFrame();
+                        if (rootFrame == null)
+                            return;
+
+                        rootFrame.Navigate(typeof(CommentPage));
                     }
                     break;
             }

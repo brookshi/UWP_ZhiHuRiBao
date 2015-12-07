@@ -147,6 +147,7 @@
                                      Content=""
                                      Foreground="White"
                                      IconInterval="12"
+                                     Click="DownloadButton_Click"
                                      IconPosition="Left"
                                      PointerOverBackground="{StaticResource BrushPointerOver}"
                                      PressedBackground="{StaticResource BrushPressed}"
