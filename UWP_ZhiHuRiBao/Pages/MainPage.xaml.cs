@@ -161,6 +161,7 @@ namespace Brook.ZhiHuRiBao.Pages
 
         private void Login(object sender, RoutedEventArgs e)
         {
+            VM.UserName = StringUtil.GetString("Logining");
             AuthorizationHelper.Login(LoginType.Sina, (isSuccess, msg) =>
             {
                 if (isSuccess)
@@ -171,6 +172,7 @@ namespace Brook.ZhiHuRiBao.Pages
                 else
                 {
                     PopupMessage.DisplayMessageInRes("LoginFailed");
+                    VM.UserName = StringUtil.GetString("PleaseLogin");
                 }
             });
             ResetCategoryPanel();

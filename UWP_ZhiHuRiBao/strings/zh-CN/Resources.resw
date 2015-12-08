@@ -159,6 +159,9 @@
   <data name="LoginFailed" xml:space="preserve">
     <value>登录失败</value>
   </data>
+  <data name="Logining" xml:space="preserve">
+    <value>登录中</value>
+  </data>
   <data name="LoginSuccess" xml:space="preserve">
     <value>登录成功</value>
   </data>
