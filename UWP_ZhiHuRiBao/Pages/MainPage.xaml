@@ -28,6 +28,7 @@
 
             <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <convert:BooleanReverseConverter x:Key="BooleanReverseConverter" />
+            <convert:FlipViewVisibilityConverter x:Key="FlipViewVisibilityConverter" />
             <common:StoryDataTemplateSelector x:Key="StoryDataTemplateSelector"
                                               GroupTemplate="{StaticResource GroupHeader}"
                                               ImageTemplate="{StaticResource Story}"
@@ -132,6 +133,7 @@
                                      Foreground="White"
                                      IconInterval="12"
                                      IconPosition="Left"
+                                     Click="MyFav_Click"
                                      PointerOverBackground="{StaticResource BrushPointerOver}"
                                      PressedBackground="{StaticResource BrushPressed}"
                                      RelativePanel.AlignBottomWithPanel="True">
@@ -189,6 +191,7 @@
                     <llm:LLMListView.HeaderTemplate>
                         <DataTemplate x:DataType="vm:MainViewModel">
                             <FlipView x:Name="ImageFlipView"
+                                      Visibility="{x:Bind CurrentCategoryId, Mode=OneWay, Converter={StaticResource FlipViewVisibilityConverter}}"
                                       Width="auto"
                                       Height="{StaticResource HeightFlipView}"
                                       Margin="0, 0, 0, 10"

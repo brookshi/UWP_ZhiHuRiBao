@@ -28,6 +28,8 @@ namespace Brook.ZhiHuRiBao.Utils
 
         public const int Default_Category_Id = -1;
 
+        public const int Favorite_Category_Id = -2;
+
         public const int Page_Count = 30;
 
         public const int Unvalid_Image_Id = -1;

@@ -19,23 +19,14 @@ using Brook.ZhiHuRiBao.Models;
 using Brook.ZhiHuRiBao.Utils;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Data;
-using XPHttp;
-using XPHttp.Serializer;
 
 namespace Brook.ZhiHuRiBao.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public partial class MainViewModel : ViewModelBase
     {
         private string _currentDate;
-
-        private readonly ObservableCollectionExtended<Others> _categoryList = new ObservableCollectionExtended<Others>() { new Others() { id = -1, name = StringUtil.GetString("DefaultCategory") } };
-
-        public ObservableCollectionExtended<Others> CategoryList { get { return _categoryList; } }
 
         private readonly ObservableCollectionExtended<Story> _storyDataList = new ObservableCollectionExtended<Story>();
 
@@ -44,22 +35,6 @@ namespace Brook.ZhiHuRiBao.ViewModels
         private List<TopStory> _topStoryList = new List<TopStory>();
 
         public List<TopStory> TopStoryList { get { return _topStoryList; } set { if (value != _topStoryList) { _topStoryList = value; Notify("TopStoryList"); } } }
-       
-        public int CurrentCategoryId { get; set; } = Misc.Default_Category_Id;
-
-        private string _categoryName = "";
-        public string CategoryName
-        {
-            get { return _categoryName; }
-            set
-            {
-                if(value != _categoryName)
-                {
-                    _categoryName = value;
-                    Notify("CategoryName");
-                }
-            }
-        }
 
         private string _userPhotoUrl = "ms-appx:///Assets/StoreLogo.png";
         public string UserPhotoUrl
@@ -94,20 +69,6 @@ namespace Brook.ZhiHuRiBao.ViewModels
             InitCategories();
         }
 
-        public async void InitCategories()
-        {
-            var categories = await DataRequester.RequestCategory();
-            if (categories == null)
-                return;
-
-            CategoryList.AddRange(categories.others);
-            
-            if(CategoryList.Count > 0)
-            {
-                CategoryName = CategoryList[0].name;
-            }
-        }
-
         public async Task Refresh()
         {
             ResetStorys();
@@ -136,6 +97,10 @@ namespace Brook.ZhiHuRiBao.ViewModels
             if(CurrentCategoryId == Misc.Default_Category_Id)
             {
                 await RequestDefaultCategoryData(isLoadingMore);
+            }
+            else if(CurrentCategoryId == Misc.Favorite_Category_Id)
+            {
+                await RequestFavorites(isLoadingMore);
             }
             else
             {

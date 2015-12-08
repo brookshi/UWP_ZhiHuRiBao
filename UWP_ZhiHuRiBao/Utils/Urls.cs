@@ -63,6 +63,10 @@ namespace Brook.ZhiHuRiBao.Utils
 
         public const string Favorite = "favorite/{storyid}";
 
+        public const string LatestFavorites = "favorites";
+
+        public const string Favorites = "favorites/before/{lasttime}";
+
         public static string GetStoriesUrl(int categoryId)
         {
             return categoryId == Misc.Default_Category_Id ? Stories : CategoryStories;

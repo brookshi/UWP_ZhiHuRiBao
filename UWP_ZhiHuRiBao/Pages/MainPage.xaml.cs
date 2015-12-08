@@ -187,5 +187,19 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             PopupMessage.DisplayMessageInRes("Inprogress");
         }
+
+        private void MyFav_Click(object sender, RoutedEventArgs e)
+        {
+            if(!AuthorizationHelper.IsLogin)
+            {
+                PopupMessage.DisplayMessageInRes("NeedLogin");
+                return;
+            }
+
+            VM.CurrentCategoryId = Misc.Favorite_Category_Id;
+            VM.CategoryName = string.Format(StringUtil.GetString("FavCategoryName"), 0);
+            MainListView.SetRefresh(true);
+            ResetCategoryPanel();
+        }
     }
 }

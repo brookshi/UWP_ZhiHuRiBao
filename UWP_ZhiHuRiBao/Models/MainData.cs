@@ -41,4 +41,11 @@ namespace Brook.ZhiHuRiBao.Models
         public List<Story> stories { get; set; }
         public List<TopStory> top_stories { get; set; }
     }
+
+    public class Favorites
+    {
+        public int count { get; set; }
+        public List<Story> stories { get; set; }
+        public int? last_time { get; set; } = null;
+    }
 }
