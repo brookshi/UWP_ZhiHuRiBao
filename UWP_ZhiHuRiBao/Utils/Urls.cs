@@ -63,7 +63,7 @@ namespace Brook.ZhiHuRiBao.Utils
 
         public const string Favorite = "favorite/{storyid}";
 
-        public const string LatestFavorites = "favorites";
+        public const string LatestFavorites = "favorites/";
 
         public const string Favorites = "favorites/before/{lasttime}";
 

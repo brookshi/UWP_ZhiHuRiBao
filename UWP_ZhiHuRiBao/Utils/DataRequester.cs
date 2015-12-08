@@ -154,7 +154,7 @@ namespace Brook.ZhiHuRiBao.Utils
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
                 .AddUrlSegements("lasttime", lastTime);
-            return XPHttpClient.DefaultClient.GetAsync<Favorites>(Urls.Favorites, null);
+            return XPHttpClient.DefaultClient.GetAsync<Favorites>(Urls.Favorites, httpParam);
         }
 
         public static Task<T> RequestDataForStory<T>(string storyId, string before, string functionUrl)
