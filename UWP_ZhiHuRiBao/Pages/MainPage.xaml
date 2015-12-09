@@ -22,9 +22,11 @@
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Elements/FlipViewIndicator.xaml" />
                 <ResourceDictionary Source="../Elements/Story.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <utils:Config x:Key="Config" />
+            <vm:MainViewModel x:Key="MainViewModel"/>
 
             <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <convert:BooleanReverseConverter x:Key="BooleanReverseConverter" />
@@ -190,37 +192,57 @@
                                  SelectionMode="Single">
                     <llm:LLMListView.HeaderTemplate>
                         <DataTemplate x:DataType="vm:MainViewModel">
-                            <FlipView x:Name="ImageFlipView"
-                                      Visibility="{x:Bind CurrentCategoryId, Mode=OneWay, Converter={StaticResource FlipViewVisibilityConverter}}"
-                                      Width="auto"
-                                      Height="{StaticResource HeightFlipView}"
-                                      Margin="0, 0, 0, 10"
-                                      ItemsSource="{x:Bind TopStoryList, Mode=OneWay}">
-                                <FlipView.ItemTemplate>
-                                    <DataTemplate x:DataType="data:TopStory">
-                                        <Grid>
-                                            <Image x:Name="MainItem_Image"
-                                                   VerticalAlignment="Center"
-                                                   Stretch="UniformToFill">
-                                                <Image.Source>
-                                                    <BitmapImage UriSource="{x:Bind image}" />
-                                                </Image.Source>
-                                            </Image>
-                                            <Rectangle Fill="#33000000"
-                                                       Tag="{x:Bind id}"
-                                                       Tapped="TapFlipImage" />
-                                            <TextBlock Margin="20"
-                                                       VerticalAlignment="Bottom"
-                                                       FontSize="20"
-                                                       FontWeight="SemiBold"
-                                                       Foreground="White"
-                                                       IsHitTestVisible="False"
-                                                       Text="{x:Bind title}"
-                                                       TextWrapping="Wrap" />
-                                        </Grid>
-                                    </DataTemplate>
-                                </FlipView.ItemTemplate>
-                            </FlipView>
+                            <Grid>
+                                <FlipView x:Name="ImageFlipView"
+                                          Visibility="{x:Bind CurrentCategoryId, Mode=OneWay, Converter={StaticResource FlipViewVisibilityConverter}}"
+                                          Width="auto"
+                                          Height="{StaticResource HeightFlipView}"
+                                          Margin="0, 0, 0, 10"
+                                          ItemsSource="{Binding Source={StaticResource MainViewModel}, Path=TopStoryList, Mode=OneWay}">
+                                    <FlipView.ItemTemplate>
+                                        <DataTemplate x:DataType="data:TopStory">
+                                            <Grid>
+                                                <Image x:Name="MainItem_Image"
+                                                       VerticalAlignment="Center"
+                                                       Stretch="UniformToFill">
+                                                    <Image.Source>
+                                                        <BitmapImage UriSource="{x:Bind image}" />
+                                                    </Image.Source>
+                                                </Image>
+                                                <Rectangle Fill="#33000000"
+                                                           Tag="{x:Bind id}"
+                                                           Tapped="TapFlipImage" />
+                                                <TextBlock Margin="20"
+                                                           VerticalAlignment="Bottom"
+                                                           FontSize="20"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="White"
+                                                           IsHitTestVisible="False"
+                                                           Text="{x:Bind title}"
+                                                           TextWrapping="Wrap" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </FlipView.ItemTemplate>
+                                </FlipView>
+                                <ListBox HorizontalAlignment="Center"
+                                         VerticalAlignment="Bottom"
+                                         Background="Transparent"
+                                         ItemContainerStyle="{StaticResource FlipViewIndicator}"
+                                         ItemsSource="{Binding Source={StaticResource MainViewModel}, Path=TopStoryList, Mode=OneWay}"
+                                         SelectedIndex="{Binding ElementName=ImageFlipView, Path=SelectedIndex, Mode=TwoWay}"
+                                         Margin="0, 0, 0, 8">
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Ellipse Width="10" Height="10" Fill="White"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Grid>
                         </DataTemplate>
                     </llm:LLMListView.HeaderTemplate>
                     <llm:LLMListView.ItemContainerStyle>
