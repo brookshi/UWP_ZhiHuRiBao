@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -19,6 +20,8 @@ namespace Brook.ZhiHuRiBao.Utils
         private const int AnimDuration = 200;
         private const int PopupStayTime = 2000;
         private const int PopupPosition = -100;
+        private const int TextPadding_LR = 20;
+        private const int TextPadding_TB = 5;
 
         private static Popup _popup = new Popup();
 
@@ -30,7 +33,7 @@ namespace Brook.ZhiHuRiBao.Utils
 
         static PopupMessage()
         {
-            _msgText.Padding = new Thickness(20, 5, 20, 5);
+            _msgText.Padding = new Thickness(TextPadding_LR, TextPadding_TB, TextPadding_LR, TextPadding_TB);
             _msgText.Foreground = new SolidColorBrush(Colors.White);
             _msgText.HorizontalAlignment = HorizontalAlignment.Center;
 
@@ -125,9 +128,21 @@ namespace Brook.ZhiHuRiBao.Utils
 
         private static void UpdatePosition()
         {
+            if (string.IsNullOrEmpty(_msgText.Text))
+                return;
+
+            MeasureText();
+
             var window = Window.Current.CoreWindow;
-            _popup.HorizontalOffset = window.Bounds.Width / 2 - _popup.ActualWidth / 2;
+            _popup.HorizontalOffset = window.Bounds.Width / 2 - _msgText.ActualWidth / 2;
             _popup.VerticalOffset = window.Bounds.Height;
+        }
+
+        private static void MeasureText()
+        {
+            var size = new Size(1000, 1000);
+            _msgText.Measure(size);
+            _msgText.Arrange(new Rect(new Point(0, 0), size));
         }
     }
 }

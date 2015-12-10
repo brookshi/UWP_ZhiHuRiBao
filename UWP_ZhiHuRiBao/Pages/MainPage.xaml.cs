@@ -36,6 +36,7 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             this.InitializeComponent();
             Initalize();
+
             NavigationCacheMode = NavigationCacheMode.Required;
 
             MainListView.Refresh = RefreshMainList;
@@ -43,14 +44,16 @@ namespace Brook.ZhiHuRiBao.Pages
 
             Loaded += MainPage_Loaded;
 
-            MyFav.Content = StringUtil.GetString("Favorite");
-            DownloadButton.Content = StringUtil.GetString("DownloadOffline");
-
             LLQNotifier.Default.Register(this);
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
+            if(IsUsingCachedWhenNavigate())
+            {
+                return;
+            }
+
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
 
             AuthorizationHelper.AutoLogin(VM.LoginSuccess);

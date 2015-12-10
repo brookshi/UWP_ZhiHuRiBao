@@ -78,6 +78,7 @@
                              Visibility="{x:Bind VM.IsReplingTo, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
                 <RelativePanel Grid.Row="1">
                     <TextBox x:Name="CommentText"
+                             x:Uid="CommentPlaceholder"
                              Margin="4"
                              AcceptsReturn="True"
                              RelativePanel.AlignBottomWithPanel="True"

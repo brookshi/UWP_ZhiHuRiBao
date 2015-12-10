@@ -83,7 +83,8 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="StoryContentView.Visibility" Value="Collapsed" />
-                        <Setter Target="MainListView.Width" Value="auto" />
+                        <Setter Target="MainListView.Width" Value="Auto" />
+                        <Setter Target="MainListView.(RelativePanel.AlignRightWithPanel)" Value="True" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
