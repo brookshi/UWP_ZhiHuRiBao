@@ -26,10 +26,26 @@ namespace Brook.ZhiHuRiBao.Common
     public class PageBase : Page
     {
         protected T GetVM<T>() where T : ViewModelBase { return DataContext as T; }
+        protected bool _canUseCached = false;
+
+        public PageBase()
+        {
+            _canUseCached = false;
+        }
 
         protected void Initalize()
         {
             GetVM<ViewModelBase>().Init();
+        }
+
+        protected bool IsUsingCachedWhenNavigate()
+        {
+            var isUsingCached = NavigationCacheMode != Windows.UI.Xaml.Navigation.NavigationCacheMode.Disabled &&
+                _canUseCached;
+
+            _canUseCached = true;
+
+            return isUsingCached;
         }
     }
 }

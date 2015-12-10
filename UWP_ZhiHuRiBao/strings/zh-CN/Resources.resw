@@ -126,8 +126,8 @@
   <data name="CommentItem" xml:space="preserve">
     <value>条</value>
   </data>
-  <data name="CommentPlaceholder" xml:space="preserve">
-    <value>不友善的言论会被删除，尝试讨论会被优先展示</value>
+  <data name="CommentPlaceholder.PlaceholderText" xml:space="preserve">
+    <value>发表评论</value>
   </data>
   <data name="CommentTitle" xml:space="preserve">
     <value>评论</value>
@@ -141,13 +141,13 @@
   <data name="DefaultCategory" xml:space="preserve">
     <value>首页</value>
   </data>
-  <data name="DownloadOffline" xml:space="preserve">
+  <data name="DownloadOffline.Content" xml:space="preserve">
     <value>离线下载</value>
   </data>
   <data name="FavCategoryName" xml:space="preserve">
     <value> {0} 条收藏</value>
   </data>
-  <data name="Favorite" xml:space="preserve">
+  <data name="Favorite.Content" xml:space="preserve">
     <value>我的收藏</value>
   </data>
   <data name="Friday" xml:space="preserve">
