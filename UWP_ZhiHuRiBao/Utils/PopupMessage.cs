@@ -126,7 +126,7 @@ namespace Brook.ZhiHuRiBao.Utils
         private static void UpdatePosition()
         {
             var window = Window.Current.CoreWindow;
-            _popup.HorizontalOffset = window.Bounds.Width / 2 - _popup.ActualWidth / 2;
+            _popup.HorizontalOffset = window.Bounds.Width / 2 - _msgText.ActualWidth / 2;
             _popup.VerticalOffset = window.Bounds.Height;
         }
     }
