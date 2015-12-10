@@ -98,6 +98,7 @@
     <Content Include="Assets\Fonts\fontawesome-webfont.ttf" />
     <None Include="project.json" />
     <Compile Include="Converters\FlipViewVisibilityConverter.cs" />
+    <Compile Include="Elements\FlipViewIndicator.cs" />
     <Compile Include="ViewModels\MainViewModel.Favorites.cs" />
     <Compile Include="ViewModels\MainViewModel.Category.cs" />
   </ItemGroup>
@@ -209,7 +210,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Elements\FlipViewIndicator.xaml">
+    <Page Include="Elements\FlipViewIndicatorItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

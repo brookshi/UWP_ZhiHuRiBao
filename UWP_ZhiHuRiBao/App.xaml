@@ -34,8 +34,8 @@
 
                     <SolidColorBrush x:Key="BrushCommentExtraInfoForeground" Color="Gray" />
                     <SolidColorBrush x:Key="BrushCommentInfoForeground" Color="Black" />
-                    
-                    <SolidColorBrush x:Key="BrushIndicatorNormalBackground" Color="Gray"/>
+
+                    <SolidColorBrush x:Key="BrushIndicatorNormalBackground" Color="LightGray" />
                     <SolidColorBrush x:Key="BrushIndicatorHighlightBackground" Color="White" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>

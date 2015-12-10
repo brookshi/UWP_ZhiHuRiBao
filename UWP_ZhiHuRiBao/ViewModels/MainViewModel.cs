@@ -36,6 +36,10 @@ namespace Brook.ZhiHuRiBao.ViewModels
 
         public List<TopStory> TopStoryList { get { return _topStoryList; } set { if (value != _topStoryList) { _topStoryList = value; Notify("TopStoryList"); } } }
 
+        private List<bool> _indicators = new List<bool>();
+
+        public List<bool> Indicators { get { return _indicators; } set { if (value != _indicators) { _indicators = value; Notify("Indicators"); } } }
+
         private string _userPhotoUrl = "ms-appx:///Assets/StoreLogo.png";
         public string UserPhotoUrl
         {
@@ -90,6 +94,7 @@ namespace Brook.ZhiHuRiBao.ViewModels
             _currentDate = DateTime.Now.AddDays(1).ToString("yyyyMMdd");
             StoryDataList.Clear();
             TopStoryList.Clear();
+            Indicators.Clear();
         }
 
         private async Task RequestMainList(bool isLoadingMore)
@@ -123,6 +128,7 @@ namespace Brook.ZhiHuRiBao.ViewModels
                 if (storyData != null)
                 {
                     TopStoryList = storyData.top_stories;
+                    UpdateIndicators(TopStoryList.Count);
                     CurrentStoryId = storyData.stories.First().id.ToString();
                 }
             }
@@ -134,6 +140,16 @@ namespace Brook.ZhiHuRiBao.ViewModels
 
             StoryDataList.Add(new Story() { title = StringUtil.GetStoryGroupName(_currentDate), type = Misc.Group_Name_Type });
             StoryDataList.AddRange(storyData.stories);
+        }
+
+        private void UpdateIndicators(int count)
+        {
+            var indicators = new List<bool>();
+            for(int i=0;i< count; i++)
+            {
+                indicators.Add(true);
+            }
+            Indicators = indicators;
         }
 
         private async Task RequestMinorCategoryData(bool isLoadingMore)
