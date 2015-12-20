@@ -200,7 +200,8 @@
                                           Width="auto"
                                           Height="{StaticResource HeightFlipView}"
                                           Margin="0, 0, 0, 10"
-                                          ItemsSource="{Binding Source={StaticResource TopStorySource}}"
+                                          ItemsSource="{x:Bind TopStoryList, Mode=OneWay}"
+                                          ManipulationMode="TranslateX"
                                           Visibility="{x:Bind CurrentCategoryId, Mode=OneWay, Converter={StaticResource FlipViewVisibilityConverter}}">
                                     <FlipView.ItemTemplate>
                                         <DataTemplate x:DataType="data:TopStory">

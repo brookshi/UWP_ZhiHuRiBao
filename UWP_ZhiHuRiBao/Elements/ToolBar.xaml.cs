@@ -61,8 +61,8 @@ namespace Brook.ZhiHuRiBao.Elements
             }
         }
 
-        private bool _isLikeButtonChecked = false;
-        public bool IsLikeButtonChecked
+        private bool? _isLikeButtonChecked = false;
+        public bool? IsLikeButtonChecked
         {
             get { return _isLikeButtonChecked; }
             set
@@ -72,8 +72,8 @@ namespace Brook.ZhiHuRiBao.Elements
             }
         }
 
-        private bool _isFavoriteButtonChecked = false;
-        public bool IsFavoriteButtonChecked
+        private bool? _isFavoriteButtonChecked = false;
+        public bool? IsFavoriteButtonChecked
         {
             get { return _isFavoriteButtonChecked; }
             set

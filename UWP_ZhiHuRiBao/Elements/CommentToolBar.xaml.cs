@@ -42,9 +42,9 @@ namespace Brook.ZhiHuRiBao.Elements
         public static readonly DependencyProperty CommentLikeCountProperty =
             DependencyProperty.Register("CommentLikeCount", typeof(int), typeof(CommentToolBar), new PropertyMetadata(0));
 
-        public bool IsLikeComment
+        public bool? IsLikeComment
         {
-            get { return (bool)GetValue(IsLikeCommentProperty); }
+            get { return (bool?)GetValue(IsLikeCommentProperty); }
             set { SetValue(IsLikeCommentProperty, value); }
         }
         public static readonly DependencyProperty IsLikeCommentProperty =

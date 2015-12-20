@@ -10,31 +10,30 @@
              mc:Ignorable="d">
 
     <RelativePanel>
-        <xp:XPButton x:Name="CommentLike"
-                     Height="30"
-                     Background="Transparent"
-                     CheckedContent="{x:Bind CommentLikeCount, Mode=OneWay}"
-                     CheckedIconForeground="{ThemeResource BrushPrimary}"
-                     CheckedPointerOverIconForeground="{ThemeResource BrushPrimaryDark}"
-                     CheckedPointerOverTextForeground="{ThemeResource BrushPrimaryDark}"
-                     CheckedTextForeground="{ThemeResource BrushPrimaryDark}"
-                     Content="{x:Bind CommentLikeCount, Mode=OneWay}"
-                     FontSize="12"
-                     Foreground="{ThemeResource BrushCommentExtraInfoForeground}"
-                     IconForeground="{ThemeResource BrushCommentExtraInfoForeground}"
-                     IconSize="10"
-                     IsChecked="{x:Bind IsLikeComment, Mode=TwoWay}"
-                     IsToggleMode="True"
-                     OnToggleChanged="LikeComment"
-                     PointerOverIconForeground="{ThemeResource BrushCommentInfoForeground}"
-                     PointerOverTextForeground="{ThemeResource BrushCommentInfoForeground}"
-                     PressedBackground="{ThemeResource BrushPointerOver}"
-                     RelativePanel.AlignRightWithPanel="True"
-                     RelativePanel.AlignTopWithPanel="True">
-            <xp:XPButton.Icon>
+        <xp:XPToggleButton x:Name="CommentLike"
+                           Height="30"
+                           Background="Transparent"
+                           CheckedContent="{x:Bind CommentLikeCount, Mode=OneWay}"
+                           CheckedIconForeground="{ThemeResource BrushPrimary}"
+                           CheckedPointerOverIconForeground="{ThemeResource BrushPrimaryDark}"
+                           CheckedPointerOverTextForeground="{ThemeResource BrushPrimaryDark}"
+                           CheckedTextForeground="{ThemeResource BrushPrimaryDark}"
+                           Content="{x:Bind CommentLikeCount, Mode=OneWay}"
+                           FontSize="12"
+                           Foreground="{ThemeResource BrushCommentExtraInfoForeground}"
+                           IconForeground="{ThemeResource BrushCommentExtraInfoForeground}"
+                           IconSize="10"
+                           IsChecked="{x:Bind IsLikeComment, Mode=TwoWay}"
+                           OnToggleChanged="LikeComment"
+                           PointerOverIconForeground="{ThemeResource BrushCommentInfoForeground}"
+                           PointerOverTextForeground="{ThemeResource BrushCommentInfoForeground}"
+                           PressedBackground="{ThemeResource BrushPointerOver}"
+                           RelativePanel.AlignRightWithPanel="True"
+                           RelativePanel.AlignTopWithPanel="True">
+            <xp:XPToggleButton.Icon>
                 <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf164;" />
-            </xp:XPButton.Icon>
-        </xp:XPButton>
+            </xp:XPToggleButton.Icon>
+        </xp:XPToggleButton>
         <xp:XPButton x:Name="CommentReply"
                      Height="30"
                      Background="Transparent"
@@ -68,5 +67,5 @@
                 <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf1f8;" />
             </xp:XPButton.Icon>
         </xp:XPButton>
-        </RelativePanel>
+    </RelativePanel>
 </UserControl>

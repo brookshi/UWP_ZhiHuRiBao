@@ -19,6 +19,7 @@ using Windows.UI.Popups;
 using Brook.ZhiHuRiBao.Authorization;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Controls.Primitives;
+using System.Threading.Tasks;
 
 namespace Brook.ZhiHuRiBao.Pages
 {

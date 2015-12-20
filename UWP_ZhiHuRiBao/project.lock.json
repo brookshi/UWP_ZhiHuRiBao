@@ -1605,7 +1605,7 @@
           "lib/uap10.0/Workaround1200257.dll": {}
         }
       },
-      "XPButton/0.0.9": {
+      "XPButton/0.0.11": {
         "compile": {
           "lib/uap10.0/XPButton.dll": {}
         },
@@ -3332,7 +3332,7 @@
           "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
-      "XPButton/0.0.9": {
+      "XPButton/0.0.11": {
         "compile": {
           "lib/uap10.0/XPButton.dll": {}
         },
@@ -5031,7 +5031,7 @@
           "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
-      "XPButton/0.0.9": {
+      "XPButton/0.0.11": {
         "compile": {
           "lib/uap10.0/XPButton.dll": {}
         },
@@ -6763,7 +6763,7 @@
           "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
-      "XPButton/0.0.9": {
+      "XPButton/0.0.11": {
         "compile": {
           "lib/uap10.0/XPButton.dll": {}
         },
@@ -8462,7 +8462,7 @@
           "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
-      "XPButton/0.0.9": {
+      "XPButton/0.0.11": {
         "compile": {
           "lib/uap10.0/XPButton.dll": {}
         },
@@ -10194,7 +10194,7 @@
           "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
-      "XPButton/0.0.9": {
+      "XPButton/0.0.11": {
         "compile": {
           "lib/uap10.0/XPButton.dll": {}
         },
@@ -11893,7 +11893,7 @@
           "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
-      "XPButton/0.0.9": {
+      "XPButton/0.0.11": {
         "compile": {
           "lib/uap10.0/XPButton.dll": {}
         },
@@ -15398,8 +15398,8 @@
         "[Content_Types].xml"
       ]
     },
-    "XPButton/0.0.9": {
-      "sha512": "gEZ5RkAVCEOrT0ne6WtLU9N22BjARwmpGlKqL7oDQmgrfNofaMgz9gHJQLuXA4YOKGAc8mUn79gLXfXHZvFmBg==",
+    "XPButton/0.0.11": {
+      "sha512": "nrZCvNKPXradwsgVYpthghjRfjR69ZIzQhjobmQJywzjip3jgAEsW7Yl2KnFLwH+RJgemtNOrtQkk4wj5OmhmA==",
       "type": "Package",
       "files": [
         "_rels/.rels",
@@ -15410,7 +15410,7 @@
         "lib/uap10.0/XPButton.dll",
         "lib/uap10.0/XPButton.pdb",
         "lib/uap10.0/XPButton.pri",
-        "package/services/metadata/core-properties/9658dcee9ef5481cacf36dfcaf02a9a9.psmdcp",
+        "package/services/metadata/core-properties/d3a2c3a3ae544c4baf152a5c4f6195a9.psmdcp",
         "[Content_Types].xml"
       ]
     },
@@ -15454,7 +15454,7 @@
       "Microsoft.ApplicationInsights.PersistenceChannel >= 1.0.0",
       "Microsoft.ApplicationInsights.WindowsApps >= 1.0.0",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
-      "XPButton >= 0.0.9",
+      "XPButton >= 0.0.11",
       "XPHttp >= 0.3.6"
     ],
     "UAP,Version=v10.0": []

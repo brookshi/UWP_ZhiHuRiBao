@@ -40,7 +40,7 @@ namespace Brook.ZhiHuRiBao.ViewModels
 
         public List<bool> Indicators { get { return _indicators; } set { if (value != _indicators) { _indicators = value; Notify("Indicators"); } } }
 
-        private string _userPhotoUrl = "ms-appx:///Assets/StoreLogo.png";
+        private string _userPhotoUrl = "ms-appx:///Assets/Login.png";
         public string UserPhotoUrl
         {
             get { return _userPhotoUrl; }
