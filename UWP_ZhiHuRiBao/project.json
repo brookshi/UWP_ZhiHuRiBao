@@ -6,7 +6,7 @@
     "Microsoft.ApplicationInsights.PersistenceChannel": "1.0.0",
     "Microsoft.ApplicationInsights.WindowsApps": "1.0.0",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
-    "XPButton": "0.0.11",
+    "XPButton": "0.1.0",
     "XPHttp": "0.3.6"
   },
   "frameworks": {

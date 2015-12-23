@@ -22,9 +22,12 @@ namespace Brook.ZhiHuRiBao.Authorization
 
         static SinaAuthorization()
         {
-            SdkData.AppKey = "2626289114";
-            SdkData.AppSecret = "d0b05d8a84f64b2ef509dc1934f7c3a1";
+            SdkData.AppKey = "2615126550";
+            SdkData.AppSecret = "d8f2b0dc26390ddb844f45b5a6f69328";
             SdkData.RedirectUri = "http://sns.whalecloud.com/sina2/callback";
+            //SdkData.AppKey = "518092098";
+            //SdkData.AppSecret = "5b029f4e790a1403f6ff9e1fb0828fb2";
+            //SdkData.RedirectUri = "http://daily.zhihu.com/sina_weibo/auth";
         }
 
         public SinaAuthorization()

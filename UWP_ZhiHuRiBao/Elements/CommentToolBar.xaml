@@ -60,8 +60,8 @@
                      PointerOverIconForeground="{ThemeResource BrushCommentInfoForeground}"
                      PointerOverTextForeground="{ThemeResource BrushCommentInfoForeground}"
                      PressedBackground="{ThemeResource BrushPointerOver}"
-                     RelativePanel.AlignRightWithPanel="True"
-                     RelativePanel.AlignTopWithPanel="True"
+                     RelativePanel.LeftOf="CommentLike"
+                     RelativePanel.AlignVerticalCenterWith="CommentLike"
                      Visibility="Collapsed">
             <xp:XPButton.Icon>
                 <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf1f8;" />

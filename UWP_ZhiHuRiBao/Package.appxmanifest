@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="8bbfcfa1-887d-4d73-9fc0-9b003d7087f4" Publisher="CN=Brook" Version="0.1.0.0" />
+  <Identity Name="18863.win10" Publisher="CN=38ED427C-7F10-4837-A4FA-A2F1E710F854" Version="1.1.0.0" />
   <mp:PhoneIdentity PhoneProductId="8bbfcfa1-887d-4d73-9fc0-9b003d7087f4" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>知乎日报</DisplayName>
+    <DisplayName>知乎日报_win10</DisplayName>
     <PublisherDisplayName>布鲁克石</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="UWP_ZhiHuRiBao.App">
-      <uap:VisualElements DisplayName="知乎日报" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="知乎日报第三方win10客户端" BackgroundColor="#04b9f7">
+      <uap:VisualElements DisplayName="知乎日报_win10" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="知乎日报第三方win10客户端" BackgroundColor="#04b9f7">
         <uap:LockScreen Notification="badgeAndTileText" BadgeLogo="Assets\LockScreenLogo.png" />
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\Square310x310Logo.png" Square71x71Logo="Assets\Square71x71Logo.png">
           <uap:ShowNameOnTiles>

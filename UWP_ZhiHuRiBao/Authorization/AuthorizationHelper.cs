@@ -82,6 +82,9 @@ namespace Brook.ZhiHuRiBao.Authorization
 
         public static void Login(LoginType loginType, Action<bool, object> loginCallback)
         {
+            if (IsLogin)
+                return;
+
             if (loginCallback == null)
                 loginCallback = (b, o) => { };
 

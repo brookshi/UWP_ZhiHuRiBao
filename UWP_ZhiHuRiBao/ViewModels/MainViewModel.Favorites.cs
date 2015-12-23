@@ -28,6 +28,7 @@ namespace Brook.ZhiHuRiBao.ViewModels
             else
             {
                 ResetStorys();
+                UpdateTopStory();
                 favData = await DataRequester.RequestLatestFavorites();
                 if (favData != null)
                 {
@@ -43,6 +44,11 @@ namespace Brook.ZhiHuRiBao.ViewModels
             FavoritesLastTime = favData.last_time;
 
             StoryDataList.AddRange(favData.stories);
+        }
+
+        void UpdateTopStory()
+        {
+            TopStoryList = new List<TopStory>();
         }
     }
 }
