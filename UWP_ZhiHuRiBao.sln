@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UWP_ZhiHuRiBao", "UWP_ZhiHuRiBao\UWP_ZhiHuRiBao.csproj", "{2DFFC674-11D5-4ECD-BF8A-1B7B59180AB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeiboSDK", "WeiboSDK\WeiboSDK.csproj", "{75B63B86-27C9-4267-A32A-8EA2C7FA0324}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,22 +41,6 @@ Global
 		{2DFFC674-11D5-4ECD-BF8A-1B7B59180AB2}.Release|x86.ActiveCfg = Release|x86
 		{2DFFC674-11D5-4ECD-BF8A-1B7B59180AB2}.Release|x86.Build.0 = Release|x86
 		{2DFFC674-11D5-4ECD-BF8A-1B7B59180AB2}.Release|x86.Deploy.0 = Release|x86
-		{75B63B86-27C9-4267-A32A-8EA2C7FA0324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{75B63B86-27C9-4267-A32A-8EA2C7FA0324}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{75B63B86-27C9-4267-A32A-8EA2C7FA0324}.Debug|ARM.ActiveCfg = Debug|ARM
-		{75B63B86-27C9-4267-A32A-8EA2C7FA0324}.Debug|ARM.Build.0 = Debug|ARM
-		{75B63B86-27C9-4267-A32A-8EA2C7FA0324}.Debug|x64.ActiveCfg = Debug|x64
-		{75B63B86-27C9-4267-A32A-8EA2C7FA0324}.Debug|x64.Build.0 = Debug|x64
-		{75B63B86-27C9-4267-A32A-8EA2C7FA0324}.Debug|x86.ActiveCfg = Debug|x86
-		{75B63B86-27C9-4267-A32A-8EA2C7FA0324}.Debug|x86.Build.0 = Debug|x86
-		{75B63B86-27C9-4267-A32A-8EA2C7FA0324}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{75B63B86-27C9-4267-A32A-8EA2C7FA0324}.Release|Any CPU.Build.0 = Release|Any CPU
-		{75B63B86-27C9-4267-A32A-8EA2C7FA0324}.Release|ARM.ActiveCfg = Release|ARM
-		{75B63B86-27C9-4267-A32A-8EA2C7FA0324}.Release|ARM.Build.0 = Release|ARM
-		{75B63B86-27C9-4267-A32A-8EA2C7FA0324}.Release|x64.ActiveCfg = Release|x64
-		{75B63B86-27C9-4267-A32A-8EA2C7FA0324}.Release|x64.Build.0 = Release|x64
-		{75B63B86-27C9-4267-A32A-8EA2C7FA0324}.Release|x86.ActiveCfg = Release|x86
-		{75B63B86-27C9-4267-A32A-8EA2C7FA0324}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
