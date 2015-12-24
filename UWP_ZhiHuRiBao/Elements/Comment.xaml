@@ -9,6 +9,7 @@
 
     <converter:TimeConverter x:Key="TimeConverter" />
     <converter:ReplyAuthorFormatConverter x:Key="ReplyAuthorFormatConverter" />
+    <converter:NullableBooleanToBooleanConverter x:Key="NullableBooleanToBooleanConverter" />
 
     <DataTemplate x:Key="Comment" x:DataType="model:Comment">
         <RelativePanel BorderBrush="{ThemeResource BrushCommentSplitter}"
@@ -53,7 +54,7 @@
                        RelativePanel.RightOf="CommentAvatar"
                        Text="{x:Bind time, Converter={StaticResource TimeConverter}}" />
             <local:CommentToolBar CommentLikeCount="{x:Bind likes}"
-                                  IsLikeComment="{x:Bind voted}"
+                                  IsLikeComment="{x:Bind voted, Converter={StaticResource NullableBooleanToBooleanConverter}}"
                                   IsOwner="{x:Bind own}"
                                   RelativePanel.AlignRightWithPanel="True"
                                   RelativePanel.AlignTopWithPanel="True" />

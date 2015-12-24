@@ -47,7 +47,7 @@ namespace Brook.ZhiHuRiBao.Elements
             set { SetValue(IsLikeCommentProperty, value); }
         }
         public static readonly DependencyProperty IsLikeCommentProperty =
-            DependencyProperty.Register("IsLikeComment", typeof(bool?), typeof(CommentToolBar), new PropertyMetadata(false));
+            DependencyProperty.Register("IsLikeComment", typeof(bool), typeof(CommentToolBar), new PropertyMetadata(false));
 
         private void LikeComment(object sender, ToggleEventArgs e)
         {
