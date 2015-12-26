@@ -107,7 +107,7 @@ namespace Brook.ZhiHuRiBao
         {
             TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueue(true);
 
-            PeriodicUpdateRecurrence recurrence = PeriodicUpdateRecurrence.Hour;
+            PeriodicUpdateRecurrence recurrence = PeriodicUpdateRecurrence.HalfHour;
             TileUpdateManager.CreateTileUpdaterForApplication().StartPeriodicUpdateBatch(new []{
                 new Uri("http://7xpj2g.com1.z0.glb.clouddn.com/Tile1.xml"),
                 new Uri("http://7xpj2g.com1.z0.glb.clouddn.com/Tile2.xml"),
