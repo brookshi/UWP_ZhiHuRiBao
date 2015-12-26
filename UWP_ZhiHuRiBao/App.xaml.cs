@@ -8,6 +8,7 @@ using System.Diagnostics;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Core;
+using Windows.UI.Notifications;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -39,6 +40,7 @@ namespace Brook.ZhiHuRiBao
         {
             InitConfig();
             InitHttpClient();
+            InitTileScheduler();
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -99,6 +101,20 @@ namespace Brook.ZhiHuRiBao
                 .SetBaseUrl(Urls.BaseUrl)
                 .SetUseHttpCache(false)
                 .ApplyConfig();
+        }
+
+        void InitTileScheduler()
+        {
+            TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueue(true);
+
+            PeriodicUpdateRecurrence recurrence = PeriodicUpdateRecurrence.Hour;
+            TileUpdateManager.CreateTileUpdaterForApplication().StartPeriodicUpdateBatch(new []{
+                new Uri("http://7xpj2g.com1.z0.glb.clouddn.com/Tile1.xml"),
+                new Uri("http://7xpj2g.com1.z0.glb.clouddn.com/Tile2.xml"),
+                new Uri("http://7xpj2g.com1.z0.glb.clouddn.com/Tile3.xml"),
+                new Uri("http://7xpj2g.com1.z0.glb.clouddn.com/Tile4.xml"),
+                new Uri("http://7xpj2g.com1.z0.glb.clouddn.com/Tile5.xml"),
+            }, recurrence);
         }
 
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
