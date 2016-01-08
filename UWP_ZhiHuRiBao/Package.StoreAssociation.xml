@@ -358,11 +358,14 @@
     <Language Code="zu-za" InMinimumRequirementSet="true" />
   </SupportedLocales>
   <ProductReservedInfo>
-    <MainPackageIdentityName>18863.win10</MainPackageIdentityName>
+    <MainPackageIdentityName>18863.28708D4869669</MainPackageIdentityName>
     <ReservedNames>
-      <ReservedName>知乎日报_win10</ReservedName>
+      <ReservedName>知乎日报</ReservedName>
+      <ReservedName>知乎日报: 小布版</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
-  <AccountPackageIdentityNames />
-  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9NBLGGH5B35M" />
+  <AccountPackageIdentityNames>
+    <MainPackageIdentityName>18863.win10</MainPackageIdentityName>
+  </AccountPackageIdentityNames>
+  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9NBLGGH5J5VW" />
 </StoreAssociation>

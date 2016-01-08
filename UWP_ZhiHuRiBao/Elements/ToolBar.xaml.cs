@@ -2,6 +2,7 @@
 using Brook.ZhiHuRiBao.Common;
 using Brook.ZhiHuRiBao.Events;
 using Brook.ZhiHuRiBao.Utils;
+using LLM;
 using LLQ;
 using System.ComponentModel;
 using Windows.UI.Xaml;
@@ -128,11 +129,12 @@ namespace Brook.ZhiHuRiBao.Elements
             if (!AuthorizationHelper.IsLogin)
             {
                 PopupMessage.DisplayMessageInRes("NeedLogin");
+                Animator.Use(AnimationType.Shake).PlayOn(LikeButton);
                 e.IsCancel = true;
                 return;
             }
-
             LikeCount = (int.Parse(LikeCount) + (e.IsChecked ? 1 : -1)).ToString();
+            Animator.Use(AnimationType.StandUp).PlayOn(LikeButton);
             LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Like, IsChecked = e.IsChecked });
         }
 
@@ -141,9 +143,11 @@ namespace Brook.ZhiHuRiBao.Elements
             if (!AuthorizationHelper.IsLogin)
             {
                 PopupMessage.DisplayMessageInRes("NeedLogin");
+                Animator.Use(AnimationType.Shake).PlayOn(FavButton);
                 e.IsCancel = true;
                 return;
             }
+            Animator.Use(AnimationType.Bounce).PlayOn(FavButton);
             LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Fav, IsChecked = e.IsChecked });
         }
 

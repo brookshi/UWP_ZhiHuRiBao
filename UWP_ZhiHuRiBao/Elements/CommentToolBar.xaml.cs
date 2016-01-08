@@ -2,6 +2,7 @@
 using Brook.ZhiHuRiBao.Events;
 using Brook.ZhiHuRiBao.Models;
 using Brook.ZhiHuRiBao.Utils;
+using LLM;
 using LLQ;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -60,11 +61,13 @@ namespace Brook.ZhiHuRiBao.Elements
             if (!AuthorizationHelper.IsLogin)
             {
                 PopupMessage.DisplayMessageInRes("NeedLogin");
+                Animator.Use(AnimationType.Shake).PlayOn(CommentLike);
                 e.IsCancel = true;
                 return;
             }
 
             CommentLikeCount = CommentLikeCount + (e.IsChecked ? 1 : -1);
+            Animator.Use(AnimationType.StandUp).PlayOn(CommentLike);
             LLQNotifier.Default.Notify(new CommentEvent() { Type = CommentEventType.Like, Comment = (Comment)DataContext, IsLike = e.IsChecked });
         }
 
@@ -73,9 +76,11 @@ namespace Brook.ZhiHuRiBao.Elements
             if (!AuthorizationHelper.IsLogin)
             {
                 PopupMessage.DisplayMessageInRes("NeedLogin");
+                Animator.Use(AnimationType.Shake).PlayOn(CommentReply);
                 return;
             }
 
+            Animator.Use(AnimationType.Pulse).PlayOn(CommentReply);
             LLQNotifier.Default.Notify(new CommentEvent() { Type = CommentEventType.Reply, Comment = (Comment)DataContext });
         }
 
@@ -84,9 +89,11 @@ namespace Brook.ZhiHuRiBao.Elements
             if (!AuthorizationHelper.IsLogin)
             {
                 PopupMessage.DisplayMessageInRes("NeedLogin");
+                Animator.Use(AnimationType.Shake).PlayOn(CommentDel);
                 return;
             }
 
+            Animator.Use(AnimationType.TakingOff).PlayOn(CommentReply);
             LLQNotifier.Default.Notify(new CommentEvent() { Type = CommentEventType.Delete, Comment = (Comment)DataContext });
         }
     }

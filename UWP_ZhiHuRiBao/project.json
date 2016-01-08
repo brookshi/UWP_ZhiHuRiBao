@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "LLMAnimator": "0.1.0",
     "LLMListView": "0.0.6",
     "LLQNotifier": "0.6.0",
     "Microsoft.ApplicationInsights": "1.0.0",

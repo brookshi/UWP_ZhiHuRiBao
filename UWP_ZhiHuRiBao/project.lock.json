@@ -3,6 +3,14 @@
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
+      "LLMAnimator/0.1.0": {
+        "compile": {
+          "lib/uap10.0/LLMAnimator.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/LLMAnimator.dll": {}
+        }
+      },
       "LLMListView/0.0.6": {
         "dependencies": {
           "XPShadow": "[0.1.1, )",
@@ -1637,6 +1645,14 @@
       }
     },
     "UAP,Version=v10.0/win10-arm": {
+      "LLMAnimator/0.1.0": {
+        "compile": {
+          "lib/uap10.0/LLMAnimator.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/LLMAnimator.dll": {}
+        }
+      },
       "LLMListView/0.0.6": {
         "dependencies": {
           "XPShadow": "[0.1.1, )",
@@ -3364,6 +3380,14 @@
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
+      "LLMAnimator/0.1.0": {
+        "compile": {
+          "lib/uap10.0/LLMAnimator.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/LLMAnimator.dll": {}
+        }
+      },
       "LLMListView/0.0.6": {
         "dependencies": {
           "XPShadow": "[0.1.1, )",
@@ -5063,6 +5087,14 @@
       }
     },
     "UAP,Version=v10.0/win10-x86": {
+      "LLMAnimator/0.1.0": {
+        "compile": {
+          "lib/uap10.0/LLMAnimator.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/LLMAnimator.dll": {}
+        }
+      },
       "LLMListView/0.0.6": {
         "dependencies": {
           "XPShadow": "[0.1.1, )",
@@ -6795,6 +6827,14 @@
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
+      "LLMAnimator/0.1.0": {
+        "compile": {
+          "lib/uap10.0/LLMAnimator.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/LLMAnimator.dll": {}
+        }
+      },
       "LLMListView/0.0.6": {
         "dependencies": {
           "XPShadow": "[0.1.1, )",
@@ -8494,6 +8534,14 @@
       }
     },
     "UAP,Version=v10.0/win10-x64": {
+      "LLMAnimator/0.1.0": {
+        "compile": {
+          "lib/uap10.0/LLMAnimator.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/LLMAnimator.dll": {}
+        }
+      },
       "LLMListView/0.0.6": {
         "dependencies": {
           "XPShadow": "[0.1.1, )",
@@ -10226,6 +10274,14 @@
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
+      "LLMAnimator/0.1.0": {
+        "compile": {
+          "lib/uap10.0/LLMAnimator.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/LLMAnimator.dll": {}
+        }
+      },
       "LLMListView/0.0.6": {
         "dependencies": {
           "XPShadow": "[0.1.1, )",
@@ -11926,6 +11982,20 @@
     }
   },
   "libraries": {
+    "LLMAnimator/0.1.0": {
+      "sha512": "9i/g/VrnLmTkQv/FW3eAcOZbx4nRLcGFC79UiHHerrF6u2GG1aPR3aA0MeL2NvXauhYH9MSYAHfNSm2hNC+J/Q==",
+      "type": "Package",
+      "files": [
+        "_rels/.rels",
+        "LLMAnimator.nuspec",
+        "lib/uap10.0/LLMAnimator/Properties/LLMAnimator.rd.xml",
+        "lib/uap10.0/LLMAnimator.dll",
+        "lib/uap10.0/LLMAnimator.pdb",
+        "lib/uap10.0/LLMAnimator.pri",
+        "package/services/metadata/core-properties/6830ce1120ef475f8083b78241558893.psmdcp",
+        "[Content_Types].xml"
+      ]
+    },
     "LLMListView/0.0.6": {
       "sha512": "DFEWbsJyeTNtveWXM2DX1du2y0mi4c8NPDFAfWqw11lKfnLuHUp3sFvBAOV8cM9v03FGnARVOmJNIZDc/1hH1A==",
       "type": "Package",
@@ -15448,6 +15518,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
+      "LLMAnimator >= 0.1.0",
       "LLMListView >= 0.0.6",
       "LLQNotifier >= 0.6.0",
       "Microsoft.ApplicationInsights >= 1.0.0",
