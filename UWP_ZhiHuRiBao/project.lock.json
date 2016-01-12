@@ -1632,7 +1632,7 @@
           "lib/uap10.0/XPHttp.dll": {}
         }
       },
-      "XPShadow/0.1.1": {
+      "XPShadow/0.1.2": {
         "dependencies": {
           "Win2D.uwp": "[1.7.0, )"
         },
@@ -3367,7 +3367,7 @@
           "lib/uap10.0/XPHttp.dll": {}
         }
       },
-      "XPShadow/0.1.1": {
+      "XPShadow/0.1.2": {
         "dependencies": {
           "Win2D.uwp": "[1.7.0, )"
         },
@@ -5074,7 +5074,7 @@
           "lib/uap10.0/XPHttp.dll": {}
         }
       },
-      "XPShadow/0.1.1": {
+      "XPShadow/0.1.2": {
         "dependencies": {
           "Win2D.uwp": "[1.7.0, )"
         },
@@ -6814,7 +6814,7 @@
           "lib/uap10.0/XPHttp.dll": {}
         }
       },
-      "XPShadow/0.1.1": {
+      "XPShadow/0.1.2": {
         "dependencies": {
           "Win2D.uwp": "[1.7.0, )"
         },
@@ -8521,7 +8521,7 @@
           "lib/uap10.0/XPHttp.dll": {}
         }
       },
-      "XPShadow/0.1.1": {
+      "XPShadow/0.1.2": {
         "dependencies": {
           "Win2D.uwp": "[1.7.0, )"
         },
@@ -10261,7 +10261,7 @@
           "lib/uap10.0/XPHttp.dll": {}
         }
       },
-      "XPShadow/0.1.1": {
+      "XPShadow/0.1.2": {
         "dependencies": {
           "Win2D.uwp": "[1.7.0, )"
         },
@@ -11968,7 +11968,7 @@
           "lib/uap10.0/XPHttp.dll": {}
         }
       },
-      "XPShadow/0.1.1": {
+      "XPShadow/0.1.2": {
         "dependencies": {
           "Win2D.uwp": "[1.7.0, )"
         },
@@ -15498,20 +15498,19 @@
         "[Content_Types].xml"
       ]
     },
-    "XPShadow/0.1.1": {
-      "sha512": "Kk1PGDOq+ObcsrZnub32Qo9E+0/WYdBwy/gf40uJXB39FSsjZXARnD82dioq1xRKqVkJomN4QJj/PEDBya7IlA==",
+    "XPShadow/0.1.2": {
+      "sha512": "XSPb5K6kkXa1g+I+9w4oGlqEsiag0inN5TJQtUyA9VB8m86kQlNU2jyqF9T6GABc08CiYrUgb5TDnwwh7hWXVw==",
       "type": "Package",
       "files": [
         "_rels/.rels",
         "XPShadow.nuspec",
-        "lib/uap10.0/XPShadow/Properties/Generic.xbf",
         "lib/uap10.0/XPShadow/Properties/XPShadow.rd.xml",
         "lib/uap10.0/XPShadow/Generic.xbf",
         "lib/uap10.0/XPShadow/XPShadow.xr.xml",
         "lib/uap10.0/XPShadow.dll",
         "lib/uap10.0/XPShadow.pdb",
         "lib/uap10.0/XPShadow.pri",
-        "package/services/metadata/core-properties/24b4677efaa24b888f5361491950b74e.psmdcp",
+        "package/services/metadata/core-properties/b269b3b922ce4c09bc9b59bd28d9035d.psmdcp",
         "[Content_Types].xml"
       ]
     }
@@ -15526,7 +15525,8 @@
       "Microsoft.ApplicationInsights.WindowsApps >= 1.0.0",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
       "XPButton >= 0.1.0",
-      "XPHttp >= 0.3.6"
+      "XPHttp >= 0.3.6",
+      "XPShadow >= 0.1.2"
     ],
     "UAP,Version=v10.0": []
   }

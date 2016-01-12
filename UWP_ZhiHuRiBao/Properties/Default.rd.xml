@@ -24,7 +24,7 @@
     
     
     <!-- Add your application specific runtime directives here. -->
-
+    <Namespace Name="Windows.Networking.Vpn" Dynamic="Excluded" Serialize="Excluded" Browse="Excluded" Activate="Excluded" />
 
   </Application>
 </Directives>
