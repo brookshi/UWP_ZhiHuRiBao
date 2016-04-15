@@ -30,7 +30,7 @@ namespace Brook.ZhiHuRiBao.ViewModels
                 ResetStorys();
                 UpdateTopStory();
                 favData = await DataRequester.RequestLatestFavorites();
-                if (favData != null)
+                if (favData != null && favData.stories != null && favData.stories.Count > 0)
                 {
                     CurrentStoryId = favData.stories.First().id.ToString();
                     FavoritesCount = favData.count;
