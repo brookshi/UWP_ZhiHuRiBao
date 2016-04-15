@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <StoreAssociation xmlns="http://schemas.microsoft.com/appx/2010/storeassociation">
-  <Publisher>CN=38ED427C-7F10-4837-A4FA-A2F1E710F854</Publisher>
-  <PublisherDisplayName>布鲁克石</PublisherDisplayName>
+  <Publisher>CN=F62B67B0-697E-480D-8C64-193DA623D762</Publisher>
+  <PublisherDisplayName>小布</PublisherDisplayName>
   <GeneratePackageHash>http://www.w3.org/2001/04/xmlenc#sha256</GeneratePackageHash>
   <SupportedLocales>
     <Language Code="af" InMinimumRequirementSet="true" />
@@ -358,14 +358,13 @@
     <Language Code="zu-za" InMinimumRequirementSet="true" />
   </SupportedLocales>
   <ProductReservedInfo>
-    <MainPackageIdentityName>18863.18365E5A399B9</MainPackageIdentityName>
+    <MainPackageIdentityName>21720.win10</MainPackageIdentityName>
     <ReservedNames>
-      <ReservedName>天天读报</ReservedName>
+      <ReservedName>知乎日报 win10</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames>
-    <MainPackageIdentityName>18863.28708D4869669</MainPackageIdentityName>
-    <MainPackageIdentityName>18863.win10</MainPackageIdentityName>
+    <MainPackageIdentityName>21720.UWP</MainPackageIdentityName>
   </AccountPackageIdentityNames>
-  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9NBLGGH5FX8Z" />
+  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9NBLGGH4NQ3M" />
 </StoreAssociation>

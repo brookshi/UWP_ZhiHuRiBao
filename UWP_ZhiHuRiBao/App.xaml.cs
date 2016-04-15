@@ -4,6 +4,7 @@ using Brook.ZhiHuRiBao.Pages;
 using Brook.ZhiHuRiBao.Utils;
 using LLQ;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -105,16 +106,23 @@ namespace Brook.ZhiHuRiBao
 
         void InitTileScheduler()
         {
-            TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueue(true);
+            if (StorageUtil.IsTileInited())
+                return;
 
-            PeriodicUpdateRecurrence recurrence = PeriodicUpdateRecurrence.HalfHour;
-            TileUpdateManager.CreateTileUpdaterForApplication().StartPeriodicUpdateBatch(new []{
-                new Uri("http://7xpj2g.com1.z0.glb.clouddn.com/Tile1.xml"),
-                new Uri("http://7xpj2g.com1.z0.glb.clouddn.com/Tile2.xml"),
-                new Uri("http://7xpj2g.com1.z0.glb.clouddn.com/Tile3.xml"),
-                new Uri("http://7xpj2g.com1.z0.glb.clouddn.com/Tile4.xml"),
-                new Uri("http://7xpj2g.com1.z0.glb.clouddn.com/Tile5.xml"),
-            }, recurrence);
+            try
+            {
+                const string baseTileUrl = "http://7xpj2g.com1.z0.glb.clouddn.com/Tile{0}.xml";
+                StorageUtil.SetTileInited();
+                TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueue(true);
+
+                var uris = new List<Uri>();
+                for (int i = 1; i < 6; i++)
+                {
+                    uris.Add(new Uri(string.Format(baseTileUrl, i)));
+                }
+                TileUpdateManager.CreateTileUpdaterForApplication().StartPeriodicUpdateBatch(uris, PeriodicUpdateRecurrence.HalfHour);
+            }
+            catch { }
         }
 
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)

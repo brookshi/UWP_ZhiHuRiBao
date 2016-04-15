@@ -12,9 +12,9 @@ namespace Brook.ZhiHuRiBao.Utils
 {
     public class StorageUtil
     {
-        public const string StorageInfoKey = "StorageInfo";
+        private const string StorageInfoKey = "StorageInfo";
 
-        public const string LoginDataKey = "LoginData";
+        private const string TileBeInitedKey = "TileBeInited";
 
         static ApplicationDataContainer _localSetting = ApplicationData.Current.LocalSettings;
 
@@ -40,6 +40,22 @@ namespace Brook.ZhiHuRiBao.Utils
         {
             StorageInfo.IsCommentPanelOpen = isOpen;
             UpdateStorageInfo();
+        }
+
+        public static bool IsTileInited()
+        {
+            int value = 0;
+            if (TryGet(TileBeInitedKey, out value))
+            {
+                return value == 1;
+            }
+
+            return false;
+        }
+
+        public static void SetTileInited()
+        {
+            Add(TileBeInitedKey, "1");
         }
 
         public static void Add(string key, string value)
