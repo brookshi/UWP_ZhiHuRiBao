@@ -20,6 +20,7 @@ using Brook.ZhiHuRiBao.Authorization;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Controls.Primitives;
 using System.Threading.Tasks;
+using Windows.Foundation.Metadata;
 
 namespace Brook.ZhiHuRiBao.Pages
 {
@@ -37,7 +38,6 @@ namespace Brook.ZhiHuRiBao.Pages
         {
             this.InitializeComponent();
             Initalize();
-
             NavigationCacheMode = NavigationCacheMode.Required;
 
             MainListView.Refresh = RefreshMainList;
@@ -48,18 +48,28 @@ namespace Brook.ZhiHuRiBao.Pages
             LLQNotifier.Default.Register(this);
         }
 
-        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        private async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if(IsUsingCachedWhenNavigate())
+            if (IsUsingCachedWhenNavigate())
             {
                 return;
             }
-
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+            await InitUI();
 
             AuthorizationHelper.AutoLogin(VM.LoginSuccess);
 
             MainListView.SetRefresh(true);
+        }
+
+        private static async Task InitUI()
+        {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+
+            var isStatusBarPresent = ApiInformation.IsTypePresent(typeof(StatusBar).ToString());
+            if (isStatusBarPresent)
+            {
+                await StatusBar.GetForCurrentView().HideAsync();
+            }
         }
 
         private async void RefreshMainList()
