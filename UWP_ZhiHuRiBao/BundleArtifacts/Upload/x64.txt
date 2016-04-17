@@ -1,1 +1,0 @@
-MainPackage=C:\projects\UWP_ZhiHuRiBao\UWP_ZhiHuRiBao\bin\x64\Release\Upload\UWP_ZhiHuRiBao_1.1.3.0_x64.appx

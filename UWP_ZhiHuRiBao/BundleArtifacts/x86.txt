@@ -1,2 +1,0 @@
-MainPackage=C:\projects\UWP_ZhiHuRiBao\UWP_ZhiHuRiBao\bin\x86\Release\UWP_ZhiHuRiBao_1.1.3.0_x86.appx
-SymbolPackage=C:\projects\UWP_ZhiHuRiBao\UWP_ZhiHuRiBao\AppPackages\UWP_ZhiHuRiBao_1.1.3.0_Test\UWP_ZhiHuRiBao_1.1.3.0_x86.appxsym

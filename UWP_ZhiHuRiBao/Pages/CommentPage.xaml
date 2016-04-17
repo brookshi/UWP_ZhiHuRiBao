@@ -27,7 +27,7 @@
         </ResourceDictionary>
     </Page.Resources>
 
-    <Grid Background="{ThemeResource BrushListBackground}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
@@ -77,8 +77,8 @@
                              PointerOverTextForeground="{StaticResource BrushCommentReplyToPointerOverForeground}"
                              Visibility="{x:Bind VM.IsReplingTo, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
                 <RelativePanel Grid.Row="1">
-                    <TextBox x:Uid="CommentPlaceholder"
-                             x:Name="CommentText"
+                    <TextBox x:Name="CommentText"
+                             x:Uid="CommentPlaceholder"
                              Margin="4"
                              AcceptsReturn="True"
                              RelativePanel.AlignBottomWithPanel="True"
