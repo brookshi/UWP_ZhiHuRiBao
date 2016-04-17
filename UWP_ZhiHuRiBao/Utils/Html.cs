@@ -31,7 +31,7 @@ namespace Brook.ZhiHuRiBao.Utils
 
         private const string _notifyScript = "<script type=\"text/javascript\">for (var i = 0; i < document.links.length; i++) { document.links[i].onclick = function() { window.external.notify('"+ NotifyPrex + "' + this.href); return false; } }</script>";
 
-        private const string _headerTemplate = "<div style=\"position:relative; height:250;  background-image:url({0}); background-size:100% 100%;\">"
+        private const string _headerTemplate = "<div style=\"position:relative; height:250;  background:url({0}) no-repeat center center; background-size:100%; \">"
                                                + "<div style=\"position:relative; height:250;  background-image:url(ms-appx-web:///Assets/header_background.png); background-size:100% 100%;\">"
                                                + "<table style = \"position:absolute; Bottom:30px; color:white; font-weight:bold; font-size:30;\" >"
                                                +"<tr><td style=\"width:20px\"></td><td>{1}</td><td style=\"width:20px\"></td></tr>"
