@@ -18,9 +18,10 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>UWP_ZhiHuRiBao_StoreKey.pfx</PackageCertificateKeyFile>
-    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
     <PackageCertificateThumbprint>779BB333D493BAB86612E19D16752312F3BB62B4</PackageCertificateThumbprint>
+    <AppxBundle>Always</AppxBundle>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -96,6 +97,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\BadgeLogo.scale-200.png" />
+    <Content Include="Assets\BadgeLogo.scale-400.png" />
     <Content Include="Assets\Fonts\fontawesome-webfont.ttf" />
     <None Include="project.json" />
     <Compile Include="Converters\FlipViewVisibilityConverter.cs" />
@@ -183,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\header_background.png" />
+    <Content Include="Assets\ListItemShadow.png" />
     <Content Include="Assets\Login.png" />
     <Content Include="Assets\Logo.scale-200.png" />
     <Content Include="Assets\logo_1024.png" />

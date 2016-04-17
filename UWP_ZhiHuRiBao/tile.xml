@@ -1,0 +1,26 @@
+<tile>
+  <visual  branding="nameAndLogo">
+    <binding template="TileSmall">
+    </binding>
+    <binding template="TileMedium" hint-textStacking="top"  hint-overlay="40" displayName="知乎日报">
+      <image src="{{image}}" placement="peek"/>
+      <text hint-style="caption" hint-wrap="true" hint-align="left">{{body}}</text>
+    </binding>
+
+    <binding template="TileWide"  displayName="知乎日报" >
+      <group>
+        <subgroup hint-weight="33">
+          <image placement="inline" src="{{image}}" />
+        </subgroup>
+        <subgroup>
+          <text hint-style="body" hint-wrap="true">{{body}}</text>
+        </subgroup>
+      </group>
+    </binding>
+
+    <binding template="TileLarge" hint-textStacking="bottom" hint-overlay="40"  displayName="知乎日报">
+       <image src="{{image}}" placement="background"/>
+      <text hint-style="base" hint-wrap="true" hint-align="left">{{body}}</text>
+    </binding>
+  </visual>
+</tile>

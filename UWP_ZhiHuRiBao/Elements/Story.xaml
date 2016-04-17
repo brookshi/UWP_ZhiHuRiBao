@@ -5,8 +5,14 @@
                     xmlns:xp="using:XP">
 
     <DataTemplate x:Key="Story">
-        <xp:Shadow CornerRadius="5" Z_Depth="1">
+        <Grid>
+            <Image Height="98"
+                   Margin="-1, 0"
+                   NineGrid="20, 20, 20, 20"
+                   Source="ms-appx:///Assets/ListItemShadow.png"
+                   Stretch="Fill" />
             <RelativePanel Height="88"
+                           Margin="5, 0, 5, 0"
                            Background="White"
                            CornerRadius="5">
                 <Image x:Name="MainItem_Image"
@@ -28,12 +34,18 @@
                            Text="{Binding title}"
                            TextWrapping="Wrap" />
             </RelativePanel>
-        </xp:Shadow>
+        </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="StoryWithoutImage">
-        <xp:Shadow CornerRadius="5" Z_Depth="1">
+        <Grid>
+            <Image Height="106"
+                   Margin="-1, 0"
+                   NineGrid="20, 20, 20, 20"
+                   Source="ms-appx:///Assets/ListItemShadow.png"
+                   Stretch="Fill" />
             <RelativePanel Height="96"
+                           Margin="5, 0, 5, 0"
                            Background="White"
                            CornerRadius="5">
                 <TextBlock x:Name="MainItem_Content"
@@ -43,7 +55,7 @@
                            Text="{Binding title}"
                            TextWrapping="Wrap" />
             </RelativePanel>
-        </xp:Shadow>
+        </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="GroupHeader">
