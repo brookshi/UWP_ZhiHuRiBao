@@ -45,7 +45,7 @@ namespace Brook.ZhiHuRiBao.Utils
 
         private readonly static List<Panel> _webViewParents = new List<Panel>();
 
-        private readonly static WebView _webViewInstance = new WebView();
+        public readonly static WebView _webViewInstance = new WebView();
 
         public static void AddWebViewWithBinding(Panel parent, object source, string path)
         {

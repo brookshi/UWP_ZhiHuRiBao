@@ -28,6 +28,7 @@ namespace Brook.ZhiHuRiBao.Events
         Comment,
         Like,
         Fav,
+        Share,
     }
 
     public class StoryEvent

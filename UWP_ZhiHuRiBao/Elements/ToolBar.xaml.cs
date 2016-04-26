@@ -8,6 +8,7 @@ using System.ComponentModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using XP;
+using System;
 
 namespace Brook.ZhiHuRiBao.Elements
 {
@@ -122,6 +123,15 @@ namespace Brook.ZhiHuRiBao.Elements
         private void CommentButton_Click(object sender, RoutedEventArgs e)
         {
             LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Comment });
+        }
+
+        private async void ShareButton_Click(object sender, RoutedEventArgs e)
+        {
+            //LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Comment });
+            //WeiboSDKForWinRT.SdkNetEngine engine = new WeiboSDKForWinRT.SdkNetEngine();
+            //await engine.RequestCmd(WeiboSDKForWinRT.SdkRequestType.POST_MESSAGE, new WeiboSDKForWinRT.CmdPostMessage() { Status = "哈哈哈http://bbs.umeng.com/thread-2545-1-1.html" });
+
+           // LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Share });
         }
 
         private void LikeStatusChanged(object sender, ToggleEventArgs e)

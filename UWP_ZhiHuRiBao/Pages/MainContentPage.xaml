@@ -7,6 +7,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:ui="using:CN.Brook.UI"
       xmlns:vm="using:Brook.ZhiHuRiBao.ViewModels"
+      xmlns:xp="using:XP"
       mc:Ignorable="d">
     <Page.DataContext>
         <vm:MainContentViewModel />
@@ -16,7 +17,9 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <element:ToolBar Category="{x:Bind VM.Title}" Host="ContentPage" Visibility="{x:Bind ToolBarVisibility}" />
+        <element:ToolBar Category="{x:Bind VM.Title}"
+                         Host="ContentPage"
+                         Visibility="{x:Bind ToolBarVisibility}" />
         <Grid x:Name="MainContent"
               Grid.Row="1"
               BorderBrush="{ThemeResource BrushMainSplitter}"
@@ -29,5 +32,45 @@
                           Foreground="{ThemeResource BrushPrimaryDark}"
                           IsActive="{Binding IsRefreshContent}" />
         </Grid>
+        <Popup x:Name="WeiboSharePopup"
+               Grid.Row="1"
+               Width="400"
+               Height="200"
+               MaxWidth="{Binding ElementName=MainContent,
+                                  Path=ActualWidth}"
+               HorizontalAlignment="Center"
+               IsOpen="True">
+            <Grid Width="400"
+                  Height="200"
+                  MaxWidth="{Binding ElementName=MainContent,
+                                     Path=ActualWidth}">
+                <RelativePanel Background="White">
+                    <TextBox x:Name="PostMsg"
+                             Height="140"
+                             Margin="4"
+                             HorizontalContentAlignment="Stretch"
+                             VerticalContentAlignment="Stretch"
+                             AcceptsReturn="True"
+                             MaxLength="10"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True"
+                             TextWrapping="Wrap" />
+                    <xp:XPButton x:Name="SendBtn"
+                                 Background="Gold"
+                                 Content="Send"
+                                 CornerRadius="2"
+                                 Foreground="{StaticResource BrushSendButton}"
+                                 IconPosition="NoIcon"
+                                 PointerOverBackground="Transparent"
+                                 PointerOverIconForeground="{StaticResource BrushPrimary}"
+                                 PressedBackground="{ThemeResource BrushPressed}"
+                                 PressedIconForeground="{StaticResource BrushPrimary}"
+                                 RelativePanel.AlignBottomWithPanel="True"
+                                 RelativePanel.AlignRightWithPanel="True"
+                                 RelativePanel.Below="PostMsg" />
+                </RelativePanel>
+            </Grid>
+        </Popup>
     </Grid>
 </Page>

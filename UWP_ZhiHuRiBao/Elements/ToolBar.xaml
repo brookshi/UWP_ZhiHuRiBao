@@ -133,6 +133,21 @@
                                PointerOverBackground="{StaticResource BrushPointerOver}"
                                PressedBackground="{StaticResource BrushPressed}"
                                RelativePanel.LeftOf="LikeButton" />
+            <xp:XPButton x:Name="ShareButton"
+                         Height="48"
+                         Margin="10, 0, 0, 0"
+                         Background="Transparent"
+                         Click="ShareButton_Click"
+                         Foreground="White"
+                         IconPosition="Left"
+                         IconSize="20"
+                         PointerOverBackground="{StaticResource BrushPointerOver}"
+                         PressedBackground="{StaticResource BrushPressed}"
+                         RelativePanel.LeftOf="FavButton">
+                <xp:XPButton.Icon>
+                    <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf1e0;" />
+                </xp:XPButton.Icon>
+            </xp:XPButton>
         </RelativePanel>
     </Grid>
 </UserControl>
