@@ -80,6 +80,7 @@ namespace Brook.ZhiHuRiBao.Pages
                 WeiboSharePopup.IsOpen = false;
                 var transform = (CompositeTransform)PrepareTransform(WeiboSharePopup, typeof(CompositeTransform));
                 transform.Rotation = 0;
+                transform.TranslateX = transform.TranslateY = 0;
             });
         }
 
@@ -142,9 +143,12 @@ namespace Brook.ZhiHuRiBao.Pages
 
             Animator.Use(AnimationType.ZoomOutUp).SetDuration(TimeSpan.FromMilliseconds(800)).PlayOn(WeiboSharePopup, () =>
             {
+                WeiboSharePopup.IsOpen = false;
                 var transform = (CompositeTransform)PrepareTransform(WeiboSharePopup, typeof(CompositeTransform));
                 transform.CenterX = transform.CenterY = 0;
-                transform.ScaleX = transform.ScaleY = 0;
+                transform.ScaleX = transform.ScaleY = 1;
+                transform.TranslateX = transform.TranslateY = 0;
+                WeiboSharePopup.Opacity = 1;
             });
 
             WeiboSDKForWinRT.SdkNetEngine engine = new WeiboSDKForWinRT.SdkNetEngine();
