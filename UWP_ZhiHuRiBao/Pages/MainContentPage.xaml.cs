@@ -8,6 +8,10 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml;
 using LLQ;
 using Brook.ZhiHuRiBao.Events;
+using LLM;
+using Windows.UI.Xaml.Media;
+using System.Linq;
+using System;
 
 namespace Brook.ZhiHuRiBao.Pages
 {
@@ -55,9 +59,100 @@ namespace Brook.ZhiHuRiBao.Pages
                     }
                     break;
                 case StoryEventType.Share:
-                   // WebViewUtil._webViewInstance.Navigate(new System.Uri("http://service.weibo.com/share/share.php?appkey=2615126550&title=%E5%88%BB%E5%A5%87%EF%BC%88Kitsch%EF%BC%89%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%A6%82%E4%BD%95%E5%85%8B%E6%9C%8D%E5%88%BB%E5%A5%87%EF%BC%9F+-+%E5%9B%9E%E7%AD%94%E4%BD%9C%E8%80%85%EF%BC%9A%E5%8A%A8%E6%9C%BA%E5%9C%A8%E6%9D%AD%E5%B7%9E+http%3A%2F%2Fzhihu.com%2Fquestion%2F27039705%2Fanswer%2F35506915%3Futm_campaign%3Dwebshare%26utm_source%3Dweibo%26utm_medium%3Dzhihu%EF%BC%88%E6%83%B3%E7%9C%8B%E6%9B%B4%E5%A4%9A%EF%BC%9F%E4%B8%8B%E8%BD%BD%E7%9F%A5%E4%B9%8E+App%EF%BC%9Ahttp%3A%2F%2Fweibo.com%2Fp%2F100404711598%EF%BC%89"));
+                    if (WeiboSharePopup.IsOpen)
+                        break;
+
+                    WeiboSharePopup.IsOpen = true;
+                    PostMsg.Text = string.Format($"{VM.MainHtmlContent.title} {VM.MainHtmlContent.share_url}");
+                    Animator.Use(AnimationType.ZoomInDown).SetDuration(TimeSpan.FromMilliseconds(800)).PlayOn(WeiboSharePopup, ()=>
+                    {
+                        var transform = (CompositeTransform)PrepareTransform(WeiboSharePopup, typeof(CompositeTransform));
+                        transform.CenterX = transform.CenterY = 0;
+                    });
                     break;
             }
+        }
+
+        private void CloseWeiBoShareDlg(object sender, RoutedEventArgs e)
+        {
+            Animator.Use(AnimationType.Hinge).PlayOn(WeiboSharePopup, ()=> 
+            {
+                WeiboSharePopup.IsOpen = false;
+                var transform = (CompositeTransform)PrepareTransform(WeiboSharePopup, typeof(CompositeTransform));
+                transform.Rotation = 0;
+            });
+        }
+
+        public static Transform PrepareTransform(UIElement target, Type targetTransformType)
+        {
+            var renderTransform = target.RenderTransform;
+
+            if (renderTransform == null)
+            {
+                target.RenderTransform = BuildTransform(targetTransformType);
+                return target.RenderTransform;
+            }
+
+            if (renderTransform.GetType() == targetTransformType)
+                return renderTransform;
+
+            var transformGroup = renderTransform as TransformGroup;
+            var transform = BuildTransform(targetTransformType);
+
+            if (transformGroup == null)
+            {
+                transformGroup = new TransformGroup();
+                transformGroup.Children.Add(renderTransform);
+                transformGroup.Children.Add(transform);
+                target.RenderTransform = transformGroup;
+                return transform;
+            }
+
+            transform = transformGroup.Children.SingleOrDefault(o => o.GetType() == targetTransformType);
+
+            if (transform == null)
+            {
+                transform = BuildTransform(targetTransformType);
+                transformGroup.Children.Add(transform);
+            }
+
+            return transform;
+        }
+
+        public static Transform BuildTransform(Type targetTransformType)
+        {
+            if (targetTransformType == typeof(TranslateTransform))
+                return new TranslateTransform();
+            if (targetTransformType == typeof(RotateTransform))
+                return new RotateTransform();
+            if (targetTransformType == typeof(ScaleTransform))
+                return new ScaleTransform();
+            if (targetTransformType == typeof(CompositeTransform))
+                return new CompositeTransform();
+            if (targetTransformType == typeof(SkewTransform))
+                return new SkewTransform();
+
+            throw new NotSupportedException();
+        }
+
+        private async void ShareWeiBo(object sender, RoutedEventArgs e)
+        {
+            if (VM == null || VM.MainHtmlContent == null)
+                return;
+
+            Animator.Use(AnimationType.ZoomOutUp).SetDuration(TimeSpan.FromMilliseconds(800)).PlayOn(WeiboSharePopup, () =>
+            {
+                var transform = (CompositeTransform)PrepareTransform(WeiboSharePopup, typeof(CompositeTransform));
+                transform.CenterX = transform.CenterY = 0;
+                transform.ScaleX = transform.ScaleY = 0;
+            });
+
+            WeiboSDKForWinRT.SdkNetEngine engine = new WeiboSDKForWinRT.SdkNetEngine();
+            var response = await engine.RequestCmd(WeiboSDKForWinRT.SdkRequestType.POST_MESSAGE, new WeiboSDKForWinRT.CmdPostMessage() { Status = PostMsg.Text });
+            if(response.errCode == WeiboSDKForWinRT.SdkErrCode.SUCCESS)
+                PopupMessage.DisplayMessageInRes("ShareSuccess");
+            else
+                PopupMessage.DisplayMessageInRes("ShareFailed");
         }
     }
 }

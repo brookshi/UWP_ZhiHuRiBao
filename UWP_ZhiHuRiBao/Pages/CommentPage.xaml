@@ -81,6 +81,7 @@
                              x:Name="CommentText"
                              Margin="4"
                              AcceptsReturn="True"
+                             BorderThickness="1"
                              RelativePanel.AlignBottomWithPanel="True"
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignTopWithPanel="True"

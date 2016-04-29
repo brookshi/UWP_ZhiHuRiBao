@@ -222,4 +222,19 @@
   <data name="ZhiHuRiBao" xml:space="preserve">
     <value>知乎日报</value>
   </data>
+  <data name="Send.Content" xml:space="preserve">
+    <value>发送</value>
+  </data>
+  <data name="ShareFailed" xml:space="preserve">
+    <value>分享失败</value>
+  </data>
+  <data name="ShareSuccess" xml:space="preserve">
+    <value>分享成功</value>
+  </data>
+  <data name="ShareToWeiBo.Text" xml:space="preserve">
+    <value>分享到微博</value>
+  </data>
+  <data name="ShareToWeiXin.Text" xml:space="preserve">
+    <value>分享到微信</value>
+  </data>
 </root>

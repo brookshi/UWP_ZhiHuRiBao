@@ -125,13 +125,15 @@ namespace Brook.ZhiHuRiBao.Elements
             LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Comment });
         }
 
-        private async void ShareButton_Click(object sender, RoutedEventArgs e)
+        private void ShareButton_Click(object sender, RoutedEventArgs e)
         {
-            //LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Comment });
-            //WeiboSDKForWinRT.SdkNetEngine engine = new WeiboSDKForWinRT.SdkNetEngine();
-            //await engine.RequestCmd(WeiboSDKForWinRT.SdkRequestType.POST_MESSAGE, new WeiboSDKForWinRT.CmdPostMessage() { Status = "哈哈哈http://bbs.umeng.com/thread-2545-1-1.html" });
-
-           // LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Share });
+            if (!AuthorizationHelper.IsLogin)
+            {
+                PopupMessage.DisplayMessageInRes("NeedLogin");
+                Animator.Use(AnimationType.Shake).PlayOn(ShareButton);
+                return;
+            }
+            LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Share });
         }
 
         private void LikeStatusChanged(object sender, ToggleEventArgs e)
