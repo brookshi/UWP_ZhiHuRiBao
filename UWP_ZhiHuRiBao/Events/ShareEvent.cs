@@ -22,22 +22,8 @@ using System.Threading.Tasks;
 
 namespace Brook.ZhiHuRiBao.Events
 {
-    public enum StoryEventType
+    public class ShareEvent
     {
-        Menu,
-        Comment,
-        Like,
-        Fav,
-        ShareToWeiBo,
-        ShareToWeiXin
-    }
-
-    public class StoryEvent
-    {
-        public StoryEventType Type { get; set; }
-
-        public int Count { get; set; }
-
-        public bool IsChecked { get; set; }
+        public string ShareUrl { get; set; }
     }
 }

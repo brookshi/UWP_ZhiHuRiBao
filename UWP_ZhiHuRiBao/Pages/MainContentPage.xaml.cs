@@ -58,7 +58,7 @@ namespace Brook.ZhiHuRiBao.Pages
                         rootFrame.Navigate(typeof(CommentPage));
                     }
                     break;
-                case StoryEventType.Share:
+                case StoryEventType.ShareToWeiBo:
                     if (WeiboSharePopup.IsOpen)
                         break;
 

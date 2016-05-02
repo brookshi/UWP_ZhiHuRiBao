@@ -59,9 +59,9 @@
                                    RelativePanel.AlignRightWithPanel="True"
                                    RelativePanel.AlignTopWithPanel="True">
                         <Image x:Name="WeiBoImg"
-                               Width="40"
-                               Height="40"
-                               Margin="0, -5, 0, 0"
+                               Width="24"
+                               Height="22"
+                               Margin="4, 0, 0, 0"
                                RelativePanel.AlignLeftWithPanel="True"
                                RelativePanel.AlignVerticalCenterWithPanel="True"
                                Source="ms-appx:///Assets/weibo.png"

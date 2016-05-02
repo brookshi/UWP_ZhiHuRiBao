@@ -3,15 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:common="using:Brook.ZhiHuRiBao.Common"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="using:Brook.ZhiHuRiBao.Elements"
+             xmlns:element="using:Brook.ZhiHuRiBao.Elements"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:utils="using:Brook.ZhiHuRiBao.Utils"
              xmlns:xp="using:XP"
+             x:Name="CustomToolBar"
              mc:Ignorable="d">
 
     <UserControl.Resources>
         <ResourceDictionary>
             <utils:Config x:Key="Config" />
+
+            <ControlTemplate x:Key="WeiXinTemplate" TargetType="MenuFlyoutItem">
+                <StackPanel>
+                    <StackPanel Margin="12, 8, 0, 8" Orientation="Horizontal">
+                        <Image Width="24"
+                               Height="20"
+                               Margin="0, 2, 0, 0"
+                               Source="ms-appx:///Assets/weixin.png"
+                               Stretch="Fill" />
+                        <TextBlock x:Uid="ShareToWeiXin" Margin="4, 2, 4, 0" />
+                    </StackPanel>
+                    <Image x:Name="WeiBoImg"
+                           Width="100"
+                           Height="100"
+                           Margin="0, 4, 0, 12"
+                           Source="{Binding Path=DataContext.ShareUrl,
+                                            RelativeSource={RelativeSource TemplatedParent}}"
+                           Stretch="Fill" />
+                </StackPanel>
+            </ControlTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -120,6 +141,7 @@
             <xp:XPToggleButton x:Name="FavButton"
                                Width="48"
                                Height="48"
+                               Margin="10, 0, 0, 0"
                                Background="Transparent"
                                CheckedIconForeground="Yellow"
                                CheckedPointerOverBackground="{StaticResource BrushPointerOver}"
@@ -134,10 +156,9 @@
                                PressedBackground="{StaticResource BrushPressed}"
                                RelativePanel.LeftOf="LikeButton" />
             <xp:XPButton x:Name="ShareButton"
+                         Width="48"
                          Height="48"
-                         Margin="10, 0, 0, 0"
                          Background="Transparent"
-                         Click="ShareButton_Click"
                          Foreground="White"
                          IconPosition="Left"
                          IconSize="20"
@@ -145,8 +166,25 @@
                          PressedBackground="{StaticResource BrushPressed}"
                          RelativePanel.LeftOf="FavButton">
                 <xp:XPButton.Icon>
-                    <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf1e0;" />
+                    <BitmapIcon UriSource="ms-appx:///Assets/Share.png" />
                 </xp:XPButton.Icon>
+                <xp:XPButton.Flyout>
+                    <MenuFlyout x:Name="ShareMenu">
+                        <element:CustomMenuFlyoutItem BorderBrush="#cdcdcd"
+                                                      BorderThickness="0, 0, 0, 1"
+                                                      Click="ShareToWeiBo"
+                                                      Padding="0, 2, 0, 2">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="24"
+                                       Height="22"
+                                       Source="ms-appx:///Assets/weibo.png"
+                                       Stretch="Fill" />
+                                <TextBlock x:Uid="ShareToWeiBo" Margin="4, 2, 4, 0" />
+                            </StackPanel>
+                        </element:CustomMenuFlyoutItem>
+                        <MenuFlyoutItem x:Name="WeiXinItem" Template="{StaticResource WeiXinTemplate}" />
+                    </MenuFlyout>
+                </xp:XPButton.Flyout>
             </xp:XPButton>
         </RelativePanel>
     </Grid>

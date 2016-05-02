@@ -85,9 +85,26 @@ namespace Brook.ZhiHuRiBao.Elements
             }
         }
 
+        private const string _shareUrlFormat = "https://www.zhihu.com/qrcode?url={0}";
+        private string _shareUrl = "https://www.zhihu.com/qrcode?url=123";
+        public string ShareUrl
+        {
+            get { return _shareUrl; }
+            set
+            {
+                var url = string.Format(_shareUrlFormat, value);
+                if (url != _shareUrl)
+                {
+                    _shareUrl = url;
+                    Notify("ShareUrl");
+                }
+            }
+        }
+
         public ToolBar()
         {
             this.InitializeComponent();
+            WeiXinItem.DataContext = this;
             Loaded += (s, e) =>
             {
                 if (this.Visibility == Visibility.Visible)
@@ -115,6 +132,12 @@ namespace Brook.ZhiHuRiBao.Elements
             IsFavoriteButtonChecked = false;
         }
 
+        [SubscriberCallback(typeof(ShareEvent))]
+        private void UpdateShareUrl(ShareEvent shareEvent)
+        {
+            ShareUrl = shareEvent.ShareUrl;
+        }
+
         private void MenuButton_Click(object sender, RoutedEventArgs e)
         {
             LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Menu });
@@ -125,7 +148,7 @@ namespace Brook.ZhiHuRiBao.Elements
             LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Comment });
         }
 
-        private void ShareButton_Click(object sender, RoutedEventArgs e)
+        private void ShareToWeiBo(object sender, RoutedEventArgs e)
         {
             if (!AuthorizationHelper.IsLogin)
             {
@@ -133,7 +156,7 @@ namespace Brook.ZhiHuRiBao.Elements
                 Animator.Use(AnimationType.Shake).PlayOn(ShareButton);
                 return;
             }
-            LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Share });
+            LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.ShareToWeiBo });
         }
 
         private void LikeStatusChanged(object sender, ToggleEventArgs e)

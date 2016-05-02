@@ -97,13 +97,17 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Login.png" />
+    <Content Include="Assets\Share.png" />
     <Content Include="Assets\BadgeLogo.scale-200.png" />
     <Content Include="Assets\BadgeLogo.scale-400.png" />
     <Content Include="Assets\Fonts\fontawesome-webfont.ttf" />
     <None Include="project.json" />
     <Compile Include="Converters\FlipViewVisibilityConverter.cs" />
     <Compile Include="Converters\NullableBooleanToBooleanConverter.cs" />
+    <Compile Include="Elements\CustomMenuFlyoutItem.cs" />
     <Compile Include="Elements\FlipViewIndicator.cs" />
+    <Compile Include="Events\ShareEvent.cs" />
     <Compile Include="ViewModels\MainViewModel.Favorites.cs" />
     <Compile Include="ViewModels\MainViewModel.Category.cs" />
   </ItemGroup>
@@ -187,7 +191,7 @@
   <ItemGroup>
     <Content Include="Assets\header_background.png" />
     <Content Include="Assets\ListItemShadow.png" />
-    <Content Include="Assets\Login.png" />
+    <Content Include="Assets\Login1.png" />
     <Content Include="Assets\Logo.scale-200.png" />
     <Content Include="Assets\logo_1024.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
@@ -246,6 +250,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -235,6 +235,6 @@
     <value>分享到微博</value>
   </data>
   <data name="ShareToWeiXin.Text" xml:space="preserve">
-    <value>分享到微信</value>
+    <value>微信扫一扫</value>
   </data>
 </root>
