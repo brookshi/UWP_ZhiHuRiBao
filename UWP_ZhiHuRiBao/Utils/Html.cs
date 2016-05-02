@@ -39,7 +39,6 @@ namespace Brook.ZhiHuRiBao.Utils
                                                +"<table style=\"position:absolute; right:4px; margin:0,20; Bottom:8px;color:white;font-size:15;\">"
                                                + "<tr><td>{2}</td><td style=\"width:20px\"></td></tr>"
                                                + "</table>"
-                                               + "</div><a href=\"circlely://circle/118429\">aaa</a>"
                                                +"</div>";
 
         public static void ArrangeMainContent(MainContent content)

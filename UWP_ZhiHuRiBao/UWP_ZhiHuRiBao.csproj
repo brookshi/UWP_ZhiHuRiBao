@@ -96,6 +96,7 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Assets\Login.png" />
     <Content Include="Assets\Share.png" />
@@ -191,7 +192,6 @@
   <ItemGroup>
     <Content Include="Assets\header_background.png" />
     <Content Include="Assets\ListItemShadow.png" />
-    <Content Include="Assets\Login1.png" />
     <Content Include="Assets\Logo.scale-200.png" />
     <Content Include="Assets\logo_1024.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
@@ -209,7 +209,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.scale-200.png" />

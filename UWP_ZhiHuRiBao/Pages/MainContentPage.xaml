@@ -34,23 +34,25 @@
         </Grid>
         <Popup x:Name="WeiboSharePopup"
                Grid.Row="1"
-               Width="400"
+               Width="{Binding ElementName=MainContent,
+                               Path=ActualWidth}"
                Height="200"
-               MaxWidth="{Binding ElementName=MainContent,
-                                  Path=ActualWidth}"
+               MaxWidth="400"
                HorizontalAlignment="Center"
                IsOpen="False">
-            <Grid Width="400"
+            <Grid Width="{Binding ElementName=MainContent,
+                                  Path=ActualWidth}"
                   Height="200"
-                  MaxWidth="{Binding ElementName=MainContent,
-                                     Path=ActualWidth}">
-                <Image Width="400"
+                  MaxWidth="400">
+                <Image Width="{Binding ElementName=MainContent,
+                                       Path=ActualWidth}"
                        Height="200"
+                       MaxWidth="400"
                        NineGrid="20, 20, 20, 20"
                        Source="ms-appx:///Assets/ListItemShadow.png"
                        Stretch="Fill" />
-                <RelativePanel Width="388"
-                               Height="188"
+                <RelativePanel Height="188"
+                               MaxWidth="388"
                                Background="White">
                     <RelativePanel x:Name="PostTitle"
                                    Height="36"

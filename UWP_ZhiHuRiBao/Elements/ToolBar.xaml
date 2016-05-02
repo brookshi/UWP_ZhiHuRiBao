@@ -27,7 +27,8 @@
                     <Image x:Name="WeiBoImg"
                            Width="100"
                            Height="100"
-                           Margin="0, 4, 0, 12"
+                           Margin="20, 4, 0, 12"
+                           HorizontalAlignment="Left"
                            Source="{Binding Path=DataContext.ShareUrl,
                                             RelativeSource={RelativeSource TemplatedParent}}"
                            Stretch="Fill" />
@@ -50,6 +51,7 @@
                         <Setter Target="CommentButton.Visibility" Value="Collapsed" />
                         <Setter Target="LikeButton.Visibility" Value="Collapsed" />
                         <Setter Target="FavButton.Visibility" Value="Collapsed" />
+                        <Setter Target="ShareButton.Visibility" Value="Collapsed" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -77,6 +79,7 @@
                         <Setter Target="CommentButton.Visibility" Value="Collapsed" />
                         <Setter Target="LikeButton.Visibility" Value="Collapsed" />
                         <Setter Target="FavButton.Visibility" Value="Collapsed" />
+                        <Setter Target="ShareButton.Visibility" Value="Collapsed" />
                         <Setter Target="CategoryText.(RelativePanel.RightOf)" Value="" />
                         <Setter Target="CategoryText.Margin" Value="20, 0, 0, 0" />
                     </VisualState.Setters>
@@ -170,10 +173,16 @@
                 </xp:XPButton.Icon>
                 <xp:XPButton.Flyout>
                     <MenuFlyout x:Name="ShareMenu">
-                        <element:CustomMenuFlyoutItem BorderBrush="#cdcdcd"
+                        <MenuFlyout.MenuFlyoutPresenterStyle>
+                            <Style TargetType="MenuFlyoutPresenter">
+                                <Setter Property="MaxWidth" Value="140" />
+                            </Style>
+                        </MenuFlyout.MenuFlyoutPresenterStyle>
+                        <element:CustomMenuFlyoutItem Margin="0"
+                                                      BorderBrush="#cdcdcd"
                                                       BorderThickness="0, 0, 0, 1"
                                                       Click="ShareToWeiBo"
-                                                      Padding="0, 2, 0, 2">
+                                                      Padding="{ThemeResource MenuFlyoutItemThemePaddingNarrow}">
                             <StackPanel Orientation="Horizontal">
                                 <Image Width="24"
                                        Height="22"
