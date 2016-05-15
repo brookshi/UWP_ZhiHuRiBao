@@ -28,7 +28,7 @@ namespace Brook.ZhiHuRiBao.Common
     {
         public static string CurrentStoryId { get; set; }
 
-        public static StoryExtraInfo CurrentStoryExtraInfo { get; set; } = new StoryExtraInfo()
+        public static StoryExtraInfo DefaultStoryExtraInfo = new StoryExtraInfo()
         {
             comments = 0,
             favorite = false,
@@ -39,6 +39,8 @@ namespace Brook.ZhiHuRiBao.Common
             short_comments = 0,
             vote_status = 0,
         };
+
+        public static StoryExtraInfo CurrentStoryExtraInfo { get; set; } = DefaultStoryExtraInfo;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

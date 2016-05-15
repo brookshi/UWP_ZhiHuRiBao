@@ -85,10 +85,8 @@ namespace Brook.ZhiHuRiBao.ViewModels
 
         public async void RequestStoryExtraInfo()
         {
-            CurrentStoryExtraInfo = await DataRequester.RequestStoryExtraInfo(CurrentStoryId);
-            if (CurrentStoryExtraInfo == null)
-                return;
-
+            var currentStoryExtraInfo = await DataRequester.RequestStoryExtraInfo(CurrentStoryId);
+            CurrentStoryExtraInfo = currentStoryExtraInfo ?? DefaultStoryExtraInfo;
             LLQNotifier.Default.Notify(new StoryExtraEvent() { StoryExtraInfo = CurrentStoryExtraInfo });
         }
 
