@@ -104,27 +104,6 @@ namespace Brook.ZhiHuRiBao
                 .ApplyConfig();
         }
 
-        void InitTileScheduler()
-        {
-            if (StorageUtil.IsTileInited())
-                return;
-
-            try
-            {
-                const string baseTileUrl = "http://7xpj2g.com1.z0.glb.clouddn.com/Tile{0}.xml";
-                StorageUtil.SetTileInited();
-                TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueue(true);
-
-                var uris = new List<Uri>();
-                for (int i = 1; i < 6; i++)
-                {
-                    uris.Add(new Uri(string.Format(baseTileUrl, i)));
-                }
-                TileUpdateManager.CreateTileUpdaterForApplication().StartPeriodicUpdateBatch(uris, PeriodicUpdateRecurrence.HalfHour);
-            }
-            catch { }
-        }
-
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
